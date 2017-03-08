@@ -3,48 +3,37 @@ var DemoApp = angular.module('DemoApp',['dx']);
 
 DemoApp.controller('DemoController', function DemoController($scope) {
  
-	 $scope.filterRow = {
-		        visible: false,
-		        applyFilter: "auto"
-		    };
-		    
-		    $scope.headerFilter = {
-		        visible: false
-		    };
+	
 		    
     $scope.events = "";
-    
+      $scope.filterRow = {
+        visible: true,
+        applyFilter: "auto"
+    };
     $scope.dataGridOptions = {
         dataSource: employees,
         paging: {
             enabled: false
         },
+		   bindingOptions: {
+            filterRow: "filterRow",
+            headerFilter: "headerFilter"
+        },
+		
         "export": {
             enabled: true,
             fileName: "Companies",
             allowExportSelectedData: true
         },
-        bindingOptions: {
-            filterRow: "filterRow",
-            headerFilter: "headerFilter"
-        },
-        searchPanel: {
-            visible: true,
-            width: 240,
-            placeholder: "Search..."
-        },
+       
       
-        editing: {
-            mode: "row",
-            allowUpdating: true,
-            allowDeleting: false,
-            allowAdding: true
+         editing: {
+            mode: "",
+            allowUpdating: false,
+           
         }, 
         columns: [
-            {
-                dataField: "systemid",
-                caption: "System ID"
-            }, 
+           
             {
                 dataField: "userid",
                 caption: "User ID"
@@ -55,7 +44,7 @@ DemoApp.controller('DemoController', function DemoController($scope) {
             }, 
             {
                 dataField: "middleinitial",
-                caption: "MIddle Initial"
+                caption: "M.I"
             }, 
             {
                 dataField: "lastname",
@@ -75,17 +64,35 @@ DemoApp.controller('DemoController', function DemoController($scope) {
             }, 
             {
                 dataField: "status",
-                caption: "Status",
+				 cellTemplate: function (container, options) {
+                           $('<a>Active</a>')
+                               .attr('href','#')
+                              // .attr('target', '_blank')
+                               .appendTo(container);
+                       }
+              /*  caption: "Status",
                 width: 125,
                 lookup: {
                     dataSource: statusID,
                     displayExpr: "Name",
                     valueExpr: "ID"
-                }
+                }*/
             },
-            {
-                dataField: "resendinvite",
-                caption: "Resend Invite"
+           {
+                dataField: "action",
+				 cellTemplate: function (container, options) {
+                           $('<a>Resend Password</a>')
+                               .attr('href','#')
+                              // .attr('target', '_blank')
+                               .appendTo(container);
+                       }
+              /*  caption: "Status",
+                width: 125,
+                lookup: {
+                    dataSource: statusID,
+                    displayExpr: "Name",
+                    valueExpr: "ID"
+                }*/
             },
         
             
@@ -124,49 +131,35 @@ DemoApp.controller('DemoController', function DemoController($scope) {
 		
 		var employees = [{
 		    "ID": 1,
-		    "systemid": "1000",
-		    "userid": "robert@gmail.com",
-		    "firstname": "Sampath",
-		    "middleinitial": "K",
-		    "lastname": "Narayanan",
-		    "jobtitle": "Manager",
-		    "phone": "895-989-8898 extn 234",
-		    "access": "Super admin,View dashboard financial,Add firm",
-		    "status": 1,
-		    "resendinvite": "Resend",
-		    
 		   
-		},{
-		    "ID": 1,
-		    "systemid": "1002",
-		    "userid": "robert@gmail.com",
+		    "userid": "sampath@gmail.com",
 		    "firstname": "Sampath",
 		    "middleinitial": "K",
 		    "lastname": "Narayanan",
 		    "jobtitle": "Manager",
 		    "phone": "895-989-8898 extn 234",
 		    "access": "Super admin,View dashboard financial,Add firm",
-		    "status": 1,
-		    "resendinvite": "Resend",
+		    "status": "Action",
+		    "action": "Resend",
 		    
 		   
 		},{
 		    "ID": 2,
-		    "systemid": "1003",
+		   
 		    "userid": "robert@gmail.com",
-		    "firstname": "Sampath",
+		    "firstname": "Robert",
 		    "middleinitial": "K",
 		    "lastname": "Narayanan",
 		    "jobtitle": "Manager",
 		    "phone": "895-989-8898 extn 234",
 		    "access": "Super admin,View dashboard financial,Add firm",
-		    "status": 1,
-		    "resendinvite": "Resend",
+		    "status": "Action",
+		   "action": "Resend",
 		    
 		   
 		},{
 		    "ID": 3,
-		    "systemid": "1004",
+		   
 		    "userid": "robert@gmail.com",
 		    "firstname": "Sampath",
 		    "middleinitial": "K",
@@ -174,13 +167,13 @@ DemoApp.controller('DemoController', function DemoController($scope) {
 		    "jobtitle": "Manager",
 		    "phone": "895-989-8898 extn 234",
 		    "access": "Super admin,View dashboard financial,Add firm",
-		    "status": 1,
-		    "resendinvite": "Resend",
+		    "status":"Action",
+		    "action": "Resend",
 		    
 		   
 		},{
 		    "ID": 4,
-		    "systemid": "1005",
+		   
 		    "userid": "robert@gmail.com",
 		    "firstname": "Sampath",
 		    "middleinitial": "K",
@@ -188,18 +181,26 @@ DemoApp.controller('DemoController', function DemoController($scope) {
 		    "jobtitle": "Manager",
 		    "phone": "895-989-8898 extn 234",
 		    "access": "Super admin,View dashboard financial,Add firm",
-		    "status": 1,
-		    "resendinvite": "Resend",
+		    "status": "Action",
+		    "action": "Resend",
+		    
+		   
+		},{
+		    "ID": 5,
+		   
+		    "userid": "robert@gmail.com",
+		    "firstname": "Sampath",
+		    "middleinitial": "K",
+		    "lastname": "Narayanan",
+		    "jobtitle": "Manager",
+		    "phone": "895-989-8898 extn 234",
+		    "access": "Super admin,View dashboard financial,Add firm",
+		    "status": "Action",
+		     "action": "Resend",
 		    
 		   
 		},
 		
 		];
 
-		var statusID = [{
-		    "ID": 1,
-		    "Name": "Active"
-		}, {
-		    "ID": 2,
-		    "Name": "Inactive"
-		}];
+		

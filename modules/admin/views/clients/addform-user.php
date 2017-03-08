@@ -5,8 +5,8 @@
 		<div class="dashboard-container">
 			
 
-			<div class="header-main">
-			<span class="font-22">Add / Edit Client Users</span>
+			<div class="header-main" id="header">
+			<span class="font-18">Add Client Users</span>
 			</div>
 
 				

@@ -8,7 +8,7 @@
 
 			<div class="col-md-12 col-xs-12 header-main">
 				<div class="col-md-12 col-xs-12">
-					<span style="font-size: 22px;">Dashboard</span> <span
+					<span style="font-size: 18px;">Dashboard</span> <span
 						style="font-size: 22px;" class="pull-right"> <i
 						class="fa fa-heart-o" aria-hidden="true"
 						style="margin-right: 15px;"></i> <i class="fa fa-list menuBtn"
@@ -22,7 +22,7 @@
 
 			<div class="row">
 				<div class="col-md-12">
-					<div class="col-xl-3 col-lg-6 col-sm-6 col-xs-12">
+					<div class="col-xl-3 col-lg-6 col-sm-6 col-xs-12 media-width">
 						<div class="widget widget-seven background-success">
 							<div class="widget-body">
 								<div href="javascript: void(0);" class="widget-body-inner">
@@ -56,7 +56,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-xl-3 col-lg-6 col-sm-6 col-xs-12">
+					<div class="col-xl-3 col-lg-6 col-sm-6 col-xs-12 media-width">
 						<div class="widget widget-seven background-default">
 							<div class="widget-body">
 								<div href="javascript: void(0);" class="widget-body-inner">
@@ -90,7 +90,7 @@
 						</div>
 					</div>
 
-					<div class="col-xl-3 col-lg-6 col-sm-6 col-xs-12">
+					<div class="col-xl-3 col-lg-6 col-sm-6 col-xs-12 media-width">
 						<div class="widget widget-seven">
 							<div class="widget-body">
 								<div href="javascript: void(0);" class="widget-body-inner">
@@ -124,7 +124,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-xl-3 col-lg-6 col-sm-6 col-xs-12">
+					<div class="col-xl-3 col-lg-6 col-sm-6 col-xs-12 media-width">
 						<div class="widget widget-seven">
 							<div class="widget-body">
 								<div href="javascript: void(0);" class="widget-body-inner">
@@ -164,8 +164,8 @@
 
 
 			<div class="col-md-12 padding-right-0 padding-left-0">
-				<div class="col-lg-4">
-					<div class="widget widget-six">
+				<div class="col-lg-4 col-xs-12">
+					<div class="widget widget-six" style="min-height: 336px;">
 						<div class="widget-header">
 
 							<strong class="margin-right-10">Firms (by module)</strong>
@@ -181,8 +181,8 @@
 					</div>
 				</div>
 
-				<div class="col-lg-4">
-					<div class="widget widget-six">
+				<div class="col-lg-4 col-xs-12">
+					<div class="widget widget-six" style="min-height: 336px;">
 						<div class="widget-header">
 
 							<strong class="margin-right-10">Total Plans (by plan type)</strong>
@@ -203,9 +203,9 @@
 
 
 
-				<div class="col-md-4  padding-left-0">
+				<div class="col-lg-4 col-xs-12">
 
-					<div class="widget widget-six">
+					<div class="widget widget-six" style="min-height: 336px;">
 						<div class="widget-header">
 
 							<strong class="margin-right-10">Billing by Month / Year</strong>

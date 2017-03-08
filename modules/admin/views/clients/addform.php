@@ -4,8 +4,8 @@
 		<!-- clients -->
 		<div class="dashboard-container">
 
-			<div class="header-main">
-				<span class="font-22">Add / Edit Clients</span>
+			<div class="header-main" id="header">
+				<span class="font-18">Add Clients</span>
 			</div>
 
 			 

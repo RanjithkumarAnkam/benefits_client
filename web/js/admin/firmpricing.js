@@ -5,13 +5,19 @@ DemoApp.controller('DemoController', function DemoController($scope) {
  
     
     $scope.events = "";
-    
+      $scope.filterRow = {
+        visible: true,
+        applyFilter: "auto"
+    };
     $scope.dataGridOptions = {
         dataSource: employees,
         paging: {
             enabled: false
         },
-      
+         bindingOptions: {
+            filterRow: "filterRow",
+            headerFilter: "headerFilter"
+        },
         "export": {
             enabled: true,
             fileName: "Companies",

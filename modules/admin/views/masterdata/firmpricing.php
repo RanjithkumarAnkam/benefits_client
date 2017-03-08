@@ -7,14 +7,16 @@
 		<!-- clients -->
 		<div class="dashboard-container">
 
-				<div class="col-md-12 col-xs-12 header-main">
-				<div class="col-md-11 col-xs-11">
-					<span style="font-size: 22px;">Firm Pricing</span>
+					<div class="col-md-12 col-xs-12 header-main">
+				<div class="col-md-12 col-xs-12">
+					<span style="font-size: 18px;">Firm Pricing</span> <span
+						style="font-size: 22px;" class="pull-right"> <i
+						class="fa fa-heart-o" aria-hidden="true"
+						style="margin-right: 15px;"></i> <i class="fa fa-list menuBtn"
+						aria-hidden="true"></i></span>
+
 				</div>
-				<div class="col-md-1 col-xs-1">
-					<i class="fa fa-heart-o" aria-hidden="true"></i>&nbsp;&nbsp;<i
-						class="fa fa-list menuBtn" aria-hidden="true"></i>
-				</div>
+
 			</div>
 			<div class="col-md-12">
 
@@ -25,22 +27,22 @@
 							<div class="panel-body">
 							
 							<div class="row">
-							<div class="col-md-12 padding-top-10 padding-bottom-10">
-							<div class="col-md-2 padding-left-8"><label class="margin-top-10"><b> Firm Name<span class="imp-red">*</span> :</b></label></div>
-								<div class="col-md-4">
+							<div class="col-md-12 col-xs-12 padding-top-10 padding-bottom-10">
+							<div class="col-md-2 col-xs-4 padding-left-8"><label class="margin-top-10"><b> Firm Name<span class="imp-red">*</span> :</b></label></div>
+								<div class="col-md-4 col-xs-4">
 								<input type="text" class="form-control" value="Bentles Yates"/>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-4 col-xs-4">
 							<a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/admin/firm/add-firm" class="btn btn-warning">Firm Details</a>
 								</div>
 								</div>
 								</div>
 								
 								
-							<div class="row">
-							<div class="col-md-12 padding-top-10 padding-bottom-10">
-							<div class="col-md-2 padding-left-8"><label class="margin-top-10"><b> Select a Module :</b></label></div>
-								<div class="col-md-4">
+								<div class="row">
+							<div class="col-md-12 col-xs-12 padding-top-10 padding-bottom-10">
+							<div class="col-md-2 col-xs-4 padding-left-8"><label class="margin-top-10"><b> Select a Module :</b></label></div>
+								<div class="col-md-4 col-xs-8">
 								<select class="form-control">
 								  <option selected="" value="Plan Claims Reporting">Plan Claims Reporting</option>
 						          <option value="Population Health Management">Population Health Management</option>

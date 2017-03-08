@@ -18,9 +18,9 @@ DemoApp.controller('DemoController', function DemoController($scope) {
         },
         editing: {
             mode: "row",
-            allowUpdating: true,
+            allowUpdating: false,
             allowDeleting: false,
-            allowAdding: true
+            allowAdding: false
         }, 
         columns: [
             {

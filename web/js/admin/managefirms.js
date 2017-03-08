@@ -6,28 +6,40 @@ DemoApp.controller('DemoController', function DemoController($scope) {
     
     $scope.events = "";
     
+	 $scope.filterRow = {
+        visible: true,
+        applyFilter: "auto"
+    };
+	
     $scope.dataGridOptions = {
         dataSource: employees,
         paging: {
             enabled: false
         },
-      
+       bindingOptions: {
+            filterRow: "filterRow",
+            headerFilter: "headerFilter"
+        },
         "export": {
             enabled: true,
             fileName: "Manage Firms",
             allowExportSelectedData: true
         },
         editing: {
-            mode: "row",
+            mode: "",
             allowUpdating: false,
-            allowDeleting: false,
-            allowAdding: true
+            
         }, 
         columns: [
            
-            {
+           {
                 dataField: "firmname",
-                caption: "Firm Name"
+				 cellTemplate: function (container, options) {
+                           $('<a>'+ options.value +'</a>')
+                               .attr('href','/admin/firm/update-firm?id=sdfd45sdfsd')
+                              // .attr('target', '_blank')
+                               .appendTo(container);
+                       }
             },
             {
                 dataField: "primarycontact",
@@ -41,15 +53,14 @@ DemoApp.controller('DemoController', function DemoController($scope) {
                 dataField: "primaryemail",
                 caption: "Primary Email"
             },
-            {
+             {
                 dataField: "status",
-                caption: "Status",
-                width: 125,
-                lookup: {
-                    dataSource: statusID,
-                    displayExpr: "Name",
-                    valueExpr: "ID"
-                }
+				 cellTemplate: function (container, options) {
+                           $('<a>Active</a>')
+                               .attr('href','#')
+                              // .attr('target', '_blank')
+                               .appendTo(container);
+                       }
             },
             {
                 dataField: "lastlogin",
@@ -94,7 +105,7 @@ DemoApp.controller('DemoController', function DemoController($scope) {
 		    "primarycontact": "12345",
 		    "primarytel": "Client 1",
 		    "primaryemail": "Firm",
-		    "status": 2,
+		    "status": "Active",
 		    "lastlogin": "08-09-2015",
 		  
 		}, {
@@ -103,7 +114,7 @@ DemoApp.controller('DemoController', function DemoController($scope) {
 		    "primarycontact": "12345",
 		    "primarytel": "Client 1",
 		    "primaryemail": "Firm",
-		    "status": 1,
+		    "status": "Active",
 		    "lastlogin": "08-09-2015",
 		   
 		}, {
@@ -112,7 +123,7 @@ DemoApp.controller('DemoController', function DemoController($scope) {
 		    "primarycontact": "12345",
 		    "primarytel": "Client 1",
 		    "primaryemail": "Firm",
-		    "status": 2,
+		    "status": "Active",
 		    "lastlogin": "08-09-2015",
 		   
 		}, {
@@ -121,7 +132,7 @@ DemoApp.controller('DemoController', function DemoController($scope) {
 		    "primarycontact": "12345",
 		    "primarytel": "Client 1",
 		    "primaryemail": "Firm",
-		    "status": 1,
+		    "status": "Active",
 		    "lastlogin": "08-09-2015",
 		   
 		}, {
@@ -130,7 +141,7 @@ DemoApp.controller('DemoController', function DemoController($scope) {
 		    "primarycontact": "12345",
 		    "primarytel": "Client 1",
 		    "primaryemail": "Firm",
-		    "status": 2,
+		    "status": "Active",
 		    "lastlogin": "08-09-2015",
 		   
 		}, {
@@ -139,7 +150,7 @@ DemoApp.controller('DemoController', function DemoController($scope) {
 		    "primarycontact": "12345",
 		    "primarytel": "Client 1",
 		    "primaryemail": "Firm",
-		    "status": 1,
+		    "status": "Active",
 		    "lastlogin": "08-09-2015",
 		   
 		}, {
@@ -148,7 +159,7 @@ DemoApp.controller('DemoController', function DemoController($scope) {
 		    "primarycontact": "12345",
 		    "primarytel": "Client 1",
 		    "primaryemail": "Firm",
-		    "status": 1,
+		    "status":"Active",
 		    "lastlogin": "08-09-2015",
 		   
 		}];
@@ -160,3 +171,8 @@ DemoApp.controller('DemoController', function DemoController($scope) {
 		    "ID": 2,
 		    "Name": "Inactive"
 		}];
+		
+		function firmdetails(){
+		
+			
+		}

@@ -17,10 +17,10 @@ DemoApp.controller('DemoController', function DemoController($scope) {
             allowExportSelectedData: true
         },
         editing: {
-            mode: "row",
+            mode: "",
             allowUpdating: false,
             allowDeleting: false,
-            allowAdding: true,
+            allowAdding: false,
         }, 
         columns: [
             {

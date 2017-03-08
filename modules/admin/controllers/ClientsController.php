@@ -26,7 +26,7 @@ class ClientsController extends \yii\web\Controller
 								[ 
 										'allow' => true,
 										'actions' => [ 
-												'addclient','editclient','addclientuser','clientsearchresult','clientusersearchresult'
+												'addclient','editclient','addclientuser','clientsearchresult','clientusersearchresult','editclientuser'
 										],
 										'roles' => [ 
 												User::ADMIN 

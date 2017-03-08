@@ -12,16 +12,16 @@
 
 
 					<div class="widget widget-six col-md-12">
-						<div class="widget-header">
+					<!--	<div class="widget-header">
 
 							<strong class="margin-right-10">Firms Details</strong>
 
-						</div>
+						</div>-->
 						<div class="panel-body">
 							<div class="col-md-12">
 								<div class="col-md-4">
 								<div
-							class="form-group form-md-line-input form-md-floating-label has-success">
+							class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">ID *</label>
 							<span></span>
 						</div>
@@ -31,7 +31,7 @@
 
 								<div class="col-md-4">
 									<div
-							class="form-group form-md-line-input form-md-floating-label has-success">
+							class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Firm
 								Name *</label> <span></span>
 						</div>
@@ -41,7 +41,7 @@
 
 								<div class="col-md-4">
 									<div
-							class="form-group form-md-line-input form-md-floating-label has-success">
+							class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Business
 								Address1 *</label> <span></span>
 						</div>
@@ -53,7 +53,7 @@
 							<div class="col-md-12">
 								<div class="col-md-4">
 									<div
-							class="form-group form-md-line-input form-md-floating-label has-success">
+							class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Business
 								Address2</label> <span></span>
 						</div>
@@ -63,7 +63,7 @@
 
 								<div class="col-md-4">
 									<div
-							class="form-group form-md-line-input form-md-floating-label has-success">
+							class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 							 <select class="form-control edited" id="form_control_1">
 								<option value="select">Select State</option>
 								<option value="AL">AL</option>
@@ -125,7 +125,7 @@
 
 								<div class="col-md-4">
 										<div
-							class="form-group form-md-line-input form-md-floating-label has-success">
+							class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 							<select class="form-control edited" id="form_control_1">
 								<option value=""></option>
 								<option value="1" selected="">Option 1</option>
@@ -143,7 +143,7 @@
 							<div class="col-md-12">
 								<div class="col-md-4">
 									<div
-							class="form-group form-md-line-input form-md-floating-label has-success">
+							class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Zip
 								code *</label> <span></span>
 						</div>
@@ -153,7 +153,7 @@
 
 								<div class="col-md-4">
 									<div
-							class="form-group form-md-line-input form-md-floating-label has-success">
+							class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Website</label>
 							<span></span>
 						</div>
@@ -171,200 +171,7 @@
 				<!-- div end for Client Company Details  -->
 			</section>
 
-			<h3>
-				<i class="icmn-phone2 cui-wizard--steps--icon"></i> <span
-					class="cui-wizard--steps--title">Primary Firm Contact</span>
-			</h3>
-			<section class="padding-0">
-				<div class="col-lg-12 col-xs-12 padding-bottom-10 padding-left-0">
-
-
-					<div class="widget widget-six col-md-12">
-						<div class="widget-header">
-
-							<strong class="margin-right-10">Primary Firm Contact</strong>
-
-						</div>
-						<div class="panel-body">
-							<div class="col-md-12">
-								<div class="col-md-4">
-									<div
-							class="form-group form-md-line-input form-md-floating-label has-success">
-							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">First
-								Name *</label> <span></span>
-						</div>
-						
-								</div>
-
-
-								<div class="col-md-4">
-									<div
-							class="form-group form-md-line-input form-md-floating-label has-success">
-							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Middle
-								Name</label> <span></span>
-						</div>
-						
-								</div>
-
-
-								<div class="col-md-4">
-									<div
-							class="form-group form-md-line-input form-md-floating-label has-success">
-							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Last
-								Name *</label> <span></span>
-						</div>
-					
-								</div>
-							</div>
-
-
-							<div class="col-md-12">
-								<div class="col-md-4">
-									<div
-							class="form-group form-md-line-input form-md-floating-label has-success">
-							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Email
-								Id *</label> <span></span>
-						</div>
-
-					
-								</div>
-
-
-								<div class="col-md-4">
-										<div class="row">
-							<div class="col-md-12 ">
-								<div
-									class="col-md-8 padding-left-0 form-group form-md-line-input form-md-floating-label has-success">
-									<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Phone
-										Number *</label> <span></span>
-								</div>
-								<div
-									class="col-md-4 padding-left-0  padding-right-0 form-group form-md-line-input form-md-floating-label has-success">
-									<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Extn
-									</label> <span></span>
-								</div>
-							</div>
-						</div>
-						
-
-								</div>
-
-
-								<div class="col-md-4">
-
-									<div
-							class="row form-group form-md-line-input form-md-floating-label has-success">
-							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Title
-								*</label> <span></span>
-						</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<h3>
-				<i class="icmn-coins cui-wizard--steps--icon"></i> <span
-					class="cui-wizard--steps--title">Billing Firm Contact</span>
-			</h3>
-			<section class="padding-0">
-				<div class="col-lg-12 col-xs-12 padding-bottom-10 padding-left-0">
-
-
-					<div class="widget widget-six col-md-12">
-						<div class="widget-header">
-
-							<strong class="margin-right-10">Billing Firm Contact</strong>
-
-						</div>
-						<div class="panel-body">
-							<div class="col-md-12 padding-top-10">
-								<div class="col-md-4">
-										<div class="md-checkbox">
-							<input type="checkbox" id="checkbox1" class="md-check"> <label class="line-height-4"
-								for="checkbox1"> <span></span> <span class="check top-16"></span> <span
-								class="box margin-top-20"></span> Same as Primary Firm Contact
-							</label>
-						</div>
-					
-								</div>
-
-
-								<div class="col-md-4">
-										<div
-							class="form-group form-md-line-input form-md-floating-label has-success">
-							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">First
-								Name *</label> <span></span>
-						</div>
-						
-								</div>
-								<div class="col-md-4">
-									<div
-							class="form-group form-md-line-input form-md-floating-label has-success">
-							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Middle
-								Name</label> <span></span>
-						</div>
-						</div>
-						
-								</div>
-								
-								<div class="col-md-12 padding-top-10">
-								<div class="col-md-4">
-								<div
-							class="form-group form-md-line-input form-md-floating-label has-success">
-							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Last
-								Name *</label> <span></span>
-						</div>
-						</div>
-						
-						<div class="col-md-4">
-						<div
-							class="form-group form-md-line-input form-md-floating-label has-success">
-							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Email
-								Id *</label> <span></span>
-						</div>
-
-						</div>
-						
-						<div class="col-md-4">
-						<div class="row">
-							<div class="col-md-12 ">
-								<div
-									class="col-md-8 padding-left-0 form-group form-md-line-input form-md-floating-label has-success">
-									<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Phone
-										Number *</label> <span></span>
-								</div>
-								<div
-									class="col-md-4 padding-left-0  padding-right-0 form-group form-md-line-input form-md-floating-label has-success">
-									<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Extn
-									</label> <span></span>
-								</div>
-							</div>
-						</div>
-					
-						
-						</div>
-								</div>
-								
-								<div class="col-md-12">
-								<div class="col-md-4">
-								<div
-							class="row form-group form-md-line-input form-md-floating-label has-success">
-							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Title
-								*</label> <span></span>
-					
-						</div>
-								</div>
-							</div>
-
-
-						</div>
-					</div>
-</div>
-			</section>
-
+			
 			<h3>
 				<i class="icmn-location5 cui-wizard--steps--icon"></i> <span
 					class="cui-wizard--steps--title">Firms Location</span>
@@ -374,16 +181,16 @@
 
 
 					<div class="widget widget-six col-md-12">
-						<div class="widget-header">
+						<!--<div class="widget-header">
 
 							<strong class="margin-right-10">Firms Location</strong>
 
-						</div>
+						</div>-->
 						<div class="panel-body">
 							<div class="col-md-12 padding-top-10">
 								<div class="col-md-4">
 									<div
-							class="row form-group form-md-line-input form-md-floating-label has-success">
+							class="row form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 							<input type="text" required="" class="form-control borders" 
 								value="Atlanta"> <label  class="margin-bottom-0">Location 1 *</label> <span></span>
 						</div>
@@ -394,7 +201,7 @@
 								<div class="col-md-4">
 									
 						<div
-							class="row form-group form-md-line-input form-md-floating-label has-success">
+							class="row form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 							<input type="text" required="" class="form-control borders"
 								value="New York"> <label class="margin-bottom-0">Location 2</label> <span></span>
 						</div>
@@ -419,6 +226,202 @@
 				</div>
 			</section>
 
+			
+			<h3>
+				<i class="icmn-phone2 cui-wizard--steps--icon"></i> <span
+					class="cui-wizard--steps--title">Primary Firm Contact</span>
+			</h3>
+			<section class="padding-0">
+				<div class="col-lg-12 col-xs-12 padding-bottom-10 padding-left-0">
+
+
+					<div class="widget widget-six col-md-12">
+						<!--<div class="widget-header">
+
+							<strong class="margin-right-10">Primary Firm Contact</strong>
+
+						</div>-->
+						<div class="panel-body">
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<div
+							class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
+							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">First
+								Name *</label> <span></span>
+						</div>
+						
+								</div>
+
+
+								<div class="col-md-4">
+									<div
+							class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
+							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Middle
+								Name</label> <span></span>
+						</div>
+						
+								</div>
+
+
+								<div class="col-md-4">
+									<div
+							class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
+							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Last
+								Name *</label> <span></span>
+						</div>
+					
+								</div>
+							</div>
+
+
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<div
+							class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
+							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Email
+								Id *</label> <span></span>
+						</div>
+
+					
+								</div>
+
+
+								<div class="col-md-4">
+										<div class="row">
+							<div class="col-md-12 ">
+								<div
+									class="col-md-8 padding-left-0 form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
+									<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Phone
+										Number *</label> <span></span>
+								</div>
+								<div
+									class="col-md-4 padding-left-0  padding-right-0 form-group form-md-line-input form-md-floating-label has-success">
+									<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Extn
+									</label> <span></span>
+								</div>
+							</div>
+						</div>
+						
+
+								</div>
+
+
+								<div class="col-md-4">
+
+									<div
+							class="row form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
+							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Title
+								*</label> <span></span>
+						</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<h3>
+				<i class="icmn-coins cui-wizard--steps--icon"></i> <span
+					class="cui-wizard--steps--title">Billing Firm Contact</span>
+			</h3>
+			<section class="padding-0">
+				<div class="col-lg-12 col-xs-12 padding-bottom-10 padding-left-0">
+
+
+					<div class="widget widget-six col-md-12">
+						<!--<div class="widget-header">
+
+							<strong class="margin-right-10">Billing Firm Contact</strong>
+
+						</div>-->
+						<div class="panel-body">
+							<div class="col-md-12 padding-top-10">
+								<div class="col-md-4">
+										<div class="md-checkbox">
+							<input type="checkbox" id="checkbox1" class="md-check"> <label class="line-height-4"
+								for="checkbox1"> <span></span> <span class="check top-16"></span> <span
+								class="box margin-top-20"></span> Same as Primary Firm Contact
+							</label>
+						</div>
+					
+								</div>
+
+
+								<div class="col-md-4">
+										<div
+							class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
+							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">First
+								Name *</label> <span></span>
+						</div>
+						
+								</div>
+								<div class="col-md-4">
+									<div
+							class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
+							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Middle
+								Name</label> <span></span>
+						</div>
+						</div>
+						
+								</div>
+								
+								<div class="col-md-12 padding-top-10">
+								<div class="col-md-4">
+								<div
+							class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
+							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Last
+								Name *</label> <span></span>
+						</div>
+						</div>
+						
+						<div class="col-md-4">
+						<div
+							class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
+							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Email
+								Id *</label> <span></span>
+						</div>
+
+						</div>
+						
+						<div class="col-md-4">
+						<div class="row">
+							<div class="col-md-12 ">
+								<div
+									class="col-md-8 padding-left-0 form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
+									<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Phone
+										Number *</label> <span></span>
+								</div>
+								<div
+									class="col-md-4 padding-left-0  padding-right-0 form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
+									<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Extn
+									</label> <span></span>
+								</div>
+							</div>
+						</div>
+					
+						
+						</div>
+								</div>
+								
+								<div class="col-md-12">
+								<div class="col-md-4">
+								<div
+							class="row form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
+							<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Title
+								*</label> <span></span>
+					
+						</div>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+</div>
+			</section>
+
+			
 			<h3>
 				<i class="icmn-upload2 cui-wizard--steps--icon"></i> <span
 					class="cui-wizard--steps--title">Upload Logo</span>
@@ -428,11 +431,11 @@
 
 
 					<div class="widget widget-six col-md-12">
-						<div class="widget-header">
+					<!--	<div class="widget-header">
 
 							<strong class="margin-right-10">Upload Logo</strong>
 
-						</div>
+						</div>-->
 						<div class="panel-body">
 							<div class="col-md-12 padding-top-10">
 								<div class="col-md-4">
@@ -461,15 +464,58 @@
 
 
 					<div class="widget widget-six col-md-12">
-						<div class="widget-header">
+					<!--	<div class="widget-header">
 
 							<strong class="margin-right-10">Module Subscription</strong>
 
-						</div>
+						</div>-->
 						<div class="panel-body">
 							<div class="col-md-12 padding-top-10">
 								<div class="col-md-6">
-									<div class="col-xs-6 padding-left-0 ">Plan Claims Reporting</div>
+									<div class="col-xs-6 padding-left-0 ">
+									
+								<div class="form-group form-md-checkboxes">
+							
+								<div class="md-checkbox-list">
+									<div class="md-checkbox">
+										<input type="checkbox" checked id="checkbox2_1" name="checkboxes1[]" value="1" class="md-check">
+										<label for="checkbox2_1">
+											<span class="inc"></span>
+											<span class="check"></span>
+											<span class="box"></span> Plan Claims Reporting</label>
+									</div>
+									<div class="md-checkbox">
+										<input type="checkbox" id="checkbox2_2" name="checkboxes1[]" value="1" class="md-check">
+										<label for="checkbox2_2">
+											<span></span>
+											<span class="check"></span>
+											<span class="box"></span>  Population Health Management </label>
+									</div>
+									<div class="md-checkbox">
+										<input type="checkbox" id="checkbox2_3" name="checkboxes1[]" value="1" class="md-check">
+										<label for="checkbox2_3">
+											<span></span>
+											<span class="check"></span>
+											<span class="box"></span>  Stewardship Reporting </label>
+									</div>
+									<div class="md-checkbox">
+										<input type="checkbox" id="checkbox2_3" name="checkboxes1[]" value="1" class="md-check">
+										<label for="checkbox2_3">
+											<span></span>
+											<span class="check"></span>
+											<span class="box"></span> Plan RFP Quoting Assistant </label>
+									</div>
+									<div class="md-checkbox">
+										<input type="checkbox" id="checkbox2_3" name="checkboxes1[]" value="1" class="md-check">
+										<label for="checkbox2_3">
+											<span></span>
+											<span class="check"></span>
+											<span class="box"></span>  Sales Activity Tracking </label>
+									</div>
+								</div>
+							</div>
+								
+								</div>
 						<div class="col-xs-6">
 							<span class="md-radio"> <input type="radio" id="radio50"
 								name="radio211" class="md-radiobtn"> <label for="radio50"> <span
@@ -495,10 +541,12 @@
 									(future module)</i></span><br>
 						</div>
 								</div>
-								<div class="col-md-2">
+								<div class="col-md-2" id="save_button">
+								<div class="row">
 									<div class="margin-top-25">
-								<button type="button" class="btn btn-success pull-right">Save & Update</button>
+								<button type="button" class="btn btn-success pull-right">Save</button>
 							</div>	
+							</div>
 								</div>
 							</div>
 

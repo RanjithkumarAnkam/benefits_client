@@ -13,17 +13,17 @@
 
 
 					<div class="widget widget-six col-md-12">
-						<div class="widget-header">
+						<!--<div class="widget-header">
 
 							<strong class="margin-right-10">Contact Information</strong>
 
-						</div>
+						</div>-->
 						<div class="panel-body">
 							<div class="col-md-12">
 								<div class="col-md-4">
 									
 					<div
-						class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+						class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 						<select class="form-control edited" id="form_control_1">
 							<option>Select Client Company List</option>
 							<option>ABC Company</option>
@@ -39,7 +39,7 @@
 								<div class="col-md-4">
 									
 					<div
-						class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+						class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 						<input type="text" required="" class="form-control borders"> <label  class="margin-bottom-0">First
 							Name<span class="imp-red">*</span>
 						</label> <span></span>
@@ -51,7 +51,7 @@
 
 								<div class="col-md-4">
 										<div
-						class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+						class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 						<input type="text" required="" class="form-control borders"> <label  class="margin-bottom-0">Middle
 							Name<span class="imp-red">*</span>
 						</label> <span></span>
@@ -65,7 +65,7 @@
 							<div class="col-md-12">
 								<div class="col-md-4">
 										<div
-						class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+						class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 						<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0" >Last
 							Name<span class="imp-red">*</span>
 						</label> <span></span>
@@ -77,7 +77,7 @@
 
 								<div class="col-md-4">
 									<div
-						class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+						class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 						<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Your
 							Title<span class="imp-red">*</span>
 						</label> <span></span>
@@ -89,7 +89,7 @@
 
 								<div class="col-md-4">
 									<div
-						class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+						class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 						<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Email
 							Id<span class="imp-red">*</span>
 						</label> <span></span>
@@ -106,7 +106,7 @@
 						<div class="col-md-12 padding-0">
 							<div class="col-md-8">
 								<div
-									class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+									class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 									<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Phone
 										number<span class="imp-red">*</span>
 									</label> <span></span>
@@ -116,7 +116,7 @@
 							<div class="col-md-4">
 
 								<div
-									class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+									class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 									<input type="text" required="" class="form-control borders"> <label class="margin-bottom-0">Ext
 										No.<span class="imp-red">*</span>
 									</label> <span></span>
@@ -158,11 +158,11 @@
 
 
 					<div class="widget widget-six col-md-12">
-						<div class="widget-header">
+					<!--	<div class="widget-header">
 
 							<strong class="margin-right-10">Access Priviledge</strong>
 
-						</div>
+						</div>-->
 						<div class="panel-body">
 							<div class="col-md-12">
 								<div class="col-md-4">
@@ -170,7 +170,7 @@
 		<label for="form_control_1">Permissions</label>
 		<div class="md-checkbox-list">
 			<div class="md-checkbox">
-				<input type="checkbox" id="checkbox2_1" name="checkboxes1[]" value="1" class="md-check">
+				<input type="checkbox" id="checkbox2_1" name="checkboxes1[]" value="1" class="md-check" checked>
 				<label for="checkbox2_1">
 					<span class="inc"></span>
 					<span class="check"></span>
@@ -194,6 +194,9 @@
 	</div>
 								</div>
 
+								<div class="col-md-8 margin-top-100" id="save_button">
+					<button type="button" class="btn btn-success pull-right">Save</button>
+				</div>
 							</div>
 
 
@@ -203,7 +206,7 @@
 				</div>
 			</section>
 
-			<h3>
+			<!--<h3>
 				<i class="icmn-toggle-off cui-wizard--steps--icon"></i> <span
 					class="cui-wizard--steps--title">Active / Inactive</span>
 			</h3>
@@ -211,13 +214,13 @@
 				<div class="col-lg-12 col-xs-12 padding-bottom-10 padding-left-0">
 
 
-					<div class="widget widget-six col-md-12">
-						<div class="widget-header">
+					<div class="widget widget-six col-md-12">-->
+					<!--	<div class="widget-header">
 
 							<strong class="margin-right-10">Active / Inactive</strong>
 
-						</div>
-						<div class="panel-body">
+						</div>-->
+					<!--	<div class="panel-body">
 							<div class="col-md-12 padding-top-10">
 								<div class="col-md-4">
 										<div class="row">
@@ -260,7 +263,7 @@
 						</div>
 					</div>
 				</div>
-			</section>
+			</section>-->
 
 			
 

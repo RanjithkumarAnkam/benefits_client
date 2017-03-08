@@ -5,27 +5,41 @@ DemoApp.controller('DemoController', function DemoController($scope) {
  
     
     $scope.events = "";
-    
+     $scope.filterRow = {
+        visible: true,
+        applyFilter: "auto"
+    };
+	
     $scope.dataGridOptions = {
         dataSource: employees,
         paging: {
             enabled: false
         },
+		
+		   bindingOptions: {
+            filterRow: "filterRow",
+            headerFilter: "headerFilter"
+        },
+		
         "export": {
             enabled: true,
             fileName: "Companies",
             allowExportSelectedData: true
         },
         editing: {
-            mode: "row",
-            allowUpdating: true,
-            allowDeleting: false,
-            allowAdding: true
+            mode: "",
+            allowUpdating: false,
+           
         }, 
         columns: [
             {
                 dataField: "Clientname",
-                caption: "Client Name"
+				 cellTemplate: function (container, options) {
+                           $('<a>'+ options.value +'</a>')
+                                .attr('href','/admin/clients/editclientuser?id=sdfd45sdfsd')
+                              // .attr('target', '_blank')
+                               .appendTo(container);
+                       }
             }, 
             
            
@@ -42,17 +56,38 @@ DemoApp.controller('DemoController', function DemoController($scope) {
                 dataField: "jobtitle",
                 caption: "Job Title"
             },	
-			 {
+			  {
                 dataField: "status",
-                caption: "Status",
+				 cellTemplate: function (container, options) {
+                           $('<a>Active</a>')
+                               .attr('href','#')
+                              // .attr('target', '_blank')
+                               .appendTo(container);
+                       }
+              /*  caption: "Status",
                 width: 125,
                 lookup: {
                     dataSource: statusID,
                     displayExpr: "Name",
                     valueExpr: "ID"
-                }
+                }*/
             },
-			"action",
+			 {
+                dataField: "action",
+				 cellTemplate: function (container, options) {
+                           $('<a>Resend Password</a>')
+                               .attr('href','#')
+                              // .attr('target', '_blank')
+                               .appendTo(container);
+                       }
+              /*  caption: "Status",
+                width: 125,
+                lookup: {
+                    dataSource: statusID,
+                    displayExpr: "Name",
+                    valueExpr: "ID"
+                }*/
+            },
             
         ],
         onEditingStart: function(e) {
@@ -91,7 +126,7 @@ DemoApp.controller('DemoController', function DemoController($scope) {
 		    "lastname": "Mr.",
 		    "email": "robert@gmail.com",
 			 "jobtitle": "Employee",
-			  "status": 1,
+			  "status": "Active",
 			  "action": "Resend Password",
 		   
 		},
@@ -102,16 +137,13 @@ DemoApp.controller('DemoController', function DemoController($scope) {
 		    "lastname": "Rangu",
 		    "email": "rangu@gmail.com",
 			 "jobtitle": "Manager",
-			  "status": 2,
+			  "status": "Active",
 			  "action": "Resend Password",
 		   
 		}];
 
 		
-		var statusID = [{
-		    "ID": 1,
-		    "Name": "Active"
-		}, {
-		    "ID": 2,
-		    "Name": "Inactive"
-		}];
+		function clientuserdetails(){
+		
+			
+		}

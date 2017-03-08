@@ -22,6 +22,25 @@
                 </a>
             </li>
             
+			 <li class="left-menu-list-submenu left-menu-list-color-warning" id="firms_id">
+                <a class="left-menu-link" href="javascript: void(0);">
+                    <i class="left-menu-link-icon icmn-books"><!-- --></i>
+                    Firms
+                </a>
+                <ul class="left-menu-list list-unstyled" id="firms_id_ul">
+                    <li class="firms_li">
+                        <a class="left-menu-link firms" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/admin/firm/add-firm">
+                             Firms 
+                        </a>
+                    </li>
+                    <li class="firm_users_li">
+                         <a class="left-menu-link firm-users" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/admin/firm/firm-user">
+                            Firm Users
+                        </a>
+                    </li>
+                </ul>
+            </li>
+			
              <li class="left-menu-list-submenu left-menu-list-color-warning" id="clients_id">
                 <a class="left-menu-link" href="javascript: void(0);">
                     <i class="left-menu-link-icon icmn-books"><!-- --></i>
@@ -41,24 +60,7 @@
                 </ul>
             </li>
              
-             <li class="left-menu-list-submenu left-menu-list-color-warning" id="firms_id">
-                <a class="left-menu-link" href="javascript: void(0);">
-                    <i class="left-menu-link-icon icmn-books"><!-- --></i>
-                    Firms
-                </a>
-                <ul class="left-menu-list list-unstyled" id="firms_id_ul">
-                    <li class="firms_li">
-                        <a class="left-menu-link firms" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/admin/firm/add-firm">
-                             Firms 
-                        </a>
-                    </li>
-                    <li class="firm_users_li">
-                         <a class="left-menu-link firm-users" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/admin/firm/firm-user">
-                            Firm Users
-                        </a>
-                    </li>
-                </ul>
-            </li>
+            
             <li class="left-menu-list-separator "><!-- --></li>
           
             <li class="left-menu-list-submenu left-menu-list-color-info">

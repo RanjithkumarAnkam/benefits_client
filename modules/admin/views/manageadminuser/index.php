@@ -8,13 +8,15 @@
 		<div class="dashboard-container">
 
 	<div class="col-md-12 col-xs-12 header-main">
-				<div class="col-md-11 col-xs-11">
-					<span style="font-size: 22px;">Manage Admin Users</span>
+				<div class="col-md-12 col-xs-12">
+					<span style="font-size: 18px;">Manage Admin Users</span> <span
+						style="font-size: 22px;" class="pull-right"> <i
+						class="fa fa-heart-o" aria-hidden="true"
+						style="margin-right: 15px;"></i> <i class="fa fa-list menuBtn"
+						aria-hidden="true"></i></span>
+
 				</div>
-				<div class="col-md-1 col-xs-1">
-					<i class="fa fa-heart-o" aria-hidden="true"></i>&nbsp;&nbsp;<i
-						class="fa fa-list menuBtn" aria-hidden="true"></i>
-				</div>
+
 			</div>
 
 		

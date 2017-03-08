@@ -11,7 +11,9 @@
 .padding-18 {
 	padding: 18px;
 }
-
+.margin-top-100{
+	margin-top:100px;
+}
 .padding-top-20 {
 	padding-top: 20px;
 }
@@ -340,6 +342,48 @@
 .margin-bottom-0{
 margin-bottom:0px !important;	
 }
+.margin-bottom-5{
+margin-bottom:5px !important;	
+}
 .line-height-4{
 	line-height:4;
 }
+.font-18{
+	font-size:18px;
+}
+.cui-wizard .steps ul li.disabled a{
+	padding:0px
+}
+.wizard > .steps .current a{
+	padding:0px;
+}
+.wizard > .steps .done a{
+	padding:0px;
+}
+.cui-ecommerce--cart .actions{
+	padding-top:0px;
+	border-top:0px !important;
+}
+.wizard > .steps .current a{
+	color:red;
+}
+
+
+
+/*  for button in flow of form  */
+
+.cui-wizard .actions li a{
+	background:#2184be;
+	border-color:#2184be ;
+}
+
+.margin-top-15{
+	margin-top:15px;
+}
+
+ @media (min-width: 1200px) and (max-width: 1340px) {
+
+    .media-width {
+       width:50% !important;
+    }
+}​

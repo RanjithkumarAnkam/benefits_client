@@ -15,16 +15,16 @@
 
 
 					<div class="widget widget-six col-md-12">
-						<div class="widget-header">
+					<!--	<div class="widget-header">
 
 							<strong class="margin-right-10">Client Details</strong>
 
-						</div>
+						</div>-->
 						<div class="panel-body">
 							<div class="col-md-12">
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<input type="text" required="" class="form-control borders"> <label 
 											class="padding-left-8 margin-bottom-0">ID</label> <span></span>
 									</div>
@@ -33,7 +33,7 @@
 
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<input type="text" required="" class="form-control borders"> <label
 											class="padding-left-8 margin-bottom-0">Industry<span class="imp-red">*</span></label>
 										<span></span>
@@ -43,7 +43,7 @@
 
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<input type="text" required="" class="form-control borders"> <label
 											class="padding-left-8 margin-bottom-0">Business Address 1<span
 											class="imp-red">*</span>
@@ -56,7 +56,7 @@
 							<div class="col-md-12">
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<input type="text" required="" class="form-control borders"> <label
 											class="padding-left-8 margin-bottom-0">Business Address 2<span
 											class="imp-red">*</span>
@@ -67,7 +67,7 @@
 
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<input type="text" required="" class="form-control borders"> <label
 											class="padding-left-8 margin-bottom-0">State<span class="imp-red">*</span></label>
 										<span></span>
@@ -77,7 +77,7 @@
 
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<input type="text" required="" class="form-control borders"> <label
 											class="padding-left-8 margin-bottom-0">City<span class="imp-red">*</span></label>
 										<span></span>
@@ -89,7 +89,7 @@
 							<div class="col-md-12">
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<input type="text" required="" class="form-control borders"> <label
 											class="padding-left-8 margin-bottom-0">Zip Code<span class="imp-red">*</span>
 										</label> <span></span>
@@ -99,7 +99,7 @@
 
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<input type="text" required="" class="form-control borders"> <label
 											class="padding-left-8 margin-bottom-0">Website<span class="imp-red">*</span></label>
 										<span></span>
@@ -109,7 +109,7 @@
 
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<select class="form-control edited" id="form_control_1">
 											<option value=""></option>
 											<option value="<25" selected=""><25</option>
@@ -132,7 +132,7 @@
 							<div class="col-md-12">
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<select class="form-control edited" id="form_control_1">
 											<option>Select Industry Category</option>
 											<option>Manufacturing</option>
@@ -156,7 +156,7 @@
 
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<select class="form-control edited" id="form_control_1">
 											<option>Select Industry Category</option>
 											<option>Manufacturing</option>
@@ -198,16 +198,16 @@
 
 
 					<div class="widget widget-six col-md-12">
-						<div class="widget-header">
+					<!--	<div class="widget-header">
 
 							<strong class="margin-right-10">Primary Contact Information</strong>
 
-						</div>
+						</div>-->
 						<div class="panel-body">
 							<div class="col-md-12">
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<input type="text" required="" class="form-control borders"> <label
 											class="padding-left-8 margin-bottom-0">First Name<span class="imp-red">*</span>
 										</label> <span></span>
@@ -219,7 +219,7 @@
 
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<input type="text" required="" class="form-control borders"> <label
 											class="padding-left-8 margin-bottom-0">Middle Name<span class="imp-red">*</span>
 										</label> <span></span>
@@ -231,7 +231,7 @@
 
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<input type="text" required="" class="form-control borders"> <label
 											class="padding-left-8 margin-bottom-0">Last Name<span class="imp-red">*</span>
 										</label> <span></span>
@@ -245,7 +245,7 @@
 							<div class="col-md-12">
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<input type="text" required="" class="form-control borders"> <label
 											class="padding-left-8 margin-bottom-0">Email Id <span class="imp-red">*</span>
 										</label> <span></span>
@@ -260,7 +260,7 @@
 										<div class="col-md-12 padding-0">
 											<div class="col-md-8">
 												<div
-													class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+													class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 													<input type="text" required="" class="form-control borders">
 													<label class="padding-left-8 margin-bottom-0">Phone number<span
 														class="imp-red">*</span>
@@ -271,7 +271,7 @@
 
 											<div class="col-md-4">
 												<div
-													class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+													class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 													<input type="text" required="" class="form-control borders">
 													<label class="padding-left-8 margin-bottom-0">Ext No.<span class="imp-red">*</span>
 													</label> <span></span>
@@ -289,7 +289,7 @@
 									<div class="row">
 										<div class="col-md-12">
 											<div
-												class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+												class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 												<input type="text" required="" class="form-control borders">
 												<label class="padding-left-8 margin-bottom-0">Title<span>*</span></label> <span></span>
 											</div>
@@ -312,11 +312,11 @@
 
 
 					<div class="widget widget-six col-md-12">
-						<div class="widget-header">
+						<!--<div class="widget-header">
 
 							<strong class="margin-right-10">Subscriptions</strong>
 
-						</div>
+						</div>-->
 						<div class="panel-body">
 							<div class="col-md-12 padding-top-10">
 								<div class="col-md-4">
@@ -327,7 +327,7 @@
 												<label for="form_control_1">Status</label>
 														<div class="md-radio-list">
 														<div class="md-radio">
-																<input type="radio" id="radio10" name="radio10"
+																<input type="radio" id="radio10" name="radio10" checked
 																	class="md-radiobtn"> <label for="radio10"> <span
 																	class="inc"></span> <span class="check"></span> <span
 																	class="box"></span> Firm Active
@@ -426,16 +426,27 @@
 
 
 					<div class="widget widget-six col-md-12">
-						<div class="widget-header">
+						<!--<div class="widget-header">
 
 							<strong class="margin-right-10">Billing Information</strong>
 
-						</div>
+						</div>-->
 						<div class="panel-body">
 							<div class="col-md-12 padding-top-10">
+							
+								<div class="col-md-4">
+										<div class="md-checkbox">
+							<input type="checkbox" id="checkbox1" class="md-check"> <label class="line-height-4"
+								for="checkbox1"> <span></span> <span class="check top-16"></span> <span
+								class="box margin-top-20"></span> Same as Primary Contact Info
+							</label>
+						</div>
+					
+								</div>
+								
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<input type="text" required="" class="form-control borders"> <label
 											class="padding-left-8 margin-bottom-0">Who to Bill?<span class="imp-red">*</span>
 										</label> <span></span>
@@ -448,7 +459,7 @@
 
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<input type="text" required="" class="form-control borders"> <label
 											class="padding-left-8 margin-bottom-0">First Name<span class="imp-red">*</span>
 										</label> <span></span>
@@ -456,9 +467,14 @@
 
 
 								</div>
-								<div class="col-md-4">
+								
+							</div>
+
+							<div class="col-md-12">
+							
+							<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<input type="text" required="" class="form-control borders"> <label
 											class="padding-left-8 margin-bottom-0">Middle Name<span class="imp-red">*</span>
 										</label> <span></span>
@@ -466,12 +482,9 @@
 
 
 								</div>
-							</div>
-
-							<div class="col-md-12">
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<input type="text" required="" class="form-control borders"> <label
 											class="padding-left-8 margin-bottom-0">Last Name<span class="imp-red">*</span>
 										</label> <span></span>
@@ -481,7 +494,7 @@
 								<div class="col-md-4">
 
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<input type="text" required="" class="form-control borders"> <label
 											class="padding-left-8 margin-bottom-0">Email Id <span class="imp-red">*</span>
 										</label> <span></span>
@@ -490,13 +503,19 @@
 
 								</div>
 
-								<div class="col-md-4">
+								
+							</div>
+
+
+							<div class="col-md-12">
+
+							<div class="col-md-4">
 
 									<div class="row">
 										<div class="col-md-12 padding-0">
 											<div class="col-md-8">
 												<div
-													class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+													class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 													<input type="text" required="" class="form-control borders">
 													<label class="padding-left-8 margin-bottom-0">Phone number<span
 														class="imp-red">*</span>
@@ -507,7 +526,7 @@
 											<div class="col-md-4">
 
 												<div
-													class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+													class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 													<input type="text" required="" class="form-control borders">
 													<label class="padding-left-8 margin-bottom-0">Ext No.<span class="imp-red">*</span>
 													</label> <span></span>
@@ -520,18 +539,14 @@
 
 
 								</div>
-							</div>
-
-
-							<div class="col-md-12">
-
+								
 
 								<div class="col-md-4">
 
 									<div class="row">
 										<div class="col-md-12">
 											<div
-												class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+												class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 												<input type="text" required="" class="form-control borders">
 												<label class="padding-left-8 margin-bottom-0">Title<span class="imp-red">*</span></label>
 												<span></span>
@@ -541,7 +556,7 @@
 								</div>
 
 								<div class="col-md-4"></div>
-								<div class="col-md-4"></div>
+								 
 							</div>
 						</div>
 					</div>
@@ -552,7 +567,7 @@
 				</div>
 			</section>
 
-			<h3>
+		<!--	<h3>
 				<i class="icmn-toggle-off cui-wizard--steps--icon"></i> <span
 					class="cui-wizard--steps--title">Active / Inactive</span>
 			</h3>
@@ -560,13 +575,13 @@
 				<div class="col-lg-12 col-xs-12 padding-bottom-10 padding-left-0">
 
 
-					<div class="widget widget-six col-md-12">
-						<div class="widget-header">
+					<div class="widget widget-six col-md-12">-->
+					<!--	<div class="widget-header">
 
 							<strong class="margin-right-10">Active / Inactive</strong>
 
-						</div>
-						<div class="panel-body">
+						</div>-->
+					<!--	<div class="panel-body">
 							<div class="col-md-12 padding-top-10">
 								<div class="col-md-4">
 									<div class="row">
@@ -609,7 +624,7 @@
 					</div>
 				</div>
 
-			</section>
+			</section>-->
 
 
 			<h3>
@@ -621,16 +636,16 @@
 
 
 					<div class="widget widget-six col-md-12">
-						<div class="widget-header">
+						<!--<div class="widget-header">
 
 							<strong class="margin-right-10">Assign Primary Support Team</strong>
 
-						</div>
+						</div>-->
 						<div class="panel-body">
 							<div class="col-md-12 padding-top-10">
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<select class="form-control edited" id="form_control_1">
 											<option>Select Team Member</option>
 											<option>Sandy Hiott</option>
@@ -643,7 +658,7 @@
 
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<select class="form-control edited" id="form_control_1">
 											<option>Select Account Manager</option>
 											<option>Sandy Hiott</option>
@@ -654,7 +669,7 @@
 								</div>
 								<div class="col-md-4">
 									<div
-										class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+										class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 										<select class="form-control edited" id="form_control_1">
 											<option>Select Service Rep</option>
 											<option>Sandy Hiott</option>
@@ -676,7 +691,7 @@
 									<div class="row">
 										<div class="col-md-12">
 											<div
-												class="form-group form-md-line-input form-md-floating-label has-success margin-top-10">
+												class="form-group form-md-line-input form-md-floating-label has-success margin-bottom-5">
 												<input type="text" required="" class="form-control borders">
 												<label class="padding-left-8 margin-bottom-0">Title<span class="imp-red">*</span></label>
 												<span></span>
@@ -686,8 +701,8 @@
 								</div>
 
 								<div class="col-md-4"></div>
-								<div class="col-md-4 margin-top-25">
-								<button type="button" class="btn btn-success pull-right">Save & Update</button>
+								<div class="col-md-4 margin-top-25 padding-bottom-10" id="save_button">
+								<button type="button" class="btn btn-success pull-right">Save</button>
 							</div>
 							</div>
 						</div>
@@ -734,6 +749,17 @@
 $(document).ready(function(){
 	 $("#clients_id_ul").css("display","block");
 	 $("#clients_id_ul  li.clients_li a.clients").css("color","black");
+	
+	$('#cart-checkout-t-0').click(function(){
+		
+		('.wizard > .steps .current a').css("color","green");
+		('#cart-checkout-t-0 .icmn-users4').css("color","green");
+		('#cart-checkout-t-0 .number').css("border","1px solid black");
+		('#cart-checkout-t-0 .icmn-users4').css("color","green");
+		
+	});
+		
+		  
 	
 	 $(".dx-toolbar-before").html('<strong class="font-16">Manage Clients</strong>');
 	 
