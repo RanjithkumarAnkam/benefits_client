@@ -1,5 +1,5 @@
 <?php
-
+//db connection
 return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=benefits_client',
@@ -7,3 +7,5 @@ return [
     'password' => 'Password1!',
     'charset' => 'utf8',
 ];
+
+
