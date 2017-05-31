@@ -8,39 +8,33 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
+
 /**
- * This is the model class for table "{{%users}}".
+ * This is the model class for table "tbl_sir_users".
  *
- * @property integer $id
- * @property string $email
- * @property string $firstname
- * @property string $lastname
- * @property string $mobile
- * @property string $authkey
+ * @property integer $user_id
+ * @property string $username
  * @property string $password
+ * @property string $authkey
  * @property string $password_reset_token
- * @property string $usertype
- * @property integer $is_active
+ * @property string $accessToken
+ * @property integer $usertype
  * @property integer $is_verified
- * @property integer $is_blocked
- * @property string $remarks
- * @property string $confirmation_token
- * @property integer $password_requested_at
- * @property integer $created_at
- * @property integer $updated_at
- * @property integer $last_logged_at
- *
- * @property ClientsDetails[] $clientsDetails
- *
+ * @property integer $is_active
+ * @property string $last_login
+ * @property string $created_date
+ * @property integer $created_by
+ * @property string $modified_date
+ * @property integer $modified_by
  */
+
 class User extends ActiveRecord implements IdentityInterface {
-	public $_fullname;
+	
 	const STATUS_NO = 0;
 	const STATUS_YES = 1;
 	const ADMIN = 1;
 	const FIRM = 2;
 	const CLIENT = 3;
-	
 	
 	/**
 	 * @inheritdoc
@@ -52,175 +46,56 @@ class User extends ActiveRecord implements IdentityInterface {
 	/**
 	 * @inheritdoc
 	 */
-	public function behaviors() {
+	/*public function behaviors() {
 		return [ 
 				TimestampBehavior::className () 
 		];
-	}
+	}*/
 	
 	/**
 	 * @inheritdoc
 	 */
 	public function rules() {
-		return [ 
-				[ 
-						[ 
-								'email',
-								'firstname',
-								'lastname',
-								'authkey',
-								'password',
-								'usertype' 
-						],
-						'required' 
-				],
-				[ 
-						[ 
-								'usertype' 
-						],
-						'string' 
-				],
-				[ 
-						[ 
-								'is_active',
-								'is_verified',
-								'is_blocked',
-								'password_requested_at',
-								'created_at',
-								'updated_at',
-								'last_logged_at' 
-						],
-						'integer' 
-				],
-				[ 
-						[ 
-								'email' 
-						],
-						'string',
-						'max' => 100 
-				],
-				[ 
-						[ 
-								'firstname',
-								'lastname',
-								'mobile' 
-						],
-						'string',
-						'max' => 20 
-				],
-				[ 
-						[ 
-								'authkey' 
-						],
-						'string',
-						'max' => 32 
-				],
-				[ 
-						[ 
-								'password',
-								'password_reset_token',
-								'remarks' 
-						],
-						'string',
-						'max' => 255 
-				],
-				[ 
-						[ 
-								'confirmation_token' 
-						],
-						'string',
-						'max' => 250 
-				],
-				[ 
-						[ 
-								'email' 
-						],
-						'unique' 
-				],
-				[ 
-						[ 
-								'password_reset_token' 
-						],
-						'unique' 
-				],
-				
-				[ 
-						[ 
-								'is_active' 
-						],
-						'default',
-						'value' => self::STATUS_YES 
-				],
-				[ 
-						[ 
-								'is_verified',
-								'is_blocked' 
-						],
-						'default',
-						'value' => self::STATUS_NO 
-				],
-				[ 
-						[ 
-								'is_active',
-								'is_verified',
-								'is_blocked' 
-						],
-						'in',
-						'range' => [ 
-								self::STATUS_YES,
-								self::STATUS_NO 
-						] 
-				] 
-		];
-	}
+        return [
+            [['username', 'usertype', 'created_date', 'created_by'], 'required'],
+        	[['is_active', 'is_verified', 'usertype', 'created_by', 'modified_by'], 'integer'],
+            [['username', 'authkey','accessToken'], 'string', 'max' => 50],
+            [['password_reset_token'], 'string', 'max' => 255],
+            [['username'], 'email'],
+			[['username'], 'required', 'message' => 'Username / Email Id cannot be blank.'],
+            ['username', 'unique', 'targetAttribute' => ['username', 'usertype'], 'message' => 'Username already taken for this Usertype'],
+            [['password_reset_token'], 'unique'],
+            [['last_login', 'created_date', 'modified_date'], 'safe'],
+            [['is_active'], 'default', 'value' => self::STATUS_NO],
+            [['is_verified'], 'default', 'value' => self::STATUS_NO],
+            [['is_active', 'is_verified'], 'in', 'range' => [self::STATUS_YES, self::STATUS_NO]],
+        ];
+    }
 	
 	/**
 	 * @inheritdoc
 	 */
 	public function attributeLabels() {
-		return [ 
-				'id' => 'ID',
-				'email' => 'Email',
-				'firstname' => 'Firstname',
-				'lastname' => 'Lastname',
-				'mobile' => 'Mobile',
-				'authkey' => 'Auth Key',
-				'password' => 'Password',
-				'password_reset_token' => 'Password Reset Token',
-				'usertype' => 'Usertype',
-				'is_active' => 'Is Active',
-				'is_verified' => 'Is Verified',
-				'is_blocked' => 'Is Blocked',
-				'remarks' => 'Remarks',
-				'confirmation_token' => 'Confirmation Token',
-				'password_requested_at' => 'Password Requested At',
-				'created_at' => 'Created At',
-				'updated_at' => 'Updated At',
-				'last_logged_at' => 'Last Logged At' 
-		];
-	}
-	
-	/**
-	 *
-	 * @return \yii\db\ActiveQuery
-	 */
-	/*
-	 * public function getProfile() { return $this->hasOne(Profiles::className(), ['user_id' => 'id']); }
-	 */
-	
-	// Other code goes here...
-	/*
-	 * public function getFullname() { $profile = Profiles::find()->where(['user_id'=>$this->id])->one(); if ($profile !==null) return $profile->firstname.' '.$profile->lastname; return false; }
-	 */
-	
-	/**
-	 * @inheritdoc
-	 */
-   /* public function getFullname()
-    {
-    	return $this->firstname.' '.$this->lastname;
+        return [
+            'user_id' => 'User ID',
+            'username' => 'Username',
+            'password' => 'Password',
+            'authkey' => 'Authkey',
+            'password_reset_token' => 'Password Reset Token',
+            'accessToken' => 'Access Token',
+            'usertype' => 'Usertype',
+            'is_verified' => 'Is Verified',
+            'is_active' => 'Is Active',
+            'last_login' => 'Last Login',
+            'created_date' => 'Created Date',
+            'created_by' => 'Created By',
+            'modified_date' => 'Modified Date',
+            'modified_by' => 'Modified By',
+        ];
     }
-    	*/
+	
+	
+	
     public function getUsertype() {
 		return $this->usertype;
 	}
@@ -237,7 +112,7 @@ class User extends ActiveRecord implements IdentityInterface {
 	 * @inheritdoc
 	 */
 	public static function findIdentityByAccessToken($token, $type = null) {
-		throw new NotSupportedException ( '"findIdentityByAccessToken" is not implemented.' );
+		return static::findOne(['accessToken' => $token]);
 	}
 	
 	/**
@@ -283,6 +158,19 @@ class User extends ActiveRecord implements IdentityInterface {
 	}
 	
 	/**
+	 * Finds user by auth key
+	 *
+	 * @param string $token
+	 *        	auth key token
+	 * @return static null
+	 */
+	public static function findByAuthKey($token) {
+		
+		return static::findOne ( [
+				'authkey' => $token,
+				] );
+	}
+	/**
 	 * Finds out if password reset token is valid
 	 *
 	 * @param string $token
@@ -293,9 +181,9 @@ class User extends ActiveRecord implements IdentityInterface {
 		if (empty ( $token )) {
 			return false;
 		}
-		
 		$timestamp = ( int ) substr ( $token, strrpos ( $token, '_' ) + 1 );
-		$expire = Yii::$app->params ['user.passwordResetTokenExpire'];
+		
+		$expire = Yii::$app->params ['passwordResetTokenExpire'];
 		return $timestamp + $expire >= time ();
 	}
 	
@@ -344,7 +232,7 @@ class User extends ActiveRecord implements IdentityInterface {
 	 * Generates "remember me" authentication key
 	 */
 	public function generateAuthKey() {
-		$this->authkey = Yii::$app->security->generateRandomString ();
+		$this->authkey = Yii::$app->security->generateRandomString () . '_' . time ();
 	}
 	
 	/**
@@ -359,5 +247,17 @@ class User extends ActiveRecord implements IdentityInterface {
 	 */
 	public function removePasswordResetToken() {
 		$this->password_reset_token = null;
+	}
+	
+	
+	public function beforeSave($insert)
+	{
+		if (parent::beforeSave($insert)) {
+			if ($this->isNewRecord) {
+				$this->authkey = \Yii::$app->security->generateRandomString() . '_' . time ();
+			}
+			return true;
+		}
+		return false;
 	}
 }

@@ -1,11 +1,10 @@
 <?php
-//db connection
+
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=benefits_client',
+    'dsn' => 'mysql:host=localhost;dbname=self_new',
+	'tablePrefix' => 'tbl_sir_',
     'username' => 'root',
-    'password' => 'Password1!',
+    'password' => '',
     'charset' => 'utf8',
 ];
-
-
