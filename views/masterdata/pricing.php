@@ -67,11 +67,10 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 				<div class="col-md-12 profile-pic-background padding-6">
 					<?php $form = ActiveForm::begin(['enableClientValidation' => false,'options' => ['enctype' => 'multipart/form-data','validateOnSubmit' => true,'enableAjaxValidation' => false,'data-pjax' => true ]]); ?>
 					<div class="col-md-3">
-					
 					<?php echo $form->field($model_search_pricing, 'module_id',[
                  
                     'labelOptions' => [ 'class' => 'color-white' ]
-    ])->dropDownList(ArrayHelper::map(LookupOptions::find()->where(['option_type'=>2,'option_status'=>1])->All(), 'option_id', 'option_value'), ['onchange'=>'this.form.submit()']); ?>
+    ])->dropDownList(ArrayHelper::map(LookupOptions::find()->where(['option_type'=>2,'option_status'=>1])->All(), 'option_id', 'option_value'), ['onchange'=>'this.form.submit()'])->label('Module Name'); ?>
 						
 					</div>
 					<?php ActiveForm::end(); ?>
@@ -112,6 +111,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 							],
 							'label' => 'Basic' ,
 							'value' => function ($model, $key, $index) {
+								
 								return Yii::$app->formatter->asCurrency($model['basic'],'$');
 							}
 					],
@@ -143,7 +143,9 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 					'containerOptions' => [ 
 							'style' => 'overflow: auto' 
 					], // only set when $responsive = false
-					
+					 'rowOptions' => function ($model, $index, $widget, $grid){
+					  return ['style'=>'text-align:center;'];
+					},
 					'toolbar' => [ ],
 					
 					'pjax' => true,
@@ -204,7 +206,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 							
 							<div class="input-group"><span class="input-group-addon">$</span>
 							<input type="text" id="systempricing-basic" class="form-control price"
-								name="SystemPricing[basic]" maxlength="15" aria-required="true">
+								name="SystemPricing[basic]" maxlength="9" aria-required="true">
 
 							
 							</div>
@@ -218,7 +220,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 								<div class="input-group"><span class="input-group-addon">$</span>
 								<input
 								type="text" id="systempricing-full_service" class="form-control price"
-								name="SystemPricing[full_service]" maxlength="15"
+								name="SystemPricing[full_service]" maxlength="9"
 								aria-required="true">
 
 							
@@ -234,7 +236,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 							<label class="form-control-label" for="systempricing-bulk">Bulk</label>
 							<div class="input-group"><span class="input-group-addon">$</span>
 							<input type="text" id="systempricing-bulk" class="form-control price"
-								name="SystemPricing[bulk]" maxlength="15" aria-required="true">
+								name="SystemPricing[bulk]" maxlength="9" aria-required="true">
 
 							
 							</div>
@@ -297,7 +299,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 							
 							<div class="input-group"><span class="input-group-addon">$</span>
 							<input type="text" id="systempricing-update-basic" class="form-control price"
-								name="SystemPricing[basic]" maxlength="15" aria-required="true">
+								name="SystemPricing[basic]" maxlength="9" aria-required="true">
 
 							
 							</div>
@@ -311,7 +313,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 								<div class="input-group"><span class="input-group-addon">$</span>
 								<input
 								type="text" id="systempricing-update-full_service" class="form-control price"
-								name="SystemPricing[full_service]" maxlength="15"
+								name="SystemPricing[full_service]" maxlength="9"
 								aria-required="true">
 
 							
@@ -327,7 +329,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 							<label class="form-control-label" for="systempricing-bulk">Bulk</label>
 							<div class="input-group"><span class="input-group-addon">$</span>
 							<input type="text" id="systempricing-update-bulk" class="form-control price"
-								name="SystemPricing[bulk]" maxlength="15" aria-required="true">
+								name="SystemPricing[bulk]" maxlength="9" aria-required="true">
 
 							
 							</div>
@@ -363,6 +365,12 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 					</div>
 
 </div>
+
+<script>
+	$(document).ready(function(){
+		$('#masterdata_link').addClass('page-active');
+	});
+	</script>
 <?php
 
 

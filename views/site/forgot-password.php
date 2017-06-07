@@ -10,7 +10,7 @@ use richweber\recaptcha\Captcha;
 ?>
 
 <section class="page-content">
-	<div class="page-content-inner single-page-login-alpha" style="background-image: url(<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/images/design/Login_bg2.png)">
+	<div class="page-content-inner single-page-login-alpha" style="background-image: url(<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/images/design/Login_bg2.jpg)">
 
 		<!-- Login Alpha Page -->
 <div class="col-md-11 margin-top-20 alert-div">

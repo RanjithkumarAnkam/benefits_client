@@ -28,6 +28,7 @@ use Yii;
  */
 class Firms extends \yii\db\ActiveRecord
 {
+	public $firm_locations;
     /**
      * @inheritdoc
      */
@@ -42,18 +43,21 @@ class Firms extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['firm_name', 'address_1', 'city', 'state', 'zip', 'phone', 'created_by', 'created_date'], 'required'],
+            [['firm_name', 'address_1', 'city', 'state', 'zip', 'phone', 'created_by', 'created_date', 'firm_locations', 'billing_address'], 'required'],
             [['state', 'zip', 'is_active', 'created_by', 'modified_by'], 'integer'],
             [['created_date', 'modified_date'], 'safe'],
             [['firm_name'], 'string', 'max' => 50],
-			['firm_name', 'match', 'pattern' => "/^[a-zA-Z0-9&.'()\-\ ]+$/", 'message' => 'Firm name can only can only contain alphanumeric, dot, Ampersand, hyphen ,brackets.'],
-            ['address_1', 'match', 'pattern' => '/^[a-zA-Z0-9\-\/\ ]+$/', 'message' => 'Address 1 can only contain alphanumeric, hyphen, slash.'],
-			['address_2', 'match', 'pattern' => '/^[a-zA-Z0-9\-\/\ ]+$/', 'message' => 'Address 2 can only contain alphanumeric, hyphen, slash.'],
-			['city', 'match', 'pattern' => '/^[a-zA-Z- ]+$/', 'message' => 'City name can only contain alphabets.'],
-			//[['zip'], 'integer', 'max' => 5],
+			[['firm_name'], 'unique'],
+			['firm_name', 'match', 'pattern' => "/^[a-zA-Z0-9&,#.\-\ ]+$/", 'message' => 'Firm name can only contain  alpha, number, space, dot , comma, hash, ampersand, hyphen .'],
+            ['address_1', 'match', 'pattern' => "/^[a-zA-Z0-9&,#. ]+$/", 'message' => 'Address 1 can only contain alpha, number, space, dot , comma, hash, ampersand .'],
+			['address_2', 'match', 'pattern' => "/^[a-zA-Z0-9&,#. ]+$/", 'message' => 'Address 2 can only contain alpha, number, space, dot , comma, hash, ampersand .'],
+			['billing_address', 'match', 'pattern' => "/^[a-zA-Z0-9&,#. ]+$/", 'message' => 'Billing Address can only contain alpha, number, space, dot , comma, hash, ampersand .'],
+			['city', 'match', 'pattern' => '/^[a-zA-Z ]+$/', 'message' => 'City name can only contain alphabets.'],
+			[['zip'], 'string', 'min' => 5],
 			[['website'], 'url'],
-			[['address_1', 'address_2', 'city', 'website', 'firm_logo'], 'string', 'max' => 100],
-            [['phone'], 'string', 'max' => 20],
+			[['address_1', 'address_2', 'billing_address'], 'string', 'max' => 200],
+			[['city', 'website', 'firm_logo'], 'string', 'max' => 100],
+            [['phone'], 'string', 'min' => 14, 'max' => 20, 'tooShort' => 'Phone should contain at least 10 digits.', 'tooLong' => 'Phone should contain at most 10 characters.'],
         ];
     }
 
@@ -69,7 +73,7 @@ class Firms extends \yii\db\ActiveRecord
             'address_2' => 'Address 2',
             'city' => 'City',
             'state' => 'State',
-            'zip' => 'Zip',
+            'zip' => 'Zip Code',
             'website' => 'Website',
             'phone' => 'Phone',
             'firm_logo' => 'Firm Logo',
@@ -78,6 +82,7 @@ class Firms extends \yii\db\ActiveRecord
             'created_date' => 'Created Date',
             'modified_by' => 'Modified By',
             'modified_date' => 'Modified Date',
+			'firm_locations' => 'Firm Locations'
         ];
     }
 

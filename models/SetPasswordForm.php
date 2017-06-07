@@ -28,7 +28,7 @@ class SetPasswordForm extends Model
         return [
             // username and password are both required
             [['password', 'confirmpassword'], 'required'],
-            ['confirmpassword','compare','compareAttribute'=>'password'],
+            ['confirmpassword','compare','compareAttribute'=>'password','message'=>"Password and Confirm Password must match."],
 			
           
         ];

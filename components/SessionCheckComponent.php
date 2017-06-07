@@ -5,12 +5,95 @@ namespace app\components;
 use Yii;
 use yii\base\Component;
 use app\controllers\SiteController;
+use app\models\AdminUsers;
+use app\models\FirmUsers;
+use app\models\Firms;
+use app\models\Clients;
+use app\models\ClientUser;
 
 /*
  * SessionCheckComponent is used for checking session variables is login or logout
  */
-class SessionCheckComponent extends Component {
+class SessionCheckComponent extends Component {	
 	
+	// function to get the session based images & names
+	public static function RedirectionandSessioncreation() {
+		$login_url = '';
+		$result = array ();
+		$user_id = Yii::$app->user->identity->user_id;
+		
+		switch (Yii::$app->user->identity->usertype) {
+			case 1 :
+				$result ['login_url'] = \Yii::$app->params ['admin_url'];
+				
+				$userdetailModel = AdminUsers::find ()->where ( [ 
+						'user_id' => $user_id 
+				] )->One ();
+				
+				$profile_pic = $userdetailModel->profile_pic;
+				if (! empty ( $profile_pic )) {
+					$result ['profile_pic'] = '/images/admin_user/' . $profile_pic;
+				} else {
+					$result ['profile_pic'] = '/images/defaultuserimg.png';
+				}
+				// $full_name = $userdetailModel->first_name.' '.$userdetailModel->last_name;
+				$full_name = $userdetailModel->first_name;
+				$result ['logged_user_fullname'] = $full_name;
+				$result ['profile_logo'] = '/images/logo/benefits.png';
+				break;
+			case 2 :
+				$result ['login_url'] = \Yii::$app->params ['firm_url'];
+				
+				$userdetailModel = FirmUsers::find ()->where ( [ 
+						'user_id' => $user_id 
+				] )->One ();
+				$profile_pic = $userdetailModel->profile_pic;
+				if (! empty ( $profile_pic )) {
+					$result ['profile_pic'] = '/images/firm_user/' . $profile_pic;
+				} else {
+					$result ['profile_pic'] = '/images/defaultuserimg.png';
+				}
+				// $full_name = $userdetailModel->first_name.' '.$userdetailModel->last_name;
+				$full_name = $userdetailModel->first_name;
+				$result ['logged_user_fullname'] = $full_name;
+				// getting firm logo
+				$firm_details = Firms::find ()->select ( 'firm_logo' )->where ( [ 
+						'firm_id' => $userdetailModel->firm_id 
+				] )->One ();
+				if (! empty ( $firm_details->firm_logo )) {
+					$result ['profile_logo'] = '/images/firm-logos/' . $firm_details->firm_logo;
+				} else {
+					$result ['profile_logo'] = '/images/logo/benefits.png';
+				}
+				break;
+			case 3 :
+				$result ['login_url'] = \Yii::$app->params ['client_url'];
+				
+				$userdetailModel = ClientUser::find ()->where ( [ 
+						'user_id' => $user_id 
+				] )->One ();
+				if (! empty ( $profile_pic )) {
+					$result ['profile_pic'] = '/images/client_user/' . $profile_pic;
+				} else {
+					$result ['profile_pic'] = '/images/defaultuserimg.png';
+				}
+				// $full_name = $userdetailModel->first_name.' '.$userdetailModel->last_name;
+				$full_name = $userdetailModel->first_name;
+				$result ['logged_user_fullname'] = $full_name;
+				// getting client logo
+				$client_details = Clients::find ()->select ( 'company_logo' )->where ( [ 
+						'client_id' => $userdetailModel->client_id 
+				] )->One ();
+				if (! empty ( $client_details->company_logo )) {
+					$result ['profile_logo'] = '/images/client-logos/' . $firm_details->company_logo;
+				} else {
+					$result ['profile_logo'] = '/images/logo/benefits.png';
+				}
+				break;
+		}
+		
+		return $result;
+	}
 	
 	//Function is used for checking if admin or admin staff user is logged
 	public function isLogged() {

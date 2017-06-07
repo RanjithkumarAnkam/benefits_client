@@ -41,16 +41,16 @@ class FirmUsers extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'firm_id', 'first_name', 'last_name', 'title', 'created_by', 'created_date','phone'], 'required'],
+            [['user_id', 'firm_id', 'first_name', 'last_name', 'created_by', 'created_date','phone'], 'required'],
             [['user_id', 'firm_id', 'is_primary', 'is_billing', 'is_active', 'created_by', 'modified_by'], 'integer'],
             [['created_date', 'modified_date'], 'safe'],
             [['first_name', 'last_name', 'title'], 'string', 'max' => 50],
-            ['first_name', 'match', 'pattern' => '/^[a-zA-Z- ]+$/', 'message' => 'First name can only contain alphabets.'],
-            ['last_name', 'match', 'pattern' => '/^[a-zA-Z- ]+$/', 'message' => 'Last name can only contain alphabets.'],
+            ['first_name', 'match', 'pattern' => '/^[a-zA-Z,.\-\ ]+$/', 'message' => 'First name can only contain alphabets, comma, dot and hash.'],
+            ['last_name', 'match', 'pattern' => '/^[a-zA-Z,.\-\ ]+$/', 'message' => 'First name can only contain alphabets, comma, dot and hash.'],
             ['extension', 'match', 'pattern' => '/^[0-9]+$/', 'message' => 'Extension can only contain numbers.'],
             [['profile_pic'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, PNG, JPEG, JPG, TIF, GIF, BMP', 'maxSize' => 1024*1024 , 'maxWidth' => 400, 'maxHeight' => 400],
-            [['extension'], 'string', 'max' => 5],
-            [['phone', 'mobile'], 'string', 'max' => 20],
+            [['extension'], 'string','min'=>3, 'max' => 6],
+            [['phone', 'mobile'], 'string', 'min' => 14, 'max' => 20, 'tooShort' => 'should contain at least 10 digits.', 'tooLong' => 'should contain at most 10 characters.'],
             [['profile_pic'], 'string', 'max' => 100],
         ];
     }

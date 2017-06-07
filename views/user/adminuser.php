@@ -18,7 +18,7 @@
 		</div>
 		
 		
-		 <?= $this->render('_form',['model_admin_users'=>$model_admin_users,'model_users'=>$model_users,'adminrights'=>$adminrights,'rightslist'=>$rightslist])?>
+		 <?= $this->render('_form',['model_admin_users'=>$model_admin_users,'model_users'=>$model_users,'adminrights'=>$adminrights,'rightslist'=>$rightslist,'currentuserrights'=>$currentuserrights])?>
 
 	</div>
 	

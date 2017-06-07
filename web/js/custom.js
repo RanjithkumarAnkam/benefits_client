@@ -38,13 +38,15 @@ function shadowClientlogin(){
 
 function showaddmodal()
 {
-	document.getElementById("systempricing-basic").style.borderColor = "";
+	$('.field-systempricing-basic').removeClass('has-error');
 	$('.field-systempricing-basic').find('div.help-block').html('');
 	document.getElementById("systempricing-basic").value = '';
-	document.getElementById("systempricing-full_service").style.borderColor = "";
+	//document.getElementById("systempricing-full_service").style.borderColor = "";
+	$('.field-systempricing-full_service').removeClass('has-error');
 	$('.field-systempricing-full_service').find('div.help-block').html('');
 	document.getElementById("systempricing-full_service").value = '';
-	document.getElementById("systempricing-bulk").style.borderColor = "";
+	//document.getElementById("systempricing-bulk").style.borderColor = "";
+	$('.field-systempricing-bulk').removeClass('has-error');
 	$('.field-systempricing-bulk').find('div.help-block').html('');
 	document.getElementById("systempricing-bulk").value = '';
 	
@@ -58,34 +60,40 @@ function validateaddpricing()
 {
 	
 	if (document.getElementById("systempricing-basic").value == '') {
-		document.getElementById("systempricing-basic").style.borderColor = "red";
+		//document.getElementById("systempricing-basic").style.borderColor = "red";
+		$('.field-systempricing-basic').addClass('has-error');
 		$('.field-systempricing-basic').find('div.help-block').html('Basic required');
 		document.getElementById("systempricing-basic").focus();
 		return false;
 	} else {
-		document.getElementById("systempricing-basic").style.borderColor = "";
+		//document.getElementById("systempricing-basic").style.borderColor = "";
+		$('.field-systempricing-basic').removeClass('has-error');
 		$('.field-systempricing-basic').find('div.help-block').html('');
 		
 	}
 	
 	if (document.getElementById("systempricing-full_service").value == '') {
-		document.getElementById("systempricing-full_service").style.borderColor = "red";
+		//document.getElementById("systempricing-full_service").style.borderColor = "red";
+		$('.field-systempricing-full_service').addClass('has-error');
 		$('.field-systempricing-full_service').find('div.help-block').html('Full Service required');
 		document.getElementById("systempricing-full_service").focus();
 		return false;
 	} else {
-		document.getElementById("systempricing-full_service").style.borderColor = "";
+		//document.getElementById("systempricing-full_service").style.borderColor = "";
+		$('.field-systempricing-full_service').removeClass('has-error');
 		$('.field-systempricing-full_service').find('div.help-block').html('');
 		
 	}
 	
 	if (document.getElementById("systempricing-bulk").value == '') {
-		document.getElementById("systempricing-bulk").style.borderColor = "red";
+		//document.getElementById("systempricing-bulk").style.borderColor = "red";
+		$('.field-systempricing-bulk').addClass('has-error');
 		$('.field-systempricing-bulk').find('div.help-block').html('Bulk required');
 		document.getElementById("systempricing-bulk").focus();
 		return false;
 	} else {
-		document.getElementById("systempricing-bulk").style.borderColor = "";
+		//document.getElementById("systempricing-bulk").style.borderColor = "";
+		$('.field-systempricing-bulk').removeClass('has-error');
 		$('.field-systempricing-bulk').find('div.help-block').html('');
 		
 	}
@@ -97,34 +105,40 @@ function validateupdatepricing()
 {
 	
 	if (document.getElementById("systempricing-update-basic").value == '') {
-		document.getElementById("systempricing-update-basic").style.borderColor = "red";
+		//document.getElementById("systempricing-update-basic").style.borderColor = "red";
+		$('.field-systempricing-update-basic').addClass('has-error');
 		$('.field-systempricing-update-basic').find('div.help-block').html('Basic required');
 		document.getElementById("systempricing-update-basic").focus();
 		return false;
 	} else {
-		document.getElementById("systempricing-update-basic").style.borderColor = "";
+		$('.field-systempricing-update-basic').removeClass('has-error')
+		//document.getElementById("systempricing-update-basic").style.borderColor = "";
 		$('.field-systempricing-update-basic').find('div.help-block').html('');
 		
 	}
 	
 	if (document.getElementById("systempricing-update-full_service").value == '') {
-		document.getElementById("systempricing-update-full_service").style.borderColor = "red";
+		//document.getElementById("systempricing-update-full_service").style.borderColor = "red";
+		$('.field-systempricing-update-full_service').addClass('has-error');
 		$('.field-systempricing-update-full_service').find('div.help-block').html('Full Service required');
 		document.getElementById("systempricing-update-full_service").focus();
 		return false;
 	} else {
-		document.getElementById("systempricing-update-full_service").style.borderColor = "";
+		$('.field-systempricing-update-full_service').removeClass('has-error');
+		//document.getElementById("systempricing-update-full_service").style.borderColor = "";
 		$('.field-systempricing-update-full_service').find('div.help-block').html('');
 		
 	}
 	
 	if (document.getElementById("systempricing-update-bulk").value == '') {
-		document.getElementById("systempricing-update-bulk").style.borderColor = "red";
+		//document.getElementById("systempricing-update-bulk").style.borderColor = "red";
+		$('.field-systempricing-update-bulk').addClass('has-error');
 		$('.field-systempricing-update-bulk').find('div.help-block').html('Bulk required');
 		document.getElementById("systempricing-update-bulk").focus();
 		return false;
 	} else {
-		document.getElementById("systempricing-update-bulk").style.borderColor = "";
+		//document.getElementById("systempricing-update-bulk").style.borderColor = "";
+		$('.field-systempricing-update-bulk').removeClass('has-error');
 		$('.field-systempricing-update-bulk').find('div.help-block').html('');
 		
 	}
@@ -161,6 +175,8 @@ function openFirmmodal(id){
 	
 }
 
+ 
+					
 function addNewplan(){
  
 	var value = $('#selected_plan').val();
@@ -205,20 +221,201 @@ function specificContract(){
 	}
 }
 
-function addPremiumtiers(){
-	var value = document.getElementById('premium_tiers').value
-	var rowCount = $('#editable_reinsurance_rate tr').length - 1;
+function loopContribution(addCount,fieldsetcount){
+	var divstoappend = '';
+ 
+	 
+	for (i=1, j=1; i<=addCount; i++ , j++){
+		    divstoappend += '<fieldset class="fieldset-box">'
+		+'<legend> Plan '+fieldsetcount+' Contribution </legend>'
+		+'<div class="col-md-12 padding-0">' 
+			+'<div class="col-md-3">'
+			+'	<label> Contribution Name</label>'
+		+	'</div>'
+			+'<div class="col-md-5">'
+			+	'<input class="form-control  placeholder-italics"/>'
+			+'</div>'
+			+	'<div class="col-md-12 padding-top-10">' 
+			+	    '<table class="table table-hover table-backcolor" id="editable_contributions_track_'+fieldsetcount+'">'
+				+	'<thead>'
+				+	'<tr>' 
+			+'<th class="width-10" id="contribution'+fieldsetcount+'-column-1">Tier No.</th>'
+			+'<th class="width-18" id="contribution'+fieldsetcount+'-column-2">Tier Name</th>'
+			+'<th class="width-24" id="contribution'+fieldsetcount+'-column-3">Monthly Rates</th>'
+			+'<th class="width-22" id="contribution'+fieldsetcount+'-column-4">Monthly Enrollment</th>'
+			+'<th class="width-22" id="contribution'+fieldsetcount+'-column-5">Add Row</th>'
+			+'</tr>'
+			+'</thead>'
+			+'<tbody>'
+			+'<tr  id="contribution-enrollment-row-1-'+fieldsetcount+'">'
+			+'<td id="contribution'+fieldsetcount+'-left-header-1"> 1</td>'
+			+'<td><select class="form-control reinsurance-rates-td" id="contribution'+fieldsetcount+'-2-1" class="form-control reinsurance-rates-td text-align-center">'
+			+'<option>Employee</option>'
+			+'<option>Employee + Spouse</option>'
+			+'<option>Employee + Child</option>'
+			+'<option>Employee + Child(ren)</option>'
+			+'<option>Family</option>'
+			+'<option>Employee + 1</option>'
+			+'<option>Employee + 2</option>'
+			+'<option>Employee + 3</option>'
+			+'</select>'
+			+'</td>'
+			+'<td><div class="input-group">'
+										+'<span class="input-group-addon">'
+										+'	<i class="fa fa-usd  color-black"></i>'
+									+'	</span><input type="text" id="contribution'+fieldsetcount+'-3-1" class="form-control reinsurance-rates-td text-align-center price" value="99.00">'
+									+'	</div></td>'
++'<td><input type="text" id="contribution'+fieldsetcount+'-4-1" class="form-control reinsurance-rates-td text-align-center" value="$68.00"></td>'
++' <td class="select_tiers" ><select class="form-control cursor-pointer  reinsurance-rates-td contribution-change-function" id="contribution_premium_tiers_1_'+fieldsetcount+'"  >'
+																	+'<option selected value="1">1 tier</option>'
+																		+'<option  value="2">2 tiers</option>'
+																		+'<option value="3">3 tiers</option>'
+																		+'<option value="4">4 tiers</option>'
+																+'<option value="5">5 tiers</option>'
+																	+'<option value="6">6 tiers</option>'
+																+'	</select></td>'
++'</tr>' 
++'</tbody>'
++'</table> 	</div>'
++		'</div>'
++'</fieldset>'
+		
+                   fieldsetcount++;
+}
+	 
+	 $('#contribution_strategies').append(divstoappend);
+}
+
+function employeeContribution(){
+	var value_select = document.getElementById('select_employee_contribution').value
 	
-	if(value > rowCount){
-		$('.select_tiers').html('');
-		addCount = value - rowCount ;
-	//	var html =;
-		switch (addCount){
-		case 1:
-		$('#editable_reinsurance_rate tr:last').after('<tr>'
-                              +'<td id="reinsurance-left-header-'+ parseInt(rowCount+1) +'">'+ parseInt(rowCount+1) +'</td>'
+var fieldsetCount = $('#contribution_strategies fieldset').length ;
+	var fieldCount = fieldsetCount+1;
+	if(value_select > fieldsetCount){
+		var count = value_select - fieldsetCount;
+		loopContribution(count ,fieldCount);
+	}else{
+		
+		$('a#alert-meassage-id-select').attr('onclick','addContribution('+value_select+','+fieldCount+');');
+		$('#alert_message_select').modal('show');
+	}
+	
+
+	/*if(value != null){
+		
+		$('#contribution_strategies').html('');
+		loopContribution(value);
+	}else{
+		$('#contribution_strategies').addClass('hide');
+	}*/
+}
+
+function addContribution(value_select,fieldCount){
+	$('#contribution_strategies').html('');
+	var fieldCount = 1;
+	loopContribution(value_select,fieldCount);
+	$('#alert_message_select').modal('hide');
+}
+function addrenewalContribution(value_select,fieldCount){
+	$('#renewal_contribution_strategies').html('');
+	var fieldCount = 1;
+	looprenewalContribution(value_select,fieldCount);
+
+	$('#alert_message_select').modal('hide');
+}
+
+function looprenewalContribution(addCount,fieldsetcount){
+	var divstoappend = '';
+	for (i=1; i<=addCount; i++){
+		    divstoappend += '<fieldset class="fieldset-box">'
+		+'<legend> Plan '+fieldsetcount+' Contribution </legend>'
+		+'<div class="col-md-12 padding-0">' 
+			+'<div class="col-md-3">'
+			+'	<label> Contribution Name</label>'
+		+	'</div>'
+			+'<div class="col-md-5">'
+			+	'<input class="form-control  placeholder-italics"/>'
+			+'</div>'
+			+	'<div class="col-md-12 padding-top-10">' 
+			+	    '<table class="table table-hover table-backcolor" id="editable_contributions_track_copy_'+fieldsetcount+'">'
+				+	'<thead>'
+				+	'<tr>' 
+			+'<th class="width-10" id="contributioncopy'+fieldsetcount+'-column-1">Tier No.</th>'
+			+'<th class="width-18" id="contributioncopy'+fieldsetcount+'-column-2">Tier Name</th>'
+			+'<th class="width-24" id="contributioncopy'+fieldsetcount+'-column-3">Monthly Rates</th>'
+			+'<th class="width-22" id="contributioncopy'+fieldsetcount+'-column-4">Monthly Enrollment</th>'
+			+'<th class="width-22" id="contributioncopy'+fieldsetcount+'-column-5">Add Row</th>'
+			+'</tr>'
+			+'</thead>'
+			+'<tbody>'
+			+'<tr  id="contribution-renewal-row-1-'+fieldsetcount+'">'
+			+'<td id="contributioncopy'+fieldsetcount+'-left-header-1"> 1</td>'
+			+'<td><select class="form-control reinsurance-rates-td" id="contributioncopy'+fieldsetcount+'-2-1" class="form-control reinsurance-rates-td text-align-center">'
+			+'<option>Employee</option>'
+			+'<option>Employee + Spouse</option>'
+			+'<option>Employee + Child</option>'
+			+'<option>Employee + Child(ren)</option>'
+			+'<option>Family</option>'
+			+'<option>Employee + 1</option>'
+			+'<option>Employee + 2</option>'
+			+'<option>Employee + 3</option>'
+			+'</select>'
+			+'</td>'
+			+'<td><div class="input-group">'
+										+'<span class="input-group-addon">'
+										+'	<i class="fa fa-usd  color-black"></i>'
+									+'	</span><input type="text" id="contributioncopy'+fieldsetcount+'-3-1" class="form-control reinsurance-rates-td text-align-center price" value="99.00">'
+									+'	</div></td>'
++'<td><input type="text" id="contributioncopy'+fieldsetcount+'-4-1" class="form-control reinsurance-rates-td text-align-center" value="$68.00"></td>'
++' <td class="select_tiers" ><select class="form-control cursor-pointer  reinsurance-rates-td renewal-contribution-change-function" id="contribution_renewal_tiers_1_'+fieldsetcount+'"  >'
++'<option selected value="1">1 tier</option>'
+	+'<option  value="2">2 tiers</option>'
+	+'<option value="3">3 tiers</option>'
+	+'<option value="4">4 tiers</option>'
++'<option value="5">5 tiers</option>'
++'<option value="6">6 tiers</option>'
++'	</select></td>'
++'</tr>' 
++'</tbody>'
++'</table> 	</div>'
++		'</div>'
++'</fieldset>'
+fieldsetcount++;
+}
+	 
+	 $('#renewal_contribution_strategies').append(divstoappend);
+}
+
+
+function employeerenewalContribution(){
+	var value_select = document.getElementById('select_renewal_employee_contribution').value
+	
+var fieldsetCount = $('#renewal_contribution_strategies fieldset').length ;
+	var fieldCount = fieldsetCount+1;
+	if(value_select > fieldsetCount){
+		var count = value_select - fieldsetCount;
+		looprenewalContribution(count ,fieldCount);
+	}else{
+		
+		$('a#alert-meassage-id-select').attr('onclick','addrenewalContribution('+value_select+','+fieldCount+');');
+		$('#alert_message_select').modal('show');
+	}
+	/*if(value != null){
+		
+		$('#contribution_strategies').html('');
+		loopContribution(value);
+	}else{
+		$('#contribution_strategies').addClass('hide');
+	}*/
+}
+
+function loop(addCount,rowCount){
+
+	 for (i=1; i<=addCount; i++){
+   var text = $('#editable_reinsurance_rate tr:last').after('<tr id="enter-reinsurance-details-row-'+parseInt(rowCount+i)+'">'
+                              +'<td id="reinsurance-left-header-'+ parseInt(rowCount+i) +'">'+ parseInt(rowCount+i) +'</td>'
 								 +'  <td class="column-1">'
-								 + '<select class="form-control reinsurance-rates-td" id="reinsurance-2-'+ parseInt(rowCount+1) +'">'
+								 + '<select class="form-control reinsurance-rates-td" id="reinsurance-2-'+ parseInt(rowCount+i) +'">'
 								 +' <option>Select</option>'
 								+' <option>Employee</option>'
 								+' <option>Employee + Spouse</option>'
@@ -230,11 +427,11 @@ function addPremiumtiers(){
 								+ '   <option>Employee + 3</option>'
 								+'	</select>'
 								+'	</td>'
-								+ '<td><input type="text" id="reinsurance-3-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$290.00"></td>'
-								 +' <td><input type="text" id="reinsurance-4-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$9.00"></td>'
-								 + '<td><input type="text" id="reinsurance-5-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$925.00"></td>'
-								 + '<td><input type="text" id="reinsurance-6-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$1156.00"></td>'
-								+ '<td class="select_tiers"><select class="form-control" id="premium_tiers" onchange="addPremiumtiers();">'
+								+ '<td><input type="text" id="reinsurance-3-'+ parseInt(rowCount+i) +'" class="form-control reinsurance-rates-td text-align-center" value="$290.00"></td>'
+								 +' <td><input type="text" id="reinsurance-4-'+ parseInt(rowCount+i) +'" class="form-control reinsurance-rates-td text-align-center" value="$9.00"></td>'
+								 + '<td><input type="text" id="reinsurance-5-'+ parseInt(rowCount+i) +'" class="form-control reinsurance-rates-td text-align-center" value="$925.00"></td>'
+								 + '<td><input type="text" id="reinsurance-6-'+ parseInt(rowCount+i) +'" class="form-control reinsurance-rates-td text-align-center" value="$1156.00"></td>'
+								+ '<td class="select_tiers"><select class="form-control change-function" id="premium_tiers"  >'
 								+' <option>Select</option>'
 																	+	'<option value="1">1 tier</option>'
 																	+	'<option value="2">2 tiers</option>'
@@ -245,595 +442,162 @@ function addPremiumtiers(){
 																+'</select></td>'
 																+'</tr>'
 							);
-		break;
-		case 2:
-		$('#editable_reinsurance_rate tr:last').after('<tr>'
-                             +'<td id="reinsurance-left-header-'+ parseInt(rowCount+1) +'">'+ parseInt(rowCount+1) +'</td>'
-								+ '  <td class="column-1">'
-								 + '<select class="form-control reinsurance-rates-td" id="reinsurance-2-'+ parseInt(rowCount+1) +'">'
-								 +' <option>Select</option>'
-								+' <option>Employee</option>'
-								+' <option>Employee + Spouse</option>'
-								+' <option>Employee + Child</option>'
-								 +'<option>Employee + Child(ren)</option>'
-								+' <option>Family</option>'
-								+'  <option>Employee + 1</option>'
-								+ '  <option>Employee + 2</option>'
-								+ '   <option>Employee + 3</option>'
-								+'	</select>'
-								+'	</td>'
-								+ '<td><input type="text" id="reinsurance-3-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$290.00"></td>'
-								 +' <td><input type="text" id="reinsurance-4-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$9.00"></td>'
-								 + '<td><input type="text" id="reinsurance-5-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$925.00"></td>'
-								 + '<td><input type="text" id="reinsurance-6-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$1156.00"></td>'
-								+ '<td></td>'
-								 + '</tr>'
-						  + '<tr>'
-                             +'<td id="reinsurance-left-header-'+ parseInt(rowCount+2) +'">'+ parseInt(rowCount+2) +'</td>'
-								 +'  <td class="column-1" id="1">'
-								 + '<select class="form-control reinsurance-rates-td" id="reinsurance-2-'+ parseInt(rowCount+2) +'">'
-								 +' <option>Select</option>'
-								+' <option>Employee</option>'
-								+' <option>Employee + Spouse</option>'
-								+' <option>Employee + Child</option>'
-								 +'<option>Employee + Child(ren)</option>'
-								+' <option>Family</option>'
-								+'  <option>Employee + 1</option>'
-								+ '  <option>Employee + 2</option>'
-								+ '   <option>Employee + 3</option>'
-								+'	</select>'
-								+'	</td>'
-								+ '<td><input type="text" id="reinsurance-3-'+ parseInt(rowCount+2) +'" class="form-control reinsurance-rates-td text-align-right" value="$290.00"></td>'
-								 +' <td><input type="text" id="reinsurance-4-'+ parseInt(rowCount+2) +'" class="form-control reinsurance-rates-td text-align-right" value="$9.00"></td>'
-								 + '<td><input type="text" id="reinsurance-5-'+ parseInt(rowCount+2) +'" class="form-control reinsurance-rates-td text-align-right" value="$925.00"></td>'
-								 + '<td><input type="text" id="reinsurance-6-'+ parseInt(rowCount+2) +'" class="form-control reinsurance-rates-td text-align-right" value="$1156.00"></td>'
-								+ '<td class="select_tiers"><select class="form-control" id="premium_tiers" onchange="addPremiumtiers();">'
-								+' <option>Select</option>'
-																	+	'<option value="1">1 tier</option>'
-																	+	'<option  value="2">2 tiers</option>'
-																	+	'<option value="3">3 tiers</option>'
-																	+	'<option value="4">4 tiers</option>'
-																	+	'<option value="5">5 tiers</option>'
-																	+	'<option value="6">6 tiers</option>'
-																+'</select></td>'
-																+'</tr>'
-						   );
-		break;
-		case 3:
-		$('#editable_reinsurance_rate tr:last').after('<tr>'
-                             +'<td id="reinsurance-left-header-'+ parseInt(rowCount+1) +'">'+ parseInt(rowCount+1) +'</td>'
-								 +'  <td class="column-1">'
-								 + '<select class="form-control reinsurance-rates-td" id="reinsurance-2-'+ parseInt(rowCount+1) +'">'
-								 +' <option>Select</option>'
-								+' <option>Employee</option>'
-								+' <option>Employee + Spouse</option>'
-								+' <option>Employee + Child</option>'
-								 +'<option>Employee + Child(ren)</option>'
-								+' <option>Family</option>'
-								+'  <option>Employee + 1</option>'
-								+ '  <option>Employee + 2</option>'
-								+ '   <option>Employee + 3</option>'
-								+'	</select>'
-								+'	</td>'
-								+ '<td><input type="text" id="reinsurance-3-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$290.00"></td>'
-								 +' <td><input type="text" id="reinsurance-4-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$9.00"></td>'
-								 + '<td><input type="text" id="reinsurance-5-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$925.00"></td>'
-								 + '<td><input type="text" id="reinsurance-6-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$1156.00"></td>'
-								+ '<td></td>'
-								 + '</tr>'
-						  + '<tr>'
-                             +'<td id="reinsurance-left-header-'+ parseInt(rowCount+2) +'">'+ parseInt(rowCount+2) +'</td>'
-								+ '  <td class="column-1" id="1">'
-								 + '<select class="form-control reinsurance-rates-td" id="reinsurance-2-'+ parseInt(rowCount+2) +'">'
-								 +' <option>Select</option>'
-								+' <option>Employee</option>'
-								+' <option>Employee + Spouse</option>'
-								+' <option>Employee + Child</option>'
-								 +'<option>Employee + Child(ren)</option>'
-								+' <option>Family</option>'
-								+'  <option>Employee + 1</option>'
-								+ '  <option>Employee + 2</option>'
-								+ '   <option>Employee + 3</option>'
-								+'	</select>'
-								+'	</td>'
-								+ '<td><input type="text" id="reinsurance-3-'+ parseInt(rowCount+2) +'" class="form-control reinsurance-rates-td text-align-right" value="$290.00"></td>'
-								 +' <td><input type="text" id="reinsurance-4-'+ parseInt(rowCount+2) +'" class="form-control reinsurance-rates-td text-align-right" value="$9.00"></td>'
-								 + '<td><input type="text" id="reinsurance-5-'+ parseInt(rowCount+2) +'" class="form-control reinsurance-rates-td text-align-right" value="$925.00"></td>'
-								 + '<td><input type="text" id="reinsurance-6-'+ parseInt(rowCount+2) +'" class="form-control reinsurance-rates-td text-align-right" value="$1156.00"></td>'
-								+ '<td></td>'
-								 + '</tr>'
-						    + '<tr>'
-                             +'<td id="reinsurance-left-header-'+ parseInt(rowCount+3) +'">'+ parseInt(rowCount+3) +'</td>'
-								 +'  <td class="column-1" id="1">'
-								+ '<select class="form-control reinsurance-rates-td" id="reinsurance-2-'+ parseInt(rowCount+3) +'">'
-								 +' <option>Select</option>'
-								+' <option>Employee</option>'
-								+' <option>Employee + Spouse</option>'
-								+' <option>Employee + Child</option>'
-								 +'<option>Employee + Child(ren)</option>'
-								+' <option>Family</option>'
-								+'  <option>Employee + 1</option>'
-								+ '  <option>Employee + 2</option>'
-								+ '   <option>Employee + 3</option>'
-								+'	</select>'
-								+'	</td>'
-								+ '<td><input type="text" id="reinsurance-3-'+ parseInt(rowCount+3) +'" class="form-control reinsurance-rates-td text-align-right" value="$290.00"></td>'
-								 +' <td><input type="text" id="reinsurance-4-'+ parseInt(rowCount+3) +'" class="form-control reinsurance-rates-td text-align-right" value="$9.00"></td>'
-								 + '<td><input type="text" id="reinsurance-5-'+ parseInt(rowCount+3) +'" class="form-control reinsurance-rates-td text-align-right" value="$925.00"></td>'
-								 + '<td><input type="text" id="reinsurance-6-'+ parseInt(rowCount+3) +'" class="form-control reinsurance-rates-td text-align-right" value="$1156.00"></td>'
-								+ '<td class="select_tiers"><select class="form-control" id="premium_tiers" onchange="addPremiumtiers();">'
-								+' <option>Select</option>'
-																	+	'<option value="1">1 tier</option>'
-																	+	'<option value="2">2 tiers</option>'
-																	+	'<option value="3">3 tiers</option>'
-																	+	'<option value="4">4 tiers</option>'
-																	+	'<option value="5">5 tiers</option>'
-																	+	'<option value="6">6 tiers</option>'
-																+'</select></td>'
-																+'</tr>'
-						   );
-		break;
-		case 4:
-		$('#editable_reinsurance_rate tr:last').after('<tr>'
-                             +'<td id="reinsurance-left-header-'+ parseInt(rowCount+1) +'">'+ parseInt(rowCount+1) +'</td>'
-								+ '  <td class="column-1">'
-								 + '<select class="form-control reinsurance-rates-td" id="reinsurance-2-'+ parseInt(rowCount+1) +'">'
-								 +' <option>Select</option>'
-								+' <option>Employee</option>'
-								+' <option>Employee + Spouse</option>'
-								+' <option>Employee + Child</option>'
-								 +'<option>Employee + Child(ren)</option>'
-								+' <option>Family</option>'
-								+'  <option>Employee + 1</option>'
-								+ '  <option>Employee + 2</option>'
-								+ '   <option>Employee + 3</option>'
-								+'	</select>'
-								+'	</td>'
-								+ '<td><input type="text" id="reinsurance-3-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$290.00"></td>'
-								 +' <td><input type="text" id="reinsurance-4-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$9.00"></td>'
-								 + '<td><input type="text" id="reinsurance-5-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$925.00"></td>'
-								 + '<td><input type="text" id="reinsurance-6-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$1156.00"></td>'
-								+ '<td></td>'
-								 + '</tr>'
-						  + '<tr>'
-                             +'<td id="reinsurance-left-header-'+ parseInt(rowCount+2) +'">'+ parseInt(rowCount+2) +'</td>'
-								+ '  <td class="column-1" id="1">'
-								 + '<select class="form-control reinsurance-rates-td" id="reinsurance-2-'+ parseInt(rowCount+2) +'">'
-								 +' <option>Select</option>'
-								+' <option>Employee</option>'
-								+' <option>Employee + Spouse</option>'
-								+' <option>Employee + Child</option>'
-								 +'<option>Employee + Child(ren)</option>'
-								+' <option>Family</option>'
-								+'  <option>Employee + 1</option>'
-								+ '  <option>Employee + 2</option>'
-								+ '   <option>Employee + 3</option>'
-								+'	</select>'
-								+'	</td>'
-								+ '<td><input type="text" id="reinsurance-3-'+ parseInt(rowCount+2) +'" class="form-control reinsurance-rates-td text-align-right" value="$290.00"></td>'
-								 +' <td><input type="text" id="reinsurance-4-'+ parseInt(rowCount+2) +'" class="form-control reinsurance-rates-td text-align-right" value="$9.00"></td>'
-								 + '<td><input type="text" id="reinsurance-5-'+ parseInt(rowCount+2) +'" class="form-control reinsurance-rates-td text-align-right" value="$925.00"></td>'
-								 + '<td><input type="text" id="reinsurance-6-'+ parseInt(rowCount+2) +'" class="form-control reinsurance-rates-td text-align-right" value="$1156.00"></td>'
-								+ '<td></td>'
-								 + '</tr>'
-						    + '<tr>'
-                             +'<td id="reinsurance-left-header-'+ parseInt(rowCount+3) +'">'+ parseInt(rowCount+3) +'</td>'
-								+ '  <td class="column-1" id="1">'
-								+ '<select class="form-control reinsurance-rates-td" id="reinsurance-2-'+ parseInt(rowCount+3) +'">'
-								 +' <option>Select</option>'
-								+' <option>Employee</option>'
-								+' <option>Employee + Spouse</option>'
-								+' <option>Employee + Child</option>'
-								 +'<option>Employee + Child(ren)</option>'
-								+' <option>Family</option>'
-								+'  <option>Employee + 1</option>'
-								+ '  <option>Employee + 2</option>'
-								+ '   <option>Employee + 3</option>'
-								+'	</select>'
-								+'	</td>'
-								+ '<td><input type="text" id="reinsurance-3-'+ parseInt(rowCount+3) +'" class="form-control reinsurance-rates-td text-align-right" value="$290.00"></td>'
-								 +' <td><input type="text" id="reinsurance-4-'+ parseInt(rowCount+3) +'" class="form-control reinsurance-rates-td text-align-right" value="$9.00"></td>'
-								 + '<td><input type="text" id="reinsurance-5-'+ parseInt(rowCount+3) +'" class="form-control reinsurance-rates-td text-align-right" value="$925.00"></td>'
-								 + '<td><input type="text" id="reinsurance-6-'+ parseInt(rowCount+3) +'" class="form-control reinsurance-rates-td text-align-right" value="$1156.00"></td>'
-								+ '<td></td>'
-								 + '</tr>'
-						    + '<tr>'
-                             +'<td id="reinsurance-left-header-'+ parseInt(rowCount+4) +'">'+ parseInt(rowCount+4) +'</td>'
-								 +'  <td class="column-1" id="1">'
-								 + '<select class="form-control reinsurance-rates-td" id="reinsurance-2-'+ parseInt(rowCount+4) +'">'
-								 +' <option>Select</option>'
-								+' <option>Employee</option>'
-								+' <option>Employee + Spouse</option>'
-								+' <option>Employee + Child</option>'
-								 +'<option>Employee + Child(ren)</option>'
-								+' <option>Family</option>'
-								+'  <option>Employee + 1</option>'
-								+ '  <option>Employee + 2</option>'
-								+ '   <option>Employee + 3</option>'
-								+'	</select>'
-								+'	</td>'
-								+ '<td><input type="text" id="reinsurance-3-'+ parseInt(rowCount+4) +'" class="form-control reinsurance-rates-td text-align-right" value="$290.00"></td>'
-								 +' <td><input type="text" id="reinsurance-4-'+ parseInt(rowCount+4) +'" class="form-control reinsurance-rates-td text-align-right" value="$9.00"></td>'
-								 + '<td><input type="text" id="reinsurance-5-'+ parseInt(rowCount+4) +'" class="form-control reinsurance-rates-td text-align-right" value="$925.00"></td>'
-								 + '<td><input type="text" id="reinsurance-6-'+ parseInt(rowCount+4) +'" class="form-control reinsurance-rates-td text-align-right" value="$1156.00"></td>'
-								+ '<td class="select_tiers"><select class="form-control" id="premium_tiers" onchange="addPremiumtiers();">'
-								+' <option>Select</option>'
-																	+	'<option value="1">1 tier</option>'
-																	+	'<option  value="2">2 tiers</option>'
-																	+	'<option value="3">3 tiers</option>'
-																	+	'<option value="4">4 tiers</option>'
-																	+	'<option value="5">5 tiers</option>'
-																	+	'<option value="6">6 tiers</option>'
-																+'</select></td>'
-																+'</tr>'
-						   );
-		break;
-		
-		case 5:
-		$('#editable_reinsurance_rate tr:last').after('<tr>'
-                             +'<td id="reinsurance-left-header-'+ parseInt(rowCount+1) +'">'+ parseInt(rowCount+1) +'</td>'
-								+ '  <td class="column-1">'
-								 + '<select class="form-control reinsurance-rates-td" id="reinsurance-2-'+ parseInt(rowCount+1) +'">'
-								 +' <option>Select</option>'
-								+' <option>Employee</option>'
-								+' <option>Employee + Spouse</option>'
-								+' <option>Employee + Child</option>'
-								 +'<option>Employee + Child(ren)</option>'
-								+' <option>Family</option>'
-								+'  <option>Employee + 1</option>'
-								+ '  <option>Employee + 2</option>'
-								+ '   <option>Employee + 3</option>'
-								+'	</select>'
-								+'	</td>'
-								+ '<td><input type="text" id="reinsurance-3-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$290.00"></td>'
-								 +' <td><input type="text" id="reinsurance-4-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$9.00"></td>'
-								 + '<td><input type="text" id="reinsurance-5-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$925.00"></td>'
-								 + '<td><input type="text" id="reinsurance-6-'+ parseInt(rowCount+1) +'" class="form-control reinsurance-rates-td text-align-right" value="$1156.00"></td>'
-								+ '<td></td>'
-								 + '</tr>'
-						  + '<tr>'
-                             +'<td id="reinsurance-left-header-'+ parseInt(rowCount+2) +'">'+ parseInt(rowCount+2) +'</td>'
-								+ '  <td class="column-1" id="1">'
-								 + '<select class="form-control reinsurance-rates-td" id="reinsurance-2-'+ parseInt(rowCount+2) +'">'
-								 +' <option>Select</option>'
-								+' <option>Employee</option>'
-								+' <option>Employee + Spouse</option>'
-								+' <option>Employee + Child</option>'
-								 +'<option>Employee + Child(ren)</option>'
-								+' <option>Family</option>'
-								+'  <option>Employee + 1</option>'
-								+ '  <option>Employee + 2</option>'
-								+ '   <option>Employee + 3</option>'
-								+'	</select>'
-								+'	</td>'
-								+ '<td><input type="text" id="reinsurance-3-'+ parseInt(rowCount+2) +'" class="form-control reinsurance-rates-td text-align-right" value="$290.00"></td>'
-								 +' <td><input type="text" id="reinsurance-4-'+ parseInt(rowCount+2) +'" class="form-control reinsurance-rates-td text-align-right" value="$9.00"></td>'
-								 + '<td><input type="text" id="reinsurance-5-'+ parseInt(rowCount+2) +'" class="form-control reinsurance-rates-td text-align-right" value="$925.00"></td>'
-								 + '<td><input type="text" id="reinsurance-6-'+ parseInt(rowCount+2) +'" class="form-control reinsurance-rates-td text-align-right" value="$1156.00"></td>'
-								+ '<td></td>'
-								 + '</tr>'
-						    + '<tr>'
-                             +'<td id="reinsurance-left-header-'+ parseInt(rowCount+3) +'">'+ parseInt(rowCount+3) +'</td>'
-								+ '  <td class="column-1" id="1">'
-								+ '<select class="form-control reinsurance-rates-td" id="reinsurance-2-'+ parseInt(rowCount+3) +'">'
-								 +' <option>Select</option>'
-								+' <option>Employee</option>'
-								+' <option>Employee + Spouse</option>'
-								+' <option>Employee + Child</option>'
-								 +'<option>Employee + Child(ren)</option>'
-								+' <option>Family</option>'
-								+'  <option>Employee + 1</option>'
-								+ '  <option>Employee + 2</option>'
-								+ '   <option>Employee + 3</option>'
-								+'	</select>'
-								+'	</td>'
-								+ '<td><input type="text" id="reinsurance-3-'+ parseInt(rowCount+3) +'" class="form-control reinsurance-rates-td text-align-right" value="$290.00"></td>'
-								 +' <td><input type="text" id="reinsurance-4-'+ parseInt(rowCount+3) +'" class="form-control reinsurance-rates-td text-align-right" value="$9.00"></td>'
-								 + '<td><input type="text" id="reinsurance-5-'+ parseInt(rowCount+3) +'" class="form-control reinsurance-rates-td text-align-right" value="$925.00"></td>'
-								 + '<td><input type="text" id="reinsurance-6-'+ parseInt(rowCount+3) +'" class="form-control reinsurance-rates-td text-align-right" value="$1156.00"></td>'
-								+ '<td></td>'
-								 + '</tr>'
-						    + '<tr>'
-                             +'<td id="reinsurance-left-header-'+ parseInt(rowCount+4) +'">'+ parseInt(rowCount+4) +'</td>'
-								+ '  <td class="column-1" id="1">'
-								 + '<select class="form-control reinsurance-rates-td" id="reinsurance-2-'+ parseInt(rowCount+4) +'">'
-								 +' <option>Select</option>'
-								+' <option>Employee</option>'
-								+' <option>Employee + Spouse</option>'
-								+' <option>Employee + Child</option>'
-								 +'<option>Employee + Child(ren)</option>'
-								+' <option>Family</option>'
-								+'  <option>Employee + 1</option>'
-								+ '  <option>Employee + 2</option>'
-								+ '   <option>Employee + 3</option>'
-								+'	</select>'
-								+'	</td>'
-								+ '<td><input type="text" id="reinsurance-3-'+ parseInt(rowCount+4) +'" class="form-control reinsurance-rates-td text-align-right" value="$290.00"></td>'
-								 +' <td><input type="text" id="reinsurance-4-'+ parseInt(rowCount+4) +'" class="form-control reinsurance-rates-td text-align-right" value="$9.00"></td>'
-								 + '<td><input type="text" id="reinsurance-5-'+ parseInt(rowCount+4) +'" class="form-control reinsurance-rates-td text-align-right" value="$925.00"></td>'
-								 + '<td><input type="text" id="reinsurance-6-'+ parseInt(rowCount+4) +'" class="form-control reinsurance-rates-td text-align-right" value="$1156.00"></td>'
-								+ '<td></td>'
-								 + '</tr>'
-						     + '<tr>'
-                             +'<td id="reinsurance-left-header-'+ parseInt(rowCount+5) +'">'+ parseInt(rowCount+5) +'</td>'
-								+ '  <td class="column-1">'
-								 + '<select class="form-control reinsurance-rates-td" id="reinsurance-2-'+ parseInt(rowCount+5) +'">'
-								 +' <option>Select</option>'
-								+' <option>Employee</option>'
-								+' <option>Employee + Spouse</option>'
-								+' <option>Employee + Child</option>'
-								 +'<option>Employee + Child(ren)</option>'
-								+' <option>Family</option>'
-								+'  <option>Employee + 1</option>'
-								+ '  <option>Employee + 2</option>'
-								+ '   <option>Employee + 3</option>'
-								+'	</select>'
-								+'	</td>'
-								+ '<td><input type="text" id="reinsurance-3-'+ parseInt(rowCount+5) +'" class="form-control reinsurance-rates-td text-align-right" value="$290.00"></td>'
-								 +' <td><input type="text" id="reinsurance-4-'+ parseInt(rowCount+5) +'" class="form-control reinsurance-rates-td text-align-right" value="$9.00"></td>'
-								 + '<td><input type="text" id="reinsurance-5-'+ parseInt(rowCount+5) +'" class="form-control reinsurance-rates-td text-align-right" value="$925.00"></td>'
-								 + '<td><input type="text" id="reinsurance-6-'+ parseInt(rowCount+5) +'" class="form-control reinsurance-rates-td text-align-right" value="$1156.00"></td>'
-								+ '<td class="select_tiers"><select class="form-control" id="premium_tiers" onchange="addPremiumtiers();">'
-								+' <option>Select</option>'
-																	+	'<option value="1">1 tier</option>'
-																	+	'<option value="2">2 tiers</option>'
-																	+	'<option value="3">3 tiers</option>'
-																	+	'<option value="4">4 tiers</option>'
-																	+	'<option value="5">5 tiers</option>'
-																	+	'<option value="6">6 tiers</option>'
-																+'</select></td>'
-																+'</tr>'
-						   );
-		break;
-		
-		
-	} 
-	
-/*	$('#editable_reinsurance_rates').editableTableWidget(
-			
-				  {editor: $('<input>')}
-			
-		);*/
-	}
-	
+							
+							
+	//$('#editable_reinsurance_rate tr:last').prev().find('.select_tiers').html('<div class="remove-icon"><span class="button-remove-premiums button-remove cursor-pointer" id="remove-icon-id-'+parseInt(i)+'" ><a class="color-red"><u>Remove</u></a></span></div>');
+	$('#enter-reinsurance-details-row-'+parseInt(rowCount+i)).prev().find('.select_tiers').html('<div class="remove-icon"><span class="button-remove-premiums button-remove cursor-pointer" id="remove-icon-id-'+parseInt(rowCount+i-1)+'" ><a class="color-red"><u>Remove</u></a></span></div>');					
 }
 
+return text;
+
+}
+
+function loopinnercontribution(addCount,rowCount,id){
+
+	 for (i=1; i<=addCount; i++){
+   var text = $('#editable_contributions_track_'+id+' tr:last').after('<tr id="contribution-enrollment-row-'+parseInt(rowCount+i)+'-'+id+'">'
+                              +'<td id="contribution'+id+'-left-header-'+ parseInt(rowCount+i) +'">'+ parseInt(rowCount+i) +'</td>'
+								 +'  <td class="column-1">'
+								 + '<select class="form-control reinsurance-rates-td" id="contribution'+id+'-2-'+ parseInt(rowCount+i) +'">'
+								 +' <option>Select</option>'
+								+' <option>Employee</option>'
+								+' <option>Employee + Spouse</option>'
+								+' <option>Employee + Child</option>'
+								 +'<option>Employee + Child(ren)</option>'
+								+' <option>Family</option>'
+								+'  <option>Employee + 1</option>'
+								+ '  <option>Employee + 2</option>'
+								+ '   <option>Employee + 3</option>'
+								+'	</select>'
+								+'	</td>'
+								+ '<td><div class="input-group"><span class="input-group-addon">	<i class="fa fa-usd  color-black"></i>	</span><input type="text" id="contribution'+id+'-3-'+ parseInt(rowCount+i) +'" class="form-control reinsurance-rates-td text-align-center price" value="99.00">	</div></td>'
+								 +' <td><input type="text" id="contribution'+id+'-4-'+ parseInt(rowCount+i) +'" class="form-control reinsurance-rates-td text-align-center" value="$68.00"></td>'
+								 + '<td class="select_tiers"><select class="form-control contribution-change-function" id="contribution_premium_tiers_'+i+'_'+id+'"  >'
+								+' <option>Select</option>'
+																	+	'<option value="1">1 tier</option>'
+																	+	'<option value="2">2 tiers</option>'
+																	+	'<option value="3">3 tiers</option>'
+																	+	'<option value="4">4 tiers</option>'
+																	+	'<option value="5">5 tiers</option>'
+																	+	'<option value="6">6 tiers</option>'
+																+'</select></td>'
+																+'</tr>'
+							);
+							
+							
+	$('#editable_contributions_track_'+id+' tr:last').prev().find('.select_tiers').html('<div class="remove-icon"><span class="button-remove-premiums button-remove-contribution cursor-pointer" id="contribution-remove-icon-id-'+parseInt(rowCount+i-1)+'-'+id+'" ><a class="color-red"><u>Remove</u></a></span></div>');
+					
+}
+
+return text;
+
+}
+
+
+function loopinnerrenewalcontribution(addCount,rowCount,id){
+
+	 for (i=1; i<=addCount; i++){
+   var text = $('#editable_contributions_track_copy_'+id+' tr:last').after('<tr id="contribution-renewal-row-'+parseInt(rowCount+i)+'-'+id+'">'
+                              +'<td id="contributioncopy'+id+'-left-header-'+ parseInt(rowCount+i) +'">'+ parseInt(rowCount+i) +'</td>'
+								 +'  <td class="column-1">'
+								 + '<select class="form-control reinsurance-rates-td" id="contributioncopy'+id+'-2-'+ parseInt(rowCount+i) +'">'
+								 +' <option>Select</option>'
+								+' <option>Employee</option>'
+								+' <option>Employee + Spouse</option>'
+								+' <option>Employee + Child</option>'
+								 +'<option>Employee + Child(ren)</option>'
+								+' <option>Family</option>'
+								+'  <option>Employee + 1</option>'
+								+ '  <option>Employee + 2</option>'
+								+ '   <option>Employee + 3</option>'
+								+'	</select>'
+								+'	</td>'
+								+ '<td><div class="input-group"><span class="input-group-addon">	<i class="fa fa-usd  color-black"></i>	</span><input type="text" id="contributioncopy'+id+'-3-'+ parseInt(rowCount+i) +'" class="form-control reinsurance-rates-td text-align-center price" value="99.00">	</div></td>'
+								 +' <td><input type="text" id="contributioncopy'+id+'-4-'+ parseInt(rowCount+i) +'" class="form-control reinsurance-rates-td text-align-center" value="$68.00"></td>'
+								 + '<td class="select_tiers"><select class="form-control renewal-contribution-change-function" id="contribution_renewal_tiers_'+i+'_'+id+'"  >'
+								+' <option>Select</option>'
+																	+	'<option value="1">1 tier</option>'
+																	+	'<option value="2">2 tiers</option>'
+																	+	'<option value="3">3 tiers</option>'
+																	+	'<option value="4">4 tiers</option>'
+																	+	'<option value="5">5 tiers</option>'
+																	+	'<option value="6">6 tiers</option>'
+																+'</select></td>'
+																+'</tr>'
+							);
+							
+							
+	$('#editable_contributions_track_copy_'+id+' tr:last').prev().find('.select_tiers').html('<div class="remove-icon"><span class="button-remove-premiums button-remove-contribution-renewal cursor-pointer" id="contributionrenewal-remove-icon-id-'+parseInt(rowCount+i-1)+'-'+id+'" ><a class="color-red"><u>Remove</u></a></span></div>');
+							
+}
+
+return text;
+
+}
+
+
+
 function addReimbursementtrack(){
-	$('.add_icon_button').html('');
-	var html = '<tr><td><input type="text" id="id-1-5" class="form-control reinsurance-rates-td text-align-right" value="Drug Debates"></td>'
-								   +'<td> <select class="form-control reinsurance-rates-td" id="id-2-5">'
+	
+	var rowCount = $('#editable_reimbursementtrack tr').length - 1;
+	
+	//$('.add_icon_button').html('<div class="remove-icon"><span   class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
+	var html = '<tr><td><input type="text" id="adjustment-1-5" class="form-control reinsurance-rates-td text-align-center" value="Drug Debates"></td>'
+								   +'<td> <select class="form-control reinsurance-rates-td" id="adjustment-2-5">'
 									+' <option>Medical Claims</option>'
 								+' <option>Dental Claims</option>'
 								+' <option>Vision Claims</option>'
 								+'	</select></td>'
-									+'<td class="add_icon_button"><div class="add-icon"><span class="button-add cursor-pointer" onclick="addReimbursementtrack();">+</span></div></td></tr>';
+									+'<td class="add_icon_button"><div class="add-icon"><span class="button-add cursor-pointer" onclick="addReimbursementtrack();"><u>Add</u></span></div></td></tr>';
 									
 			
 	$('#editable_reimbursementtrack tr:last').after(html
 							);
+							
+								$('#editable_reimbursementtrack tr:last').prev().find('.add_icon_button').html('<div class="remove-icon"><span id="claim_adjustment_'+parseInt(rowCount)+'" class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 }
-/*
-function addReimbursementtrack(){
-	var value = document.getElementById('reimbursement_track').value
-	var rowCount = $('#editable_reimbursement_track tr').length - 1;
-	
-	if(value >= rowCount){
-		
-		addCount = value - rowCount ;
-		var html = '<tr>'
-                                   +'<td>1</td>'
-                                   +'<td class="tabledit-view-mode" style="cursor: pointer;"><span class="tabledit-span" style="display: inline;">Stop Loss Reimbursement</span><input class="tabledit-input form-control input-sm" type="text" name="name" value="Stop Loss Reimbursement" style="display: none;" disabled=""></td>'
-                                 +'<td class="tabledit-edit-mode" style="cursor: pointer;"><span class="tabledit-span" style="display: none;">Medical Claims</span><select class="tabledit-input form-control input-sm" name="claims" style=""><option value="1" selected="">Medical Claims</option><option value="2">Vision Claims</option><option value="3">Dental Claims</option></select></td>'
-                                   +'</tr>';
-		switch (addCount){
-		case 1:
-		$('#editable_reimbursementtrack tr:last').after(html
-							);
-		break;
-		case 2:
-		$('#editable_reimbursement_track tr:last').after(html+html
-						   );
-		break;
-		case 3:
-		$('#editable_reimbursement_track tr:last').after(html
-								+html
-								+html
-						   );
-		break;
-		case 4:
-		$('#editable_reimbursement_track tr:last').after(html
-								+html
-								+html
-								+html
-						   );
-		break;
-		
-		case 5:
-		$('#editable_reimbursement_track tr:last').after(html+html+html+html+html
-						   );
-		break;
-		
-		
-	} 
-	$('#editable_reimbursement_track').Tabledit({
-		    url: 'client-medical-self.php',
-		    editButton: false,
-		    deleteButton: false,
-		    hideIdentifier: true,
-		
-		    columns: {
-		    	 identifier: [0, 'id'],
-		    	    editable: []
-			   
-		    },
  
-		});
-
-	}
-	
-}
-*/
-
 function addCosttrack(){
-		$('.add_costtrack_button').html('');
+	
+	var rowCount = $('#editable_cost_track tr').length - 1;
+	//	$('.add_costtrack_button').html('<div class="remove-icon"><span  class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 	var html = ' <tr>'
-                                   + '<td><input type="text" id="cost-1-2" class="form-control reinsurance-rates-td text-align-right" value="Wellness Credit"></td>'
-									+'<td class="add_costtrack_button"><div class="add-icon"><span class="button-add cursor-pointer"  onclick="addCosttrack();">+</span></div></td>'
+                                   + '<td><input type="text" id="cost-1-2" class="form-control reinsurance-rates-td text-align-center" value="Wellness Credit"></td>'
+									+'<td class="add_costtrack_button"><div class="add-icon"><span class="button-add cursor-pointer"  onclick="addCosttrack();"><u>Add</u></span></div></td>'
                                  +' </tr>';
 									
 	$('#editable_cost_track tr:last').after(html
 							);
+							$('#editable_cost_track tr:last').prev().find('.add_costtrack_button').html('<div class="remove-icon"><span id="cost_items_'+parseInt(rowCount)+'" class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 }
 
 function addCostitems(){
-	var rowCount = $('#editable_cost_items tr').length - 1;
+	var rowCount = $('#editable_renewal_cost_items tr').length - 1;
 		
-		$('.add_costitems_button').html('');
+		//$('.add_costitems_button').html('<div class="remove-icon"><span id="renewal_cost_items_'+rowCount+'" class="button-remove margin-0 cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 		
 								 
 	var html = ' <tr>'
-                                   + '<td><input type="text" id="costitems-1-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right" value=""></td>'
-								   + '<td><input type="text" id="costitems-2-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right" value=""></td>'
-								    + '<td><input type="text" id="costitems-3-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right" value=""></td>'
-									+'<td class="add_costitems_button" align="center"><div class="add-icon"><span onclick="addCostitems();">+</span></div></td>'
+                                   + '<td><input type="text" id="costitems-1-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center" value=""></td>'
+								   + '<td><div class="input-group"><span class="input-group-addon"><i class="fa fa-usd  color-black"></i></span><input type="text" id="costitems-2-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td price" value=""></div></td>'
+								    + '<td><input type="text" id="costitems-3-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td" value=""></td>'
+									+'<td class="add_costitems_button" align="center"><div class="add-icon cursor-pointer"><span onclick="addCostitems();"><u>Add</u></span></div></td>'
                                  +' </tr>';
 									
-	$('#editable_cost_items tr:last').after(html
+	$('#editable_renewal_cost_items tr:last').after(html
 							);
+							
+							$('#editable_renewal_cost_items tr:last').prev().find('.add_costitems_button').html('<div class="remove-icon"><span id="renewal_cost_items_'+parseInt(rowCount)+'" class="button-remove margin-0 cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 }
-addCostitems
-/*
-function addCosttrack(){
-	var value = document.getElementById('cost_track').value
-	var rowCount = $('#editable_cost_track tr').length - 1;
-	
-	if(value >= rowCount){
-		var html = '<tr>'
-                                    +'<td>1</td>'
-                                    +'<td>Adminstrative Fees</td>'
-                                 +'</tr>';
-		addCount = value - rowCount ;
-		switch (addCount){
-		case 1:
-		$('#editable_cost_track tr:last').after(html
-							);
-		break;
-		case 2:
-		$('#editable_cost_track tr:last').after(html
-		                                        +html
-						   );
-		break;
-		case 3:
-		$('#editable_cost_track tr:last').after(html
-		                                        +html
-												+html
-						   );
-		break;
-		case 4:
-		$('#editable_cost_track tr:last').after(html
-		                                        +html
-												+html
-												+html
-						   );
-		break;
-		
-		case 5:
-		$('#editable_cost_track tr:last').after(html
-		                                        +html
-												+html
-												+html
-												+html
-						   );
-		break;
-		
-		
-	} 
-	
-		$('#editable_cost_track').Tabledit({
-		    url: 'client-medical-self.php',
-		    editButton: false,
-		    deleteButton: false,
-		    hideIdentifier: true,
-		    columns: {
-		    	  identifier: [0, 'id'],
-		          editable: [[1, 'itemname']]
-		    }
-		});
-	}
-	
-}
-*/
-/*
-function addEmployeecontribution(){
-	var value = document.getElementById('employee_contribution').value
-	var rowCount = $('#editable_contributions_track tr').length - 1;
-	
-	if(value >= rowCount){
-		var html = ' <tr id="1">'
-                                  +'<td>1</td>'
-                                  +'<td class="back-darkgray">tier 1</td>'
-								   + '<td class="back-lightyellow tabledit-view-mode" style="cursor: pointer;"><span class="tabledit-span" style="display: inline;">Single</span><select class="tabledit-input form-control input-sm" name="tiername" style="display: none;" disabled=""><option value="1" selected="selected">Single</option><option value="2">Employee + Spouse</option><option value="3">Employee + Child</option><option value="4">Employee + Children</option><option value="5">Family</option></select></td>'
-									+'<td class="back-lightyellow tabledit-view-mode" style="cursor: pointer;"><span class="tabledit-span">$99.00</span><input class="tabledit-input form-control input-sm" type="text" name="monthlyrates" value="$99.00" style="display: none;" disabled=""></td>'
-									+ '<td class="back-lightyellow tabledit-view-mode" style="cursor: pointer;"><span class="tabledit-span">68</span><input class="tabledit-input form-control input-sm" type="text" name="mothlyenrollment" value="68" style="display: none;" disabled=""></td>'
-                                   +'</tr>';
-		addCount = value - rowCount ;
-		switch (addCount){
-		case 1:
-		$('#editable_contributions_track tr:last').after(html
-							);
-		break;
-		case 2:
-		$('#editable_contributions_track tr:last').after(html
-		                                        +html
-						   );
-		break;
-		case 3:
-		$('#editable_contributions_track tr:last').after(html
-		                                        +html
-												+html
-						   );
-		break;
-		case 4:
-		$('#editable_contributions_track tr:last').after(html
-		                                        +html
-												+html
-												+html
-						   );
-		break;
-		
-		case 5:
-		$('#editable_contributions_track tr:last').after(html
-		                                        +html
-												+html
-												+html
-												+html
-						   );
-		break;
-		
-		
-	} 
-	
-		$('#editable_contributions_track').Tabledit({
-		    url: 'client-medical-self.php',
-		    editButton: false,
-		    deleteButton: false,
-		    hideIdentifier: true,
-		    columns: {
-		    	  identifier: [0, 'id'],
-		          editable: []
-		    }
-		});
-	}
-	
-}*/
 
+ 
 function addEmployeecontribution(){
 	
 	var rowCount = $('#editable_contributions_track tr').length - 1;
-		$('.add_contribution_button').html('');
+		$('.add_contribution_button').html('<div class="remove-icon"><span class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 	var html = '  <tr>'
                                +  '   <td id="contribution-left-header-'+parseInt(rowCount+1)+'">tier '+parseInt(rowCount+1)+'</td>'
-								+'	 <td><select class="form-control reinsurance-rates-td" id="contribution-2-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right">'
+								+'	 <td><select class="form-control reinsurance-rates-td" id="contribution-2-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center">'
 								+' <option>Employee</option>'
 								+' <option>Employee + Spouse</option>'
 								+' <option>Employee + Child</option>'
@@ -844,23 +608,24 @@ function addEmployeecontribution(){
 								 +'   <option>Employee + 3</option>'
 									+'</select>'
 								+'	</td>'
-								+	 '  <td><input type="text" id="contribution-3-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right" value="99.00"></td>'
-								+	 '  <td><input type="text" id="contribution-4-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right" value="$68.00"></td>'
-								+	'<td class="add_contribution_button"><div class="add-icon"><span class="button-add cursor-pointer" onclick="addEmployeecontribution();">+</span></div></td>'
+								+	 '<td><div class="input-group"><span class="input-group-addon"><i class="fa fa-usd  color-black"></i></span><input type="text" id="contribution-3-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center" value="99.00"></div></td>'
+								+	 '  <td><input type="text" id="contribution-4-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center" value="$68.00"></td>'
+								+	'<td class="add_contribution_button"><div class="add-icon"><span class="button-add cursor-pointer" onclick="addEmployeecontribution();"><u>Add</u></span></div></td>'
                                 +'  </tr>';
 									
 	$('#editable_contributions_track tr:last').after(html
 							);
+							$('#editable_contributions_track tr:last').prev().find('.add_contribution_button').html('<div class="remove-icon"><span class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 }
 
 
 function addEmployeecontributiontwo(){
 	
 	var rowCount = $('#editable_contributions_track_two tr').length - 1;
-		$('.add_contributiontwo_button').html('');
+		$('.add_contributiontwo_button').html('<div class="remove-icon"><span class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 	var html = '  <tr>'
                                +  '   <td id="contributiontwo-left-header-'+parseInt(rowCount+1)+'">tier '+parseInt(rowCount+1)+'</td>'
-								+'	 <td><select class="form-control reinsurance-rates-td" id="contributiontwo-2-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right">'
+								+'	 <td><select class="form-control reinsurance-rates-td" id="contributiontwo-2-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center">'
 								+' <option>Employee</option>'
 								+' <option>Employee + Spouse</option>'
 								+' <option>Employee + Child</option>'
@@ -871,23 +636,24 @@ function addEmployeecontributiontwo(){
 								 +'   <option>Employee + 3</option>'
 									+'</select>'
 								+'	</td>'
-								+	 '  <td><input type="text" id="contributiontwo-3-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right" value="99.00"></td>'
-								+	 '  <td><input type="text" id="contributiontwo-4-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right" value="$68.00"></td>'
-								+	'<td class="add_contributiontwo_button"><div class="add-icon"><span class="button-add cursor-pointer" onclick="addEmployeecontributiontwo();">+</span></div></td>'
+								+	 '  <td><div class="input-group"><span class="input-group-addon"><i class="fa fa-usd  color-black"></i></span><input type="text" id="contributiontwo-3-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center price" value="99.00"></div></td>'
+								+	 '  <td><input type="text" id="contributiontwo-4-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center" value="$68.00"></td>'
+								+	'<td class="add_contributiontwo_button"><div class="add-icon"><span class="button-add cursor-pointer" onclick="addEmployeecontributiontwo();"><u>Add</u></span></div></td>'
                                 +'  </tr>';
 									
 	$('#editable_contributions_track_two tr:last').after(html
 							);
+									$('#editable_contributions_track_two tr:last').prev().find('.add_contributiontwo_button').html('<div class="remove-icon"><span class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 }
 
 
 function addEmployeecontributiondental(){
 	
 	var rowCount = $('#editable_contributions_track_dental tr').length - 1;
-		$('.add_contributiondental_button').html('');
+		$('.add_contributiondental_button').html('<div class="remove-icon"><span class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 	var html = '  <tr>'
                                +  '   <td id="contributiondental-left-header-'+parseInt(rowCount+1)+'">tier '+parseInt(rowCount+1)+'</td>'
-								+'	 <td><select class="form-control reinsurance-rates-td" id="contributiondental-2-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right">'
+								+'	 <td><select class="form-control reinsurance-rates-td" id="contributiondental-2-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center">'
 								+' <option>Employee</option>'
 								+' <option>Employee + Spouse</option>'
 								+' <option>Employee + Child</option>'
@@ -898,22 +664,23 @@ function addEmployeecontributiondental(){
 								 +'   <option>Employee + 3</option>'
 									+'</select>'
 								+'	</td>'
-								+	 '  <td><input type="text" id="contributiondental-3-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right" value="99.00"></td>'
-								+	 '  <td><input type="text" id="contributiondental-4-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right" value="$68.00"></td>'
-								+	'<td class="add_contributiondental_button"><div class="add-icon"><span class="button-add cursor-pointer" onclick="addEmployeecontributiondental();">+</span></div></td>'
+								+	 '  <td><input type="text" id="contributiondental-3-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center" value="99.00"></td>'
+								+	 '  <td><input type="text" id="contributiondental-4-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center" value="$68.00"></td>'
+								+	'<td class="add_contributiondental_button"><div class="add-icon"><span class="button-add cursor-pointer" onclick="addEmployeecontributiondental();"><u>Add</u></span></div></td>'
                                 +'  </tr>';
 									
 	$('#editable_contributions_track_dental tr:last').after(html
 							);
+							$('#editable_contributions_track_dental tr:last').prev().find('.add_contributiondental_button').html('<div class="remove-icon"><span class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 }
 
 function addEmployeecontributiondentaltwo(){
 	
 	var rowCount = $('#editable_contributions_track_two_dental tr').length - 1;
-		$('.add_contributiondentaltwo_button').html('');
+		$('.add_contributiondentaltwo_button').html('<div class="remove-icon"><span class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 	var html = '  <tr>'
                                +  '   <td id="contributiondentaltwo-left-header-'+parseInt(rowCount+1)+'">tier '+parseInt(rowCount+1)+'</td>'
-								+'	 <td><select class="form-control reinsurance-rates-td" id="contributiondentaltwo-2-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right">'
+								+'	 <td><select class="form-control reinsurance-rates-td" id="contributiondentaltwo-2-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center">'
 								+' <option>Employee</option>'
 								+' <option>Employee + Spouse</option>'
 								+' <option>Employee + Child</option>'
@@ -924,21 +691,22 @@ function addEmployeecontributiondentaltwo(){
 								 +'   <option>Employee + 3</option>'
 									+'</select>'
 								+'	</td>'
-								+	 '  <td><input type="text" id="contributiondentaltwo-3-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right" value="99.00"></td>'
-								+	 '  <td><input type="text" id="contributiondentaltwo-4-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right" value="$68.00"></td>'
-								+	'<td class="add_contributiondentaltwo_button"><div class="add-icon"><span class="button-add cursor-pointer" onclick="addEmployeecontributiondentaltwo();">+</span></div></td>'
+								+	 '  <td><input type="text" id="contributiondentaltwo-3-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center" value="99.00"></td>'
+								+	 '  <td><input type="text" id="contributiondentaltwo-4-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center" value="$68.00"></td>'
+								+	'<td class="add_contributiondentaltwo_button"><div class="add-icon"><span class="button-add cursor-pointer" onclick="addEmployeecontributiondentaltwo();"><u>Add</u></span></div></td>'
                                 +'  </tr>';
 									
 	$('#editable_contributions_track_two_dental tr:last').after(html
 							);
+							$('#editable_contributions_track_two_dental tr:last').prev().find('.add_contributiondentaltwo_button').html('<div class="remove-icon"><span class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 }
 function addEmployeecontributionvision(){
 	
 	var rowCount = $('#editable_contributions_track_vision tr').length - 1;
-		$('.add_contributionvision_button').html('');
+		$('.add_contributionvision_button').html('<div class="remove-icon"><span class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 	var html = '  <tr>'
                                +  '   <td id="contributionvision-left-header-'+parseInt(rowCount+1)+'">tier '+parseInt(rowCount+1)+'</td>'
-								+'	 <td><select class="form-control reinsurance-rates-td" id="contributionvision-2-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right">'
+								+'	 <td><select class="form-control reinsurance-rates-td" id="contributionvision-2-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center">'
 								+' <option>Employee</option>'
 								+' <option>Employee + Spouse</option>'
 								+' <option>Employee + Child</option>'
@@ -949,22 +717,23 @@ function addEmployeecontributionvision(){
 								 +'   <option>Employee + 3</option>'
 									+'</select>'
 								+'	</td>'
-								+	 '  <td><input type="text" id="contributionvision-3-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right" value="99.00"></td>'
-								+	 '  <td><input type="text" id="contributionvision-4-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right" value="$68.00"></td>'
-								+	'<td class="add_contributionvision_button"><div class="add-icon"><span class="button-add cursor-pointer" onclick="addEmployeecontributionvision();">+</span></div></td>'
+								+	 '  <td><input type="text" id="contributionvision-3-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center" value="99.00"></td>'
+								+	 '  <td><input type="text" id="contributionvision-4-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center" value="$68.00"></td>'
+								+	'<td class="add_contributionvision_button"><div class="add-icon"><span class="button-add cursor-pointer" onclick="addEmployeecontributionvision();"><u>Add</u></span></div></td>'
                                 +'  </tr>';
 									
 	$('#editable_contributions_track_vision tr:last').after(html
 							);
+			$('#editable_contributions_track_vision tr:last').prev().find('.add_contributionvision_button').html('<div class="remove-icon"><span class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 }
 
 function addEmployeecontributionvisiontwo(){
 	
 	var rowCount = $('#editable_contributions_track_two_vision tr').length - 1;
-		$('.add_contributionvisiontwo_button').html('');
+		$('.add_contributionvisiontwo_button').html('<div class="remove-icon"><span class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 	var html = '  <tr>'
                                +  '   <td id="contributionvisiontwo-left-header-'+parseInt(rowCount+1)+'">tier '+parseInt(rowCount+1)+'</td>'
-								+'	 <td><select class="form-control reinsurance-rates-td" id="contributionvisiontwo-2-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right">'
+								+'	 <td><select class="form-control reinsurance-rates-td" id="contributionvisiontwo-2-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center">'
 								+' <option>Employee</option>'
 								+' <option>Employee + Spouse</option>'
 								+' <option>Employee + Child</option>'
@@ -975,89 +744,24 @@ function addEmployeecontributionvisiontwo(){
 								 +'   <option>Employee + 3</option>'
 									+'</select>'
 								+'	</td>'
-								+	 '  <td><input type="text" id="contributionvisiontwo-3-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right" value="99.00"></td>'
-								+	 '  <td><input type="text" id="contributionvisiontwo-4-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right" value="$68.00"></td>'
-								+	'<td class="add_contributionvisiontwo_button"><div class="add-icon"><span class="button-add cursor-pointer" onclick="addEmployeecontributionvisiontwo();">+</span></div></td>'
+								+	 '  <td><input type="text" id="contributionvisiontwo-3-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center" value="99.00"></td>'
+								+	 '  <td><input type="text" id="contributionvisiontwo-4-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center" value="$68.00"></td>'
+								+	'<td class="add_contributionvisiontwo_button"><div class="add-icon"><span class="button-add cursor-pointer" onclick="addEmployeecontributionvisiontwo();"><u>Add</u></span></div></td>'
                                 +'  </tr>';
 									
 	$('#editable_contributions_track_two_vision tr:last').after(html
 							);
+							
+								$('#editable_contributions_track_two_vision tr:last').prev().find('.add_contributionvisiontwo_button').html('<div class="remove-icon"><span class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 }
-/*
-function addEmployeecontributiontwo(){
-	var value = document.getElementById('employee_contribution_two').value
-	var rowCount = $('#editable_contributions_track_two tr').length - 1;
-	
-	if(value >= rowCount){
-		var html = ' <tr>'
-                                  +'<td>1</td>'
-                                   +'<td class="back-darkgray">tier 1</td>'
-								    +'<td class="back-lightyellow tabledit-view-mode" style="cursor: pointer;"><span class="tabledit-span" style="display: inline;">Single</span><select class="tabledit-input form-control input-sm" name="name" style="display: none;" disabled=""><option value="1" selected="selected">Single</option><option value="2">Employee + Spouse</option><option value="3">Employee + Child</option><option value="4">Employee + Children</option><option value="5">Family</option></select></td>'
-									+'<td class="back-lightyellow tabledit-view-mode" style="cursor: pointer;"><span class="tabledit-span">$99.00</span><input class="tabledit-input form-control input-sm" type="text" name="rates" value="$99.00" style="display: none;" disabled=""></td>'
-									  +'<td class="back-lightyellow tabledit-view-mode" style="cursor: pointer;"><span class="tabledit-span">68</span><input class="tabledit-input form-control input-sm" type="text" name="enrollment" value="68" style="display: none;" disabled=""></td>'
-                                   +'</tr>';
-		addCount = value - rowCount ;
-		switch (addCount){
-		case 1:
-		$('#editable_contributions_track_two tr:last').after(html
-							);
-		break;
-		case 2:
-		$('#editable_contributions_track_two tr:last').after(html
-		                                        +html
-						   );
-		break;
-		case 3:
-		$('#editable_contributions_track_two tr:last').after(html
-		                                        +html
-												+html
-						   );
-		break;
-		case 4:
-		$('#editable_contributions_track_two tr:last').after(html
-		                                        +html
-												+html
-												+html
-						   );
-		break;
-		
-		case 5:
-		$('#editable_contributions_track_two tr:last').after(html
-		                                        +html
-												+html
-												+html
-												+html
-						   );
-		break;
-		
-		
-	} 
-	
-		$('#editable_contributions_track_two').Tabledit({
-		    url: 'client-medical-self.php',
-		    editButton: false,
-		    deleteButton: false,
-		    hideIdentifier: true,
-		    columns: {
-		    	  identifier: [0, 'id'],
-		          editable: []
-		    }
-		});
-		
-	}
-	
-}
-
-*/
-
-
+ 
 function addEmployeecontributioncopy(){
 	
 	var rowCount = $('#editable_contributions_track_copy tr').length - 1;
-		$('.add_contributioncopy_button').html('');
+		$('.add_contributioncopy_button').html('<div class="remove-icon"><span class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 	var html = '  <tr>'
                                +  '   <td id="contributioncopy-left-header-'+parseInt(rowCount+1)+'">tier '+parseInt(rowCount+1)+'</td>'
-								+'	 <td><select class="form-control reinsurance-rates-td" id="contributioncopy-2-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right">'
+								+'	 <td><select class="form-control reinsurance-rates-td" id="contributioncopy-2-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center">'
 								+' <option>Employee</option>'
 								+' <option>Employee + Spouse</option>'
 								+' <option>Employee + Child</option>'
@@ -1068,23 +772,25 @@ function addEmployeecontributioncopy(){
 								 +'   <option>Employee + 3</option>'
 									+'</select>'
 								+'	</td>'
-								+	 '  <td><input type="text" id="contributioncopy-3-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right" value="99.00"></td>'
-								+	 '  <td><input type="text" id="contributioncopy-4-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right" value="$68.00"></td>'
-								+	'<td class="add_contributioncopy_button"><div class="add-icon"><span class="button-add cursor-pointer" onclick="addEmployeecontributioncopy();">+</span></div></td>'
+								+	 '  <td><input type="text" id="contributioncopy-3-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center" value="99.00"></td>'
+								+	 '  <td><input type="text" id="contributioncopy-4-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center" value="$68.00"></td>'
+								+	'<td class="add_contributioncopy_button"><div class="add-icon"><span class="button-add cursor-pointer" onclick="addEmployeecontributioncopy();"><u>Add</u></span></div></td>'
                                 +'  </tr>';
 									
 	$('#editable_contributions_track_copy tr:last').after(html
 							);
+							
+								$('#editable_contributions_track_copy tr:last').prev().find('.add_contributioncopy_button').html('<div class="remove-icon"><span class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 }
 
 
 function addEmployeecontributiontwocopy(){
 	
 	var rowCount = $('#editable_contributions_track_two_copy tr').length - 1;
-		$('.add_contributioncopytwo_button').html('');
+		$('.add_contributioncopytwo_button').html('<div class="remove-icon"><span class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 	var html = '  <tr>'
                                +  '   <td id="contributiontwocopy-left-header-'+parseInt(rowCount+1)+'">tier '+parseInt(rowCount+1)+'</td>'
-								+'	 <td><select class="form-control reinsurance-rates-td" id="contributiontwocopy-2-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right">'
+								+'	 <td><select class="form-control reinsurance-rates-td" id="contributiontwocopy-2-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center">'
 								+' <option>Employee</option>'
 								+' <option>Employee + Spouse</option>'
 								+' <option>Employee + Child</option>'
@@ -1095,143 +801,16 @@ function addEmployeecontributiontwocopy(){
 								 +'   <option>Employee + 3</option>'
 									+'</select>'
 								+'	</td>'
-								+	 '  <td><input type="text" id="contributiontwocopy-3-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right" value="99.00"></td>'
-								+	 '  <td><input type="text" id="contributiontwocopy-4-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-right" value="$68.00"></td>'
-								+	'<td class="add_contributioncopytwo_button"><div class="add-icon"><span class="button-add cursor-pointer" onclick="addEmployeecontributiontwocopy();">+</span></div></td>'
+								+	 '  <td><input type="text" id="contributiontwocopy-3-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center" value="99.00"></td>'
+								+	 '  <td><input type="text" id="contributiontwocopy-4-'+parseInt(rowCount+1)+'" class="form-control reinsurance-rates-td text-align-center" value="$68.00"></td>'
+								+	'<td class="add_contributioncopytwo_button"><div class="add-icon"><span class="button-add cursor-pointer" onclick="addEmployeecontributiontwocopy();"><u>Add</u></span></div></td>'
                                 +'  </tr>';
 									
 	$('#editable_contributions_track_two_copy tr:last').after(html
 							);
+								$('#editable_contributions_track_two_copy tr:last').prev().find('.add_contributioncopytwo_button').html('<div class="remove-icon"><span class="button-remove cursor-pointer"  ><a class="color-red"><u>Remove</u></a></span></div>');
 }
-/*
-function addEmployeecontributioncopy(){
-	var value = document.getElementById('employee_contribution_copy').value
-	var rowCount = $('#editable_contributions_track_copy tr').length - 1;
-	
-	if(value >= rowCount){
-		var html = ' <tr id="1">'
-                                  +'<td>1</td>'
-                                  +'<td class="back-darkgray">tier 1</td>'
-								   + '<td class="back-lightyellow tabledit-view-mode" style="cursor: pointer;"><span class="tabledit-span" style="display: inline;">Single</span><select class="tabledit-input form-control input-sm" name="tiername" style="display: none;" disabled=""><option value="1" selected="selected">Single</option><option value="2">Employee + Spouse</option><option value="3">Employee + Child</option><option value="4">Employee + Children</option><option value="5">Family</option></select></td>'
-									+'<td class="back-lightyellow tabledit-view-mode" style="cursor: pointer;"><span class="tabledit-span">$99.00</span><input class="tabledit-input form-control input-sm" type="text" name="monthlyrates" value="$99.00" style="display: none;" disabled=""></td>'
-									+ '<td class="back-lightyellow tabledit-view-mode" style="cursor: pointer;"><span class="tabledit-span">68</span><input class="tabledit-input form-control input-sm" type="text" name="mothlyenrollment" value="68" style="display: none;" disabled=""></td>'
-                                   +'</tr>';
-		addCount = value - rowCount ;
-		switch (addCount){
-		case 1:
-		$('#editable_contributions_track_copy tr:last').after(html
-							);
-		break;
-		case 2:
-		$('#editable_contributions_track_copy tr:last').after(html
-		                                        +html
-						   );
-		break;
-		case 3:
-		$('#editable_contributions_track_copy tr:last').after(html
-		                                        +html
-												+html
-						   );
-		break;
-		case 4:
-		$('#editable_contributions_track_copy tr:last').after(html
-		                                        +html
-												+html
-												+html
-						   );
-		break;
-		
-		case 5:
-		$('#editable_contributions_track_copy tr:last').after(html
-		                                        +html
-												+html
-												+html
-												+html
-						   );
-		break;
-		
-		
-	} 
-	
-		$('#editable_contributions_track_copy').Tabledit({
-		    url: 'client-medical-self.php',
-		    editButton: false,
-		    deleteButton: false,
-		    hideIdentifier: true,
-		    columns: {
-		    	  identifier: [0, 'id'],
-		          editable: []
-		    }
-		});
-	}
-	
-}
-*/
-/*
-function addEmployeecontributiontwocopy(){
-	var value = document.getElementById('employee_contribution_two_copy').value
-	var rowCount = $('#editable_contributions_track_two_copy tr').length - 1;
-	
-	if(value >= rowCount){
-		var html = ' <tr>'
-                                  +'<td>1</td>'
-                                   +'<td class="back-darkgray">tier 1</td>'
-								    +'<td class="back-lightyellow tabledit-view-mode" style="cursor: pointer;"><span class="tabledit-span" style="display: inline;">Single</span><select class="tabledit-input form-control input-sm" name="name" style="display: none;" disabled=""><option value="1" selected="selected">Single</option><option value="2">Employee + Spouse</option><option value="3">Employee + Child</option><option value="4">Employee + Children</option><option value="5">Family</option></select></td>'
-									+'<td class="back-lightyellow tabledit-view-mode" style="cursor: pointer;"><span class="tabledit-span">$99.00</span><input class="tabledit-input form-control input-sm" type="text" name="rates" value="$99.00" style="display: none;" disabled=""></td>'
-									  +'<td class="back-lightyellow tabledit-view-mode" style="cursor: pointer;"><span class="tabledit-span">68</span><input class="tabledit-input form-control input-sm" type="text" name="enrollment" value="68" style="display: none;" disabled=""></td>'
-                                   +'</tr>';
-		addCount = value - rowCount ;
-		switch (addCount){
-		case 1:
-		$('#editable_contributions_track_two_copy tr:last').after(html
-							);
-		break;
-		case 2:
-		$('#editable_contributions_track_two_copy tr:last').after(html
-		                                        +html
-						   );
-		break;
-		case 3:
-		$('#editable_contributions_track_two_copy tr:last').after(html
-		                                        +html
-												+html
-						   );
-		break;
-		case 4:
-		$('#editable_contributions_track_two_copy tr:last').after(html
-		                                        +html
-												+html
-												+html
-						   );
-		break;
-		
-		case 5:
-		$('#editable_contributions_track_two_copy tr:last').after(html
-		                                        +html
-												+html
-												+html
-												+html
-						   );
-		break;
-		
-		
-	} 
-	
-		$('#editable_contributions_track_two_copy').Tabledit({
-		    url: 'client-medical-self.php',
-		    editButton: false,
-		    deleteButton: false,
-		    hideIdentifier: true,
-		    columns: {
-		    	  identifier: [0, 'id'],
-		          editable: []
-		    }
-		});
-		
-	}
-	
-}
-*/
+ 
 function back(e){
 	
 	 if (e.rowType == 'data') {
@@ -1249,6 +828,12 @@ function addLocation(){
 		$('#add_location').toggleClass('hide');
 		$('#input_add_location').val('');
 }
+
+function addLocationsearch(){
+		$('#add_location_search').toggleClass('hide');
+		$('#input_add_location').val('');
+}
+
 function addLaser(){
 		$('#add_laser').toggleClass('hide');
 		$('#input_add_laser').val('');
@@ -1306,33 +891,78 @@ function openDesignfirmmodal(id){
 	
 }
 
-
-
-
+ 
 /************* end new disign *******************/
 
 
+function addReinsurancerates(removeCount,value){
+	 
+	 for (i=1; i<=removeCount; i++){ 
+			//var result = arrange(); 
+			
+		//	if(result){
+				$('#editable_reinsurance_rate ').find(' tbody tr:last').remove();
+		//	}
+			}
+			
+			$('#enter-reinsurance-details-row-'+value).find(' td:last').html('<select class="form-control change-function" id="premium_tiers"  >'
+									+' <option>Select</option>'
+																		+	'<option value="1">1 tier</option>'
+																		+	'<option value="2">2 tiers</option>'
+																		+	'<option value="3">3 tiers</option>'
+																		+	'<option value="4">4 tiers</option>'
+																		+	'<option value="5">5 tiers</option>'
+																		+	'<option value="6">6 tiers</option>'
+																	+'</select>');
+			
+			$('#alert_message_select').modal('hide');
+			
+}
 
+function addContributiontiers(removeCount,value_select,table_id){
+	 
 
+	for (i=1; i<=removeCount; i++){ 
+		 
+		$('#editable_contributions_track_'+table_id).find(' tbody tr:last').remove();
 
+	}
+
+	$('#contribution-enrollment-row-'+value_select+'-'+table_id).find(' td:last').html('<select class="form-control contribution-change-function" id="contribution_premium_tiers_'+value_select+'_'+table_id+'"  >'
+							+' <option>Select</option>'
+																+	'<option value="1">1 tier</option>'
+																+	'<option value="2">2 tiers</option>'
+																+	'<option value="3">3 tiers</option>'
+																+	'<option value="4">4 tiers</option>'
+																+	'<option value="5">5 tiers</option>'
+																+	'<option value="6">6 tiers</option>'
+															+'</select>');
+	$('#alert_message_select').modal('hide');
+	}
+
+function addrenewalContributiontiers(removeCount,value_select,table_id){
+for (i=1; i<=removeCount; i++){ 
+	 
+	$('#editable_contributions_track_copy_'+table_id).find(' tbody tr:last').remove();
+
+}
+
+$('#contribution-renewal-row-'+value_select+'-'+table_id).find(' td:last').html('<select class="form-control renewal-contribution-change-function" id="contribution_renewal_tiers_'+value_select+'_'+table_id+'"  >'
+						+' <option>Select</option>'
+															+	'<option value="1">1 tier</option>'
+															+	'<option value="2">2 tiers</option>'
+															+	'<option value="3">3 tiers</option>'
+															+	'<option value="4">4 tiers</option>'
+															+	'<option value="5">5 tiers</option>'
+															+	'<option value="6">6 tiers</option>'
+														+'</select>');
+$('#alert_message_select').modal('hide');
+
+}
 	$(document).ready(function() {
 		
 		
-		 $(document).on('keydown', '.numbers', function (e) {
-		 // Allow: backspace, delete, tab, escape, enter and .
-        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-             // Allow: Ctrl+A, Command+A
-            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
-             // Allow: home, end, left, right, down, up
-            (e.keyCode >= 35 && e.keyCode <= 40)) {
-                 // let it happen, don't do anything
-                 return;
-        }
-        // Ensure that it is a number and stop the keypress
-        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-            e.preventDefault();
-        }
-});
+		 
 	 
 							
 							$("#monthly_financials .dx-toolbar-before").html('<div class="form-group col-md-12 padding-0" style="min-width:402px;"><label class="font-16 col-xs-3 line-height-30 padding-0" style="color:black;">Plan Year: </label><label class=" col-xs-7 padding-0 font-16 line-height-30" style="color:black;">2016</label></div>');
@@ -1490,6 +1120,211 @@ var rowid = ret[2];
 });
 
 
+	 $(document).on('change', '.change-function', function () {
+ 
+ var value = document.getElementById('premium_tiers').value;
+ 
+	var rowCount = $('#editable_reinsurance_rate tr').length - 1;
+	
+	if(value > rowCount){
+		//$('.select_tiers').html('');
+		addCount = value - rowCount ;
+	//	var html =;
+	var result = loop(addCount,rowCount);
+	//console.log(result);
+	
+	}else{
+		
+		removeCount = rowCount - value ;
+		$('a#alert-meassage-id-select').attr('onclick','addReinsurancerates('+removeCount+','+value+');');
+		
+		$('#alert_message_select').modal('show');
+		
+	//	$('#editable_reinsurance_rate tbody').html('');
+		
+		//loop(addCount,rowCount);
+	}
+	 
+});
+	
+
+	 
+	 //for enrollments and contributions
+ $(document).on('change', '.contribution-change-function', function () {
+
+  var item_id = this.id;
+  var id = item_id.split("_");
+   var id_val = id[3];
+    var table_id = id[4];
+ var value_select = document.getElementById('contribution_premium_tiers_'+id_val+'_'+table_id).value
+ 
+	var rowCount = $('#editable_contributions_track_'+table_id+' tr').length - 1;
+	
+	if(value_select > rowCount){
+		//$('.select_tiers').html('');
+		addCount = value_select - rowCount ;
+	//	var html =;
+	var result = loopinnercontribution(addCount,rowCount,table_id);
+	//console.log(result);
+	
+	}else{
+			
+		removeCount = rowCount - value_select ;
+		
+	$('a#alert-meassage-id-select').attr('onclick','addContributiontiers('+removeCount+','+value_select+','+table_id+');');
+		
+		$('#alert_message_select').modal('show');
+		
+		
+	}
+	 
+});
+//for renewal contributions
+ 
+ $(document).on('change', '.renewal-contribution-change-function', function () {
+
+	  var item_id = this.id;
+	  var id = item_id.split("_");
+	   var id_val = id[3];
+	    var table_id = id[4];
+	 var value_select = document.getElementById('contribution_renewal_tiers_'+id_val+'_'+table_id).value
+	 
+		var rowCount = $('#editable_contributions_track_copy_'+table_id+' tr').length - 1;
+		
+		if(value_select > rowCount){
+			//$('.select_tiers').html('');
+			addCount = value_select - rowCount ;
+		//	var html =;
+		var result = loopinnerrenewalcontribution(addCount,rowCount,table_id);
+		//console.log(result);
+		
+		}else{
+	 		
+			removeCount = rowCount - value_select ;
+			
+			$('a#alert-meassage-id-select').attr('onclick','addrenewalContributiontiers('+removeCount+','+value_select+','+table_id+');');
+			
+			$('#alert_message_select').modal('show');
+			
+		
+		}
+		 
+	});
+ 
+ 
+ $(document).on('click', '.button-remove', function () { 
+ var item_id = this.id;
+ $('#alert-meassage-id').attr("iddata",item_id);
+  $('#alert_message').modal('show'); 
+});
+
+ $(document).on('click', '.button-remove-modal', function () { 
+	// var item_id = this.iddata;
+	 var item_id = $("#alert-meassage-id").attr("iddata");
+	 if(item_id != ''){
+		 
+		 var id = item_id.split("-");
+			var id_val = id[3];
+		 var rowCount = $('#editable_reinsurance_rate tr').length - 1;
+		 //alert(rowCount);
+		 j = +id_val + +1;
+		 for(i=j; i<=rowCount; i++){
+			var new_val =  +i - +1;
+			$('#reinsurance-left-header-'+i).html(new_val);
+			$('#reinsurance-left-header-'+i).attr("id","reinsurance-left-header-"+ new_val);
+			$('#reinsurance-2-'+i).attr("id","reinsurance-2-"+ new_val);
+			$('#reinsurance-3-'+i).attr("id","reinsurance-3-"+ new_val);
+			$('#reinsurance-4-'+i).attr("id","reinsurance-4-"+ new_val);
+			$('#reinsurance-5-'+i).attr("id","reinsurance-5-"+ new_val);
+			$('#reinsurance-6-'+i).attr("id","reinsurance-6-"+ new_val);
+			$('#remove-icon-id-'+i).attr("id","remove-icon-id-"+ new_val);
+			$('#enter-reinsurance-details-row-'+i).attr("id","enter-reinsurance-details-row-"+ new_val);
+		 }
+		  $('#'+item_id).parent().parent().parent().remove(); 
+		  $('#alert_message').modal('hide'); 
+		  
+	 }else{
+		 $('#'+item_id).parent().parent().parent().remove(); 
+		  $('#alert_message').modal('hide'); 
+	 }
+		
+
+	});
+ 
+ $(document).on('click', '.button-remove-contribution', function () { 
+
+	 var item_id = this.id;
+	 $('#alert-meassage-id-contribution').attr("iddata",item_id);
+	  $('#alert_message_contribution').modal('show'); 
+	  
+});
+
+ $(document).on('click', '.button-remove-contribution-modal', function () { 
+		// var item_id = this.iddata;
+		 var item_id = $("#alert-meassage-id-contribution").attr("iddata");
+	
+		 var id = item_id.split("-");
+		 var id_val = id[4];
+		  var table_id = id[5];
+		 var rowCount = $('#editable_contributions_track_'+table_id+' tr').length - 1;
+		 //alert(rowCount);
+		 j = +id_val + +1;
+		 for(i=j; i<=rowCount; i++){
+			var new_val =  +i - +1;
+			$('#contribution'+table_id+'-left-header-'+i).html(new_val);
+			$('#contribution'+table_id+'-left-header-'+i).attr("id","contribution"+table_id+"-left-header-"+ new_val);
+			$('#contribution'+table_id+'-2-'+i).attr("id","contribution"+table_id+"-2-"+ new_val);
+			$('#contribution'+table_id+'-3-'+i).attr("id","contribution"+table_id+"-3-"+ new_val);
+			$('#contribution'+table_id+'-4-'+i).attr("id","contribution"+table_id+"-4-"+ new_val);
+			
+			$('#contribution-remove-icon-id-'+i+'-'+table_id+'').attr("id","contribution-remove-icon-id-"+new_val+"-"+table_id+"");
+			$('#contribution-enrollment-row-'+i+'-'+table_id+'').attr("id","contribution-enrollment-row-"+new_val+"-"+table_id+"");
+		 }
+		 
+		  $('#'+item_id).parent().parent().parent().remove(); 
+		  $('#alert_message_contribution').modal('hide'); 
+
+		});
+ 
+ //remove button for renewal contribution
+ 
+ $(document).on('click', '.button-remove-contribution-renewal', function () { 
+	 var item_id = this.id;
+	 $('#alert-meassage-id-contribution-renewal').attr("iddata",item_id);
+	  $('#alert_message_contribution_renewal').modal('show'); 
+	  
+});
+ 
+ 
+ $(document).on('click', '.button-remove-contribution-renewal-modal', function () { 
+		// var item_id = this.iddata;
+		 var item_id = $("#alert-meassage-id-contribution-renewal").attr("iddata");
+	
+		 var id = item_id.split("-");
+		 var id_val = id[4];
+		  var table_id = id[5];
+		 var rowCount = $('#editable_contributions_track_copy_'+table_id+' tr').length - 1;
+		 //alert(rowCount);
+		 j = +id_val + +1;
+		 for(i=j; i<=rowCount; i++){
+			var new_val =  +i - +1;
+			$('#contributioncopy'+table_id+'-left-header-'+i).html(new_val);
+			$('#contributioncopy'+table_id+'-left-header-'+i).attr("id","contributioncopy"+table_id+"-left-header-"+ new_val);
+			$('#contributioncopy'+table_id+'-2-'+i).attr("id","contributioncopy"+table_id+"-2-"+ new_val);
+			$('#contributioncopy'+table_id+'-3-'+i).attr("id","contributioncopy"+table_id+"-3-"+ new_val);
+			$('#contributioncopy'+table_id+'-4-'+i).attr("id","contributioncopy"+table_id+"-4-"+ new_val);
+			 
+			$('#contributionrenewal-remove-icon-id-'+i+'-'+table_id+'').attr("id","contributionrenewal-remove-icon-id-"+new_val+"-"+table_id+"");
+			$('#contribution-renewal-row-'+i+'-'+table_id+'').attr("id","contribution-renewal-row-"+new_val+"-"+table_id+"");
+		 }
+		 
+		  $('#'+item_id).parent().parent().parent().remove(); 
+		  $('#alert_message_contribution_renewal').modal('hide'); 
+
+		});
+ 
+
+
 							$(".tr-back").mouseover(function(){
    // $(this).css("background-color", "#40a9fc");
 	 $(this).find(".td-back").css("background-color", "#ddd");
@@ -1514,7 +1349,8 @@ var rowid = ret[2];
 		});
 		
 		
-		 $(".price").keypress(function (event) {
+		 $(document).on('keypress', '.price', function (event) { 
+		// $(".price").keypress(function (event) {
 
 
              var $this = $(this);
@@ -1540,13 +1376,27 @@ var rowid = ret[2];
             event.preventDefault();
     }      
 
+	  
+	  
+	
         });
+			 $(document).on('blur', '.price', function (e) { 
+			//alert(e.keyCode);
+			//if(!(e.keyCode == 37 || e.keyCode == 39)){
+	   var $this = $(this);
+      var num = $this.val().replace(/,/g, '');
+	 
+      $this.val(num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		//	 } 
+	  });
+	  
 						});
 						
 						
 					function enableFirm(){
 
 			$('#firm_users').removeClass('cursor-nodrop');
+			
 			$('#anchor-pb-4').removeClass('pointer-disable');
 			$('#anchor-pb-4').attr('data-toggle','tab');
 			$('#anchor-pb-1').trigger('click');
@@ -1556,6 +1406,7 @@ var rowid = ret[2];
 		function enableFirmusers(){
 
 			$('#firm_users').removeClass('cursor-nodrop');
+			
 			$('#anchor-pb-4').removeClass('pointer-disable');
 			$('#anchor-pb-4').attr('data-toggle','tab');
 			$('#main-anchor-1').trigger('click');
@@ -1565,6 +1416,7 @@ var rowid = ret[2];
 				function enableClientusers(){
 
 		$('#client_users').removeClass('cursor-nodrop');
+		
 		$('#anchor-pb-5').removeClass('pointer-disable');
 		$('#anchor-pb-5').attr('data-toggle','tab');
 		$('#main-anchor-1').trigger('click');
@@ -1575,11 +1427,18 @@ var rowid = ret[2];
 	function enableClient(){
 
 		$('#client_users').removeClass('cursor-nodrop');
+		
 		$('#anchor-pb-5').removeClass('pointer-disable');
 		$('#anchor-pb-5').attr('data-toggle','tab');
 		$('#anchor-pb-1').trigger('click');
 	}
+		function openPlanmodal(value){
+		$('#plan_label').html('Add '+value+' Plan');
+		$('#label_trend').html(value+' Trend');
+		
+		$('#add_plan').modal('show');
 	
+	}
 						function hoverTable(id){
 							$(".column-"+id).mouseover(function(){
 							    $(".column-"+id).css("background-color", "#ddd");

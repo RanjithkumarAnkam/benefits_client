@@ -57,15 +57,26 @@ class Clients extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['firm_id', 'client_name', 'address_1', 'city', 'state', 'zip', 'phone', 'primary_consultant', 'primary_account_manager', 'primary_service_rep', 'employer_size_category', 'industry_code', 'bill_to', 'logo_use_type', 'created_by', 'created_date', 'add_firm_id','add_state','add_primary_consultant','add_primary_account_manager','add_primary_service_rep','add_employer_size_category','add_industry_code'], 'required'],
+            [['firm_id', 'client_name', 'address_1', 'city', 'state', 'zip', 'phone', 'primary_consultant', 'primary_account_manager', 'primary_service_rep', 'employer_size_category', 'industry_code', 'bill_to', 'logo_use_type', 'created_by', 'created_date', 'add_firm_id','add_state','add_primary_consultant','add_primary_account_manager','add_primary_service_rep','add_employer_size_category','add_industry_code','billing_address'], 'required'],
             [['firm_id', 'state', 'zip', 'primary_consultant', 'primary_account_manager', 'primary_service_rep', 'employer_size_category', 'industry_code', 'is_active', 'created_by', 'modified_by'], 'integer'],
             [['bill_to', 'logo_use_type', 'add_firm_id','add_state','add_primary_consultant','add_primary_account_manager','add_primary_service_rep','add_employer_size_category','add_industry_code'], 'string'],
             [['created_date', 'modified_date'], 'safe'],
-            [['client_name', 'city', 'website', 'company_logo'], 'string', 'max' => 100],
-            [['address_1', 'address_2'], 'string', 'max' => 200],
-            [['phone'], 'string', 'max' => 20],
+            [[ 'city', 'website', 'company_logo'], 'string', 'max' => 100],
+			[['client_name'], 'string', 'max' => 50],
+			['client_name', 'match', 'pattern' => "/^[a-zA-Z0-9&,#. ]+$/", 'message' => 'Client name can only contain  alpha, number, space, dot , comma, hash, ampersand .'],
+			['client_name', 'unique', 'targetAttribute' => ['client_name', 'firm_id'], 'message' => 'Client name already exists for this firm'],
+			['address_1', 'match', 'pattern' => "/^[a-zA-Z0-9&,#. ]+$/", 'message' => 'Address 1 can only contain alpha, number, space, dot , comma, hash, ampersand .'],
+			['address_2', 'match', 'pattern' => "/^[a-zA-Z0-9&,#. ]+$/", 'message' => 'Address 2 can only contain alpha, number, space, dot , comma, hash, ampersand .'],
+			['billing_address', 'match', 'pattern' => "/^[a-zA-Z0-9&,#. ]+$/", 'message' => 'Billing Address can only contain alpha, number, space, dot , comma, hash, ampersand .'],
+			['city', 'match', 'pattern' => '/^[a-zA-Z ]+$/', 'message' => 'City name can only contain alphabets.'],
+			
+            [['address_1', 'address_2','billing_address'], 'string', 'max' => 200],
+            [['phone'], 'string', 'min' => 14, 'max' => 20, 'tooShort' => 'Phone should contain at least 10 characters.', 'tooLong' => 'Phone should contain at most 10 characters.'],
             [['firm_id'], 'exist', 'skipOnError' => true, 'targetClass' => Firms::className(), 'targetAttribute' => ['firm_id' => 'firm_id']],
-        ];
+			[['website'], 'url'],
+			[['website'], 'url'],
+			[['zip'], 'string', 'min' => 5],
+		];
     }
 
     /**
@@ -79,9 +90,10 @@ class Clients extends \yii\db\ActiveRecord
             'client_name' => 'Client Name',
             'address_1' => 'Address 1',
             'address_2' => 'Address 2',
+			'billing_address' => 'Billing Address',
             'city' => 'City',
             'state' => 'State',
-            'zip' => 'Zip',
+            'zip' => 'Zip Code',
             'phone' => 'Phone',
             'website' => 'Website',
             'primary_consultant' => 'Primary Consultant',

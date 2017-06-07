@@ -29,10 +29,12 @@ use demogorgorn\ajax\AjaxSubmitButton;
 
 	<div class="col-md-12 padding-0">
 		<div class="col-md-6">
-							<?= $form->field($model, 'first_name', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true]); ?>
+		<label class="form-control-label">First Name*</label>
+							<?= $form->field($model, 'first_name', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true,'onkeypress'=>'return username(event);'])->label(false); ?>
 						</div>
 		<div class="col-md-6">
-							<?= $form->field($model, 'last_name', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true]); ?>
+		<label class="form-control-label">Last Name*</label>
+							<?= $form->field($model, 'last_name', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true,'onkeypress'=>'return username(event);'])->label(false); ?>
 						</div>
 	</div>
 
@@ -42,12 +44,17 @@ use demogorgorn\ajax\AjaxSubmitButton;
 
 	<div class="col-md-12 padding-0">
 		<div class="col-md-6">
-							<?= $form->field($model, 'title', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true]); ?>
+		 <label class="form-control-label">Title</label>
+							<?= $form->field($model, 'title', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true])->label(false); ?>
 
 						</div>
 		<div class="col-md-6">
 			<div class="form-group">
-				<label class="form-control-label" for="l0"> Locations * </label> <select
+				<label class="form-control-label" for="l0"> Locations</label> 
+				<label class="mt-checkbox mt-checkbox-outline margin-bottom-0 margin-top-7 pull-right">Same as Firm locations<input type="checkbox" value="1" class="same_firm_locations"name="same_firm_locations">
+							<span></span>
+						</label>
+				<select
 					class="form-control height-120 select2 select-border  locations"
 					multiple id="firm_user_locations" name="firm_user_locations[]">
 							<?php
@@ -70,7 +77,8 @@ use demogorgorn\ajax\AjaxSubmitButton;
 
 	<div class="col-md-12 padding-0">
 		<div class="col-md-6">
-							<?= $form->field($modelUser, 'username', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true]); ?>
+		 <label class="form-control-label">Email Address*</label>
+							<?= $form->field($modelUser, 'username', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true])->label(false); ?>
 						</div>
 		<div class="col-md-6 ">
 			<div class="">
@@ -79,10 +87,12 @@ use demogorgorn\ajax\AjaxSubmitButton;
 
 					<div class="col-md-12 padding-0">
 						<div class="col-md-9 padding-0">
-												 <?= $form->field($model, 'phone')->textInput(['class' => 'form-control us-phone-mask-input'])->label('Phone',['class'=>'form-control-label']); ?>
+						 <label class="form-control-label">Phone*</label>
+												 <?= $form->field($model, 'phone')->textInput(['class' => 'form-control us-phone-mask-input'])->label(false); ?>
 											</div>
 						<div class="col-md-3 padding-right-0">
-												<?= $form->field($model, 'extension')->textInput(['class' => 'form-control numbers','maxlength'=>'5'])->label('Extension',['class'=>'form-control-label']); ?>
+						 <label class="form-control-label">Extension</label>
+												<?= $form->field($model, 'extension')->textInput(['class' => 'form-control numbers','maxlength'=>'6'])->label(false); ?>
 											</div>
 					</div>
 				</div>
@@ -93,10 +103,12 @@ use demogorgorn\ajax\AjaxSubmitButton;
 
 	<div class="col-md-12 padding-0">
 		<div class="col-md-6">
-							<?= $form->field($model, 'mobile', ['inputOptions' => ['class' => 'form-control us-phone-mask-input']])->textInput(['maxlength' => true])->label('Mobile'); ?>
+		<label class="form-control-label">Mobile</label>
+							<?= $form->field($model, 'mobile', ['inputOptions' => ['class' => 'form-control us-phone-mask-input']])->textInput(['maxlength' => true])->label(false); ?>
 						</div>
 		<div class="col-md-6">
-							 <?= $form->field($model, 'profile_pic')->fileInput(['class' => 'form-control'])->label('Profile Image',['class'=>'form-control-label']); ?>
+		 <label class="form-control-label">Profile Image  <span class="fa fa-info-circle information-icon" title="" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Recommended dimensions are 400x400 pixels." data-original-title="Upload Firm Logo"></span></label>
+							 <?= $form->field($model, 'profile_pic')->fileInput(['class' => 'form-control','accept'=>"image/x-png,image/gif,image/jpeg,image/tif,image/bmp,image/jpg"])->label(false); ?>
 						</div>
 	</div>
 
@@ -114,25 +126,28 @@ use demogorgorn\ajax\AjaxSubmitButton;
 					<div class="col-md-12 padding-0">
 						<div class="col-md-9 padding-0">
 							<label class="mt-checkbox mt-checkbox-outline margin-bottom-10">
-								Firm Primary Contact <input type="hidden" value="0"
+								Firm Primary Contact <input type="hidden" value="0" class="primary-contact-checkbox"
 								name="FirmUsers[is_primary]" /> <input type="checkbox" value="1"
 								<?php echo $model->is_primary ? 'checked' : '';?>
-								name="FirmUsers[is_primary]"> <span></span>
+								name="FirmUsers[is_primary]"  class="primary-contact-checkbox"> <span></span>
 							</label>
 						</div>
 
 						<div class="col-md-9 padding-0">
 							<label class="mt-checkbox mt-checkbox-outline margin-bottom-10">
-								Firm Billing Contact <input type="hidden" value="0"
+								Firm Billing Contact <input type="hidden" value="0" class="billing-contact-checkbox"
 								name="FirmUsers[is_billing]" /> <input type="checkbox" value="1"
-								<?php echo $model->is_billing ? 'checked' : '';?>
+								<?php echo $model->is_billing ? 'checked' : '';?> class="billing-contact-checkbox"
 								name="FirmUsers[is_billing]"> <span></span>
 							</label>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="<?php echo $model->isNewRecord ? 'col-md-6' : 'col-md-6' ?> margin-top-5">
+			
+			<?php if(Yii::$app->user->identity->user_id != $model->user_id){?>
+			
+				<div class="<?php echo $model->isNewRecord ? 'col-md-6' : 'col-md-6' ?> margin-top-5">
 				<div class="">
 					<h6 class="action_head">
 						Access Privileges: <span
@@ -148,8 +163,9 @@ use demogorgorn\ajax\AjaxSubmitButton;
 							class="mt-checkbox mt-checkbox-outline margin-bottom-10 ">
 																<?php echo $rights['description']; ?> <input
 							type="checkbox" value="<?php echo $rights['right_id']; ?>"
-							name="FirmUserRights[<?php echo str_replace(' ','_',$rights['description']); ?>]"
-							<?php if(!empty($firmuserRights) && in_array($rights['right_id'], $firmuserRights)){echo 'checked'; }?>>
+							
+							<?php if(Yii::$app->user->identity->usertype==1 || in_array($rights['right_id'],$currentuserrights)){?>name="FirmUserRights[<?php echo str_replace(' ','_',$rights['description']); ?>]" <?php }else{?> disabled readonly<?php }?>
+							<?php if(!$model->isNewRecord){ if(!empty($firmuserRights) && in_array($rights['right_id'], $firmuserRights)){echo 'checked'; }}elseif(Yii::$app->user->identity->usertype == 1){?>checked <?php } ?>>
 							<span></span>
 						</label>
 															
@@ -174,7 +190,7 @@ user will have full access to view/edit all clients in the system at all firm lo
 								class="mt-checkbox mt-checkbox-outline no-wrap margin-bottom-10 ">
 																<?php echo $rights['description']; ?> <input
 								type="checkbox" value="<?php echo $rights['right_id']; ?>"
-								name="FirmUserRights[<?php echo str_replace(' ','_',$rights['description']); ?>]"
+								<?php if(Yii::$app->user->identity->usertype==1 || in_array($rights['right_id'],$currentuserrights)){?>name="FirmUserRights[<?php echo str_replace(' ','_',$rights['description']); ?>]" <?php }else{?> disabled readonly<?php }?>
 								<?php if(!empty($firmuserRights) && in_array($rights['right_id'], $firmuserRights)){echo 'checked'; }?>>
 								<span></span>
 							</label>
@@ -186,6 +202,9 @@ user will have full access to view/edit all clients in the system at all firm lo
 					</div>
 				</div>
 			</div>
+			
+			<?php }?>
+		
 			
 			<?php if(!$model->isNewRecord){?>
 			<!--<div class="col-md-3">
@@ -207,7 +226,7 @@ user will have full access to view/edit all clients in the system at all firm lo
 	</div>
 	
 	<!-- Loading GIF div starts -->
-<div class="load-gif" id="loading-indicator" style="display: none;">
+<div class="load-gif" id="loading-indicator-firm-user" style="display: none;">
 	<div class="procressing_plz_wait">
 		<img class=""
 			src="<?php echo Yii::$app->getUrlManager()->getBaseUrl();  ?>/images/default.gif" />
@@ -215,9 +234,9 @@ user will have full access to view/edit all clients in the system at all firm lo
 </div>
 
 <!-- Loading GIF div end -->
-</div>
+</div> 
 <div class="modal-footer footer-background col-md-12">
-					<?= Html::submitButton('Save', ['class' => 'btn btn-modal-lightblue'])?>
+					<?= Html::submitButton($model->isNewRecord ? 'Save' : 'Update' , ['class' => 'btn btn-modal-lightblue'])?>
 					<button class="btn btn-default firm-user-modal-close" data-dismiss="modal">Cancel</button>
 </div>
 <?php ActiveForm::end(); ?>
@@ -245,15 +264,35 @@ $("[data-toggle=tooltip]").tooltip();
         }
     }, 300);
 });
+
+<?php if(!empty($get_user_primary)){ ?>
+
+$('input.primary-contact-checkbox').change(function(){
+
+if ($('input.primary-contact-checkbox').is(':checked')) {
+
+toastr.error('You have already made other user as primary contact, this will override previous one.');	
+	
+}	
+
 });
-$(document).on('ready pjax:success', function(){
-	$('.view').click(function(e){
-	       e.preventDefault();
-			
-			$('#create_firm_user').modal('show').find('.modal-content').load($(this).attr('href'));
-			$('.select2').select2();
-	      
-	});
+<?php } ?>
+
+
+<?php if(!empty($get_user_billing)){ ?>
+
+$('input.billing-contact-checkbox').change(function(){
+
+if ($('input.billing-contact-checkbox').is(':checked')) {
+
+toastr.error('You have already made other user as billing contact, this will override previous one.');	
+	
+}	
+
 });
+<?php } ?>
+
+});
+
 </script>
 

@@ -1,8 +1,29 @@
+ <?php
+ use app\models\FirmUsers;
+ use app\components\EncryptDecryptComponent;
+ use app\components\SessionCheckComponent;
+
+ $result = SessionCheckComponent::RedirectionandSessioncreation();
+
+ if(Yii::$app->user->identity->usertype == 2){
+	$user_id = Yii::$app->user->identity->user_id;
+ $firm_id = '';
+ $encrpt_firm_id ='';
+ $model_firm_users = FirmUsers::find()->select('firm_id')->where(['user_id'=>$user_id])->one();
+
+ if(!empty($model_firm_users)){
+ 	$firm_id = $model_firm_users->firm_id;
+ 	$encrpt_firm_id = EncryptDecryptComponent::encrytedUser ($firm_id);
+ }
+
+ }
  
+ $permissions = Yii::$app->session['permissions'];
+ ?> 
 <nav class="left-menu media-hide" left-menu >
     <div class="logo-container">
         <a href="" class="logo" style="max-width:none;height:auto;">
-             <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl().''.Yii::$app->session ['profile_logo']; ?>" alt="Benefits Client Template" />
+             <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl().''.$result['profile_logo']; ?>" alt="Benefits Client Template" style="height:44px;" />
             <img class="logo-inverse" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/web/themes/clean-ui/common/img/logo-inverse.png" alt="Clean UI Admin Template" />
             
         </a>
@@ -27,7 +48,7 @@
 		   
 		     <?php if(Yii::$app->user->identity->usertype == 1){?>
           <li class="left-menu-list-color-primary " id="">
-                <a class="left-menu-link" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/manageadminuser/add">
+                <a class="left-menu-link" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/user/adminuser">
                     <i class="left-menu-link-icon icmn-pencil5"><!-- --></i>
                     Create Admin User
                 </a>
@@ -42,6 +63,19 @@
                 </a>
             </li>
 			  <?php }?>
+			  
+			  <?php if(Yii::$app->user->identity->usertype == 2 && !empty($encrpt_firm_id)){?>
+			 <li class="left-menu-list-color-primary" id="">
+                <a class="left-menu-link" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/user/firmuser?id=<?php echo $encrpt_firm_id;?>&tab=2">
+                    <i class="left-menu-link-icon icmn-pencil5"><!-- --></i>
+                    Add Firm User
+                </a>
+            </li>
+           <?php }?>
+		     
+						 
+					 
+		   
 			   <?php if(Yii::$app->user->identity->usertype == 1 || Yii::$app->user->identity->usertype == 2){?>
 			 <li class="left-menu-list-color-primary" id="">
                 <a class="left-menu-link" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/user/clientuser">
@@ -75,7 +109,7 @@
                 </a>
 						   <?php //}?>
                 <ul class="left-menu-list list-unstyled"  id="master_data_ul">
-                <?php //if(Yii::$app->user->identity->usertype == 1){?>
+                <?php if(Yii::$app->user->identity->usertype == 1){?>
                     <li class="billing_li">
                         <a class="left-menu-link billing_a" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/masterdata/systembilling">
                             System Billing	
@@ -86,6 +120,7 @@
                             System Pricing
                         </a>
                     </li>
+					<?php }?>
                    <li class="pricing_li">
                         <a class="left-menu-link pricing_a" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/masterdata/firmpricing">
                             Firm Pricing
@@ -100,7 +135,7 @@
                         </a>
                     </li>
 					
-				<li class="pricing_li">
+				<li class="pricing_li hide">
                         <a class="left-menu-link pricing_a" <?php if(Yii::$app->user->identity->usertype == 1){?>onclick="openDesignfirmmodal(2);"<?php }else{?>
 						 href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/firm-plan/client-plan-years?id=1" <?php }?>>
                           Manage Plans
@@ -123,7 +158,7 @@
 					
 					
 					
-					<li  class="element_li">
+					<li  class="element_li hide">
                         <a class="left-menu-link firm_a" href="#">
                             Element Master
                         </a>
@@ -131,7 +166,7 @@
                     <?php }?>
                     
                      <?php if(Yii::$app->user->identity->usertype == 2){?>
-                       <li class="left-menu-list-color-primary"  >
+                       <li class="left-menu-list-color-primary hide"  >
                 <a class="left-menu-link" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/firm-plan/client-plan-years?id=1">
                     <i class="left-menu-link-icon icmn-pencil5"><!-- --></i>
                    Manage Plans
@@ -141,10 +176,9 @@
                      <?php }?>    
 					  <?php if(Yii::$app->user->identity->usertype == 2){?>
 					   <li class="left-menu-list-color-primary" id="">
-                <a class="left-menu-link" <?php if(Yii::$app->user->identity->usertype == 1){?>onclick="openDesignfirmmodal(1);"<?php }else{?>
-				href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/firm-list"<?php }?>>
+                <a class="left-menu-link"  href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/masterdata/firmpricing">
                     <i class="left-menu-link-icon icmn-pencil5"> </i>
-                  View
+                  Firm Pricing
                 </a>
             </li>
 			 <?php }?>    
@@ -202,7 +236,7 @@
 	
 	    <div class="logo-container col-md-2  media-hide-header">
         <a href="" class="logo" style="max-width:none;height:auto;">
-             <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl().''.Yii::$app->session ['profile_logo'];?>" class="width-198 img-transistion" alt="Benefits Client Template" />
+             <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl().''.$result['profile_logo'];?>" style="height:44px;" class="width-198 img-transistion" alt="Benefits Client Template" />
                
         </a>
     </div>
@@ -229,14 +263,16 @@
 			</div>
 		</div>-->
 		<ul class="actions  media-hide-header">
-		<?php if(Yii::$app->controller->id != 'dashboard'){?>
+		<?php //if(Yii::$app->controller->id != 'dashboard'){?>
 		<li class="vertical-align-top">
-		<a class="disable-hover" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl().''.\Yii::$app->params['dashboard_url']; ?>" ><i class="fa fa-home font-40"></i></a>
+		<a class="disable-hover" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl().''.\Yii::$app->params['dashboard_url']; ?>" ><i class="fa fa-home font-40" id="home_color"></i></a>
 		</li>
-		<?php }?>
+		<?php //}?>
 		<li>
 				<a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl().''.\Yii::$app->params['search_url']; ?>" class="disable-hover" id="search_link"><b>Search</b></a>
 		</li>
+		
+		<?php if(in_array(\app\models\User::SuperAdmin, $permissions)  || in_array(\app\models\User::FirmAdministratorAccess, $permissions) || in_array(\app\models\User::EditFirm, $permissions) || in_array(\app\models\User::EditClient, $permissions)  || in_array(\app\models\User::AdminUser, $permissions)){ ?>
 		<li>
 		<div class="menu-user-block">
 			<div class="dropdown dropdown-avatar">
@@ -247,39 +283,51 @@
 					role="menu">
 					
 					 <?php if(Yii::$app->user->identity->usertype == 1){?>
+					 
+					 <?php if(in_array(\app\models\User::SuperAdmin, $permissions)  || in_array(\app\models\User::FirmAdministratorAccess, $permissions) || in_array(\app\models\User::AdminUser, $permissions)){ ?>
 					<a class="dropdown-item dropdown-a color-white" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/user/adminuser">Create Admin User</a>
-					   
+					   <div class="dropdown-divider margin-0"></div>
 						  <?php }?>
-						<?php if(Yii::$app->user->identity->usertype == 1 || Yii::$app->user->identity->usertype == 2  || Yii::$app->user->identity->usertype == 3){?>
-					<a class="dropdown-item hidden dropdown-a color-white" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/user/add-user">Create User</a>
-					
-							  <?php }?>
+						 <?php }?>
 							  
 					  <?php if(Yii::$app->user->identity->usertype == 1){?>
-					  <div class="dropdown-divider margin-0"></div>
+					  
+					  <?php if(in_array(\app\models\User::SuperAdmin, $permissions)  || in_array(\app\models\User::FirmAdministratorAccess, $permissions) || in_array(\app\models\User::EditFirm, $permissions)){ ?>
+					  
 					<a class="dropdown-item dropdown-a color-white" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/user/firmuser">Create Firm</a>
 					 <div class="dropdown-divider margin-0"></div> 
 					  <?php }?>
+					  <?php }?>
+					  
 					     <?php if(Yii::$app->user->identity->usertype == 1 || Yii::$app->user->identity->usertype == 2){?>
 					<a class="dropdown-item hidden dropdown-a color-white" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/firms/firm-user">Create Firm User</a>
 					
 							<?php }?>
 							
-					    <?php if(Yii::$app->user->identity->usertype == 1 || Yii::$app->user->identity->usertype == 2){?>
+							
+						  <?php if(Yii::$app->user->identity->usertype == 2 && !empty($encrpt_firm_id)){?>
+						 <?php if(in_array(\app\models\User::SuperAdmin, $permissions)  || in_array(\app\models\User::FirmAdministratorAccess, $permissions) || in_array(\app\models\User::EditFirm, $permissions)){ ?>
+					<a class="dropdown-item dropdown-a color-white" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/user/firmuser?id=<?php echo $encrpt_firm_id;?>&tab=2">Add Firm User</a>
+						<?php }?>	
+						<?php }?>	
 						
+					    <?php if(Yii::$app->user->identity->usertype == 1 || Yii::$app->user->identity->usertype == 2){?>
+						<?php if(in_array(\app\models\User::SuperAdmin, $permissions)  || in_array(\app\models\User::FirmAdministratorAccess, $permissions) || in_array(\app\models\User::EditClient, $permissions)){ ?>	
 					<a class="dropdown-item dropdown-a color-white" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/user/clientuser">Create Client</a>
 						<?php }?>
+						 <?php }?>
 						 
-							  <?php if(Yii::$app->user->identity->usertype == 3){?>
-					<a class="dropdown-item dropdown-a color-white"  href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/user/clientuser?id=1&tab=2">Create Client User</a>
-							  <?php }?>
+							  
 				</ul>
 			</div>
 		</div>
 		</li>
+		 <?php }?>
+		
+		
 		  <?php if(Yii::$app->user->identity->usertype == 3){?>
 		<li>
-				<a href="#" class="color-white">Reports</a>
+				<a href="#" class="disable-hover"><b>Reports</b></a>
 		</li>
 		 <?php }?>
 		 
@@ -294,15 +342,24 @@
 				<ul class="dropdown-menu arrow-icon dropdown-menu-right arrow padding-0" aria-labelledby=""
 					role="menu">
 					  <?php //if(Yii::$app->user->identity->usertype == 1){?>
+					  
+					 <?php if(in_array(\app\models\User::SuperAdmin, $permissions) || in_array(\app\models\User::SystemBilling, $permissions)){ ?>
 					<a class="dropdown-item dropdown-a color-white" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/masterdata/systembilling">
                             System Billing	
                         </a>
+					 <?php } ?>
+					 
+					 <?php if(in_array(\app\models\User::SuperAdmin, $permissions) || in_array(\app\models\User::SystemPricing, $permissions)){ ?>
 					 <a class="dropdown-item dropdown-a color-white" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/masterdata/systempricing">
                             System Pricing
                         </a>
+						<?php } ?>
+						
+						 <?php if(in_array(\app\models\User::SuperAdmin, $permissions) || in_array(\app\models\User::FirmPricing, $permissions)){ ?>
                      	 <a class="dropdown-item dropdown-a color-white" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/masterdata/firmpricing">
                             Firm Pricing
                         </a>
+						<?php } ?>
                       <div class="dropdown-divider margin-0"></div>
                         <?php //}?>
                       <?php //if(Yii::$app->user->identity->usertype == 1){?>
@@ -313,7 +370,7 @@
                            Plans
                         </a>    
 						
-                         <a class="dropdown-item dropdown-a color-white" <?php if(Yii::$app->user->identity->usertype == 1){?>onclick="openDesignfirmmodal(2);"<?php }else{?>
+                         <a class="dropdown-item dropdown-a color-white hide" <?php if(Yii::$app->user->identity->usertype == 1){?>onclick="openDesignfirmmodal(2);"<?php }else{?>
 						 href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/firm-plan/client-plan-years?id=1" <?php }?>>
 						 
                            Manage Plans
@@ -334,7 +391,7 @@
                         </a>
               
                
-                    <a class="dropdown-item dropdown-a color-white" href="#">
+                    <a class="dropdown-item dropdown-a color-white hide" href="#">
                             Element Master
                         </a>
 					 <?php //}?>
@@ -345,9 +402,10 @@
 		<?php }?>
 		
 		<?php if(Yii::$app->user->identity->usertype == 2){?>
-		<li>
+		<li class="hide">
 				<a  id="manage_plans_link" class="disable-hover" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/firm-plan/client-plan-years?id=1"><b>Manage Plans</b></a>
 		</li>
+		
 		 <?php }?> 
 		 
 		 <?php if(Yii::$app->user->identity->usertype == 2){?>
@@ -369,9 +427,9 @@
 				<a href="javascript: void(0);" class="dropdown-toggle profile-icon"
 					data-toggle="dropdown" aria-expanded="false"> <span class="avatar media-hide-img"
 					href="javascript:void(0);"> <img
-						src="<?php echo Yii::$app->getUrlManager()->getBaseUrl().''.\Yii::$app->session ['profile_pic']; ?>"
+						src="<?php echo Yii::$app->getUrlManager()->getBaseUrl().''.$result['profile_pic']; ?>"
 						alt="Alternative text to the image">
-				</span><span class="header-name media-hide-profilename"><span class="font-14">Welcome</span> <span class="font-14"><?php echo \Yii::$app->session ['logged_user_fullname'];?></span></span>
+				</span><span class="header-name media-hide-profilename"><span class="font-14">Welcome</span> <span class="font-14"><?php echo $result['logged_user_fullname'];?></span></span>
 				</a>
 				<ul class="dropdown-menu arrow-icon dropdown-menu-right arrow padding-0 margin-0" aria-labelledby=""
 					role="menu" style="margin-top:6px !important;">
@@ -381,6 +439,16 @@
 					<a class="dropdown-item dropdown-a color-white" data-toggle="modal" data-target="#myModal-change-pswd"><i
 						class="dropdown-icon fa fa-repeat"></i> Change Password</a>
 						<div class="dropdown-divider margin-0"></div>
+					<?php if(Yii::$app->user->identity->usertype == 2 || Yii::$app->user->identity->usertype == 3){?>
+		
+					<?php if(in_array(\app\models\User::IsBilling, $permissions) ){ ?>	
+					<a   class="dropdown-item dropdown-a color-white"  href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/masterdata/firmpricing"><i
+						class="dropdown-icon fa fa-money"></i>Firm Pricing</a>
+					<div class="dropdown-divider margin-0"></div>
+					
+					<?php }?> 
+				<?php }?> 
+						
 					  <a class="dropdown-item dropdown-a color-white" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/site/logout"><i
 						class="dropdown-icon icmn-exit"></i> Logout</a>
 				</ul>

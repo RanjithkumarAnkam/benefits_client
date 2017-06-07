@@ -32,9 +32,24 @@ class User extends ActiveRecord implements IdentityInterface {
 	
 	const STATUS_NO = 0;
 	const STATUS_YES = 1;
-	const ADMIN = 1;
-	const FIRM = 2;
-	const CLIENT = 3;
+	const ADMIN = 'ADMIN';
+	const FIRM = 'FIRM';
+	const CLIENT = 'CLIENT';
+	
+	const SuperAdmin =1;
+	const ApplicationFinancials=2;
+	const AdminUser = 3;
+	const EditFirm = 4;
+	const EditClient= 5;
+	const FirmUser = 6;
+	const ClientUser = 7;
+	const SystemPricing= 8;
+	const SystemBilling= 9;
+	const FirmPricing= 10;
+	const FirmAdministratorAccess= 11;
+	const IsPrimary = 100;
+	const IsBilling = 101;
+	
 	
 	/**
 	 * @inheritdoc
@@ -63,7 +78,8 @@ class User extends ActiveRecord implements IdentityInterface {
             [['password_reset_token'], 'string', 'max' => 255],
             [['username'], 'email'],
 			[['username'], 'required', 'message' => 'Username / Email Id cannot be blank.'],
-            ['username', 'unique', 'targetAttribute' => ['username', 'usertype'], 'message' => 'Username already taken for this Usertype'],
+           // ['username', 'unique', 'targetAttribute' => ['username', 'usertype'], 'message' => 'Username already taken for this Usertype'],
+			['username', 'unique', 'message' => 'User is already registered, please use a different email address.'],
             [['password_reset_token'], 'unique'],
             [['last_login', 'created_date', 'modified_date'], 'safe'],
             [['is_active'], 'default', 'value' => self::STATUS_NO],
@@ -78,7 +94,7 @@ class User extends ActiveRecord implements IdentityInterface {
 	public function attributeLabels() {
         return [
             'user_id' => 'User ID',
-            'username' => 'Username',
+            'username' => 'Email Address',
             'password' => 'Password',
             'authkey' => 'Authkey',
             'password_reset_token' => 'Password Reset Token',

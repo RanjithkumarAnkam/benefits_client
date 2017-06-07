@@ -13,10 +13,8 @@ use yii\filters\VerbFilter;
 use app\models\Firms;
 use app\models\FirmUsers;
 use app\models\ClientUser;
-use yii\data\Pagination;
-use yii\data\ArrayDataProvider;
 
-class SearchController extends BaseController { 
+class SearchnewController extends BaseController { 
 		public function behaviors() {
 		return [ 
 				'access' => [ 
@@ -185,7 +183,7 @@ class SearchController extends BaseController {
 		
 		
 		
-		$final_sql="SELECT u.usertype,u.user_id,u.username,".$final_select." FROM tbl_sir_users u ".$sql_admin.$sql_firm.$sql_client." ".$final_where." ORDER BY u.created_date DESC";
+		$final_sql="SELECT u.usertype,u.user_id,u.username,".$final_select." FROM tbl_sir_users u ".$sql_admin.$sql_firm.$sql_client." ".$final_where;
 		
 		
 		$count_sql=" SELECT COUNT(*) AS total, name FROM ( SELECT LCASE(substring(first_name,1,1)) as name FROM (";
@@ -218,44 +216,86 @@ class SearchController extends BaseController {
 				$count_sql .=" UNION ALL ";
 			}
 			$count_sql .="SELECT cu.first_name FROM tbl_sir_users u".$sql_admin.$sql_firm.$sql_client." WHERE cu.first_name IS NOT NULL";
-			if($user_type==2 || $user_type==3){
+			if($user_type==2){
 				$count_sql .=" AND ".$where_clause;
 			}
 			
 			$count_sql .=" UNION ALL ";
 			$count_sql .="SELECT c.client_name FROM tbl_sir_users u".$sql_admin.$sql_firm.$sql_client." WHERE c.client_name IS NOT NULL";
-			if($user_type==2 || $user_type==3){
+			if($user_type==2){
 				$count_sql .=" AND ".$where_clause;
 			}
 		}
 		
 		$count_sql .=") x ) t GROUP BY name";
 		
-		//echo $count_sql; die();
 		
 		$total_count_sql="SELECT count(u.user_id) FROM tbl_sir_users u ".$sql_admin.$sql_firm.$sql_client." ";
 		if($user_type==2 || $user_type==3){
 			$total_count_sql.='WHERE '.$where_clause;
 		}
-	
+	//	echo '<pre/>';
+	//	echo $count_sql; die();
+		
+	/*	switch ($user_type){
+			case 1:
+				$select .="CONCAT(au.first_name,' ',au.last_name) AS admin_user,au.phone as admin_contact,f.firm_name,CONCAT(fu.first_name,' ',fu.last_name) AS firm_user,fu.phone as firm_contact,c.client_name,CONCAT(cu.first_name,' ',cu.last_name) AS client_user,cu.phone as client_contact,
+							au.profile_pic as admin_pic,fu.profile_pic as firm_pic,f.firm_logo as firm_logo,cu.profile_pic as client_pic,c.company_logo as company_logo";
+				$sql .=' LEFT JOIN tbl_sir_admin_users au ON u.user_id=au.user_id ';
+				$sql .=' LEFT JOIN tbl_sir_firm_users fu ON u.user_id=fu.user_id LEFT JOIN tbl_sir_firms f ON f.firm_id=fu.firm_id ';
+				$sql .=' LEFT JOIN tbl_sir_client_user cu ON u.user_id=cu.user_id LEFT JOIN tbl_sir_clients c ON c.client_id = cu.client_id ';
+				
+				$where_clause='';
+				if($key){
+					$where_clause.="WHERE LCASE(au.first_name) LIKE :key OR LCASE(fu.first_name) LIKE :key OR LCASE(cu.first_name) LIKE :key OR LCASE(f.firm_name) LIKE :key OR LCASE(c.client_name) LIKE :key";
+				}
+				$sql .=$where_clause;
+			
+				break;
+			case 2:
+				$firm_id=FirmUsers::findOne(['user_id'=>$logged_id]);
+				
+				$select .="f.firm_name,CONCAT(fu.first_name,' ',fu.last_name) AS firm_user,fu.phone as firm_contact,c.client_name,CONCAT(cu.first_name,' ',cu.last_name) AS client_user,cu.phone as client_contact,
+							fu.profile_pic as firm_pic,f.firm_logo as firm_logo,cu.profile_pic as client_pic,c.company_logo as company_logo";
+				//$sql='SELECT f.firm_id FROM tbl_sir_firm_users fu INNER JOIN tbl_sir_firms f ON f.firm_id=fu.firm_id WHERE fu.user_id='.$logged_id;
+				$sql .=' LEFT JOIN tbl_sir_firm_users fu ON u.user_id=fu.user_id LEFT JOIN tbl_sir_firms f ON f.firm_id=fu.firm_id ';
+				$sql .=' LEFT JOIN tbl_sir_client_user cu ON u.user_id=cu.user_id LEFT JOIN tbl_sir_client c ON c.client_id = cu.client_id ';
+				
+				$where_clause="WHERE f.firm_id=$firm_id->firm_id or c.client_id in (SELECT ts.client_id from tbl_sir_client ts WHERE ts.firm_id=$firm_id->firm_id)";
+								
+				if($key){
+					$where_clause .=" OR LCASE(fu.first_name) LIKE :key OR LCASE(cu.first_name) LIKE :key OR LCASE(f.firm_name) LIKE :key OR LCASE(c.client_name) LIKE :key";
+				}
+				
+				$sql .=$where_clause;
+				
+				break;
+			case 3:
+				$client_id=ClientUser::findOne(['user_id'=>$logged_id]);
+				
+				$select .="c.client_name,CONCAT(cu.first_name,' ',cu.last_name) AS client_user,cu.phone as client_contact,
+							cu.profile_pic as client_pic,c.company_logo as company_logo";
+				$sql .=' LEFT JOIN tbl_sir_client_user cu ON u.user_id=cu.user_id LEFT JOIN tbl_sir_client c ON c.client_id = cu.client_id ';
+				$where_clause='WHERE c.client_id='.$client_id->client_id;
+				
+				if($key){
+					$where_clause .=" OR LCASE(cu.first_name) LIKE :key OR LCASE(c.client_name) LIKE :key";
+				}
+				
+				$sql .=$where_clause;
+				break;
+		}*/
+		
+	//	$sql1='SELECT '.$select.' FROM tbl_sir_users u '.$sql;
+		//echo $sql1; die();
 		$connection = \yii::$app->db;
 		$model = $connection->createCommand($final_sql);
-		
-		
 		if($key){
 		$model->bindValue(':key', $key);
 		}
 		
+	//	print_r($model); die();
 		$users = $model->queryAll();
-		
-		//for pagination
-		$pages = new Pagination(['totalCount' => count($users)]);
-		$users_provider = new ArrayDataProvider([
-				'allModels' => $users,
-				]);
-		
-		
-		$users= $users_provider->getModels();
 		
 		$model = $connection->createCommand($count_sql);
 		$counts = $model->queryAll();
@@ -272,9 +312,38 @@ class SearchController extends BaseController {
 		}
 		$count_arr['total']=$total;
 
-				
-			return $this->render ( 'index' ,['users'=>$users,'counts'=>$count_arr,'pages'=>$pages,'users_provider'=>$users_provider]);
+//	print_r($tmp_arr); die();
+	
+		/*
+		 * this is for count
+		 */
+		
+// 		$count_sql=" SELECT COUNT(*) AS total, name FROM ( SELECT LCASE(substring(first_name,1,1)) as name FROM (";
+		
+// 		$count_admin="SELECT au.first_name FROM tbl_sir_users u 
+// 			LEFT JOIN tbl_sir_admin_users au ON u.user_id=au.user_id 
+// 			LEFT JOIN tbl_sir_firm_users fu ON u.user_id=fu.user_id 
+// 			LEFT JOIN tbl_sir_firms f ON f.firm_id=fu.firm_id 
+// 			LEFT JOIN tbl_sir_client_user cu ON u.user_id=cu.user_id 
+// 			LEFT JOIN tbl_sir_client c ON c.client_id = cu.client_id WHERE au.first_name IS NOT NULL ";
+		
+	
+// 		$count_firm="SELECT f.firm_name FROM tbl_sir_users u
+// 			LEFT JOIN tbl_sir_admin_users au ON u.user_id=au.user_id
+// 			LEFT JOIN tbl_sir_firm_users fu ON u.user_id=fu.user_id
+// 			LEFT JOIN tbl_sir_firms f ON f.firm_id=fu.firm_id
+// 			LEFT JOIN tbl_sir_client_user cu ON u.user_id=cu.user_id
+// 			LEFT JOIN tbl_sir_client c ON c.client_id = cu.client_id WHERE au.first_name IS NOT NULL ";
+		
+		
+			$model = new SirFirmUsers();
+			$searchModel = new SirFirmUsersSearch();
+			$dataProvider = $searchModel->search( \Yii::$app->request->queryParams);
+			
+			return $this->render ( 'index' ,['users'=>$users,'counts'=>$count_arr,'searchModel' => $searchModel,        //rendering to view
+					'dataProvider' => $dataProvider]);
 	}
 	
- 
+ 	
+	
 }

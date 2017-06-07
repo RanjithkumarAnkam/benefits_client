@@ -44,16 +44,16 @@ class ClientUser extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'client_id', 'first_name', 'last_name', 'created_by', 'created_date'], 'required'],
+            [['user_id', 'client_id', 'first_name', 'last_name', 'created_by', 'created_date','phone'], 'required'],
             [['user_id', 'client_id', 'is_billing', 'is_primary', 'is_active', 'created_by', 'modified_by'], 'integer'],
             [['created_date', 'modified_date'], 'safe'],
             [['first_name', 'last_name', 'title'], 'string', 'max' => 50],
-			['first_name', 'match', 'pattern' => '/^[a-zA-Z- ]+$/', 'message' => 'First name can only contain alphabets.'],
-            ['last_name', 'match', 'pattern' => '/^[a-zA-Z- ]+$/', 'message' => 'Last name can only contain alphabets.'],
+			['first_name', 'match', 'pattern' => '/^[a-zA-Z,.\-\ ]+$/', 'message' => 'First name can only contain alphabets, comma, dot and hash.'],
+            ['last_name', 'match', 'pattern' => '/^[a-zA-Z,.\-\ ]+$/', 'message' => 'First name can only contain alphabets, comma, dot and hash.'],
             ['extension', 'match', 'pattern' => '/^[0-9]+$/', 'message' => 'Extension can only contain numbers.'],
             [['profile_pic'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, PNG, JPEG, JPG, TIF, GIF, BMP', 'maxSize' => 1024*1024 , 'maxWidth' => 400, 'maxHeight' => 400],
-            [['phone', 'mobile'], 'string', 'max' => 20],
-            [['extension'], 'string', 'max' => 10],
+            [['phone', 'mobile'],'string', 'min'=>14,'max' => 14,'tooShort'=>'should contain at least 10 characters.'],
+            [['extension'], 'string','min'=>3, 'max' => 6],
             [['profile_pic'], 'string', 'max' => 100],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'user_id']],
             [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => Clients::className(), 'targetAttribute' => ['client_id' => 'client_id']],

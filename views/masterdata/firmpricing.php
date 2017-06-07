@@ -31,16 +31,16 @@ use app\components\EncryptDecryptComponent;
 			<div
 				class="col-md-12 pull-left border-ddd widget padding-15 width-100">
 				<div class="col-md-12 profile-pic-background padding-6">
-					<div class="col-md-3">
+					<div class="col-md-3 <?php if(Yii::$app->user->identity->usertype == 2 || Yii::$app->user->identity->usertype == 3){?>hidden <?php } ?>">
 						<div class="">
 							<div class="form-group ">
 								<label class="form-control-label color-white" for="l0">Firm Name
-									:</label> <select class="form-control" id="firm_value">
+									:</label> <select class="form-control" id="firm_value" onchange="fetchmodules($(this).val());">
 									<option value="">Select</option>
 								<?php foreach ($firm_list as $each_firm){ ?>  
 								<option
 										<?php if(!empty(\Yii::$app->request->Get('firm')) && \Yii::$app->request->Get('firm')==EncryptDecryptComponent::encrytedUser($each_firm['firm_id'])) { echo 'selected';} ?>
-										value="<?php echo EncryptDecryptComponent::encrytedUser($each_firm['firm_id']); ?>"><?php echo $each_firm['firm_name']; ?> </option> 
+										value="<?php echo EncryptDecryptComponent::encrytedUser($each_firm['firm_id']); ?>" <?php if(Yii::$app->user->identity->usertype == 2){?> Selected <?php } ?>><?php echo $each_firm['firm_name']; ?> </option> 
 								<?php }?></select>
 							</div>
 						</div>
@@ -49,25 +49,27 @@ use app\components\EncryptDecryptComponent;
 						<div class="">
 							<div class="form-group ">
 								<label class="form-control-label color-white" for="l0">Select a
-									Module :</label> <select class="form-control" id="module_value">
+									Module :</label> <select class="form-control" id="module_value" onchange="clentbyfirm();">
 									<option value="">Select</option>
-							<?php foreach ($modules as $module){?>
+							<?php if(!empty($firm_id)){ foreach ($modules as $module){?>
 							
 								  <option
 										<?php if(!empty(\Yii::$app->request->Get('module')) && \Yii::$app->request->Get('module')==EncryptDecryptComponent::encrytedUser($module['option_id'])) { echo 'selected';} ?>
 										value="<?php echo EncryptDecryptComponent::encrytedUser($module['option_id']); ?>"><?php echo $module['option_value']; ?></option>
-						    <?php } ?>  
+						    <?php } } ?>  
 								</select>
 							</div>
 						</div>
 					</div>
 
 
-					<div class="col-md-3 margin-top-30">
+					<div class="col-md-3 margin-top-30 hidden">
 						<div class="form-group ">
 							<label class="form-control-label color-white" for="l0"></label>
-							<button class="btn  btn-modal-blue" onclick="clentbyfirm();">Search</button>
-							<!--  <a  href="<?php// echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/user/firmuser?id=1"  >Firm Details</a> -->
+							
+							<button class="btn  btn-modal-blue" onclick="clentbyfirm();"><?php if(Yii::$app->user->identity->usertype == 2){?>View<?php }else{ ?>Search<?php } ?></button>
+							
+							<!--  <a  href="<?php // echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/user/firmuser?id=1"  >Firm Details</a> -->
 						</div>
 					</div>
 
@@ -76,14 +78,7 @@ use app\components\EncryptDecryptComponent;
 				<div class="">
 			<?php
 			
-			$historyresultData = [ 
-					array (
-							"clientname" => "Client 1",
-							"notes" => "",
-							"amount" => "$2000",
-							"paymentdate" => "10-1-2017" 
-					) 
-			];
+			
 			function filter2($item) {
 				$mailfilter = Yii::$app->request->getQueryParam ( 'website', '' );
 				if (strlen ( $mailfilter ) > 0) {
@@ -134,27 +129,8 @@ use app\components\EncryptDecryptComponent;
 					] 
 			] );
 			
-			$historyfilteredresultData = array_filter ( $historyresultData, 'filter2' );
-			$dataProvider_payment_history = new ArrayDataProvider ( [ 
-					
-					'allModels' => $historyfilteredresultData,
-					'sort' => [ 
-							'attributes' => [ 
-									'clientname',
-									'paymentdate',
-									'amount',
-									'notes' 
-							] 
-					],
-					'pagination' => [ 
-							'pageSize' => 10 
-					] 
-			] );
-			
+		
 			$gridColumns = [ 
-					[ 
-							'class' => 'yii\grid\SerialColumn' 
-					],
 					
 					[ 
 							'attribute' => 'client_id',
@@ -198,7 +174,9 @@ use app\components\EncryptDecryptComponent;
 									'class' => 'blue-grid-head' 
 							],
 							'filter' => '<input class="form-control" name="website" value="' . $searchModel ['price'] . '" type="text">',
-							'value' => 'amount',
+							'value' => function ($model, $key, $index) {
+								return Yii::$app->formatter->asCurrency($model['amount'],'$');
+							},
 							'label' => 'Price Per Month' 
 					],
 					[ 
@@ -207,7 +185,9 @@ use app\components\EncryptDecryptComponent;
 									'class' => 'blue-grid-head' 
 							],
 							'filter' => '<input class="form-control" name="website" value="' . $searchModel ['billto'] . '" type="text">',
-							'value' => 'bill_to',
+							'value' => function ($model, $key, $index) {
+								return ucfirst($model['bill_to']);
+							},
 							'label' => 'Bill To (Firm/Client)' 
 					],
 					[ 
@@ -227,7 +207,7 @@ use app\components\EncryptDecryptComponent;
 							'filter' => false,
 							'value' => function ($model, $key, $index, $widget) {
 								
-								$user_name = '<a id="modal-payment" href="#payment_history" data-toggle="modal"><i class="fa fa-eye padding-5" data-toggle="tooltip" data-placement="Top" title="View" style="color:#27a4b0""></i></a>';
+								$user_name = '<a class="view-payment-history"  data-href="../masterdata/paymenthistory?subscription_id='.EncryptDecryptComponent::encrytedUser($model ['subscription_id']).'"><i class="fa fa-eye padding-5" data-toggle="tooltip" data-placement="Top" title="View" style="color:#27a4b0""></i></a>';
 								
 								return $user_name;
 							},
@@ -244,7 +224,10 @@ use app\components\EncryptDecryptComponent;
 					'containerOptions' => [ 
 							'style' => 'overflow: auto' 
 					], // only set when $responsive = false
-					
+					 // only set when $responsive = false
+					 'rowOptions' => function ($model, $index, $widget, $grid){
+					  return ['style'=>'text-align:center;'];
+					},
 					'toolbar' => [ 
 					],
 					'pjax' => true,
@@ -280,7 +263,7 @@ use app\components\EncryptDecryptComponent;
 <div class="modal fade" id="payment_history" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"
 	data-backdrop="static" data-keyboard="false">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header modal-header-color">
 
@@ -291,103 +274,85 @@ use app\components\EncryptDecryptComponent;
 					History</h4>
 			</div>
 			<div class="modal-body">
-				<form>
-						
-						
-							
-							
-							<?php
-							
-							$historygridColumns = [ 
-									[ 
-											'class' => 'yii\grid\SerialColumn' 
-									],
-									
-									[ 
-											'attribute' => 'clientname',
-											'headerOptions' => [ 
-													'class' => 'blue-grid-head' 
-											],
-											// 'filter' => '<input class="form-control" name="website" value="'. $searchModel['clientname'] .'" type="text">',
-											'value' => 'clientname',
-											'label' => 'Client Name' 
-									],
-									[ 
-											'attribute' => 'paymentdate',
-											'headerOptions' => [ 
-													'class' => 'blue-grid-head' 
-											],
-											// 'filter' => '<input class="form-control" name="website" value="'. $searchModel['packagetype'] .'" type="text">',
-											'value' => 'paymentdate',
-											'label' => 'Pyament Date' 
-									],
-									[ 
-											'attribute' => 'amount',
-											'headerOptions' => [ 
-													'class' => 'blue-grid-head' 
-											],
-											// 'filter' => '<input class="form-control" name="website" value="'. $searchModel['price'] .'" type="text">',
-											'value' => 'amount',
-											'label' => 'Amount' 
-									],
-									[ 
-											'attribute' => 'notes',
-											'headerOptions' => [ 
-													'class' => 'blue-grid-head' 
-											],
-											// 'filter' => '<input class="form-control" name="website" value="'. $searchModel['billto'] .'" type="text">',
-											'value' => 'notes',
-											'label' => 'Notes' 
-									] 
-							
-							];
-							
-							echo GridView::widget ( [ 
-									'dataProvider' => $dataProvider_payment_history,
-									// 'filterModel' => $searchModel,
-									'columns' => $historygridColumns,
-									'containerOptions' => [ 
-											'style' => 'overflow: auto' 
-									], // only set when $responsive = false
-									
-									'toolbar' => [ 
-									],
-									'pjax' => true,
-									'bordered' => true,
-									'striped' => true,
-									'condensed' => false,
-									'responsive' => true,
-									'hover' => true,
-									
-									// 'floatHeader' => true,
-									// 'floatHeaderOptions' => ['scrollingTop' => true],
-									'showPageSummary' => false,
-									'panel' => [ 
-											'heading' => false,
-											'type' => GridView::TYPE_PRIMARY,
-											'footer' => false 
-									] 
-							] );
-							?>
-                         
-							</form>
-
+				
 			</div>
 
 
 			<div class="modal-footer footer-background">
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">
-					Close</button>
-				<a id="modal_go" class="btn btn-primary"> Save </a>
+				
 			</div>
 		</div>
 
 	</div>
 </div>
+
+
+
+
+
+
+
+
+<div class="modal fade" id="add_payment_history" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true"
+	data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header modal-header-color">
+
+				<button type="button"
+					class="close-modal modal-opacity close-modal-blue"
+					data-dismiss="modal" aria-hidden="true">X</button>
+				<h4 class="modal-title color-white" id="myModalLabel">Payment History</h4>
+			</div>
+			<div class="modal-body">
+				<!-- Loading GIF div starts -->
+						<div class="load-gif"  style="position: inherit;">
+							<div class="procressing_plz_wait">
+								<img class=""
+									src="<?php echo Yii::$app->getUrlManager()->getBaseUrl();  ?>/images/default.gif" />
+							</div>
+						</div>
+
+						<!-- Loading GIF div end -->
+			</div>
+
+
+			<div class="modal-footer footer-background">
+
+				
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
+
 <script>
 	$(document).ready(function(){
 		$('#masterdata_link').addClass('page-active');
+		$('#firm_pricing').addClass('page-active');
+
+		$(document).on('click', '.view-payment-history', function (e) {
+		       e.preventDefault();
+				
+				$('#payment_history').find('.modal-body').load($(this).attr('data-href'));
+				$('#payment_history').modal('show');
+			  
+			});
+
+		$(document).on('click', '.add-view-payment-history', function (e) {
+		       e.preventDefault();
+				
+				$('#add_payment_history').find('.modal-content').load($(this).attr('data-href'));
+				$('#add_payment_history').modal('show');
+			  
+			});
+		
+		
 	});
 
 	function clentbyfirm(){
@@ -401,6 +366,46 @@ use app\components\EncryptDecryptComponent;
 		//alert(firm_val);
 		}
 
+		function fetchmodules(client){
+
+			
+		
+			var data = 'client_id='+client;
+			staticurl='/';
+			$.ajax({
+			type: 'POST',
+		    url: staticurl + "masterdata/fetchclientmodules",
+			data:data,
+			processData:false,
+			dataType:'json',
+			success:function(data){
+				console.log(data);
+				if (data) {
+
+				var optio="<option value=''>Select</option>";
+				var x= data.length;
+				for(i=0;i<x;i++){
+					optio +="<option value='"+data[i]['id']+"'> "+data[i]['module']+"</option>";
+				}
+				
+		$("#module_value").html(optio);				//toastr.success(data.success);	
+					
+				}else
+				{
+								
+				}	
+	//	$('#update_specific_firm_details').modal('hide');		
+		    },	
+		  
+		  });	
+			
+		
+
+		
+		}
+		
+		
+		
 	function particularclient(client){
 
 			
@@ -461,7 +466,7 @@ use app\components\EncryptDecryptComponent;
 				//	$("#update_particular_client_btn").attr('onclick','updateclientpackage('+client+');');
 					$("#update_specific_firm_details").modal('hide');
 					toastr.success(data.message);	
-					
+					location.reload();
 				}else
 				{
 					toastr.error(data.message);			

@@ -6,7 +6,7 @@ use yii\helpers\Html;
 <div class="modal-header modal-header-color">
 
 	<button type="button"
-		class="close-modal modal-opacity close-modal-blue"
+		class="close-modal modal-opacity close-modal-blue client-user-modal-close"
 		data-dismiss="modal" aria-hidden="true">X</button>
 	<h4 class="modal-title color-white" id="myModalLabel">
 	<?php if($model->isNewRecord){ ?>
@@ -29,19 +29,23 @@ use yii\helpers\Html;
 
 	<div class="col-md-12 padding-0">
 		<div class="col-md-6">
-			<?= $form->field($model, 'first_name', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true]); ?>
+			<label class="form-control-label" for="l0">First Name *</label>
+			<?= $form->field($model, 'first_name', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true,'onkeypress'=>'return username(event);'])->label(false); ?>
 		</div>
 		<div class="col-md-6">
-			<?= $form->field($model, 'last_name', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true]); ?>
+			<label class="form-control-label" for="l0">Last Name *</label>
+			<?= $form->field($model, 'last_name', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true,'onkeypress'=>'return username(event);'])->label(false); ?>
 		</div>
 	</div>
 
 	<div class="col-md-12 padding-0">
 		<div class="col-md-6">
-			<?= $form->field($model, 'title', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true]); ?>
+			<label class="form-control-label" for="l0">Title</label>
+			<?= $form->field($model, 'title', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true])->label(false); ?>
 		</div>
 		<div class="col-md-6">
-			<?= $form->field($modelUser, 'username', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true]); ?>
+			<label class="form-control-label" for="l0">Email Address *</label>
+			<?= $form->field($modelUser, 'username', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true])->label(false); ?>
 		</div>
 	</div>
 	<div class="col-md-12 padding-0">
@@ -52,10 +56,12 @@ use yii\helpers\Html;
 
 					<div class="col-md-12 padding-0">
 						<div class="col-md-9 padding-0">
-												 <?= $form->field($model, 'phone')->textInput(['class' => 'form-control us-phone-mask-input'])->label('Phone',['class'=>'form-control-label']); ?>
+									<label class="form-control-label" for="l0">Phone *</label>
+												 <?= $form->field($model, 'phone')->textInput(['class' => 'form-control us-phone-mask-input'])->label(false); ?>
 											</div>
 						<div class="col-md-3 padding-right-0">
-												<?= $form->field($model, 'extension')->textInput(['class' => 'form-control numbers','maxlength'=>'5'])->label('Extension',['class'=>'form-control-label']); ?>
+									<label class="form-control-label" for="l0">Extension</label>
+												<?= $form->field($model, 'extension')->textInput(['class' => 'form-control numbers','maxlength'=>'6'])->label(false); ?>
 											</div>
 					</div>
 				</div>
@@ -63,26 +69,26 @@ use yii\helpers\Html;
 			</div>
 		</div>
 		<div class="col-md-6">
-
-			<?= $form->field($model, 'mobile', ['inputOptions' => ['class' => 'form-control  us-phone-mask-input']])->textInput(['maxlength' => true])->label('Mobile'); ?>
+			<label class="form-control-label" for="l0">Mobile</label>
+			<?= $form->field($model, 'mobile', ['inputOptions' => ['class' => 'form-control  us-phone-mask-input']])->textInput(['maxlength' => true])->label(false); ?>
 		</div>
 	</div>
 
 	<div class="col-md-12 padding-0">
 		<div class="col-md-6">
 			<label class="form-control-label" for="l0">Profile Image <span class="fa fa-info-circle information-icon" title="Profile Image" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Recommended dimensions are 400x400 pixels."></span></label>
-			 <?= $form->field($model, 'profile_pic')->fileInput(['class' => 'form-control'])->label('Profile Image',['class'=>'form-control-label'])->label(false); ?>
+			 <?= $form->field($model, 'profile_pic')->fileInput(['class' => 'form-control','accept'=>"image/x-png,image/gif,image/jpeg,image/tif,image/bmp,image/jpg"])->label('Profile Image',['class'=>'form-control-label'])->label(false); ?>
 		</div>
 	</div>
 	<div class="col-md-12">
 		<div class="col-md-6">
-			<h6 class="action_head">Set Up This User As: <i class="fa fa-info-circle" title="Set Up This User As" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Select if this user will be the primary point of contact for the firm and/or the billing contact for the client.  If neither, simply leave blank." ></i></h6>
+			<h6 class="action_head">Set up this user as: <i class="fa fa-info-circle" title="Set Up This User As" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Select if this user will be the primary point of contact for the firm and/or the billing contact for the client.  If neither, simply leave blank." ></i></h6>
 			<div class="">
 				<div class="col-md-9 padding-0">
 					<label class="mt-checkbox mt-checkbox-outline margin-bottom-10">
-								Client Primary Contact <input type="hidden" value="0"
+								Client Primary Contact <input type="hidden" value="0" class="primary-contact-checkbox"
 								name="ClientUser[is_primary]" /> <input type="checkbox" value="1"
-								<?php echo $model->is_primary ? 'checked' : '';?>
+								<?php echo $model->is_primary ? 'checked' : '';?> class="primary-contact-checkbox"
 								name="ClientUser[is_primary]"> <span></span>
 					</label>
 					
@@ -91,9 +97,9 @@ use yii\helpers\Html;
 				<div class="col-md-9 padding-0">
 				
 					<label class="mt-checkbox mt-checkbox-outline margin-bottom-10">
-								Client Billing Contact <input type="hidden" value="0"
+								Client Billing Contact <input type="hidden" value="0" class="billing-contact-checkbox"
 								name="ClientUser[is_billing]" /> <input type="checkbox" value="1"
-								<?php echo $model->is_billing ? 'checked' : '';?>
+								<?php echo $model->is_billing ? 'checked' : '';?> class="billing-contact-checkbox"
 								name="ClientUser[is_billing]"> <span></span>
 							</label>
 				</div>
@@ -111,14 +117,14 @@ use yii\helpers\Html;
 
 <div class="modal-footer footer-background">
 
-	<?= Html::submitButton('Save', ['class' => 'btn btn-primary'])?>
+	<?= Html::submitButton($model->isNewRecord ? 'Save' : 'Update', ['class' => 'btn btn-primary'])?>
 	<a href="#"
-		class="btn btn-default" data-dismiss="modal"> Cancel </a>
+		class="btn btn-default client-user-modal-close" data-dismiss="modal"> Cancel </a>
 
 </div>
 <?php ActiveForm::end(); ?>
 <!-- Loading GIF div starts -->
-<div class="load-gif" id="loading-indicator" style="display: none;">
+<div class="load-gif" id="loading-indicator-client" style="display: none;">
 	<div class="procressing_plz_wait">
 		<img class=""
 			src="<?php echo Yii::$app->getUrlManager()->getBaseUrl();  ?>/images/default.gif" />
@@ -150,14 +156,39 @@ $("[data-toggle=tooltip]").tooltip();
         }
     }, 300);
 });
+
+
+
+<?php if(!empty($get_user_primary)){ ?>
+
+$('input.primary-contact-checkbox').change(function(){
+
+if ($('input.primary-contact-checkbox').is(':checked')) {
+
+toastr.error('You have already made other user as primary contact, this will override previous one.');	
+	
+}	
+
 });
-$(document).on('ready pjax:success', function(){
-	$('.view-client').click(function(e){
-	       e.preventDefault();
-			
-			$('#add_client_user').modal('show').find('.modal-content').load($(this).attr('href'));
-			$('.select2').select2();
-	      
-	});
+<?php } ?>
+
+
+<?php if(!empty($get_user_billing)){ ?>
+
+$('input.billing-contact-checkbox').change(function(){
+
+if ($('input.billing-contact-checkbox').is(':checked')) {
+
+toastr.error('You have already made other user as billing contact, this will override previous one.');	
+	
+}	
+
 });
+<?php } ?>
+
+
+
+
+});
+
 </script>

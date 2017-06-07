@@ -73,41 +73,57 @@ use yii\helpers\Html;
 						<div class="tab-pane active " id="planbasics" role="tabpanel">
 						<div class="border-top-bottom-ddd col-md-12 padding-0">
 							<div class="container margin-top-10 margin-bottom-10">
-														<div class="col-md-4">
 														
-																		<div class="form-group ">
+					<div class="col-md-12 padding-0">
+							<div class="col-md-4">
+							<div class="form-group ">
 																			<label class="form-control-label" for="l0">Name of
 																				the Plan <i class="fa fa-info-circle margin-left-5" title="Name of the Plan" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Name the plan in a way you would normally talk about the plan, such as Group PPO Plan" data-original-title="Bill Client Usage to"></i></label>
-																				</label>
 																			<input type="text" class="form-control placeholder-italics" value=""
 																				>
 																		</div>
-																		
-																		
-																		<div class="form-group ">
-																			<label class="form-control-label" for="l0">Network
-																			<i class="fa fa-info-circle margin-left-5"  data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Enter the name of the network where employees are directed for care, such as Cigna, Blue Cross or Americas" data-original-title="Network"></i>
+							</div>
+							<div class="col-md-4">
+							<div class="form-group ">
+																			<label class="form-control-label" for="l0">Network <i class="fa fa-info-circle margin-left-5"  data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Enter the name of the network where employees are directed for care, such as Cigna, Blue Cross or Ameritas" data-original-title="Network"></i>
 																			</label>
 																			<input type="text" class="form-control placeholder-italics" value=""
-																				value="UHC Plus" >
+																				value="UHC Plus">
 																		</div>
-																		
-																		
-																		<!--<div class="form-group ">
-																			<label class="form-control-label" for="l0">Select
-																				Renewal Plan Year
+							</div>
+							<div class="col-md-4">
+							<div class="form-group ">
+																			<label class="form-control-label" for="l0">Plan Funding <i class="fa fa-info-circle margin-left-5"  data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Choose the plan funding for this plan as partially self insured, self insured, fully insured or level funded" data-original-title="Plan Funding"></i>
 																			</label>
-																			<select
-																				class="form-control edited"
-																				id="renewal_plan_year" id="form_control">
-																				<option value="1">2015</option>
-																				<option value="2">2016</option>
-																				<option value="3" selected>2017</option>
-
-																			</select>
-																		</div>-->
+																			<input
+																				type="text" class="form-control placeholder-italics"
+																				value="Self Insured"  disabled>
 																		
-																	<div class="form-group ">
+																		</div>
+						
+							</div>
+							</div>
+								<div class="col-md-12 padding-0">
+							<div class="col-md-4">
+							<div class="form-group ">
+																			<label class="form-control-label" for="l0">Administrative
+																				Carrier/Vendor <i class="fa fa-info-circle margin-left-5"  data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Enter your TPAs name or the name of the carrier who is administrating the plans claims, such as United Healthcare or Cypress Benefit Administrators." data-original-title="Administrative Carrier/Vendor"></i>
+																			</label>
+																			<input type="text" class="form-control placeholder-italics" value=""
+																				>
+																		</div>
+							</div>
+							<div class="col-md-4">
+							<div class="form-group ">
+																			<label class="form-control-label" for="l0">
+																				Annual Consulting Fee<i class="fa fa-info-circle margin-left-5"  data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Enter in the total amount of commissions and other consulting fees your firm will receive on this plan for the plan year." data-original-title="Annual Consulting Fee"></i>
+																			</label>
+																			<input type="text" class="form-control placeholder-italics"
+																				value="" >
+																		</div>
+							</div>
+							<div class="col-md-4">
+							<div class="form-group ">
 																			<label class="form-control-label" for="l0">Total Plan Budget
 																			<i class="fa fa-info-circle margin-left-5"  data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Enter in the expected or budgeted amount of total plan costs on the plan for the plan year, including both claims and fixed costs.  Do not adjust this amount of employee premiums, COBRA contributions or other employee plan costs shares." data-original-title="Total Plan Budget"></i>
 																			</label>
@@ -118,69 +134,32 @@ use yii\helpers\Html;
 																				<input class="form-control" type="text" >
 																			</div>
 																		</div>
-																		
-																		
-																		
-																		
-																		
-																		
-																		
-															</div>
-
-															<div class="col-md-4">
-																
-																<div class="form-group ">
-																			<label class="form-control-label" for="l0">Administrative
-																				Carrier/Vendor <i class="fa fa-info-circle margin-left-5"  data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Enter your TPAs name or the name of the carrier who is administrating the plans claims, such as United Healthcare or Cypress Benefit Administrators." data-original-title="Administrative Carrier/Vendor"></i>
-																			</label>
-																			<input type="text" class="form-control placeholder-italics" value=""
-																				>
-																		</div>
-																		
-																<!--<div class="form-group ">
-																			<label class="form-control-label" for="l0">Pharmacy
-																				Benefit Manager <span class="imp-red">*</span>
-																			</label>
-																			<input type="text" class="form-control placeholder-italics" value=""
-																				value="Caremark" placeholder="e.g. Cigna">
-																		</div> -->
-																		<div class="form-group ">
-																			<label class="form-control-label" for="l0">Annual
-																				Fee/Commission on Plan<i class="fa fa-info-circle margin-left-5"  data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Enter in the total amount of commissions and other consulting fees your firm will receive on this plan for the plan year." data-original-title="Annual Fee/Commission on Plan"></i>
-																			</label>
-																			<input type="text" class="form-control placeholder-italics"
-																				value="" >
-																		</div>
-																<!--	<div class="form-group ">
-																			<label class="form-control-label" for="l0">Additional
-																				Notes
-																			</label>
-																				<textarea class="form-control placeholder-italics"  rows="1"></textarea>
-																		
-																		</div>	-->
-															
-															</div>
-
-															
-
-															<div class="col-md-4">
-																<div class="form-group ">
-																			<label class="form-control-label" for="l0">Plan Funding<i class="fa fa-info-circle margin-left-5"  data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Choose the plan funding for this plan as partially self insured, self insured, fully insured or level funded" data-original-title="Plan Funding"></i>
-																			</label>
-																			<input
-																				type="text" class="form-control placeholder-italics"
-																				value="Partially Self Insured" disabled>
-																		
-																		</div>
-																	<div class="form-group ">
-																	<label class="form-control-label" for="l0">Plan Change Summary Details
+						
+							</div>
+							</div>
+								<div class="col-md-12 padding-0">
+<div class="col-md-8">
+  <div class="form-group ">
+																	<label class="form-control-label" for="l0">Plan Change Summary Details<i class="fa fa-info-circle margin-left-5"  data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Enter in the details of changes made to this plan from the prior plan year.  This section is intended to provide a quick log of changes for your records." data-original-title="Plan Change Summary Details"></i>
 																	</label>
-																		<textarea class="form-control placeholder-italics" rows="5"></textarea>
-																	
+																		<textarea class="form-control placeholder-italics"  rows="2"></textarea>
+																</div>	
 																</div>
-															</div>
-
-															
+																	<div class="col-md-4">
+								<div class="form-group ">
+																			<label class="form-control-label" for="l0">Claims Budget<i class="fa fa-info-circle margin-left-5"  data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Enter in the expected or budgeted amount of total claims on the plan for the plan year." data-original-title="Claims Budget"></i>
+																			</label>
+																			<div class="input-group">
+																				<span class="input-group-addon">
+																					<i class="fa fa-usd  color-black"></i>
+																				</span>
+																				<input class="form-control price" type="text" >
+																			</div>
+																			
+																		</div>
+							</div>
+</div>	
+									
 							</div>
 							</div>
 							<div class="col-md-12 padding-0 bg-sky-blue " align="right" style="border-top:none;">
@@ -382,6 +361,16 @@ use yii\helpers\Html;
 																			
 																		</div>
 																	</div>
+																	
+																		<div class="md-checkbox col-md-12">
+																		<div class="col-md-6">
+																		<label class="mt-checkbox mt-checkbox-outline">HSA Claims
+																				<input type="checkbox">
+																			<span></span>
+																		</label>
+																			
+																		</div>
+																	</div>
 
 																	
 																</div>
@@ -408,13 +397,18 @@ use yii\helpers\Html;
 						<div class="border-top-bottom-ddd col-md-12 padding-0">
 							<div class="container margin-top-10 margin-bottom-10">
 							
-									<div class="row"> 
+								<div class="row"> 
 							<div class="col-md-12">
-							<div class="col-md-7">
 							<div class="col-md-6">
-									<p class="box-head fontcolor-blue">Add Financial Entries</p>
+								<fieldset class="fieldset-box">
+
+											<legend>Add Claims Adjustments<i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="bottom" data-content="Under self insured plans, often there are items that are essentially reimbursement of prior paid claims such as stop loss reimbursements or drug rebates.  By designating these claim amounts and entering them, we can adjust the claims tracked on the plan for the purpose of measuring a true cost and cost trend for each specific claim type.  Simply select the number of reimbursements you would like to track, enter the name for each reimbursement and finally select which claims that specific item should adjust.  Once completed, this will change the Monthly Financials input table to allow for the entering of these financial figures." data-original-title="Additional Claims Adjustments"></i></legend>	
+						
+							<div class="col-md-12 ">
+							<div class="col-md-6 hide">
+									<p class="box-head fontcolor-blue">Add Claims Adjustments</p>
 								</div>
-								<div class="col-md-6" align="right">
+								<div class="col-md-6 hide" align="right">
 									<span><i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="left" data-content="Click on Row Cell to Edit" data-original-title="Edit Cell"></i>
 									</span>
 								</div>
@@ -448,9 +442,9 @@ use yii\helpers\Html;
                             </thead>
                           
                             <tbody>
-                                <tr>
+                               <!--   <tr>
                                     
-                                       <td><input type="text" id="adjustment-1-1" class="form-control reinsurance-rates-td text-align-right" value="Drug Debates"></td>
+                                       <td><input type="text" id="adjustment-1-1" class="form-control reinsurance-rates-td text-align-center" value="Drug Debates"></td>
 								  <td> <select class="form-control reinsurance-rates-td" id="adjustment-2-1">
 								 <option>Medical Claims</option>
 								 <option>Dental Claims</option>
@@ -460,7 +454,7 @@ use yii\helpers\Html;
                                    </tr>
 								    <tr>
                                     
-                                       <td><input type="text" id="adjustment-1-2" class="form-control reinsurance-rates-td text-align-right" value="Drug Debates"></td>
+                                     <td><input type="text" id="adjustment-1-2" class="form-control reinsurance-rates-td text-align-center" value="Drug Debates"></td>
 								  <td> <select class="form-control reinsurance-rates-td" id="adjustment-2-2">
 								 <option>Medical Claims</option>
 								 <option>Dental Claims</option>
@@ -470,23 +464,23 @@ use yii\helpers\Html;
                                    </tr>
 								    <tr>
                                     
-                                       <td><input type="text" id="adjustment-1-3" class="form-control reinsurance-rates-td text-align-right" value="Drug Debates"></td>
+                                       <td><input type="text" id="adjustment-1-3" class="form-control reinsurance-rates-td text-align-center" value="Drug Debates"></td>
 								  <td> <select class="form-control reinsurance-rates-td" id="adjustment-2-3">
 								 <option>Medical Claims</option>
 								 <option>Dental Claims</option>
 								 <option>Vision Claims</option>
 									</select></td>
 									<td></td>
-                                   </tr>
+                                   </tr>-->
                                   <tr>
                                    
-                                      <td><input type="text" id="adjustment-1-4" class="form-control reinsurance-rates-td text-align-right" value="Drug Debates"></td>
-								   <td> <select class="form-control reinsurance-rates-td" id="adjustment-2-4">
+                                       <td><input type="text" id="adjustment-1-1" class="form-control reinsurance-rates-td" value="Drug Debates"></td>
+								  <td> <select class="form-control reinsurance-rates-td" id="adjustment-2-1">
 									 <option>Medical Claims</option>
 								 <option>Dental Claims</option>
 								 <option>Vision Claims</option>
 									</select></td>
-									<td class="add_icon_button"><div class="add-icon"><span class="button-add" onclick="addReimbursementtrack();">+</span></div></td>
+									<td class="add_icon_button"><div class="add-icon cursor-pointer"><span class="button-add" onclick="addReimbursementtrack();"><u>Add</u></span></div></td>
                                    </tr>
                                 
                             </tbody>
@@ -495,11 +489,16 @@ use yii\helpers\Html;
 					
 												</div>
 							</div>
-							<div class="col-md-5">
-							<div class="col-md-6">
-									<p class="box-head fontcolor-blue">Add Items</p>
+							</fieldset>
+							
+							<fieldset class="fieldset-box margin-top-10">
+
+											<legend>Add Additional Cost Items<i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="left" data-content="Additional cost items are other items on the plans that show as a cost to the plan, often referred to as fixed costs.  Some common items might be administrative fees or stop loss premiums.  Once completed, this will change the Monthly Financials input table to allow for the entering of these financial figures." data-original-title="Add Additional Cost Items"></i></legend>	
+							<div class="col-md-12">
+							<div class="col-md-6  hide">
+									<p class="box-head fontcolor-blue">Add Additional Cost Items</p>
 								</div>
-								<div class="col-md-6" align="right">
+								<div class="col-md-6  hide" align="right">
 									<span><i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="left" data-content="Click on Row Cell to Edit" data-original-title="Edit Cell"></i>
 									</span>
 								</div>
@@ -517,14 +516,14 @@ use yii\helpers\Html;
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><input type="text" id="cost-1-1" class="form-control reinsurance-rates-td text-align-right" value="Adminstrative Fees"></td>
+                             <!--   <tr>
+                                    <td><input type="text" id="cost-1-1" class="form-control reinsurance-rates-td text-align-center" value="Adminstrative Fees"></td>
 									<td></td>
-                                  </tr>
+                                  </tr>-->
                                  
                                   <tr>
-                                    <td><input type="text" id="cost-1-2" class="form-control reinsurance-rates-td text-align-right" value="Wellness Credit"></td>
-									<td class="add_costtrack_button"><div class="add-icon"><span class="button-add" onclick="addCosttrack();">+</span></div></td>
+                                    <td><input type="text" id="cost-1-1" class="form-control reinsurance-rates-td text-align-center" value="Adminstrative Fees"></td>
+									<td class="add_costtrack_button"><div class="add-icon cursor-pointer"><span class="button-add" onclick="addCosttrack();"><u>Add</u></span></div></td>
                                   </tr>
                             </tbody>
                         </table>
@@ -532,19 +531,22 @@ use yii\helpers\Html;
 												</div>
 												</div>
 												</div>
-							</div>
-											
-										</div>
-											<hr>
-											
-<div class="col-md-12 padding-0">
+							</fieldset>
+										
+	</div>
+							
+										<div class="col-md-6">	
+											<fieldset class="fieldset-box">
+
+											<legend>Employee & Member Contributions to Track <i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="In order to show a true employer net cost, we must deduct the amount of costs paid by the employee and other covered members.  Select any employee contributions or other cost shares you would like to track on the plan.  Once completed, this will change the Monthly Financials input table to allow for the entering of these financial figures." data-original-title="Employee & Member contributions to Track"></i></legend>	
+											<div class="col-md-12 padding-0">
 											
 												
 												<div class="row">
-											<div class="col-md-12 padding-top-10">
-												<div class="col-md-12">
-													<label class="font-2rem">Employee & Member Contributions to
-														Track
+											<div class="col-md-12 padding-top-10 ">
+												<div class="col-md-12 hide">
+													<label class="font-2rem " ><span class="fontcolor-blue">Employee & Member Contributions to
+														Track</span>
 														 <i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="In order to show a true employer net cost, we must deduct the amount of costs paid by the employee and other covered members.  Select any employee contributions or other cost shares you would like to track on the plan.  Once completed, this will change the Monthly Financials input table to allow for the entering of these financial figures." data-original-title="Employee & Member contributions to Track"></i>
 														 </label>
 												</div>
@@ -553,7 +555,7 @@ use yii\helpers\Html;
 
 											
 												<div class="col-md-12">
-												<div class="col-md-4">
+												
 													<div class="md-checkbox">
 													
 																		<label class="mt-checkbox mt-checkbox-outline"> Employee
@@ -563,8 +565,8 @@ use yii\helpers\Html;
 																		</label>
 														
 													</div>
-													</div>
-<div class="col-md-4">
+													
+
 													<div class="md-checkbox">
 													<label class="mt-checkbox mt-checkbox-outline">COBRA
 															Premiums
@@ -573,8 +575,8 @@ use yii\helpers\Html;
 																		</label>
 														
 													</div>
-													</div>
-<div class="col-md-4">
+												
+
 													<div class="md-checkbox">
 													<label class="mt-checkbox mt-checkbox-outline">Member
 															Copays, Coinsurance and Deductibles<input type="checkbox" >
@@ -582,12 +584,16 @@ use yii\helpers\Html;
 																		</label>
 														
 													</div>
-													</div>
+													
 												</div>
 											
 											</div>
 												
 												</div>
+							</fieldset>										
+										</div>
+										</div>
+										</div>	
 												
 							</div>
 							</div>
@@ -610,15 +616,21 @@ use yii\helpers\Html;
 						<div class="border-top-bottom-ddd col-md-12 padding-0">
 							<div class="container margin-top-10 margin-bottom-10">
 							<div class="col-md-12">
+							<div class="col-md-2">
+							</div>
+							<div class="col-md-8">
                                <div class="col-md-12 padding-0">
+							   <div class="col-md-2">
+												</div>
 												<div class="col-md-12 form-group padding-0">
-													<div class="col-md-4">
-														<label># of Plan Contribution Strategies
+													<div class="col-md-5">
+														<label># of Employee  Contribution Strategies
 														 <i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Select the number of various employee contribution structures you would like to track on this plan.  Once selected, below you will see your selected number of tables where you can then enter in the number of contribution tiers for each structure, name the tiers and enter in monthly premium rates.  Finally, enter the average monthly enrollment for each structure." data-original-title="Plan Contribution Strategies"></i>
 														 </label>
 													</div>
-													<div class="col-md-3">
-														<select class="form-control">
+													<div class="col-md-5">
+														<select class="form-control" id="select_employee_contribution" onchange="employeeContribution();">
+														<option value="">Select</option>
 															<option value="1">1</option>
 															<option value="2">2</option>
 															<option value="3">3</option>
@@ -631,72 +643,12 @@ use yii\helpers\Html;
 												
 												</div>
 												
-												<div class="col-md-12 padding-0 margin-bottom-20">
-												<div class="col-md-12 padding-0">
-													<div class="col-md-4">
-														<label> Plan 1 Contribution Name</label>
-													</div>
-													<div class="col-md-3">
-														<input class="form-control  placeholder-italics"/>
-													</div>
-													
-											 
-														<div class="col-md-12 padding-top-10">
-														
-														    <table class="table table-hover table-backcolor" id="editable_contributions_track">
-                            <thead>
-                                <tr>
-                                   
-                                    <th class="no-wrap" id="contribution-column-1">Tier No.</th>
-                                     <th class="no-wrap" id="contribution-column-2">Tier Name</th>
-									 <th class="no-wrap" id="contribution-column-3">Monthly Rates</th>
-									 <th class="no-wrap" id="contribution-column-4">Monthly Enrollment</th>
-									  <th class="no-wrap" id="contribution-column-5">Add Row</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td id="contribution-left-header-1">Tier 1</td>
-									 <td><select class="form-control reinsurance-rates-td" id="contribution-2-1" class="form-control reinsurance-rates-td text-align-right">
-								 <option>Employee</option>
-								 <option>Employee + Spouse</option>
-								 <option>Employee + Child</option>
-								 <option>Employee + Child(ren)</option>
-								 <option>Family</option>
-								  <option>Employee + 1</option>
-								   <option>Employee + 2</option>
-								    <option>Employee + 3</option>
-									</select>
-									</td>
-									  <td><input type="text" id="contribution-3-1" class="form-control reinsurance-rates-td text-align-right" value="99.00"></td>
-									   <td><input type="text" id="contribution-4-1" class="form-control reinsurance-rates-td text-align-right" value="$68.00"></td>
-									    <td></td>
-									<td></td>
-                                  </tr>
-                                 
-                                  <tr>
-                                    <td id="contribution-left-header-2">Tier 2</td>
-									 <td><select class="form-control reinsurance-rates-td" id="contribution-2-2" class="form-control reinsurance-rates-td text-align-right">
-								 <option>Employee</option>
-								 <option>Employee + Spouse</option>
-								 <option>Employee + Child</option>
-								 <option>Employee + Child(ren)</option>
-								 <option>Family</option>
-								  <option>Employee + 1</option>
-								   <option>Employee + 2</option>
-								    <option>Employee + 3</option>
-									</select>
-									</td>
-									   <td><input type="text" id="contribution-3-2" class="form-control reinsurance-rates-td text-align-right" value="99.00"></td>
-									   <td><input type="text" id="contribution-4-2" class="form-control reinsurance-rates-td text-align-right" value="$68.00"></td>
-									<td class="add_contribution_button"><div class="add-icon"><span class="button-add" onclick="addEmployeecontribution();">+</span></div></td>
-                                  </tr>
-                            </tbody>
-                        </table>
-							</div>
-												</div>
-
+												<div class="col-md-12 padding-0 margin-bottom-20" id="contribution_strategies">
+												
+										
                                             </div>
+										 
+											</div>
 											</div>
 							</div>
 							</div>
@@ -721,13 +673,13 @@ use yii\helpers\Html;
 					<div class="col-md-12  padding-10 ul-block">
 						<ul class="nav nav-pills nav-wizard">
 							<li href="#year_project_assumption" data-toggle="tab" class="active inner-block-li" id="anchor-pb-6"><a><div class="inner-block-digits pull-left">1</div><span class="inner-block-text" title="Remainder Projection">Remainder Projection
-							<i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="In this section, you can enter in the details to be used for financial projections of future claims.  The system uses mid-point to mid-point underwriting to determine future claims.  The necessary components to perform these calculations is to determine how many prior months of claims you would like to use in your calculations, the credibility to apply to those claims and the annualized trend to use.  The system will then perform month by month calculations to estimate future claims based upon prior history." data-original-title="Remainder Projection"></i>
+							<i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="bottom" data-content="In this section, you can enter in the details to be used for financial projections of future claims.  The system uses mid-point to mid-point underwriting to determine future claims.  The necessary components to perform these calculations is to determine how many prior months of claims you would like to use in your calculations, the credibility to apply to those claims and the annualized trend to use.  The system will then perform month by month calculations to estimate future claims based upon prior history." data-original-title="Remainder Projection"></i>
 							</span></a></li>
 							<li href="#claims_project_assumption" data-toggle="tab" class="inner-block-li" id="anchor-pb-7"><a><div class="inner-block-digits pull-left">2</div><span class="inner-block-text" title="Renewal Projection">Renewal Projection
-							 <i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="In this section, you can enter in the details to be used for financial projections of future claims.  The system uses mid-point to mid-point underwriting to determine future claims.  The necessary components to perform these calculations is to determine how many prior months of claims you would like to use in your calculations, the credibility to apply to those claims and the annualized trend to use.  The system will then perform month by month calculations to estimate future claims based upon prior history." data-original-title="Renewal Projection"></i>
+							 <i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="bottom" data-content="In this section, you can enter in the details to be used for financial projections of future claims.  The system uses mid-point to mid-point underwriting to determine future claims.  The necessary components to perform these calculations is to determine how many prior months of claims you would like to use in your calculations, the credibility to apply to those claims and the annualized trend to use.  The system will then perform month by month calculations to estimate future claims based upon prior history." data-original-title="Renewal Projection"></i>
 							 </span></a></li>
 							<li href="#cost_project_assumption" data-toggle="tab" class="inner-block-li" id="anchor-pb-8"><a><div class="inner-block-digits pull-left">3</div><span class="inner-block-text" title="Renewal Cost Items">Renewal Cost Items
-							<i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="At renewal cost items are likely to change.  In order to illustrate this in the renewal projection reporting, please enter in the estimated percentage change over the current plan year, as well as any notes associated with your projection." data-original-title="Renewal Cost Items"></i>
+							<i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="bottom" data-content="At renewal cost items are likely to change.  In order to illustrate this in the renewal projection reporting, please enter in the estimated percentage change over the current plan year, as well as any notes associated with your projection." data-original-title="Renewal Cost Items"></i>
 							</span></a></li>
 							<li href="#contribution_project_assumption" data-toggle="tab" class="inner-block-li" id="anchor-pb-9"><a><div class="inner-block-digits pull-left">4</div><span class="inner-block-text" title="Renewal Contributions">Renewal Contributions</span></a></li>
 						</ul>
@@ -741,12 +693,22 @@ use yii\helpers\Html;
 							<div class="container margin-top-10 margin-bottom-10">
 								
 															<div class="col-md-12 padding-0">
-																<div class="col-md-6">
+															<div class="col-md-12">
+																<div class="col-md-12 blue-breadcrumb padding-top-10 padding-left-20 margin-bottom-5">
+																<p> Enter underwriting assumptions for calculations to determine costs for the Remainder of the Contract Year</p>
+																</div>
+																</div>
+																<div class="col-md-6  margin-bottom-10">
+															<fieldset class="fieldset-box">
+
+										 
 																	<div class="padding-5"> 
 																	<img class="pull-left margin-right-10" width="22" src="/images/design/dental.png" alt="Alternative text to the image">
 																	<b class="grid-head-text">Dental</b>
+																	<a onclick="openPlanmodal('Dental');" class="pull-right cursor-pointer"><u>Add</u></a>
 																	</div>
 																	<div class="">
+																	
 																		<table class="table table-hover table-backcolor" id="editable_dental" style="table-layout:fixed;">
                             <thead>
                                 <tr> 
@@ -760,78 +722,58 @@ use yii\helpers\Html;
                             <tbody>
                                 <tr>
                                     <td id="dentaltwo-left-header-1">Period 1</td>
-									  <td><input type="text" id="dentaltwo-2-1" class="form-control reinsurance-rates-td text-align-right" value="1"></td>
-									   <td><input type="text" id="dentaltwo-3-1" class="form-control reinsurance-rates-td text-align-right" value="12"></td>
-									    <td><input type="text" id="dentaltwo-4-1" class="form-control reinsurance-rates-td text-align-right" value="80%"></td>
-										 <td><input type="text" id="dentaltwo-5-1" class="form-control reinsurance-rates-td text-align-right" value="7%"></td>
+									  <td><input type="text" id="dentaltwo-2-1" class="form-control reinsurance-rates-td text-align-center" value="1" disabled></td>
+									   <td><input type="text" id="dentaltwo-3-1" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="dentaltwo-4-1" class="form-control reinsurance-rates-td text-align-center" value="100%"></td>
+										 <td><input type="text" id="dentaltwo-5-1" class="form-control reinsurance-rates-td text-align-center" value="7%"></td>
 									     
                                   </tr>
                                  
-                                     <tr>
-                                    <td id="dentaltwo-left-header-2">Period 2</td>
-									  <td><input type="text" id="dentaltwo-2-2" class="form-control reinsurance-rates-td text-align-right" value="13"></td>
-									   <td><input type="text" id="dentaltwo-3-2" class="form-control reinsurance-rates-td text-align-right" value="24"></td>
-									    <td><input type="text" id="dentaltwo-4-2" class="form-control reinsurance-rates-td text-align-right" value="20%"></td>
-										 <td><input type="text" id="dentaltwo-5-2" class="form-control reinsurance-rates-td text-align-right" value="7%"></td>
-									     
-                                  </tr>
-								     <tr>
-                                    <td id="dentaltwo-left-header-3">Period 3</td>
-									  <td><input type="text" id="dentaltwo-2-3" class="form-control reinsurance-rates-td text-align-right" value="25"></td>
-									   <td><input type="text" id="dentaltwo-3-3" class="form-control reinsurance-rates-td text-align-right" value="36"></td>
-									    <td><input type="text" id="dentaltwo-4-3" class="form-control reinsurance-rates-td text-align-right" value="20%"></td>
-										 <td><input type="text" id="dentaltwo-5-3" class="form-control reinsurance-rates-td text-align-right" value="7%"></td>
-									     
-                                  </tr>
+                                   
                             </tbody>
                         </table>
+						
+						
 																	</div>
+																		</fieldset>
 																</div>
 																<div class="col-md-6">
+																<fieldset class="fieldset-box">
+
+										 
 																	<div class="padding-5"> 
 																	<img class="pull-left margin-right-10" width="22" src="/images/design/HRA.png" alt="Alternative text to the image">
 																	<b class="grid-head-text">HRA</b>
+																	<a onclick="openPlanmodal('HRA');" class="pull-right cursor-pointer"><u>Add</u></a>
 																	</div>
 																	<div class="">
-																		<table class="table table-hover table-backcolor" id="editable_hsa" style="table-layout:fixed;">
+																	
+																	<table class="table table-hover table-backcolor" id="editable_hra" style="table-layout:fixed;">
                             <thead>
                                 <tr> 
-                                    <th class="text-align-center" id="hsatwo-column-1">Claim Month %</th>
-                                     <th class="text-align-center" id="hsatwo-column-2">Period Start Month</th>
-									 <th class="text-align-center" id="hsatwo-column-3">Period End Month</th>
-									 <th class="text-align-center" id="hsatwo-column-4">Credibility %</th>
-									  <th class="text-align-center" id="hsatwo-column-5">Medical Trend %</th>
+                                    <th class="text-align-center" id="hratwo-column-1">Claim Month %</th>
+                                     <th class="text-align-center" id="hratwo-column-2">Period Start Month</th>
+									 <th class="text-align-center" id="hratwo-column-3">Period End Month</th>
+									 <th class="text-align-center" id="hratwo-column-4">Credibility %</th>
+									  <th class="text-align-center" id="hratwo-column-5">Medical Trend %</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td id="hsatwo-left-header-1">Period 1</td>
-									  <td><input type="text" id="hsatwo-2-1" class="form-control reinsurance-rates-td text-align-right" value="1"></td>
-									   <td><input type="text" id="hsatwo-3-1" class="form-control reinsurance-rates-td text-align-right" value="12"></td>
-									    <td><input type="text" id="hsatwo-4-1" class="form-control reinsurance-rates-td text-align-right" value="100%"></td>
-										 <td><input type="text" id="hsatwo-5-1" class="form-control reinsurance-rates-td text-align-right" value="4%"></td>
+                                    <td id="hratwo-left-header-1">Period 1</td>
+									  <td><input type="text" id="hratwo-2-1" class="form-control reinsurance-rates-td text-align-center" value="1" disabled></td>
+									   <td><input type="text" id="hratwo-3-1" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="hratwo-4-1" class="form-control reinsurance-rates-td text-align-center" value="100%"></td>
+										 <td><input type="text" id="hratwo-5-1" class="form-control reinsurance-rates-td text-align-center" value="11.4%"></td>
 									     
                                   </tr>
                                  
-                                     <tr>
-                                    <td id="hsatwo-left-header-2">Period 2</td>
-									  <td><input type="text" id="hsatwo-2-2" class="form-control reinsurance-rates-td text-align-right" value="12"></td>
-									   <td><input type="text" id="hsatwo-3-2" class="form-control reinsurance-rates-td text-align-right" value="24"></td>
-									    <td><input type="text" id="hsatwo-4-2" class="form-control reinsurance-rates-td text-align-right" value="100%"></td>
-										 <td><input type="text" id="hsatwo-5-2" class="form-control reinsurance-rates-td text-align-right" value="4%"></td>
-									     
-                                  </tr>
-								     <tr>
-                                    <td id="hsatwo-left-header-3">Period 3</td>
-									  <td><input type="text" id="hsatwo-2-3" class="form-control reinsurance-rates-td text-align-right" value="25"></td>
-									   <td><input type="text" id="hsatwo-3-3" class="form-control reinsurance-rates-td text-align-right" value="36"></td>
-									    <td><input type="text" id="hsatwo-4-3" class="form-control reinsurance-rates-td text-align-right" value="100%"></td>
-										 <td><input type="text" id="hsatwo-5-3" class="form-control reinsurance-rates-td text-align-right" value="4%"></td>
-									     
-                                  </tr>
+                                   
                             </tbody>
                         </table>
+						
 																	</div>
+																	</fieldset>
 																</div>
 															</div>
 
@@ -859,12 +801,22 @@ use yii\helpers\Html;
 							
 															
 															<div class="col-md-12 padding-0">
-																<div class="col-md-6">
+																	<div class="col-md-12">
+																<div class="col-md-12 blue-breadcrumb padding-top-10 padding-left-20 margin-bottom-5">
+																<p> Enter underwriting assumptions for calculations to determine costs for the Renewal Contract Year.</p>
+																</div>
+																</div>
+																	<div class="col-md-6  margin-bottom-10">
+															<fieldset class="fieldset-box">
+
+										 
 																	<div class="padding-5"> 
 																	<img class="pull-left margin-right-10" width="22" src="/images/design/dental.png" alt="Alternative text to the image">
 																	<b class="grid-head-text">Dental</b>
+																	<a onclick="openPlanmodal('Dental');" class="pull-right cursor-pointer"><u>Add</u></a>
 																	</div>
 																	<div class="">
+																	
 																		<table class="table table-hover table-backcolor" id="editable_dental" style="table-layout:fixed;">
                             <thead>
                                 <tr> 
@@ -878,78 +830,58 @@ use yii\helpers\Html;
                             <tbody>
                                 <tr>
                                     <td id="dentaltwo-left-header-1">Period 1</td>
-									  <td><input type="text" id="dentaltwo-2-1" class="form-control reinsurance-rates-td text-align-right" value="1"></td>
-									   <td><input type="text" id="dentaltwo-3-1" class="form-control reinsurance-rates-td text-align-right" value="12"></td>
-									    <td><input type="text" id="dentaltwo-4-1" class="form-control reinsurance-rates-td text-align-right" value="80%"></td>
-										 <td><input type="text" id="dentaltwo-5-1" class="form-control reinsurance-rates-td text-align-right" value="7%"></td>
+									  <td><input type="text" id="dentaltwo-2-1" class="form-control reinsurance-rates-td text-align-center" value="1" disabled></td>
+									   <td><input type="text" id="dentaltwo-3-1" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="dentaltwo-4-1" class="form-control reinsurance-rates-td text-align-center" value="100%"></td>
+										 <td><input type="text" id="dentaltwo-5-1" class="form-control reinsurance-rates-td text-align-center" value="7%"></td>
 									     
                                   </tr>
                                  
-                                     <tr>
-                                    <td id="dentaltwo-left-header-2">Period 2</td>
-									  <td><input type="text" id="dentaltwo-2-2" class="form-control reinsurance-rates-td text-align-right" value="13"></td>
-									   <td><input type="text" id="dentaltwo-3-2" class="form-control reinsurance-rates-td text-align-right" value="24"></td>
-									    <td><input type="text" id="dentaltwo-4-2" class="form-control reinsurance-rates-td text-align-right" value="20%"></td>
-										 <td><input type="text" id="dentaltwo-5-2" class="form-control reinsurance-rates-td text-align-right" value="7%"></td>
-									     
-                                  </tr>
-								     <tr>
-                                    <td id="dentaltwo-left-header-3">Period 3</td>
-									  <td><input type="text" id="dentaltwo-2-3" class="form-control reinsurance-rates-td text-align-right" value="25"></td>
-									   <td><input type="text" id="dentaltwo-3-3" class="form-control reinsurance-rates-td text-align-right" value="36"></td>
-									    <td><input type="text" id="dentaltwo-4-3" class="form-control reinsurance-rates-td text-align-right" value="20%"></td>
-										 <td><input type="text" id="dentaltwo-5-3" class="form-control reinsurance-rates-td text-align-right" value="7%"></td>
-									     
-                                  </tr>
+                                   
                             </tbody>
                         </table>
+						
+						
 																	</div>
+																		</fieldset>
 																</div>
 																<div class="col-md-6">
+																<fieldset class="fieldset-box">
+
+										 
 																	<div class="padding-5"> 
 																	<img class="pull-left margin-right-10" width="22" src="/images/design/HRA.png" alt="Alternative text to the image">
 																	<b class="grid-head-text">HRA</b>
+																	<a onclick="openPlanmodal('HRA');" class="pull-right cursor-pointer"><u>Add</u></a>
 																	</div>
 																	<div class="">
-																		<table class="table table-hover table-backcolor" id="editable_hsa" style="table-layout:fixed;">
+																	
+																	<table class="table table-hover table-backcolor" id="editable_hra" style="table-layout:fixed;">
                             <thead>
                                 <tr> 
-                                    <th class="text-align-center" id="hsatwo-column-1">Claim Month %</th>
-                                     <th class="text-align-center" id="hsatwo-column-2">Period Start Month</th>
-									 <th class="text-align-center" id="hsatwo-column-3">Period End Month</th>
-									 <th class="text-align-center" id="hsatwo-column-4">Credibility %</th>
-									  <th class="text-align-center" id="hsatwo-column-5">Medical Trend %</th>
+                                    <th class="text-align-center" id="hratwo-column-1">Claim Month %</th>
+                                     <th class="text-align-center" id="hratwo-column-2">Period Start Month</th>
+									 <th class="text-align-center" id="hratwo-column-3">Period End Month</th>
+									 <th class="text-align-center" id="hratwo-column-4">Credibility %</th>
+									  <th class="text-align-center" id="hratwo-column-5">Medical Trend %</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td id="hsatwo-left-header-1">Period 1</td>
-									  <td><input type="text" id="hsatwo-2-1" class="form-control reinsurance-rates-td text-align-right" value="1"></td>
-									   <td><input type="text" id="hsatwo-3-1" class="form-control reinsurance-rates-td text-align-right" value="12"></td>
-									    <td><input type="text" id="hsatwo-4-1" class="form-control reinsurance-rates-td text-align-right" value="100%"></td>
-										 <td><input type="text" id="hsatwo-5-1" class="form-control reinsurance-rates-td text-align-right" value="4%"></td>
+                                    <td id="hratwo-left-header-1">Period 1</td>
+									  <td><input type="text" id="hratwo-2-1" class="form-control reinsurance-rates-td text-align-center" value="1" disabled></td>
+									   <td><input type="text" id="hratwo-3-1" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="hratwo-4-1" class="form-control reinsurance-rates-td text-align-center" value="100%"></td>
+										 <td><input type="text" id="hratwo-5-1" class="form-control reinsurance-rates-td text-align-center" value="11.4%"></td>
 									     
                                   </tr>
                                  
-                                     <tr>
-                                    <td id="hsatwo-left-header-2">Period 2</td>
-									  <td><input type="text" id="hsatwo-2-2" class="form-control reinsurance-rates-td text-align-right" value="12"></td>
-									   <td><input type="text" id="hsatwo-3-2" class="form-control reinsurance-rates-td text-align-right" value="24"></td>
-									    <td><input type="text" id="hsatwo-4-2" class="form-control reinsurance-rates-td text-align-right" value="100%"></td>
-										 <td><input type="text" id="hsatwo-5-2" class="form-control reinsurance-rates-td text-align-right" value="4%"></td>
-									     
-                                  </tr>
-								     <tr>
-                                    <td id="hsatwo-left-header-3">Period 3</td>
-									  <td><input type="text" id="hsatwo-2-3" class="form-control reinsurance-rates-td text-align-right" value="25"></td>
-									   <td><input type="text" id="hsatwo-3-3" class="form-control reinsurance-rates-td text-align-right" value="36"></td>
-									    <td><input type="text" id="hsatwo-4-3" class="form-control reinsurance-rates-td text-align-right" value="100%"></td>
-										 <td><input type="text" id="hsatwo-5-3" class="form-control reinsurance-rates-td text-align-right" value="4%"></td>
-									     
-                                  </tr>
+                                   
                             </tbody>
                         </table>
+						
 																	</div>
+																	</fieldset>
 																</div>
 															</div>
 
@@ -977,23 +909,30 @@ use yii\helpers\Html;
 						<div class="border-top-bottom-ddd col-md-12 padding-0">
 							<div class="container margin-top-10 margin-bottom-10">
 							
-														<div class="col-md-12">
+																				
+<div class="col-md-12">
+<div class="col-md-1">
+</div>
+<div class="col-md-10">
+
+															<div class="col-md-12 margin-top-10">
 																<div class="col-md-6">
-									<p class="box-head fontcolor-blue">Renewal Cost Items</p>
+									<p class="box-head "><span class="fontcolor-blue">Renewal Cost Items</span><i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="left" data-content="Click on Row Cell to Edit" data-original-title="Edit Cell"></i></p>
+									
 								</div>
 								<div class="col-md-6" align="right">
-									<span><i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="left" data-content="Click on Row Cell to Edit" data-original-title="Edit Cell"></i>
+									<span>
 									</span>
 								</div>
 									
-			<table class="table table-hover table-backcolor" id="editable_cost_items" style="table-layout:fixed;">
+			<table class="table table-hover table-backcolor" id="editable_renewal_cost_items" style="table-layout:fixed;">
                             <thead>
                                 <tr> 
                                    
 									<th class="text-align-center" id="costitems-column-1">Item Name</th>
-									<th class="text-align-center" id="costitems-column-2">Estimated Renewal %</th>
+									<th class="text-align-center" id="costitems-column-2">Estimated Renewal</th>
 									<th class="text-align-center" id="costitems-column-3">Notes</th>
-									<th class="text-align-center" id="costitems-column-4">Add New Row</th>
+									<th class="text-align-center" id="costitems-column-4">Add New Item</th>
                                      
                                 </tr>
                             </thead>
@@ -1001,18 +940,18 @@ use yii\helpers\Html;
                                 <tr>
                                 
 									  <td id="costitems-left-header-1">Stop Loss Premiums</td>
-									   <td><input type="text" id="costitems-2-1" class="form-control reinsurance-rates-td text-align-right" value="4%"></td>
-									    <td><input type="text" id="costitems-3-1" class="form-control reinsurance-rates-td text-align-right" value="Any Notes"></td>
-									<td></td>
+									   <td><div class="input-group"><span class="input-group-addon"><i class="fa fa-usd  color-black"></i></span><input type="text" id="costitems-2-1" class="form-control reinsurance-rates-td price price" value="4"></div></td>
+									    <td><input type="text" id="costitems-3-1" class="form-control reinsurance-rates-td" value="Any Notes"></td>
+									 <td class="add_costitems_button" align="center"><div class="add-icon cursor-pointer"><span class="" onclick="addCostitems();"><u>Add</u></span></div></td>
                                   </tr>
                                  
-                                     <tr>
+                                 <!--    <tr>
                                   
 									    <td id="costitems-left-header-2">Administrative Fees</td>
-									   <td><input type="text" id="costitems-2-2" class="form-control reinsurance-rates-td text-align-right" value="4%"></td>
-									    <td><input type="text" id="costitems-3-2" class="form-control reinsurance-rates-td text-align-right" value="Any Notes%"></td>
-									     <td class="add_costitems_button" align="center"><div class="add-icon"><span class="" onclick="addCostitems();">+</span></div></td>
-                                  </tr>
+									   <td><div class="input-group"><span class="input-group-addon"><i class="fa fa-usd  color-black"></i></span><input type="text" id="costitems-2-2" class="form-control reinsurance-rates-td text-align-center" value="4%"></div></td>
+									    <td><input type="text" id="costitems-3-2" class="form-control reinsurance-rates-td text-align-center" value="Any Notes%"></td>
+									     <td class="add_costitems_button" align="center"><div class="add-icon"><span class="" onclick="addCostitems();"><u>Add</u></span></div></td>
+                                  </tr>-->
 								   
                             </tbody>
                         </table>
@@ -1022,6 +961,8 @@ use yii\helpers\Html;
 																			<div dx-data-grid="dataGridOptions16"></div>
 																		</div>-->
 															
+															</div>
+															</div>
 															</div>
 							</div>
 							</div>
@@ -1043,15 +984,21 @@ use yii\helpers\Html;
 								<div class="border-top-bottom-ddd col-md-12 padding-0">
 							<div class="container margin-top-10 margin-bottom-10">
 							<div class="col-md-12">
+							<div class="col-md-2">
+							</div>
+							<div class="col-md-8">
                                <div class="col-md-12 padding-0">
+							   <div class="col-md-2">
+												</div>
 												<div class="col-md-12 form-group padding-0">
-													<div class="col-md-4">
-														<label># of Plan Contribution Strategies
-														 <i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Select the number of various employee contribution structures you would like to track on this plan.  Once selected, below you will see your selected number of tables where you can then enter in the number of contribution tiers for each structure, name the tiers and enter in monthly premium rates.  Finally, enter the average monthly enrollment for each structure." data-original-title="Additional Cost Items to Track"></i>
+													<div class="col-md-5">
+														<label># of Employee  Contribution Strategies
+															 <i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Select the number of various employee contribution structures you would like to track on this plan.  Once selected, below you will see your selected number of tables where you can then enter in the number of contribution tiers for each structure, name the tiers and enter in monthly premium rates.  Finally, enter the average monthly enrollment for each structure." data-original-title="Plan Contribution Strategies"></i>
 														 </label>
 													</div>
-													<div class="col-md-3">
-														<select class="form-control">
+													<div class="col-md-5">
+														<select class="form-control" id="select_renewal_employee_contribution" onchange="employeerenewalContribution();">
+														<option value="">Select</option>
 															<option value="1">1</option>
 															<option value="2">2</option>
 															<option value="3">3</option>
@@ -1064,73 +1011,10 @@ use yii\helpers\Html;
 												
 												</div>
 												
-												<div class="col-md-12 padding-0 margin-bottom-20">
-												<div class="col-md-12 padding-0">
-													<div class="col-md-4">
-														<label> Plan 1 Contribution Name</label>
-													</div>
-													<div class="col-md-3">
-														<input class="form-control  placeholder-italics"/>
-													</div>
-													
-														<div class="col-md-12 padding-top-10">
-																    <table class="table table-hover table-backcolor" id="editable_contributions_track_copy">
-                            <thead>
-                                <tr>
-                                   
-                                    <th class="no-wrap" id="contributioncopy-column-1">Tier No.</th>
-                                     <th class="no-wrap" id="contributioncopy-column-2">Tier Name</th>
-									 <th class="no-wrap" id="contributioncopy-column-3">Monthly Rates</th>
-									 <th class="no-wrap" id="contributioncopy-column-4">Monthly Enrollment</th>
-									  <th class="no-wrap" id="contributioncopy-column-5">Add Row</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td id="contributioncopy-left-header-1">Tier 1</td>
-									 <td><select class="form-control reinsurance-rates-td" id="contributioncopy-2-1" class="form-control reinsurance-rates-td text-align-right">
-								 <option>Employee</option>
-								 <option>Employee + Spouse</option>
-								 <option>Employee + Child</option>
-								 <option>Employee + Child(ren)</option>
-								 <option>Family</option>
-								  <option>Employee + 1</option>
-								   <option>Employee + 2</option>
-								    <option>Employee + 3</option>
-									</select>
-									</td>
-									  <td><input type="text" id="contributioncopy-3-1" class="form-control reinsurance-rates-td text-align-right" value="99.00"></td>
-									   <td><input type="text" id="contributioncopy-4-1" class="form-control reinsurance-rates-td text-align-right" value="$68.00"></td>
-									    <td></td>
-									<td></td>
-                                  </tr>
-                                 
-                                  <tr>
-                                    <td id="contributioncopy-left-header-2">Tier 2</td>
-									 <td><select class="form-control reinsurance-rates-td" id="contributioncopy-2-2" class="form-control reinsurance-rates-td text-align-right">
-								 <option>Employee</option>
-								 <option>Employee + Spouse</option>
-								 <option>Employee + Child</option>
-								 <option>Employee + Child(ren)</option>
-								 <option>Family</option>
-								  <option>Employee + 1</option>
-								   <option>Employee + 2</option>
-								    <option>Employee + 3</option>
-									</select>
-									</td>
-									   <td><input type="text" id="contributioncopy-3-2" class="form-control reinsurance-rates-td text-align-right" value="99.00"></td>
-									   <td><input type="text" id="contributioncopy-4-2" class="form-control reinsurance-rates-td text-align-right" value="$68.00"></td>
-									<td class="add_contributioncopy_button"><div class="add-icon"><span class="button-add" onclick="addEmployeecontributioncopy();">+</span></div></td>
-                                  </tr>
-                            </tbody>
-                        </table>
-						
-													
-													</div>
+												<div class="col-md-12 padding-0 margin-bottom-20" id="renewal_contribution_strategies">
 												</div>
-
-                                            </div>
-											</div>
+												</div>
+												</div>
 						
 							</div>
 							</div>
@@ -2011,4 +1895,146 @@ $gridColumns = [
 					</div>
 					
 				</div>
+				<!-- for enter reinsurance details -->
+	<div class="modal fade" id="alert_message" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog pswd-pop" style="width: 450px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true" onclick="clearFields();">x</button>
+				<h4 class="modal-title" id="myModalLabel">Alert Message</h4>
+			</div>
+		
+			<div class="modal-body">
+			<div class="form-group">
+				<div class="col-sm-12 add-mem"  style="line-height: 33px;">
+					<label class="add-member-label">If you remove that row it will remove it from the input monthly financials table and will remove the data previously entered.</label>
+				</div>
 				
+	</div>
+			</div>
+			<div class="modal-footer"
+				style="border-top: none; margin-right: 15px;">
+				<button type="button" class="btn btn-default btn-sm"
+					data-dismiss="modal" >No</button>
+					   <a id="alert-meassage-id" class="button-remove-modal btn btn-primary btn-sm" >Yes</a>
+				
+			</div>
+	
+		</div>
+	</div>
+</div>
+
+	<div class="modal fade" id="alert_message_select" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog pswd-pop" style="width: 450px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true" onclick="clearFields();">x</button>
+				<h4 class="modal-title" id="myModalLabel">Alert Message</h4>
+			</div>
+			
+			<div class="modal-body">
+			<div class="form-group">
+				<div class="col-sm-12 add-mem"  style="line-height: 33px;">
+					<label class="add-member-label">If you remove that row it will remove it from the input monthly financials table and will remove the data previously entered.</label>
+				</div>
+				
+	</div>
+			</div>
+			<div class="modal-footer"
+				style="border-top: none; margin-right: 15px;">
+				<button type="button" class="btn btn-default btn-sm"
+					data-dismiss="modal" >No</button>
+					   <a id="alert-meassage-id-select" class="btn btn-primary btn-sm" >Yes</a>
+				
+			</div>
+		
+		</div>
+	</div>
+</div>
+<!-- End for enter reinsurance details -->
+
+<div class="modal fade" id="alert_message_contribution" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog pswd-pop" style="width: 450px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true" onclick="clearFields();">x</button>
+				<h4 class="modal-title" id="myModalLabel">Alert Message</h4>
+			</div>
+		
+			<div class="modal-body">
+			<div class="form-group">
+				<div class="col-sm-12 add-mem"  style="line-height: 33px;">
+					<label class="add-member-label">If you remove that row it will remove it from the input monthly financials table and will remove the data previously entered.</label>
+				</div>
+				
+	</div>
+			</div>
+			<div class="modal-footer"
+				style="border-top: none; margin-right: 15px;">
+				<button type="button" class="btn btn-default btn-sm"
+					data-dismiss="modal" >No</button>
+					   <a id="alert-meassage-id-contribution" class="button-remove-contribution-modal btn btn-primary btn-sm" >Yes</a>
+				
+			</div>
+	
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="alert_message_contribution_renewal" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog pswd-pop" style="width: 450px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true" onclick="clearFields();">x</button>
+				<h4 class="modal-title" id="myModalLabel">Alert Message</h4>
+			</div>
+		
+			<div class="modal-body">
+			<div class="form-group">
+				<div class="col-sm-12 add-mem"  style="line-height: 33px;">
+					<label class="add-member-label">If you remove that row it will remove it from the input monthly financials table and will remove the data previously entered.</label>
+				</div>
+				
+	</div>
+			</div>
+			<div class="modal-footer"
+				style="border-top: none; margin-right: 15px;">
+				<button type="button" class="btn btn-default btn-sm"
+					data-dismiss="modal" >No</button>
+					   <a id="alert-meassage-id-contribution-renewal" class="button-remove-contribution-renewal-modal btn btn-primary btn-sm" >Yes</a>
+				
+			</div>
+	
+		</div>
+	</div>
+</div>
+<script>
+    $(function() {
+
+        var drugs = [
+            "Amyvid", "Quinidine Gluconate", "Trulicity", "TALTZ", "AXIRON","Prozac","Strattera","Symbyax","Cymbalta"
+        ];
+for(i=1 ; i<= 20 ;i++){
+	   $.typeahead({
+            input: ".example"+i+"",
+            order: "asc",
+            minLength: 1,
+            source: {
+                data: drugs
+            },
+            cancelButton: false
+        });
+}
+     
+
+    });
+</script>

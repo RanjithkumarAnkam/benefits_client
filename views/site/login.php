@@ -9,7 +9,7 @@ use yii\captcha\Captcha;
 ?>
 
 <section class="page-content">
-	<div class="page-content-inner single-page-login-alpha" style="background-image: url(<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/images/design/Login_bg2.png)">
+	<div class="page-content-inner single-page-login-alpha" style="background-image: url(<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/images/design/Login_bg2.jpg)">
 
 		<!-- Login Alpha Page -->
 		<div class="col-md-11 margin-top-20 alert-div">
@@ -163,10 +163,10 @@ $form = ActiveForm::begin ( [
 						 		'options'=>['class'=>'form-align'],
 			                ]); ?>
 						<div class="modal-body">
-						
-							<?= $form->field($modelforgotpassword, 'username')->label('Enter your Username / Email Id') ?>
-							
-							<?= $form->field($modelforgotpassword, 'captcha')->widget(Captcha::className())->hint('Please click on captcha image to change captcha') ?>
+							<label class="form-control-label" for="l0">Enter your Username / Email Address *</label>
+							<?= $form->field($modelforgotpassword, 'username')->label('Enter your Username / Email Address')->label(false) ?>
+							<label class="form-control-label pull-left margin-top-15" for="l0">Captcha *</label>
+							<?= $form->field($modelforgotpassword, 'captcha')->widget(Captcha::className())->hint('Please click on captcha image to change captcha')->label(false) ?>
 		
 						</div>
 						<div class="modal-footer footer-background">

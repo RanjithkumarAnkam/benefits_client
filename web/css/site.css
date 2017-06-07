@@ -2,6 +2,9 @@
 	
 	font-family: arial!important;
 }*/
+a.disable-hover , a.disable-hover:hover{
+color:#999 ;
+}
 .margin-top-6{
 	margin-top:6px !important;
 }
@@ -9,6 +12,9 @@
 	background:#13a9cc !important;
 	border-color: #13a9cc !important;
 	color:white;
+}
+.color-orange-light{
+	color:#f7971e !important;
 }
 .profile-part{
 	    padding-top: 10px !important;

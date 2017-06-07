@@ -18,6 +18,8 @@ use app\models\FirmUsers;
 use app\models\ClientUser;
 use app\models\Firms;
 use app\models\Clients;
+use app\components\SessionCheckComponent;
+use app\models\UserIdentityCookie;
 
 class SiteController extends Controller {
 	/**
@@ -74,10 +76,10 @@ class SiteController extends Controller {
 	 * @return string
 	 */
 	public function actionIndex() {
-		//return $this->render ( 'index' );
+		// return $this->render ( 'index' );
 		return $this->redirect ( array ( // redirecting to admin page
-						'/site/login' 
-				) );
+				'/site/login' 
+		) );
 	}
 	
 	/**
@@ -88,108 +90,27 @@ class SiteController extends Controller {
 	public function actionLogin() {
 		$this->layout = 'login-main';
 		
-		
-		//check if user identity is already set or not
-		if (!Yii::$app->user->isGuest) {
-			
-			switch (Yii::$app->user->identity->usertype) {
-				case 1 :
-					$login_url = \Yii::$app->params ['admin_url'];
-					break;
-				case 2 :
-					$login_url = \Yii::$app->params ['firm_url'];
-					break;
-				case 3 :
-					$login_url = \Yii::$app->params ['client_url'];
-					break;
-			}
-			
+		// check if user identity is already set or not
+		if (! Yii::$app->user->isGuest) {
+			// getting login url based on loogedin usertype
+			$result = SessionCheckComponent::RedirectionandSessioncreation();
+			$login_url = $result['login_url'];
 			return $this->redirect ( array ( // redirecting to dashboard page
-					$login_url
+					$login_url 
 			) );
-            
-        }
-		
-		
+		}
 		
 		$model = new LoginForm ();
 		$modelforgotpassword = new ForgotPasswordForm ();
 		$modeluser = new User ();
 		
-		if ($model->load ( Yii::$app->request->post () ) && $model->login ()) {
-			$session = \Yii::$app->session;
+		if ($model->load ( Yii::$app->request->post () ) && $model->login ()) {			
 			$user_id = Yii::$app->user->identity->user_id;
-			switch (Yii::$app->user->identity->usertype) {
-				case 1 :
-					$login_url = \Yii::$app->params ['admin_url'];
-					
-					$userdetailModel = AdminUsers::find ()->where ( [ 
-							'user_id' => $user_id 
-					] )->One ();
-					
-					$profile_pic = $userdetailModel->profile_pic;
-					if(!empty($profile_pic)){
-						$session ['profile_pic'] = '/images/admin_user/'.$profile_pic;
-					}
-					else{
-						$session ['profile_pic'] = '/images/defaultuserimg.png';
-					}					
-					//$full_name = $userdetailModel->first_name.' '.$userdetailModel->last_name;
-					$full_name = $userdetailModel->first_name;
-					$session ['logged_user_fullname'] = $full_name;
-					$session ['profile_logo'] = '/images/logo/benefits.png';
-					break;
-				case 2 :
-					$login_url = \Yii::$app->params ['firm_url'];
-					
-					$userdetailModel = FirmUsers::find ()->where ( [
-							'user_id' => $user_id
-							] )->One ();
-					$profile_pic = $userdetailModel->profile_pic;
-					if(!empty($profile_pic)){
-						$session ['profile_pic'] = '/images/firm_user/'.$profile_pic;
-					}
-					else{
-						$session ['profile_pic'] = '/images/defaultuserimg.png';
-					}	
-					//$full_name = $userdetailModel->first_name.' '.$userdetailModel->last_name;
-					$full_name = $userdetailModel->first_name;
-					$session ['logged_user_fullname'] = $full_name;
-					// getting firm logo
-					$firm_details = Firms::find()->select('firm_logo')->where(['firm_id'=>$userdetailModel->firm_id])->One();
-					if(!empty($firm_details->firm_logo)){
-						$session ['profile_logo'] = '/images/firm-logos/'.$firm_details->firm_logo;
-					}
-					else{
-						$session ['profile_logo'] = '/images/logo/benefits.png';
-					}
-					break;
-				case 3 :
-					$login_url = \Yii::$app->params ['client_url'];
-					
-					$userdetailModel = ClientUser::find ()->where ( [
-							'user_id' => $user_id
-							] )->One ();					
-					if(!empty($profile_pic)){
-						$session ['profile_pic'] = '/images/client_user/'.$profile_pic;
-					}
-					else{
-						$session ['profile_pic'] = '/images/defaultuserimg.png';
-					}
-					//$full_name = $userdetailModel->first_name.' '.$userdetailModel->last_name;
-					$full_name = $userdetailModel->first_name;
-					$session ['logged_user_fullname'] = $full_name;
-					// getting client logo
-					$client_details = Clients::find()->select('company_logo')->where(['client_id'=>$userdetailModel->client_id])->One();
-					if(!empty($client_details->company_logo)){
-						$session ['profile_logo'] = '/images/client-logos/'.$firm_details->company_logo;
-					}
-					else{
-						$session ['profile_logo'] = '/images/logo/benefits.png';
-					}
-					break;
-			}
-			//print_r(\Yii::$app->session['profile_logo']);die();
+			
+			// getting login url based on loggedin usertype
+			$result = SessionCheckComponent::RedirectionandSessioncreation();
+			$login_url = $result['login_url'];
+			
 			return $this->redirect ( array ( // redirecting to admin page
 					$login_url 
 			) );
@@ -211,30 +132,25 @@ class SiteController extends Controller {
 						
 						$password_reset_token = $user_details->password_reset_token;
 						
-						$to =  $modelforgotpassword->username;
+						$to = $modelforgotpassword->username;
 						$from = 'sky@analytics.com';
 						$name = $to;
-						//creating link
+						// creating link
 						$link = \Yii::$app->urlManager->createAbsoluteUrl ( '/forgot-password' ) . '?token=' . $password_reset_token . '&email=' . $modelforgotpassword->username;
 						$company_email = 'sky@analytics.com';
 						$company_phone = '89998989898';
 						$company_logo = \Yii::$app->urlManager->createAbsoluteUrl ( '/images/logo/benefits.png' );
 						
 						// send forgot password mail
-						$mail_result = \Yii::$app->customMail->forgotpasswordmail($to,$from,$name,$link,$company_email,$company_phone,$company_logo);
+						$mail_result = \Yii::$app->customMail->forgotpasswordmail ( $to, $from, $name, $link, $company_email, $company_phone, $company_logo );
 						
-						if(!empty($mail_result))
-						{
+						if (! empty ( $mail_result )) {
 							\Yii::$app->session->setFlash ( 'success', 'Password reset link sent to your mail id' );
-						}else 
-						{
+						} else {
 							\Yii::$app->session->setFlash ( 'error', 'Some error occurred while sending mail' );
 						}
-						
-						}
+					}
 				}
-				
-				
 			} catch ( \Exception $e ) {
 				$msg = $e->getMessage ();
 				\Yii::$app->session->setFlash ( 'error', $msg );
@@ -246,8 +162,6 @@ class SiteController extends Controller {
 				'modelforgotpassword' => $modelforgotpassword 
 		] );
 	}
-	
-	
 	
 	/**
 	 * Forgot password link
@@ -273,9 +187,12 @@ class SiteController extends Controller {
 						
 						if ($user_details->save ()) {
 							
+							//deleting old cookie in db
+							UserIdentityCookie::deleteAll('user_id = :user_id', [':user_id' => $user_details->user_id]);
+						
 							\Yii::$app->session->setFlash ( 'success', 'Password updated successfully' );
 							return $this->redirect ( array ( // redirecting to login page
-							'/site/login' 
+									'/site/login' 
 							) );
 						}
 					} catch ( \Exception $e ) {
@@ -307,7 +224,6 @@ class SiteController extends Controller {
 			// variables
 			$user_details = '';
 			
-			
 			$model = new User ();
 			$model_password_form = new SetPasswordForm ();
 			// find by reset token
@@ -316,92 +232,90 @@ class SiteController extends Controller {
 			if (! empty ( $user_details ) && $user_details->is_verified == 0) {
 				
 				$user_details->is_verified = 1;
-				/*****Check if password is already set or not*********/
-				if($user_details->password == ''){
+				/**
+				 * ***Check if password is already set or not********
+				 */
+				 $transaction = \Yii::$app->db->beginTransaction (); // begin the transaction
+				try {
+								
+				if ($user_details->password == '') {
 					
 					\Yii::$app->session->setFlash ( 'success', 'Email verification pending, please set password to complete verification.' );
 					
 					if ($model_password_form->load ( Yii::$app->request->post () ) && $model_password_form->validate ()) {
-						$transaction = \Yii::$app->db->beginTransaction ();     //begin the transaction
-						try {
 							
 							$user_details->setPassword ( $model_password_form->confirmpassword );
 							$user_details->is_active = 1;
-							
-							
 							
 							if ($user_details->save ()) {
 								
 								$user_id = $user_details->user_id;
 								
 								switch ($user_details->usertype) {
-								/**
-								 * ****if admin*******
-								 */
-								case '1' :
-									$userdetailModel = AdminUsers::find ()->where ( [ 
-											'user_id' => $user_id 
-									] )->One ();
-									$userdetailModel->extension = (string) $userdetailModel->extension;
-									break;
-								/**
-								 * ****if firm*******
-								 */
-								case '2' :
-									$userdetailModel = FirmUsers::find ()->where ( [ 
-											'user_id' => $user_id 
-									] )->One ();
-									break;
-								/**
-								 * ****if client*******
-								 */
-								case '3' :
-									$userdetailModel = ClientUser::find ()->where ( [ 
-											'user_id' => $user_id 
-									] )->One ();
-									break;
+									/**
+									 * ****if admin*******
+									 */
+									case '1' :
+										$userdetailModel = AdminUsers::find ()->where ( [ 
+												'user_id' => $user_id 
+										] )->One ();
+										$userdetailModel->extension = ( string ) $userdetailModel->extension;
+										break;
+									/**
+									 * ****if firm*******
+									 */
+									case '2' :
+										$userdetailModel = FirmUsers::find ()->where ( [ 
+												'user_id' => $user_id 
+										] )->One ();
+										break;
+									/**
+									 * ****if client*******
+									 */
+									case '3' :
+										$userdetailModel = ClientUser::find ()->where ( [ 
+												'user_id' => $user_id 
+										] )->One ();
+										break;
 								}
-							
+								
 								$userdetailModel->is_active = 1;
 								
-								
 								if ($userdetailModel->save ()) {
-								$transaction->commit();       
-								\Yii::$app->session->setFlash ( 'success', 'Email verified and password updated successfully.' );
-								return $this->redirect ( array ( // redirecting to login page
-										'/site/login' 
-								) );
+									$transaction->commit ();
+									\Yii::$app->session->setFlash ( 'success', 'Email verified and password updated successfully.' );
+									return $this->redirect ( array ( // redirecting to login page
+											'/site/login' 
+									) );
 								}
 							}
-						} catch ( \Exception $e ) {
-							
-							$msg = $e->getMessage ();
-							\Yii::$app->session->setFlash ( 'error', $msg );
-						}
+						
 					}
 					
 					return $this->render ( 'forgot-password', [ 
 							'model' => $model,
 							'model_password_form' => $model_password_form 
 					] );
-				
-				}else 
-				{
-					
+				} else {
 					
 					if ($user_details->save ()) {
-					$transaction->commit(); 	
-					\Yii::$app->session->setFlash ( 'success', 'Email verified successfully.' );
-					return $this->redirect ( array ( // redirecting to login page
-							'/site/login'
-					) );
+						$transaction->commit ();
+						\Yii::$app->session->setFlash ( 'success', 'Email verified successfully.' );
+						return $this->redirect ( array ( // redirecting to login page
+								'/site/login' 
+						) );
 					}
-					
 				}
+				
+				} catch ( \Exception $e ) {
+							$transaction->rollback (); // if exception occurs transaction rollbacks
+							$msg = $e->getMessage ();
+							\Yii::$app->session->setFlash ( 'error', $msg );
+						}
 				
 			} else {
 				
-				$transaction->rollback ();                  //if exception occurs transaction rollbacks
+				
 				\Yii::$app->session->setFlash ( 'error', 'Verification link has expired.' );
 				return $this->redirect ( array ( // redirecting to login page
 						'/site/login' 
@@ -409,19 +323,14 @@ class SiteController extends Controller {
 			}
 		}
 	}
-	
-	
-	
-	public function actionChangePassword(){
-		
-		
-		$get_details = \Yii::$app->request->get ();          //getting the details 
-		$model_password = new PasswordForm ();                //initialising model
+	public function actionChangePassword() {
+		$get_details = \Yii::$app->request->get (); // getting the details
+		$model_password = new PasswordForm (); // initialising model
 		$model_users = new User ();
-		$output = array ();                                   //initialising array
+		$output = array (); // initialising array
 		
-		$session = \Yii::$app->session;                        //initialising session
-		$logged_user_id = Yii::$app->user->identity->user_id;            //getting session variables
+		$session = \Yii::$app->session; // initialising session
+		$logged_user_id = Yii::$app->user->identity->user_id; // getting session variables
 		if (! empty ( $get_details ['oldpass'] ) && ! empty ( $get_details ['newpass'] ) && ! empty ( $get_details ['repeatnewpass'] )) {
 			$oldpass = $get_details ['oldpass'];
 			$newpass = $get_details ['newpass'];
@@ -431,30 +340,33 @@ class SiteController extends Controller {
 			$model_password->newpass = $newpass;
 			$model_password->repeatnewpass = $repeatnewpass;
 			
-			$transaction = \Yii::$app->db->beginTransaction ();     //begin the transaction
+			$transaction = \Yii::$app->db->beginTransaction (); // begin the transaction
 			try {
-				if ($model_password->validate ()) {                 //validating the model
-					$user_details = $model_users->findIdentity ( $logged_user_id ); //finding for the user
+				if ($model_password->validate ()) { // validating the model
+					$user_details = $model_users->findIdentity ( $logged_user_id ); // finding for the user
 					$user_details->setPassword ( $newpass );
 					
-					if ($user_details->save ()) {                     //saving the model
-						$transaction->commit();                       //commiting the transaction
-						$output ['success'] = 'success';
+					if ($user_details->save ()) { // saving the model
+					
+					
+						//deleting old cookie in db
+						UserIdentityCookie::deleteAll('user_id = :user_id', [':user_id' => $logged_user_id]);
 						
+						$transaction->commit (); // commiting the transaction
+						$output ['success'] = 'success';
 					}
 				} else {
-					$output ['fail'] = $model_password->errors;           //sending response to ajax in array
+					$output ['fail'] = $model_password->errors; // sending response to ajax in array
 				}
-			} catch ( Exception $e ) {                      //catch the exceptions
+			} catch ( Exception $e ) { // catch the exceptions
 				
 				$msg = $e->getMessage ();
 				$output ['fail'] = $msg;
 				
-				$transaction->rollback ();                  //if exception occurs transaction rollbacks
+				$transaction->rollback (); // if exception occurs transaction rollbacks
 			}
-			return json_encode ( $output );                 //returning the object to ajax
+			return json_encode ( $output ); // returning the object to ajax
 		}
-	
 	}
 	/**
 	 * Logout action.
@@ -465,11 +377,9 @@ class SiteController extends Controller {
 		Yii::$app->user->logout ();
 		\Yii::$app->SessionCheck->Adminlogout ();
 		
-		//return $this->goHome ();
+		// return $this->goHome ();
 		return $this->redirect ( array ( // redirecting to login page
-				'/site/login'
+				'/site/login' 
 		) );
 	}
-	
-	
 }

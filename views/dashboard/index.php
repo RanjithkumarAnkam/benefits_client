@@ -2,6 +2,7 @@
 use yii\data\ArrayDataProvider;
 use kartik\grid\GridView; 
 use yii\helpers\Html;
+use kartik\alert\Alert;
 ?>
 <section class="page-content padding-0">
 
@@ -75,7 +76,36 @@ body.body-blue .plan-link.active{
 			<div class="tab-content padding-vertical-20">
 			<!-- tab for Financial and Basic Statistics-->
 				<div class="tab-pane active" id="home5" role="tabpanel">
+				
+				
+						
+						
 					<div class="col-md-12 padding-left-10 padding-right-10 padding-top-10">
+					<div class="col-md-12 alert-div ">
+				<?php
+				if ($flash = Yii::$app->session->getFlash ( 'success' )) {
+					
+					echo Alert::widget ( [ 
+							'type' => Alert::TYPE_SUCCESS,
+							'icon' => 'glyphicon glyphicon-ok-sign',
+							'body' => $flash,
+							'delay' => 0 
+					] );
+				}
+				?>
+
+				<?php
+				if ($flash = Yii::$app->session->getFlash ( 'error' )) {
+					
+					echo Alert::widget ( [ 
+							'type' => Alert::TYPE_DANGER,
+							'icon' => 'glyphicon glyphicon-remove-sign',
+							'body' => $flash,
+							'delay' => 0 
+					] );
+				}
+				?>
+				</div>
 						<div class="col-md-3 col-xs-12  padding-left-10 padding-right-10">
 							<div class="widget box-shadow widget-six">
 								<div class="widget-header text-align-left ">
@@ -1032,7 +1062,11 @@ $gridColumns = [
 </section>
 
 
-
+<script>
+	$(document).ready(function(){
+$('#home_color').addClass('color-orange-light');
+});
+</script>
 
 
 <script type="text/javascript"

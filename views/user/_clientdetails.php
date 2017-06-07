@@ -1,92 +1,60 @@
 <?php
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use kartik\grid\GridView;
+use SebastianBergmann\CodeCoverage\Report\PHP;
+use app\models\States;
 use kartik\alert\Alert;
 use app\components\EncryptDecryptComponent;
-       
+use yii\web\View;
+use yii\helpers\Url;
+
 ?>
 
-
-<?php $permissions = Yii::$app->session['permissions']; ?>
-<section class="page-content padding-0">
-	<div class="page-content-inner">
-
-		<!-- Dashboard -->
-				<div class="dashboard-container">
-
-
-			<div class="blue-breadcrumb col-md-12 padding-0">
-				<a class="breadcrumb-back-btn" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl().Yii::$app->params['dashboard_url']; ?>">
-				<i class="fa fa-angle-left" aria-hidden="true"></i>
-				</a>
-				<div class="breadcrumb-description">
-					<span class="">New &#62; <?php if(!empty($client_id)){?>Update Client<?php }else{?>Create Client<?php }?></span>
-
-				</div>
-
-			</div>
-			</div>
-
-			<div class="container">
-			<div class="page-content col-md-12">
-			<div class="">
-			<div class="">
-						<div class="col-md-12 alert-div padding-0">
-							<?php
-							if ($flash = Yii::$app->session->getFlash ( 'success' )) {
-								
-								echo Alert::widget ( [ 
-										'type' => Alert::TYPE_SUCCESS,
-										'icon' => 'glyphicon glyphicon-ok-sign',
-										'body' => $flash,
-										'delay' => 0 
-								] );
-							}
-							?>
-							
-							<?php
-							if ($flash = Yii::$app->session->getFlash ( 'error' )) {
-								
-								echo Alert::widget ( [ 
-										'type' => Alert::TYPE_DANGER,
-										'icon' => 'glyphicon glyphicon-remove-sign',
-										'body' => $flash,
-										'delay' => 0 
-								] );
-							}
-							?>
-						</div>
-			<div class="col-md-12 border-ddd widget padding-15">
+<div class="col-md-12 ">
                     <div>
-                        <ul class="nav nav-tabs mb-4 blue-main-nav" role="tablist">
+                        <ul class="nav nav-tabs mb-4 blue-nav-tabs" role="tablist">
+						
+						<?php $permissions = Yii::$app->session['permissions'];
+				        
+							if(in_array(\app\models\User::EditClient, $permissions) || in_array(\app\models\User::FirmAdministratorAccess, $permissions) || in_array(\app\models\User::SuperAdmin, $permissions) ){
+						?>
                             <li class="nav-item">
-                                <a class="nav-link  color-white" id="anchor-pb-1" data-target="#home5" data-toggle="tab" href="javascript: void(0);" role="tab" aria-expanded="true">Client Details
-								<i class="fa fa-info-circle" title="Client Details" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="<?php if(empty($client_id)){?> Enter in the<?php }else{?> Update<?php }?> basic details of the client company." ></i>
+                                <a class="color-black " id="anchor-pb-1" data-target="#home5" data-toggle="tab" href="javascript: void(0);" role="tab" aria-expanded="true" onclick="toggleclient(1)">Client Details
+								<i class="fa fa-info-circle" title="Client Details" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Update basic details of the client company." ></i>
 								</a>
                             </li>
 							
+							<?php } ?>
 							
-                            <li class="nav-item cursor-nodrop"  <?php if(empty($client_id)){?> data-toggle="tooltip" data-placement="bottom" title="First enter Client details." <?php }?>>
-                                <a  class="nav-link color-white pointer-disable" id="anchor-pb-5" <?php if(!empty($client_id)){?>data-target="#profile5" data-toggle="tab" href="javascript: void(0);" role="tab" aria-expanded="false"  <?php }?>>Client Users 
-								<i class="fa fa-info-circle" title="Client Users" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="<?php if(empty($client_id)){?> Enter in the<?php }else{?> Update<?php }?>  details of the client user." ></i>
+							<?php if(in_array(\app\models\User::ClientUser, $permissions) || in_array(\app\models\User::FirmAdministratorAccess, $permissions) || in_array(\app\models\User::SuperAdmin, $permissions) ){ ?>
+							
+                            <li class="nav-item "  <?php if(empty($client_id)){?> data-toggle="tooltip" data-placement="bottom" title="First enter Client details." <?php }?>>
+                                <a  class="color-black " id="anchor-pb-5" data-target="#profile5" data-toggle="tab" href="javascript: void(0);" role="tab" aria-expanded="false" onclick="toggleclient(2)">Client Users 
+								<i class="fa fa-info-circle" title="Client Users" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Update basic details of the client user." ></i>
 								</a>
 								
                             </li>
+							
+							<?php } ?>
                           
                         </ul>
-                        <div class="tab-content blue-main-nav-content ">
-                            <div class="tab-pane " id="home5" role="tabcard" aria-expanded="true" style="border-top:none;">
-							<?php $form = ActiveForm::begin(['action' => !$model->isNewRecord && $encrypt_client_id != '' ? '/user/clientuser?id='.$encrypt_client_id.'' : '/user/clientuser', 'id' => 'client_details', 'method' => 'post',]); ?>
-							<div class="col-md-12 padding-15  border-ddd">
+                        <div class="tab-content blue-nav-content">
+						
+						<?php if(in_array(\app\models\User::EditClient, $permissions) || in_array(\app\models\User::FirmAdministratorAccess, $permissions) || in_array(\app\models\User::SuperAdmin, $permissions) )
+						{ ?>
+                            <div class="tab-pane col-md-12 padding-15 " id="client-form" role="tabcard" aria-expanded="true" style="border-top:none;">
+							<?php $form = ActiveForm::begin(['action'=>Yii::$app->urlManager->createUrl("user/updateclientdetails"),'options' => ['id' => 'client_details_search']]); ?>
+							<div class="">
 											<div class="col-md-8 padding-0">
 
 												<div class="col-md-12 padding-0 margin-bottom-20">
 													<fieldset class="fieldset-box">
 
 														<legend>Client Details</legend>
-														<div class="col-md-12 padding-0" >
-															<div class="col-md-6" id="firm_name_div">
+														<div class="col-md-12 padding-0">
+															<div class="col-md-6">
 																<div class="form-group ">
 																	<label class="form-control-label" for="l0">Firm Name *</label>
 																	<?php
@@ -112,6 +80,7 @@ use app\components\EncryptDecryptComponent;
 
 															</div>
 														</div>
+														<input type="hidden" value="<?php echo $encrypt_client_id;?>" name="encrypt_client_id">
 														<div class="col-md-12 padding-0">
 															<div class="col-md-6">
 
@@ -131,7 +100,7 @@ use app\components\EncryptDecryptComponent;
 															</div>
 														</div>
 														
-														<div class="col-md-12 padding-0">
+															<div class="col-md-12 padding-0">
 														
 															
 															<div class="col-md-6">
@@ -148,6 +117,7 @@ use app\components\EncryptDecryptComponent;
 															</label>
 															</div>
 														</div>
+														
 														
 														<div class="col-md-12 padding-0">
 															<div class="col-md-6">
@@ -224,7 +194,7 @@ use app\components\EncryptDecryptComponent;
 																<div class="form-group ">
 																	<label class="form-control-label" for="l0">Upload
 																		Client Logo<span class="fa fa-info-circle information-icon" title="Upload Client Logo" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Recommended dimensions are 400x400 pixels."></span></label>
-																<?= $form->field($model, 'company_logo', ['inputOptions' => ['class' => 'form-control']])->fileInput(['class' => 'form-control','accept'=>'image/x-png, image/jpeg'])->label ( false ); ?>
+																<?= $form->field($model, 'company_logo', ['inputOptions' => ['class' => 'form-control','tabindex'=>'1']])->fileInput(['accept'=>'image/x-png, image/jpeg'])->label ( false ); ?>
 															</div>
 
 															</div>
@@ -251,7 +221,7 @@ use app\components\EncryptDecryptComponent;
 																		Consultant*</label> 
 																	
 																<?php
-																if (!$model->isNewRecord) {
+																if (! empty ( \Yii::$app->request->get () )) {
 																	echo $form->field ( $model, 'add_primary_consultant', [ 
 																			'inputOptions' => [ 
 																					'class' => 'form-control edited',
@@ -281,7 +251,7 @@ use app\components\EncryptDecryptComponent;
 																	<label class="form-control-label" for="l0">Primary
 																		Account Manager*</label>
 																<?php
-																if (!$model->isNewRecord) {
+																if (! empty ( \Yii::$app->request->get () )) {
 																	echo $form->field ( $model, 'add_primary_account_manager', [
 																			'inputOptions' => [
 																			'class' => 'form-control edited',
@@ -310,7 +280,7 @@ use app\components\EncryptDecryptComponent;
 																<label class="form-control-label" for="l0">Primary
 																	Service Rep*</label>
 																<?php
-																if (!$model->isNewRecord) {
+																if (! empty ( \Yii::$app->request->get () )) {
 																	echo $form->field ( $model, 'add_primary_service_rep', [
 																			'inputOptions' => [
 																			'class' => 'form-control edited',
@@ -383,7 +353,7 @@ use app\components\EncryptDecryptComponent;
 															</label>
 
 															<div class="mt-radio-inline padding-0">
-																<label class="mt-radio mt-radio-outline">Firm <input <?php if(!$model->isNewRecord){ if($model->bill_to == 'firm'){?>checked<?php }}else{ ?>checked<?php } ?>
+																<label class="mt-radio mt-radio-outline">Firm <input <?php if($model->bill_to == 'firm'){?>checked<?php }?>
 																	type="radio" value="firm" name="Clients[bill_to]"/> <span></span>
 																</label> <label class="mt-radio mt-radio-outline">
 																	Client <input type="radio" value="client"  <?php if($model->bill_to == 'client'){?>checked<?php }?>
@@ -403,7 +373,7 @@ use app\components\EncryptDecryptComponent;
 																data-content="Select if you would like your firms logo to be used in the client claims reporting, or if you would prefer to use the actual clients logo instead."></i>
 															</label>
 															<div class="mt-radio-inline  padding-0">
-																<label class="mt-radio mt-radio-outline">Use Firm Logo <input <?php if(!$model->isNewRecord){ if($model->logo_use_type == 'firm'){?>checked<?php }}else{ ?>checked<?php } ?>
+																<label class="mt-radio mt-radio-outline">Use Firm Logo <input <?php if($model->logo_use_type == 'firm'){?>checked<?php }?>
 																	type="radio" value="firm" name="Clients[logo_use_type]"> <span></span>
 																</label> <label class="mt-radio mt-radio-outline"> Use
 																	Client Logo <input type="radio" value="client" <?php if($model->logo_use_type == 'client'){?>checked<?php }?>
@@ -427,7 +397,7 @@ use app\components\EncryptDecryptComponent;
 														</legend>
 														<div class="form-group">
 															<div id="client_form_modules">
-															<?php if(!$model->isNewRecord){?>
+															<?php if(!empty($client_id)){?>
 																<?php foreach($modules as $module){?>																	
 																	<label class="form-control-label"><?php echo $module['option_value'];?></label>
 																	<div class="">
@@ -446,7 +416,7 @@ use app\components\EncryptDecryptComponent;
 																</div>
 															<?php } ?>
 															</div>
-															<div id="packages_block" class=" <?php if($model->isNewRecord){?> hidden <?php }?>">
+															<div id="packages_block" class=" <?php if(empty($client_id)){?> hidden <?php }?> ">
 																<div class="mt-radio-inline  padding-0">
 																<?php 
 																foreach($available_packages as $available_package){ ?>
@@ -460,18 +430,18 @@ use app\components\EncryptDecryptComponent;
 															</div>
 														</div>
 
-														<div class="form-group  <?php if($model->isNewRecord){?> hidden <?php }?>" id="client_num_and_amount_block">
+														<div class="form-group  <?php if(empty($client_id)){?> hidden <?php }?>" id="client_num_and_amount_block">
 															<div class="row">
 																<div class="col-md-12">
 																	<div class="pull-left">
 																		<label class="margin-bottom-0 margin-right-2">Client#</label>
 																		<button type="button" id="no_of_client_for_this_firm"
-																			class="btn btn-default cursor-default"><?php if(!$model->isNewRecord){ echo $client_count; } else {echo '#'; } ?></button>
+																			class="btn btn-default cursor-default"><?php if(!empty($client_id)){ echo $client_count; } else {echo '#'; } ?></button>
 																	</div>
 																	<div class="pull-left margin-left-10">
 																		<label class="margin-bottom-0 margin-right-2">$/Mo</label>
 																		<button type="button" id="amount_of_client_package_for_this_firm"
-																			class="btn btn-default cursor-default"><?php if(!empty($client_active_modules)){ echo '$ '.$client_active_modules->amount; }else{ echo '$ 0';} ?></button>
+																			class="btn btn-default cursor-default"><?php if(!empty($client_active_modules)){ echo '$ '.$client_active_modules->amount; } ?></button>
 																	</div>
 																	<div>
 																		<legend>
@@ -495,26 +465,24 @@ use app\components\EncryptDecryptComponent;
 
 											<div class="modal-footer-btn padding-15">
 
-												<?= Html::submitButton($model->isNewRecord ? 'Save' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-modal-lightblue' : 'btn btn-primary']) ?> <a
-													class="btn btn-default"
-													href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/search">Cancel</a>
-
+												<?= Html::submitButton($model->isNewRecord ? 'Save' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-modal-lightblue' : 'btn btn-primary']) ?><a
+							class="btn btn-default client-close-btn margin-left-5"
+							  >Cancel</a>
 
 
 											</div>
 										</div>										
 										<?php ActiveForm::end(); ?>
 							</div>
+							<?php } ?>
+							<?php if(in_array(\app\models\User::ClientUser, $permissions) || in_array(\app\models\User::FirmAdministratorAccess, $permissions) || in_array(\app\models\User::SuperAdmin, $permissions) ){ ?>
 							
-							 <div class="tab-pane col-md-12 padding-15 border-ddd" id="profile5" role="tabcard" aria-expanded="false" style="border-top:none;">
+							 <div class="tab-pane col-md-12 padding-15 " id="client-grid" role="tabcard" aria-expanded="false" style="border-top:none;">
 							
 							<div class="">
 							<div class="row padding-10" align="right">
-							<?php if(!$model->isNewRecord){ ?>
-																<?php if(in_array(\app\models\User::ClientUser, $permissions) || in_array(\app\models\User::SuperAdmin, $permissions)  || in_array(\app\models\User::FirmAdministratorAccess, $permissions) ){ ?>	
-																<?= Html::a('Add New User', ['addclientuser', 'clientId' => $encrypt_client_id,'clientUserId'=>''], ['class' => 'btn  btn-modal-blue view-client']) ?>
-															<?php } ?>
-															<?php } ?>
+							
+																<?= Html::a('Add New User', ['addclientuser', 'clientId' => $encrypt_client_id,'clientUserId'=>''], ['class' => 'btn  btn-modal-blue view-search-client-user']) ?>
 															</div>
 															
 													<?php 
@@ -535,7 +503,7 @@ use app\components\EncryptDecryptComponent;
 													
 																	$encrypt_client_id = EncryptDecryptComponent::encrytedUser ( $model->client_id );
 																	$client_user_id = EncryptDecryptComponent::encrytedUser ( $model->client_user_id );
-																	$a_first_name = '<u class="color-blue" >'.Html::a($model->first_name, ['addclientuser', 'clientId' => $encrypt_client_id,'clientUserId'=>$client_user_id], ['class' => 'view-client color-blue']).'<u>';
+																	$a_first_name = '<u class="color-blue" >'.Html::a($model->first_name, ['addclientuser', 'clientId' => $encrypt_client_id,'clientUserId'=>$client_user_id], ['class' => 'view-search-client-user color-blue']).'<u>';
 																	}
 																	else
 																	{
@@ -560,7 +528,7 @@ use app\components\EncryptDecryptComponent;
 																		$encrypt_client_id = EncryptDecryptComponent::encrytedUser ( $model->client_id );
 																		$client_user_id = EncryptDecryptComponent::encrytedUser ( $model->client_user_id );
 																	
-																		$a_first_name = '<u class="color-blue" >'.Html::a($model->last_name, ['addclientuser', 'clientId' => $encrypt_client_id,'clientUserId'=>$client_user_id], ['class' => 'view-client color-blue']).'<u>';
+																		$a_first_name = '<u class="color-blue" >'.Html::a($model->last_name, ['addclientuser', 'clientId' => $encrypt_client_id,'clientUserId'=>$client_user_id], ['class' => 'view-search-client-user color-blue']).'<u>';
 																	}
 																	else
 																	{
@@ -716,8 +684,8 @@ use app\components\EncryptDecryptComponent;
 															],
 															'pjax' => true,
 															'pjaxSettings' =>[
-															'timeout'=>3000,
-															//'filterUrl'=> Url::to(["user/clientdetails"]),
+															'timeout'=>5000,
+															'filterUrl'=> Url::to(["user/clientdetails"]),
 															'options'=>[
 																'id'=>'client-user-grid-pjax',
 																'enablePushState' => false,
@@ -743,60 +711,71 @@ use app\components\EncryptDecryptComponent;
 															
 							</div>
 							</div>
+							<?php } ?>
 							</div>
 </div>
-			
-</div>
-	
+	<!-- Loading GIF div starts -->
+						<div class="load-gif" id="loading-client-indicator" style="display:none;">
+							<div class="procressing_plz_wait">
+								<img class=""
+									src="<?php echo Yii::$app->getUrlManager()->getBaseUrl();  ?>/images/default.gif" />
+							</div>
+						</div>
 
-		<script>
-	
-	
-	
-	$(document).ready(function(){
+		<!-- Loading GIF div end -->		
+</div>
+<?php 
+$this->registerJs(
+		"
+		
+		$('.select2').select2();
+		$(\"[data-toggle=tooltip]\").tooltip();
+		$(\"[data-toggle=popover-hover]\").popover({ trigger: \"manual\" , html: true, animation:false,
+
+   })
+	.on(\"mouseenter\", function () {
+		var _this = this;
+		$(this).popover(\"show\");
+		$(\".popover\").on(\"mouseleave\", function () {
+			$(_this).popover('hide');
+		});
+	}).on(\"mouseleave\", function () {
+		var _this = this;
+		setTimeout(function () {
+			if (!$(\".popover:hover\").length) {
+				$(_this).popover(\"hide\");
+			}
+		}, 300);
+	});
 		
 		
-	
-		$('#new_link').addClass('page-active');
-		<?php if(!empty($client_id) && !empty(\Yii::$app->request->get ('tab')) && Yii::$app->request->get ('tab')==2){?>
-		enableClientusers();
-			
-			<?php }elseif(!empty($client_id)){?>
-		enableClient();
-		<?php }else{ ?>
-		$('#anchor-pb-1').trigger('click');
-		<?php }?>
-		$(function () {
-		   $("[data-toggle=popover-hover]").popover({
-            trigger: 'hover'
-			});
-		   $('[data-toggle="tooltip"]').tooltip()
+		$('a[data-toggle=\"tab\"]').on('shown.bs.tab', function (e) {
+		  e.target // newly activated tab
+		  e.relatedTarget // previous active tab
 		})
 		
+		
+		
+		
 
-			 $(document).on('change', 'input[name=activate_module]', function () {
+
+	
+");
+?>
+<script>
+$(document).ready(function(){
+	
+		 $(document).on('change', 'input[name=activate_module]', function () {
 		if($('.input_available_client_packages').is(':checked')){ 
 								$("#packages_block").removeClass("pointer-disable");
 							}else{
 								$("#packages_block").addClass("pointer-disable");
 								$('#packages_block input').removeAttr('checked');
-								$('#amount_of_client_package_for_this_firm').html('$ 0');
 							}
-	})		
-
-$(document).on('ready pjax:success', function(){
-	$('.view-client').click(function(e){
-	       e.preventDefault();
-			
-			$('#add_client_user').modal('show').find('.modal-content').load($(this).attr('href'));
-			$('.select2').select2();
-	      
-	});
-});	
-			
-
-				
-		$('input.business-address-check').change(function(){
+	});		
+	
+	
+	$('input.business-address-check').change(function(){
 
 		if ($('input.business-address-check').is(':checked')) {
 			
@@ -807,55 +786,30 @@ $(document).on('ready pjax:success', function(){
 
 		});
 		
-		
-		<?php if(Yii::$app->user->identity->usertype == 2){ ?>
-		$('#clients-add_firm_id').val('<?php echo $encrypt_firm_id; ?>');
-		getSelectedFirmDetails('<?php echo $encrypt_firm_id; ?>');
-		$('#firm_name_div').hide();
-		<?php } ?>
-
-	});
-
-	
-	/***** function to get firm users based on selected firm 
-	function getFirmUsers(value){
-		 var data= 'firm_id='+value;
-		   
-		  $.ajax({
-			type: 'POST',
-		    url: '<?php echo Yii::$app->urlManager->createUrl("user/getfirmuserslist"); ?>',
-			data:data,
-			processData:false,
-			dataType:'json',
-			success:function(data){
-				console.log(data);
-				if(data.length > 0){
-					var options = '<option value="">Select</option>';				
-					for(var i=0;i< data.length;i++){
-						options += '<option value="'+data[i]['firm_user_id']+'">'+data[i]['firm_user_fullname']+'</option>';
-					}
-				}
-				else{
-					var options = '<option value="">No Firm User Available</option>';
-				}
-				
-				$('#primary_consultant_dd').html('');
-				$('#primary_consultant_dd').append(options);
-				$('#primary_account_manager_dd').html('');
-				$('#primary_account_manager_dd').append(options);
-				$('#primary_service_rep_dd').html('');
-				$('#primary_service_rep_dd').append(options);
-								
-		    },	
-		  
-		  });
+$(".nav.nav-tabs>li:first a").addClass("active");
+$(".tab-content div.tab-pane:first ").addClass("active");
+});	
+function toggleclient(id)
+{
+	if(id == 1)
+	{
+		$('#client-form').addClass('active');
+		$('#client-grid').removeClass('active');
 	}
-	*****/
- 
+	else if(id == 2)
+	{
+		$('#client-form').removeClass('active');
+		$('#client-grid').addClass('active');
+	}
+	
+}
+
+
+
 	/***** function to get firm users based on selected firm *****/
 	function getSelectedFirmDetails(value){
 		 var data= 'firm_id='+value;
-		  
+		   
 		  $.ajax({
 			type: 'POST',
 		    url: '<?php echo Yii::$app->urlManager->createUrl("user/getselectedfirmdetails"); ?>',
@@ -886,20 +840,13 @@ $(document).on('ready pjax:success', function(){
 				if(data.firm_modules.length > 0){
 					var div = '';	
 					for(var i=0;i< data.firm_modules.length;i++){
-						var checked = '';;
-						if(i == 0)
-						{
-							checked = 'checked';
-						}
-						div += '<label class="form-control-label">'+data.firm_modules[i]['option_value']+'</label><div class=""><label class="mt-checkbox mt-checkbox-outline"> Activate<input class="input_available_client_packages" type="checkbox" value="'+data.firm_modules[i]['module_id']+'" name="activate_module" '+checked+'> <span></span></label></div>';
+						div += '<label class="form-control-label">'+data.firm_modules[i]['option_value']+'</label><div class=""><label class="mt-checkbox mt-checkbox-outline"> Activate<input class="input_available_client_packages" type="checkbox" value="'+data.firm_modules[i]['module_id']+'" name="activate_module"> <span></span></label></div>';
 					}
 					$('#packages_block').removeClass("hidden");
 					$('#client_num_and_amount_block').removeClass("hidden");
 				}
 				else{
 					div = '<label class="form-control-label">No modules available for the Firm</label>';
-					$('#packages_block').addClass("hidden");
-					$('#client_num_and_amount_block').addClass("hidden");
 				}
 				$('#client_form_modules').html(div);
 
@@ -949,10 +896,5 @@ $(document).on('ready pjax:success', function(){
 		
 	});
 
-	
-	
-	</script>
-	</div>
-</section>
 
-
+</script>

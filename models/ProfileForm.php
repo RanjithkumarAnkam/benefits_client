@@ -30,8 +30,8 @@ class ProfileForm extends Model
         return [
         
             [['first_name', 'last_name', 'phone'], 'required'],
-            ['first_name', 'match', 'pattern' => '/^[a-zA-Z- ]+$/', 'message' => 'First name can only contain alphabets.'],
-            ['last_name', 'match', 'pattern' => '/^[a-zA-Z- ]+$/', 'message' => 'Last name can only contain alphabets.'],
+            ['first_name', 'match', 'pattern' => '/^[a-zA-Z0-9,. ]+$/', 'message' => 'First name can only contain alphabets, comma, dot and numbers.'],
+            ['last_name', 'match', 'pattern' => '/^[a-zA-Z0-9,. ]+$/', 'message' => 'Last name can only contain alphabets, comma, dot and numbers.'],
             ['extension', 'match', 'pattern' => '/^[0-9]+$/', 'message' => 'Extension can only contain numbers.'],
             [['first_name', 'last_name'], 'string', 'max' => 50],
             [['profile_pic'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, PNG, JPEG, JPG, TIF, GIF, BMP', 'maxSize' => 1024*1024 , 'maxWidth' => 128, 'maxHeight' => 128],

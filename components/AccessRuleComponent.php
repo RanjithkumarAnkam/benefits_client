@@ -17,6 +17,8 @@ class AccessRuleComponent extends AccessRule {
 		if (empty($this->roles)) {
 			return true;
 		}
+		
+		//print_r(\Yii::$app->session['permissions']); die();
 		foreach ($this->roles as $role) {
 			if ($role === '?') {
 				if ($user->getIsGuest()) {
@@ -26,7 +28,7 @@ class AccessRuleComponent extends AccessRule {
 				if (!$user->getIsGuest()) {
 					return true;
 				}
-			} elseif (!$user->getIsGuest() && $user->identity->usertype == $role) {
+			} elseif (!$user->getIsGuest() && in_array($role, \Yii::$app->session['permissions'])) {
 				return true;
 			}
 		}

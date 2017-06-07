@@ -17,7 +17,7 @@
        
         public function rules(){
             return [
-                [['username'],'required', 'message' => 'Username / Email Id cannot be blank.'],
+                [['username'],'required', 'message' => 'Username / Email Address cannot be blank.'],
                 ['username','email'],
 				[['captcha'],'required'],
                 [['captcha'], 'captcha']

@@ -21,7 +21,12 @@ class DashboardController extends BaseController {
 						'ruleConfig' => [
 							'class' => AccessRuleComponent::className ()
 						],
-						
+						'only' => [ 
+								'admin',
+								'firms',
+								'clients',
+								
+						],
 						'rules' => [ 
 								[ 
 										'allow' => true,
@@ -70,6 +75,7 @@ class DashboardController extends BaseController {
 	
 	/* action for Admin Dashboard */
 	public function actionAdmin() {
+		//print_r(\Yii::$app->session['permissions']); die();
 	\Yii::$app->view->title = \Yii::$app->params['page_title'].' | Dashboard';     //page title
 		return $this->render ( 'index' );                                          //rendering to view
 	}

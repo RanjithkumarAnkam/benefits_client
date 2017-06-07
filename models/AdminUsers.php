@@ -41,16 +41,16 @@ class AdminUsers extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'first_name', 'last_name', 'created_by', 'created_date'], 'required'],
+            [['user_id', 'first_name', 'last_name', 'created_by', 'created_date','phone'], 'required'],
             [['user_id', 'is_active', 'created_by', 'modified_by'], 'integer'],
             [['created_date', 'modified_date'], 'safe'],
-            ['first_name', 'match', 'pattern' => '/^[a-zA-Z- ]+$/', 'message' => 'First name can only contain alphabets.'],
-            ['last_name', 'match', 'pattern' => '/^[a-zA-Z- ]+$/', 'message' => 'Last name can only contain alphabets.'],
+            ['first_name', 'match', 'pattern' => '/^[a-zA-Z,.\-\ ]+$/', 'message' => 'First name can only contain alphabets, comma, dot and hash.'],
+            ['last_name', 'match', 'pattern' => '/^[a-zA-Z,.\-\ ]+$/', 'message' => 'Last name can only contain alphabets, comma, dot and hash.'],
             ['extension', 'match', 'pattern' => '/^[0-9]+$/', 'message' => 'Extension can only contain numbers.'],
             [['first_name', 'last_name'], 'string', 'max' => 50],
-            [['profile_pic'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, PNG, JPEG, JPG, TIF, GIF, BMP', 'maxSize' => 1024*1024 , 'maxWidth' => 128, 'maxHeight' => 128],
-            [['extension'], 'string', 'max' => 5],
-            [['phone', 'mobile'], 'string', 'max' => 20],
+            [['profile_pic'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, PNG, JPEG, JPG, TIF, GIF, BMP', 'maxSize' => 1024*1024 , 'maxWidth' => 400, 'maxHeight' => 400],
+            [['extension'], 'string', 'min'=>3, 'max' => 6],
+            [['phone', 'mobile'], 'string', 'min'=>14,'max' => 14,'tooShort'=>'Should contain 10 digits'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'user_id']],
         ];
     }

@@ -16,6 +16,11 @@ use app\components\EncryptDecryptComponent;
 use app\models\Clients;
 use app\models\CompanySubscription;
 use app\models\FirmUsers;
+use app\models\ClientUser;
+use app\models\SubscriptionPayments;
+use app\models\SubscriptionPaymentsSearch;
+use yii\web\Response;
+use app\models\FirmModules;
 
 class MasterdataController extends BaseController {
 	public function behaviors() {
@@ -32,35 +37,49 @@ class MasterdataController extends BaseController {
 								'addsystempricing',
 								'updatesystempricing'
 						],
-						'rules' => [ 
-								[ 
-										'allow' => true,
+						'rules' => [[ 
 										'actions' => [ 
-												'systembilling',
-												'systempricing',
-												'firmpricing',
-												'lookupoptions',
-												'addplans',
-												'manage-plans',
-												'addsystempricing',
-												'updatesystempricing'
-												
+												'systembilling' 
 										],
+										'allow' => true,
 										'roles' => [ 
-												User::ADMIN 
+												User::SuperAdmin,User::SystemBilling 
 										] 
 								],
 								[ 
+										'actions' => [ 
+												'systempricing',
+												'addsystempricing',
+												'updatesystempricing'												
+										],
+										'allow' => true,
+										'roles' => [ 
+												User::SuperAdmin,User::SystemPricing 
+										] 
+								],
+								[ 
+										'actions' => [ 
+												'firmpricing' 
+										],
+										'allow' => true,
+										'roles' => [
+												User::SuperAdmin,User::FirmAdministratorAccess,User::IsBilling,User::FirmPricing 
+										]
+								],
+								
+								[ 
 										'allow' => true,
 										'actions' => [ 
+												'lookupoptions',
 												'addplans',
-												'firmpricing',
-												'manage-plans' 
+												'manage-plans'
+																								
 										],
 										'roles' => [ 
-												User::FIRM 
+												User::SuperAdmin 
 										] 
-								] 
+								],
+								
 						] 
 				]
 				,
@@ -133,7 +152,7 @@ class MasterdataController extends BaseController {
 				
 				$model_pricing->module_id = $module_id;
 				$model_pricing->package_type = $key;
-				$model_pricing->amount = $value;
+				$model_pricing->amount = str_replace(',', '', $value);
 				$model_pricing->created_by = Yii::$app->user->identity->user_id;
 				$model_pricing->status = 1;
 				$model_pricing->client_number = $new_client_number;
@@ -213,25 +232,26 @@ class MasterdataController extends BaseController {
 				
 				if($pricing_details['package_type'] == 24)
 				{
-					$pricing_details->amount = $basic;
+					
+					$pricing_details->amount = str_replace(',', '', $basic);
 						
 				}elseif ($pricing_details['package_type'] == 25){
 						
-					$pricing_details->amount = $full_service;
+					$pricing_details->amount = str_replace(',', '', $full_service);
 						
 				}elseif ($pricing_details['package_type'] == 26)
 				{
-					$pricing_details->amount = $bulk;
+					$pricing_details->amount = str_replace(',', '', $bulk);
 						
 				}
 				
-				if ($pricing_details->update ()) {
+				if ($pricing_details->save ()) {
 					
 					$i++;
 				} else {
 					
 						
-					$arrerrors = $model_pricing->getFirstErrors ();
+					$arrerrors = $pricing_details->getFirstErrors ();
 					$errorstring = '';
 					/**
 					 * *****Converting error into string*******
@@ -286,15 +306,15 @@ class MasterdataController extends BaseController {
 			{
 				if($pricing['package_type'] == 24)
 				{
-					$newInsertArray['basic'] = $pricing['amount'];
+					$newInsertArray['basic'] = Yii::$app->formatter->asCurrency($pricing['amount'],'');
 					
 				}elseif ($pricing['package_type'] == 25){
 					
-					$newInsertArray['full_service'] = $pricing['amount'];
+					$newInsertArray['full_service'] = Yii::$app->formatter->asCurrency($pricing['amount'],'');
 					
 				}elseif ($pricing['package_type'] == 26)
 				{
-					$newInsertArray['bulk'] = $pricing['amount'];
+					$newInsertArray['bulk'] = Yii::$app->formatter->asCurrency($pricing['amount'],'');
 					
 				}
 			}
@@ -315,65 +335,273 @@ class MasterdataController extends BaseController {
 	}
 	
 	public function actionFirmpricing() {
-		
-		$where_clause='';
-		$firm_id='';
-		$module='';
-		$user_type=Yii::$app->user->identity->usertype;
-		$logged_id=Yii::$app->user->identity->user_id;
-		$firm_clients=[];
+		$where_clause = '';
+		$firm_id = '';
+		$client_id = '';
+		$module = '';
+		$user_type = Yii::$app->user->identity->usertype;
+		$logged_id = Yii::$app->user->identity->user_id;
+		$firm_clients = [ ];
+		$modules = array();
 		$connection = \yii::$app->db;
 		
 		\Yii::$app->view->title = \Yii::$app->params ['page_title'] . ' | Firm Pricing';
 		
-		if(!empty(\Yii::$app->request->Get('firm'))){
-			$firm_id=EncryptDecryptComponent::decryptUser(\Yii::$app->request->Get('firm'));
+		
+		
+		
+		if (! empty ( \Yii::$app->request->Get ( 'firm' ) ) && ! empty ( \Yii::$app->request->Get ( 'module' ) )) {
+			$firm_id = EncryptDecryptComponent::decryptUser ( \Yii::$app->request->Get ( 'firm' ) );
 		}
 		
-		if(!empty(\Yii::$app->request->Get('module'))){
-			$module=EncryptDecryptComponent::decryptUser(\Yii::$app->request->Get('module'));
+		//check if usertype is firm user
+		if ($user_type == 2 ) {
+			$firm_details = FirmUsers::findOne ( [ 
+					'user_id' => $logged_id 
+			] );
+			$firm_id = $firm_details->firm_id;
 		}
 		
-		if($module && $firm_id){
-		$sql="SELECT c.client_id,c.client_name,c.created_date,cs.amount,c.bill_to,lo.option_value as module,lop.option_value as packagetype 
+		//check if usertype is client user
+		if ($user_type == 3 ) {
+			$client_details = ClientUser::findOne ( [ 
+					'user_id' => $logged_id 
+			] );
+			$client_id = $client_details->client_id;
+			$firm_id =  $client_details->client->firm_id;
+		}
+		
+		
+		
+		if ($firm_id && ! empty ( \Yii::$app->request->Get ( 'module' ) )) {
+			
+			$module = EncryptDecryptComponent::decryptUser ( \Yii::$app->request->Get ( 'module' ) );
+			
+			$sql = "SELECT cs.subscription_id,c.client_id,c.client_name,c.created_date,cs.amount,c.bill_to,lo.option_value as module,lop.option_value as packagetype 
 				FROM tbl_sir_firms f LEFT JOIN tbl_sir_clients c ON f.firm_id=c.firm_id 
 				INNER JOIN tbl_sir_company_subscription cs ON c.client_id=cs.client_id 
 				LEFT JOIN tbl_sir_lookup_options lo ON lo.option_id=cs.module_id 
 				LEFT JOIN tbl_sir_lookup_options lop ON lop.option_id=cs.package_type 
-				LEFT JOIN tbl_sir_firm_modules fm ON fm.firm_id=f.firm_id WHERE f.firm_id=$firm_id AND fm.module_id=$module GROUP BY c.client_id";
-		
-		/*if($user_type==2){
-			$firm_id=FirmUsers::findOne(['user_id'=>$logged_id]);
+				LEFT JOIN tbl_sir_firm_modules fm ON fm.firm_id=f.firm_id WHERE f.firm_id=$firm_id AND cs.is_active = 1";
 			
-			$where_clause=" AND c.firm_id=$firm_id->firm_id";
-		}*/
-		
-	//	$sql .=$where_clause;
-		
-		$model = $connection->createCommand($sql);
-		$firm_clients = $model->queryAll();
-		
+			if ($module) {
+				$sql .= " AND fm.module_id=$module ";
+			}
+			
+			if (!empty($client_id)) {
+				
+			$sql .= " AND  cs.client_id = $client_id";
+			
+			}
+			
+			$sql .= " GROUP BY c.client_id ";
+			$model = $connection->createCommand ( $sql );
+			$firm_clients = $model->queryAll ();
 		}
 		
-		$firms_sql="SELECT f.firm_id,f.firm_name FROM tbl_sir_firms f";
+		$firms_sql = "SELECT f.firm_id,f.firm_name FROM tbl_sir_firms f";
 		
-		if($user_type==2){
-			$firm_id=FirmUsers::findOne(['user_id'=>$logged_id]);
-			$firms_sql.=" WHERE f.firm_id=$firm_id->firm_id";
+		if ($user_type == 2 && ! empty ( \Yii::$app->request->Get ( 'module' ) )) {
+			
+			$firms_sql .= " WHERE f.firm_id=$firm_id";
+			
 		}
-		$firms_model = $connection->createCommand($firms_sql);
-		$firm_list= $firms_model->queryAll();
+		$firms_model = $connection->createCommand ( $firms_sql );
+		$firm_list = $firms_model->queryAll ();
 		
 		
-		$module_sql="SELECT option_id,option_value FROM tbl_sir_lookup_options WHERE option_type=2 AND option_status=1";
-		$module_model = $connection->createCommand($module_sql);
-		$modules= $module_model->queryAll();
+		//get modules details for the firm user login
+		if (($user_type == 1 || $user_type == 2) && ! empty ( $firm_id )) {
+		$module_sql = "SELECT tslo.option_id,tslo.option_value 
+		FROM tbl_sir_firm_modules tsfm 
+		LEFT JOIN tbl_sir_lookup_options  tslo
+		ON tsfm.module_id = tslo.option_id
+		WHERE tsfm.firm_id=$firm_id AND tsfm.is_active = 1";
+		$module_model = $connection->createCommand ( $module_sql );
+		$modules = $module_model->queryAll ();
+		}
 		
-		$packages_sql="SELECT option_id,option_value FROM tbl_sir_lookup_options WHERE option_type=5 AND option_status=1";
-		$packages_model = $connection->createCommand($packages_sql);
-		$packages= $packages_model->queryAll();
+		
+		//get modules details for the client user login
+		if ($user_type == 3 && ! empty ( $firm_id ) && ! empty ( $client_id )) {
+			
+		$module_sql = "SELECT tslo.option_id,tslo.option_value 
+		FROM tbl_sir_company_subscription tscs 
+		LEFT JOIN tbl_sir_lookup_options  tslo
+		ON tscs.module_id = tslo.option_id
+		WHERE tscs.client_id=$client_id AND tscs.is_active = 1";
+		$module_model = $connection->createCommand ( $module_sql );
+		$modules = $module_model->queryAll ();
+			
+			
+		}
 
-		return $this->render ( 'firmpricing',['resultData'=>$firm_clients,'firm_list'=>$firm_list,'modules'=>$modules,'packages'=>$packages] );
+		
+		$packages_sql = "SELECT option_id,option_value FROM tbl_sir_lookup_options WHERE option_type=5 AND option_status=1";
+		$packages_model = $connection->createCommand ( $packages_sql );
+		$packages = $packages_model->queryAll ();
+		
+		
+		
+		
+		return $this->render ( 'firmpricing', [ 
+				'resultData' => $firm_clients,
+				'firm_list' => $firm_list,
+				'modules' => $modules,
+				'packages' => $packages,
+				'firm_id' => $firm_id
+		] );
+	}
+	
+	/**
+	 * ****action for getting payment history************
+	 */
+	public function actionPaymenthistory($subscription_id) {
+		$model = new SubscriptionPayments ();
+		$searchModel = new SubscriptionPaymentsSearch ();
+		
+		$decrypt_subscription_id = EncryptDecryptComponent::decryptUser ( $subscription_id );
+		
+		$searchModel->subscription_id = $decrypt_subscription_id;
+		// data provider for firm users grid
+		$dataProvider = $searchModel->search ( \Yii::$app->request->queryParams );
+		
+		if (Yii::$app->request->isAjax) {
+			return $this->renderAjax ( '_payment-history', [ 
+					'encrypt_subscription_id' => $subscription_id,
+					'searchModel' => $searchModel,
+					'dataProvider' => $dataProvider,
+					'model' => $model 
+			] );
+		} else {
+			return $this->render ( '_payment-history', [ 
+					'encrypt_subscription_id' => $subscription_id,
+					'searchModel' => $searchModel,
+					'dataProvider' => $dataProvider,
+					'model' => $model 
+			] );
+		}
+	}
+	
+	/**
+	 * ***action to show payment history details model
+	 * $subscription_id,$payment_id is iin encrypted form
+	 * ******
+	 */
+	public function actionPaymenthistorydetails($subscription_id, $payment_id) {
+		
+		// decrypting id
+		$decrypt_subscription_id = EncryptDecryptComponent::decryptUser ( $subscription_id );
+		
+		$model = new SubscriptionPayments ();
+		
+		// if not empty payment_id it shows that request is for update
+		if (! empty ( $payment_id )) {
+			$decrypt_payment_id = EncryptDecryptComponent::decryptUser ( $payment_id );
+			$model = SubscriptionPayments::find ()->where ( [ 
+					'payment_id' => $decrypt_payment_id 
+			] )->One ();
+		}
+		
+		if (Yii::$app->request->isAjax) {
+			return $this->renderAjax ( '_add-payment-history', [ 
+					'encrypt_subscription_id' => $subscription_id,
+					'encrypt_payment_id' => $payment_id,
+					'model' => $model 
+			] );
+		} else {
+			return $this->render ( '_add-payment-history', [ 
+					'encrypt_subscription_id' => $subscription_id,
+					'encrypt_payment_id' => $payment_id,
+					'model' => $model 
+			] );
+		}
+	}
+	/**
+	 * ******Action to add update payment history****************
+	 */
+	public function actionSavepaymenthistory() {
+		
+		$posted_data = \Yii::$app->request->post();
+		if(!empty($posted_data['SupportVariable']['subscription_id']))
+		{
+			$model = new SubscriptionPayments ();
+			$subscription_id = $posted_data['SupportVariable']['subscription_id'];
+			$payment_id = $posted_data['SupportVariable']['payment_id'];
+			
+			$transaction = \Yii::$app->db->beginTransaction();
+			
+			try {
+				
+				
+				//decrypting ids
+				$decrypt_subscription_id = EncryptDecryptComponent::decryptUser ( $subscription_id );
+					
+				if (! empty ( $payment_id ))
+				{
+				
+					$decrypt_payment_id = EncryptDecryptComponent::decryptUser ( $payment_id );
+					$model = SubscriptionPayments::find ()->where ( [
+							'payment_id' => $decrypt_payment_id
+							] )->One ();
+					
+					if(empty($model))
+					{
+						throw new \Exception('No payment history found to update.');
+					}
+				
+				}
+				
+				$model->attributes = \Yii::$app->request->post('SubscriptionPayments');
+				if($model->isNewRecord)
+				{
+					$model->subscription_id = $decrypt_subscription_id;
+					$model->created_date = date('Y-m-d H:i:s');
+					$model->created_by = \Yii::$app->user->identity->user_id;
+					
+				}else 
+				{
+					$model->modified_date = date('Y-m-d H:i:s');
+					$model->modified_by = \Yii::$app->user->identity->user_id;
+				}
+				
+				if($model->save())
+				{
+					$transaction->commit();
+					// set flash message to user
+					$success = 'success';
+					Yii::$app->response->format = trim ( Response::FORMAT_JSON );
+					return $success;
+					
+				}else 
+				{
+					$error = \yii\widgets\ActiveForm::validate ( $model );
+					Yii::$app->response->format = trim ( Response::FORMAT_JSON );
+					return $error;
+						
+				}
+				
+				
+				
+			} catch (\Exception $e) {
+				
+				$msg = $e->getMessage ();
+				$transaction->rollback ();
+				
+				Yii::$app->response->format = trim ( Response::FORMAT_JSON );
+				return $msg;
+				
+				
+				
+			}
+		}else 
+		{
+			$error = 'error-no-subscription-id';
+			Yii::$app->response->format = trim ( Response::FORMAT_JSON );
+			return $error;
+		}
+		
+		
 		
 	}
 	public function actionLookupoptions() {
@@ -509,18 +737,27 @@ class MasterdataController extends BaseController {
 			$client_details=[];
 			$client_id=EncryptDecryptComponent::decryptUser(\Yii::$app->request->post ('client_id'));
 			
-			$client=Clients::findOne(['client_id'=>$client_id]);
-			$client_subs=CompanySubscription::find(['client_id'=>$client_id])->all();
+			$client=Clients::find()->where(['client_id'=>$client_id])->One();
+			$client_subs=CompanySubscription::find()->where(['client_id'=>$client_id])->One();
 			$transaction = \Yii::$app->db->beginTransaction ();
 			try {
+				
+				$client->add_firm_id =  'true';
+				$client->add_state =  'true';
+				$client->add_primary_consultant =  'true';
+				$client->add_primary_account_manager =  'true';
+				$client->add_primary_service_rep =  'true';
+				$client->add_employer_size_category = 'true';
+				$client->add_industry_code =  'true';
+				$client->zip = (string) $client->zip;
 				$client->bill_to=\Yii::$app->request->post ('billto');
 				$client_subs->amount=\Yii::$app->request->post ('amount');
 				$client_subs->package_type=\Yii::$app->request->post ('package');
 				
-				if($client->update() && $client_subs->save()){
+				if($client->save() && $client_subs->save()){
 					$transaction->commit ();
 					$data['success']=true;
-					$data['message']='Success';
+					$data['message']='Successfully updated';
 				}else{
 					print_r($client->geterrors()); die();
 				}
@@ -537,6 +774,27 @@ class MasterdataController extends BaseController {
 			echo json_encode($data);
 			//return $client_details;
 			//print_r(\Yii::$app->request->post (  ));die();
+		}
+	}
+	
+	final function actionFetchclientmodules(){
+		if (! empty ( \Yii::$app->request->post ('client_id') )) {
+			
+			$module_details=[];
+			$client_id=EncryptDecryptComponent::decryptUser(\Yii::$app->request->post ('client_id'));
+			
+			
+			$client_subs=FirmModules::find()->select('module_id,tbl_sir_lookup_options.option_value')->joinWith('module')->where(['firm_id'=>$client_id])->andwhere(['is_active'=>1])->groupBy('module_id')->asArray()->All();
+			
+			foreach($client_subs as $client_sub){
+				$client_details=[];
+				$client_details['id'] = EncryptDecryptComponent::encrytedUser($client_sub['module_id']);
+				$client_details['module'] = $client_sub['option_value'];
+				array_push($module_details,$client_details);
+			}
+			echo json_encode($module_details);
+			//print_r($client_subs);
+			
 		}
 	}
 	

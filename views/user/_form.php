@@ -8,7 +8,8 @@ use kartik\alert\Alert;
 <div class="container">
 <div class="page-content col-md-12">
 <div class="alert-div">
-		<?php 
+<?php 
+
 if($flash = Yii::$app->session->getFlash('success')){
 
 echo  Alert::widget([
@@ -55,12 +56,14 @@ echo  Alert::widget([
 						 <div class="col-md-12 padding-0">
 						 <div class="col-md-6">
 						   <div class="">
-                                <?= $form->field($model_admin_users, 'first_name')->textInput(['maxlength' => 15, 'class' => 'form-control'])->label('First Name',['class'=>'form-control-label']); ?>
+						   	 <label class="form-control-label">First Name*</label>
+                                <?= $form->field($model_admin_users, 'first_name')->textInput(['maxlength' => true, 'class' => 'form-control','tabindex' => '1','onkeypress'=>'return username(event);'])->label(false); ?>
                             </div>
 						 </div>
 						  <div class="col-md-6">
 						  <div class="">
-                               <?= $form->field($model_admin_users, 'last_name')->textInput(['maxlength' => 15, 'class' => 'form-control'])->label('Last Name',['class'=>'form-control-label']); ?>
+						  	 <label class="form-control-label">Last Name*</label>
+                               <?= $form->field($model_admin_users, 'last_name')->textInput(['maxlength' => true, 'class' => 'form-control','tabindex' => '1','onkeypress'=>'return username(event);'])->label(false); ?>
                             </div>
 						 </div>
 						 </div>
@@ -69,7 +72,8 @@ echo  Alert::widget([
 						
 						  <div class="col-md-6">
 						   <div class="">
-                               <?= $form->field($model_users, 'username')->textInput([ 'class' => 'form-control'])->label('Email ID',['class'=>'form-control-label']); ?>
+						  	 <label class="form-control-label">Email Address*</label>
+                               <?= $form->field($model_users, 'username')->textInput([ 'class' => 'form-control','tabindex' => '1'])->label(false); ?>
                             </div>
 						 </div>
 						 <div class="col-md-6 ">
@@ -79,10 +83,12 @@ echo  Alert::widget([
 										
 										<div class="col-md-12 padding-0">
 											<div class="col-md-9 padding-0">
-												 <?= $form->field($model_admin_users, 'phone')->textInput(['class' => 'form-control us-phone-mask-input'])->label('Phone',['class'=>'form-control-label']); ?>
+											<label class="form-control-label">Phone*</label>
+												 <?= $form->field($model_admin_users, 'phone')->textInput(['class' => 'form-control us-phone-mask-input','tabindex' => '1'])->label(false); ?>
 											</div>
 											<div class="col-md-3 padding-right-0">
-												<?= $form->field($model_admin_users, 'extension')->textInput(['class' => 'form-control numbers','maxlength'=>'5'])->label('Extension',['class'=>'form-control-label']); ?>
+											<label class="form-control-label">Extension</label>
+												<?= $form->field($model_admin_users, 'extension')->textInput(['class' => 'form-control numbers','maxlength'=>'6','tabindex' => '1'])->label(false); ?>
 											</div>
 										</div>
 									</div>
@@ -95,7 +101,8 @@ echo  Alert::widget([
 						  <div class="col-md-6">
 						  
 							<div class="">
-                               <?= $form->field($model_admin_users, 'mobile')->textInput(['class' => 'form-control us-phone-mask-input'])->label('Mobile #',['class'=>'form-control-label']); ?>
+							<label class="form-control-label">Mobile</label>
+                               <?= $form->field($model_admin_users, 'mobile')->textInput(['class' => 'form-control us-phone-mask-input','tabindex' => '1'])->label(false); ?>
                             </div>
 						 </div>
 						 
@@ -106,29 +113,29 @@ echo  Alert::widget([
                                 <div class="form-group ">
                                     <label class="form-control-label" for="l0">Profile Image <span class="fa fa-info-circle information-icon" title="Profile Image" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Recommended dimensions are 400x400 pixels."></span></label>
                                
-                                <?= $form->field($model_admin_users, 'profile_pic')->fileInput(['class' => 'form-control'])->label('Profile Image',['class'=>'form-control-label'])->label(false); ?>
+                                <?= $form->field($model_admin_users, 'profile_pic')->fileInput(['class' => 'form-control','tabindex' => '1','accept'=>"image/x-png,image/gif,image/jpeg,image/tif,image/bmp,image/jpg"])->label('Profile Image',['class'=>'form-control-label'])->label(false); ?>
                                 </div>
                             </div>
 						 </div>
 						 </div>
 						<div class="col-md-12 padding-0">
-							<div class="col-md-12 padding-top-5">
-								<h6 class="action_head">Access Privileges: 
+							<div class="col-md-12 padding-top-5  padding-left-0">
+								
+								<div class="col-md-4">
+<h6 class="action_head">Access Privileges: 
 								<span class="fa fa-info-circle information-icon" title="Access Privileges" data-container="body" data-toggle="popover-hover" data-placement="right"
 						 data-content="Select if you would like for the user to have super administrator privileges in the system to performing all functions including changing the access level of other administrative users.<br>
 Next, select if this user should be able to access financial performance of the entire application."></span>
 </h6>
-								<div class="col-md-4">
-
 
 									<div class="md-checkbox-list ">
 														 <?php foreach ($rightslist as $rights){ if($rights['category']==1){ ?>
 														 <div class="width-100 pull-left">
 															<label
 											class="mt-checkbox mt-checkbox-outline margin-bottom-10 ">
-																<?php echo $rights['description']; ?> <input
+																<?php echo $rights['description']; ?> <input 
 											type="checkbox" value="<?php echo $rights['right_id']; ?>"
-											name="AdminUserRights[<?php echo str_replace(' ','_',$rights['description']); ?>]"
+											<?php if(in_array($rights['right_id'],$currentuserrights)){?>name="AdminUserRights[<?php echo str_replace(' ','_',$rights['description']); ?>]"  id="adminusr_<?php echo $rights['right_id']; ?>";<?php }else{?> disabled readonly<?php }?>
 											<?php if(!empty($rights['user_right_id'])){echo 'checked'; }?>>
 											<span></span>
 										</label>
@@ -138,10 +145,11 @@ Next, select if this user should be able to access financial performance of the 
 														</div>
 								</div>
 							</div>
-							<div class="col-md-12  padding-top-5">
+							<div class="col-md-12  padding-top-5 padding-left-0">
+						
 								<div class="col-md-4">
 
-									<h6 class="action_head">Admin Access  
+										<h6 class="action_head">Admin Access :
 									<span class="fa fa-info-circle information-icon" title="Admin Access" data-container="body" data-toggle="popover-hover" data-placement="right"
 														 
 														 data-content="Select if this user will be able to add and edit the information of other admin users.  <br><br> 
@@ -155,11 +163,11 @@ Next, select if this user should be able to access financial performance of the 
 														 
 														 <?php foreach ($rightslist as $rights){ if($rights['category']==2){ ?>
 														 <div class="width-100 pull-left">
-														<label
+														<label 
 											class="mt-checkbox mt-checkbox-outline no-wrap margin-bottom-10">
-																<?php echo $rights['description']; ?> <input
+																<?php echo $rights['description']; ?> <input 
 											type="checkbox" value="<?php echo $rights['right_id']; ?>"
-											name="AdminUserRights[<?php echo str_replace(' ','_',$rights['description']); ?>]"
+											<?php if(in_array($rights['right_id'],$currentuserrights)){?>class="admin" name="AdminUserRights[<?php echo str_replace(' ','_',$rights['description']); ?>]" <?php }else{?> disabled readonly<?php }?><?php if(in_array($rights['right_id'],$currentuserrights)){?>name="AdminUserRights[<?php echo str_replace(' ','_',$rights['description']); ?>]" <?php }else{?> disabled readonly<?php }?>
 											<?php if(!empty($rights['user_right_id'])){echo 'checked'; }?>>
 											<span></span>
 										</label>
@@ -176,11 +184,11 @@ Next, select if this user should be able to access financial performance of the 
 									<div class="md-checkbox-list ">							
  <?php foreach ($rightslist as $rights){ if($rights['category']==3){ ?>
  <div class="width-100 pull-left">
-													<label
+													<label 
 											class="mt-checkbox mt-checkbox-outline no-wrap margin-bottom-10 ">
-																<?php echo $rights['description']; ?> <input
+																<?php echo $rights['description']; ?> <input 
 											type="checkbox" value="<?php echo $rights['right_id']; ?>"
-											name="AdminUserRights[<?php echo str_replace(' ','_',$rights['description']); ?>]"
+											<?php if(in_array($rights['right_id'],$currentuserrights)){?>class="admin" name="AdminUserRights[<?php echo str_replace(' ','_',$rights['description']); ?>]" <?php }else{?> disabled readonly<?php }?><?php if(in_array($rights['right_id'],$currentuserrights)){?>name="AdminUserRights[<?php echo str_replace(' ','_',$rights['description']); ?>]" <?php }else{?> disabled readonly<?php }?>
 											<?php if(!empty($rights['user_right_id'])){echo 'checked'; }?>>
 											<span></span>
 										</label>
@@ -195,11 +203,11 @@ Next, select if this user should be able to access financial performance of the 
 									<div class="md-checkbox-list ">	
 												<?php foreach ($rightslist as $rights){ if($rights['category']==4){ ?>  
 												<div class="width-100 pull-left">
-												 <label
+												 <label 
 											class="mt-checkbox mt-checkbox-outline no-wrap margin-bottom-10 ">
-																<?php echo $rights['description']; ?> <input
+																<?php echo $rights['description']; ?> <input  
 											type="checkbox" value="<?php echo $rights['right_id']; ?>"
-											name="AdminUserRights[<?php echo str_replace(' ','_',$rights['description']); ?>]"
+											<?php if(in_array($rights['right_id'],$currentuserrights)){?>class="admin" name="AdminUserRights[<?php echo str_replace(' ','_',$rights['description']); ?>]" <?php }else{?> disabled readonly<?php }?><?php if(in_array($rights['right_id'],$currentuserrights)){?>name="AdminUserRights[<?php echo str_replace(' ','_',$rights['description']); ?>]" <?php }else{?> disabled readonly<?php }?>
 											<?php if(!empty($rights['user_right_id'])){echo 'checked'; }?>>
 											<span></span>
 										</label>
@@ -225,8 +233,8 @@ Next, select if this user should be able to access financial performance of the 
 						 <div class="col-md-12 padding-0 bg-sky-blue border-ddd" align="right" style="border-top:none;">
 								
 								<div class="modal-footer-btn padding-15">
-								<?= Html::submitButton('Save', ['class' => 'btn btn-modal-lightblue']) ?>
-							 <a class="btn btn-default"
+								<?= Html::submitButton('Save', ['class' => 'btn btn-modal-lightblue','tabindex'=>'1']) ?>
+							 <a class="btn btn-default" tabindex="1"
 								href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/search">Cancel</a>
 
 								
@@ -239,4 +247,24 @@ Next, select if this user should be able to access financial performance of the 
 			</div>	
 			</div>
 			</div>
-	</div>				
+	</div>	
+	
+	<script>
+	$(document).ready(function(){
+		$('#adminusr_1').click(function(){
+
+			var select = $("#adminusr_1").is(":checked");
+			if(select)
+				{
+				$('.admin').prop('checked', true);
+				$('.admin').css("pointer-events", "none");
+				}
+			else
+				{
+				$('.admin').prop('checked', false);
+				$('.admin').css("pointer-events", "auto");
+				}
+
+			});
+	});
+	</script>			

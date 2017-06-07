@@ -20,7 +20,7 @@
             return [
                 [['oldpass','newpass','repeatnewpass'],'required'],
                 ['oldpass','findPasswords'],
-                ['repeatnewpass','compare','compareAttribute'=>'newpass','message'=>"Passwords mismatch"],
+                ['repeatnewpass','compare','compareAttribute'=>'newpass','message'=>"Password and Confirm Password must match."],
             ];
         }
 		

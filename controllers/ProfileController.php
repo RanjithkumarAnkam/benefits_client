@@ -14,6 +14,7 @@ use app\models\UploadForm;
 use yii\web\UploadedFile;
 use app\models\FirmUsers;
 use app\models\ClientUser;
+use app\models\RightsMaster;
 
 class ProfileController extends BaseController {
 	public $layout = 'main-layout';
@@ -59,6 +60,8 @@ class ProfileController extends BaseController {
 		 */
 		$userdetailModel = '';
 		$email_id = '';
+		$rightslist = '';
+		$currentuserrights= array();
 		$email_changed = false;
 		$user_id = \Yii::$app->user->identity->user_id;
 		$usertype = \Yii::$app->user->identity->usertype;
@@ -78,6 +81,21 @@ class ProfileController extends BaseController {
 						'user_id' => $user_id 
 				] )->One ();
 				$profile_pic = $userdetailModel->profile_pic;
+				
+				$rightslist = RightsMaster::find ()->where ( [
+						'user_type' => 1
+						] )->all ();
+				
+				$sql="SELECT rm.right_id FROM tbl_sir_admin_user_rights aur Left Join tbl_sir_rights_master rm on aur.right_id=rm.right_id WHERE rm.user_type=1 and aur.admin_id=$userdetailModel->admin_id";
+				$connection = \yii::$app->db;
+				$model = $connection->createCommand($sql);
+				//	print_r($model); die();
+				$userrights= $model->queryAll();
+				
+				foreach ($userrights as $userright){
+					array_push($currentuserrights, $userright['right_id']);
+				}
+				
 				break;
 			/**
 			 * ****if firm*******
@@ -87,6 +105,23 @@ class ProfileController extends BaseController {
 						'user_id' => $user_id 
 				] )->One ();
 				$profile_pic = $userdetailModel->profile_pic;
+				
+				$rightslist = RightsMaster::find ()->where ( [
+						'user_type' => 2
+						] )->all ();
+				
+				$sql="SELECT rm.right_id FROM tbl_sir_firm_user_rights aur Left Join tbl_sir_rights_master rm on aur.right_id=rm.right_id WHERE rm.user_type=1 and aur.firm_user_id=$userdetailModel->firm_user_id";
+				$connection = \yii::$app->db;
+				$model = $connection->createCommand($sql);
+				//	print_r($model); die();
+				$userrights= $model->queryAll();
+				
+				foreach ($userrights as $userright){
+					array_push($currentuserrights, $userright['right_id']);
+				}
+				
+				
+				
 				break;
 			/**
 			 * ****if client*******
@@ -196,6 +231,24 @@ class ProfileController extends BaseController {
 							
 							\Yii::$app->session->setFlash ( 'success', 'Profile updated successfully.' );
 						//}
+						
+						if($usertype == 1){
+							return $this->redirect ( array ( // redirecting to dashboard
+										\Yii::$app->params ['admin_url'] 
+								) );
+						}
+						else if($usertype == 2){
+							
+							return $this->redirect ( array ( // redirecting to dashboard
+										\Yii::$app->params ['firm_url'] 
+								) );
+						}
+						else if($usertype == 3){
+							
+							return $this->redirect ( array ( // redirecting to dashboard
+										\Yii::$app->params ['client_url'] 
+								) );
+						}
 					}
 				}
 			} catch ( \Exception $e ) {
@@ -209,7 +262,9 @@ class ProfileController extends BaseController {
 		return $this->render ( 'index', [ 
 				'user_parent' => $user_parent,
 				'userdetailModel' => $userdetailModel,
-				'usertype'=>$usertype
+				'usertype'=>$usertype,
+				'rightslist'=>$rightslist,
+				'currentuserrights'=>$currentuserrights
 		] );
 	}
 }

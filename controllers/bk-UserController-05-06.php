@@ -52,78 +52,28 @@ class UserController extends BaseController {
 								'clientuser',
 								'updatefirmuser',
 								'updateclientuser',
-								'updateadminuser',
-								'updatefirmdetails',
-								'changefirmstatus',
-								'changeuserstatus',
-								'deactivateadmin',
-								'changeclientuserstatus',
-								'saveclientuser',
-								'addfirmuser',
-								'addclientuser'
-								
+								'updateadminuser' 
 						],
 						'rules' =>  [ 
 								[ 
 										'actions' => [ 
 												'adminuser',
-												'updateadminuser',
-												'deactivateadmin'
+												'updateadminuser' 
 										],
-										'allow' => true,
+										'allow' => self::specialaccess(3),
 										'roles' => [ 
-												User::AdminUser,User::SuperAdmin 
+												User::ADMIN 
 										] 
 								],['actions' => [
-										'updatefirmuser',
-										'savefirmuser',
-										'changeuserstatus',
-										'addfirmuser'
-									],
-										'allow' => true,
-										'roles' => [
-												User::FirmUser,User::FirmAdministratorAccess,User::SuperAdmin 
-										]
-										
-								],['actions' => [
-										'updatefirmdetails',
-										'firmuser',
-										'changefirmstatus',
-										
-									],
-										'allow' => true,
-										'roles' => [
-												User::EditFirm,User::FirmAdministratorAccess,User::SuperAdmin 
-										]
-								],
-								
-								['actions' => [
-										'saveclientuser',
-										'updateclientuser',
-										'changeclientuserstatus',
-										'addclientuser'
-								],
-										'allow' => true,
-										'roles' => [
-												User::ClientUser,User::FirmAdministratorAccess,User::SuperAdmin 
-										]
-								]
-								,['actions' => [
-										'updateclientdetails',
-										'clientuser',
-										
-									],
-										'allow' => true,
-										'roles' => [
-												User::EditClient,User::FirmAdministratorAccess,User::SuperAdmin 
-										]
-								],
-								
-								['actions' => [
 										'add-user',
-										'update-user'
+										'update-user',
+										'firmuser',
+										'clientuser',
+										'updatefirmuser',
+										'updateclientuser'
+										
 								],
-								'allow' => true,
+								'allow' => self::specialaccess(1),
 								'roles' => [
 										'@'
 								]
@@ -251,7 +201,7 @@ class UserController extends BaseController {
 							\Yii::$app->session->setFlash ( 'success', 'Admin added succesfully, a verification mail has been sent please verify it.' );
 							
 							return $this->redirect ( [ 
-									'/search?key='.$model_admin_users->first_name 
+									'/search' 
 							] );
 						}
 					}
@@ -428,9 +378,6 @@ class UserController extends BaseController {
 									throw new \Exception ( 'Unable to save permissions for user.' );
 								}
 							}
-						}
-						else {
-							throw new \Exception ( 'Atleast one permission is required.' );
 						}
 						// check for email change
 						if ($email_changed) {
@@ -1147,7 +1094,6 @@ class UserController extends BaseController {
 			/* begining the db transaction */
 			$transaction = \Yii::$app->db->beginTransaction ();
 			try {
-				
 				if ($_POST ['status'] == 'A1') {
 					// print_r('A1');die();
 					$firms = Firms::find ()->where ( [ 
@@ -1155,9 +1101,6 @@ class UserController extends BaseController {
 					] )->One ();
 					$firms->is_active = 1;
 					$firms->modified_date = date ( 'Y-m-d H:i:s' );
-					$firms->firm_locations = true;
-					$firms->zip = (string)$firms->zip;
-					
 					if ($firms->save ()) {
 						$transaction->commit ();
 						return TRUE;
@@ -1173,20 +1116,15 @@ class UserController extends BaseController {
 					] )->One ();
 					$firms->is_active = 0;
 					$firms->modified_date = date ( 'Y-m-d H:i:s' );
-					$firms->firm_locations = true;
-					$firms->zip = (string)$firms->zip;
 					// print_r($firms);die();
 					if ($firms->save ()) {
 						$transaction->commit ();
 						return TRUE;
 					} else {
-						
-						return FALSE;
+							return FALSE;
 					}
 				}
 			} catch ( \Exception $e ) {
-				
-				
 				$msg = $e->getMessage ();
 				return FALSE;
 			}
@@ -1547,7 +1485,6 @@ class UserController extends BaseController {
 			// }
 		} else { // don't have client id in url (i.e.., add client)
 			$model = new Clients ();
-			$searchModel->client_id = 0;
 			$dataProvider = $searchModel->search ( \Yii::$app->request->queryParams );
 		}
 		

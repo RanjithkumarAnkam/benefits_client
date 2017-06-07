@@ -7,10 +7,16 @@ use SebastianBergmann\CodeCoverage\Report\PHP;
 use app\models\States;
 use kartik\alert\Alert;
 use app\components\EncryptDecryptComponent;
+use yii\web\View;
 ?>
 
+<?php $permissions = Yii::$app->session['permissions']; ?>
 
-
+<style>
+.select2-search__field{
+	color:black;
+}
+</style>
 <section class="page-content padding-0">
 	<div class="page-content-inner">
 
@@ -65,30 +71,32 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 
 							<div>
 								<ul class="nav nav-tabs mb-4 blue-main-nav" role="tablist">
-									<li class="nav-item"><a id="anchor-pb-1"
+									<li class="nav-item" ><a id="anchor-pb-1"
 										class="nav-link  color-white" data-target="#home5"
 										data-toggle="tab" href="javascript: void(0);" role="tab"
 										aria-expanded="true">Firm Details <span
 											class="fa fa-info-circle information-icon"
 											title="Firm details" data-container="body"
 											data-toggle="popover-hover" data-placement="right"
-											data-content="Enter in the basic details of the firm. "></span>
+											data-content="<?php if(empty($firm_id)){ ?>Enter in the<?php }else{ ?> Update <?php } ?> basic details of the firm. "></span>
 									</a></li>
-									<li class="nav-item  cursor-nodrop" id="firm_users"><a
+									<li class="nav-item  cursor-nodrop" id="firm_users" <?php if(empty($firm_id)){?> data-toggle="tooltip" data-placement="bottom" title="First enter Firm details." <?php }?>>
+									<a
 										id="anchor-pb-4" class="nav-link color-white pointer-disable"
-										data-target="#profile5" data-toggle="tab"
-										href="javascript: void(0);" role="tab" aria-expanded="false">Firm
+										<?php if(!empty($firm_id)){ ?> data-target="#profile5" data-toggle="tab"
+										href="javascript: void(0);" role="tab" aria-expanded="false" <?php } ?>>Firm
 											Users <span class="fa fa-info-circle information-icon"
 											title="Firm Users" data-container="body"
 											data-toggle="popover-hover" data-placement="right"
-											data-content="Enter in the basic details of the firm user."></span>
+											data-content="<?php if(empty($firm_id)){ ?>Enter in the<?php }else{ ?> Update <?php } ?> the basic details of the firm user."></span>
 									</a></li>
 
 								</ul>
 								<div class="tab-content blue-main-nav-content ">
 									<div class="tab-pane" id="home5" role="tabcard"
 										aria-expanded="true">
-										<?php $form = ActiveForm::begin(); ?>
+										 
+										<?php $form = ActiveForm::begin(['action' => $model->isNewRecord ? '/user/firmuser' : '/user/firmuser?id='.$firm_id.'', 'id' => 'forum_post', 'method' => 'post',]); ?>
 										<div class="col-md-12 padding-15 border-ddd"
 											style="border-top: none; border-bottom: none;">
 											<div class="">
@@ -104,7 +112,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 
 																<div class="form-group ">
 																	<label class="form-control-label" for="l0">Firm Name *</label>
-																	<?= $form->field($model, 'firm_name', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true])->label(false); ?>
+																	<?= $form->field($model, 'firm_name', ['inputOptions' => ['class' => 'form-control','tabindex'=>'1','onkeypress'=>'return firmname(event);',]])->textInput(['maxlength' => true])->label(false); ?>
 																</div>
 
 															</div>
@@ -115,7 +123,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 																<div class="form-group ">
 																	<label class="form-control-label" for="l0">Business
 																		Address 1*</label>
-																	<?= $form->field($model, 'address_1', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true])->label(false); ?>
+																	<?= $form->field($model, 'address_1', ['inputOptions' => ['class' => 'form-control firmname','tabindex'=>'1','onkeypress'=>'return firmname(event);',]])->textInput(['maxlength' => true])->label(false); ?>
 																</div>
 
 															</div>
@@ -124,18 +132,38 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 																<div class="form-group ">
 																	<label class="form-control-label" for="l0">Business
 																		Address 2</label>
-																	<?= $form->field($model, 'address_2', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true])->label(false); ?>
+																	<?= $form->field($model, 'address_2', ['inputOptions' => ['class' => 'form-control firmname','tabindex'=>'1','onkeypress'=>'return firmname(event);',]])->textInput(['maxlength' => true])->label(false); ?>
 																</div>
 
 															</div>
 															</div>
 															
+															
+															<div class="col-md-12 ">
+														
+															
+															<div class="col-md-6">
+															<div class="form-group ">
+															<label class="form-control-label" for="l0">Billing
+																		Address * </label>
+																<?= $form->field($model, 'billing_address', ['inputOptions' => ['class' => 'form-control','tabindex'=>'1']])->textInput(['maxlength' => true])->label(false); ?>
+															</div>
+															</div>
+															
+															<div class="col-md-6 margin-top-40">
+															<label class="mt-checkbox mt-checkbox-outline margin-bottom-10">
+																Same as Business Address 1 
+																<input type="checkbox" value="1" name="billing_address_check" class="billing-address-check" tabindex="1"> <span></span>
+															</label>
+															</div>
+														</div>
+														
 															<div class="col-md-12 p-0">
 															<div class="col-md-6  ">
 
 																<div class="form-group ">
 																	<label class="form-control-label" for="l0">City *</label>
-																	<?= $form->field($model, 'city', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true])->label(false); ?>
+																	<?= $form->field($model, 'city', ['inputOptions' => ['class' => 'form-control alpha','tabindex'=>'1']])->textInput(['maxlength' => true])->label(false); ?>
 																</div>
 
 															</div>
@@ -150,7 +178,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 																	
 																	echo $form->field ( $model, 'state', [ 
 																			'inputOptions' => [ 
-																					'class' => 'form-control' 
+																					'class' => 'form-control' ,'tabindex'=>'1',
 																			] 
 																	] )->dropDownList ( $stateList, [ 
 																			'prompt' => 'Select' 
@@ -166,8 +194,8 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 															<div class="col-md-6  ">
 
 																<div class="form-group ">
-																	<label class="form-control-label" for="l0">Zip *</label>
-																	<?= $form->field($model, 'zip', ['inputOptions' => ['class' => 'form-control numbers']])->textInput(['maxlength' => 5])->label(false); ?>
+																	<label class="form-control-label" for="l0">Zip Code*</label>
+																	<?= $form->field($model, 'zip', ['inputOptions' => ['class' => 'form-control numbers','tabindex'=>'1']])->textInput(['maxlength' => 5])->label(false); ?>
 																</div>
 
 
@@ -176,7 +204,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 
 																<div class="form-group ">
 																	<label class="form-control-label" for="l0">Website</label>
-																	<?= $form->field($model, 'website', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true])->label(false); ?>
+																	<?= $form->field($model, 'website', ['inputOptions' => ['class' => 'form-control','tabindex'=>'1']])->textInput(['maxlength' => true])->label(false); ?>
 																</div>
 
 															</div>
@@ -187,7 +215,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 																<div class="form-group row">
 																	<div class="col-md-12 ">
 																		<label class="form-control-label" for="l0">Phone *</label>
-																		<?= $form->field($model, 'phone', ['inputOptions' => ['class' => 'form-control us-phone-mask-input']])->textInput(['maxlength' => true])->label(false); ?>
+																		<?= $form->field($model, 'phone', ['inputOptions' => ['class' => 'form-control us-phone-mask-input','tabindex'=>'1']])->textInput(['maxlength' => true])->label(false); ?>
 																	</div>
 																</div>
 
@@ -197,7 +225,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 															<div class="col-md-6  ">
 
 
-																<div class="form-group field-firms-locations">
+																<!--<div class="form-group field-firms-locations">
 																	<label class="form-control-label" for="l0">Firm
 																		Locations * <span
 																		class="fa fa-info-circle information-icon"
@@ -207,22 +235,66 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 																	</label> 
 																	
 																	<select class="form-control height-120 select2 select-border  locations" multiple id="firm_locations" name="firm_locations[]">
-																	<?php if(!empty($firm_locations)){
-																		foreach($firm_locations as $location){
+																	<?php //if(!empty($firm_locations)){
+																		//foreach($firm_locations as $location){
 																		?>
-																	<option value="<?php echo $location->location_id; ?>" selected><?php echo $location->location_name; ?></option>
-																	<?php }} ?>
+																	<option value="<?php// echo $location->location_id; ?>" selected><?php// echo $location->location_name; ?></option>
+																	<?php //}} ?>
 																	</select>
-																	<input type="text" value="<?php echo $location_name;?>" class="form-control hidden" id="firm_locations_hidden" name="firm_locations_hidden" placeholder="">
+																	<input type="text" value="<?php //echo $location_name;?>" class="form-control hidden" id="firm_locations_hidden" name="firm_locations_hidden" placeholder="">
 																	<div class="help-block"></div>
+																</div> -->
+
+
+																<div class="form-group field-firms-locations">
+																	
+																	
+																	<label class="form-control-label" for="l0">Firm
+																		Locations * <span
+																		class="fa fa-info-circle information-icon"
+																		title="Firm Locations" data-container="body"
+																		data-toggle="popover-hover" data-placement="right"
+																		data-content="Enter in the various firm locations.  These locations will later be used when entering your firm users to associate which of your users are from which locations."></span>
+																	</label>
+																	
+																	<?php 
+																	$selected = array();
+																	if(!empty($firm_locations)){
+																		
+																	
+																	
+																	foreach($firm_locations as $locations){
+																		
+																		//array_push($selected,'9');
+																		$selected[$locations->location_id] = array('selected' => 'selected');
+																			
+																	}
+																	/*
+																	$selected   = array(
+																				  '9' => array('selected' => 'selected'),
+																				  '10' => array('selected' => 'selected'),
+																				);*/
+																	$firm_locations = ArrayHelper::map ( $firm_locations, 'location_id', 'location_name' );
+																	
+																	}
+																	
+																	
+																	echo $form->field ( $model, 'firm_locations[]', [
+																		'inputOptions' => [
+																		'class' => 'form-control select2','tabindex'=>'1', 
+																		'multiple' => true,
+																		'selected' => 'selected',
+																		'name'=>'firm_locations[]',
+																		]
+																		] )->dropDownList ( $firm_locations ,array( 'options'=>$selected))->label ( false );
+																		
+																	?>
+
 																</div>
-
-
-
 
 																<div class="row">
 																	<div class="form-group col-md-12 " align="right">
-																		<label><a onclick="addLocation();" class="color-blue"><u>Add
+																		<label><a onclick="addLocation();" class="color-blue"><u  tabindex="1">Add
 																					Additional Locations</u></a></label>
 																	</div>
 																</div>
@@ -230,15 +302,15 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 																<div class=" hide" id="add_location">
 																	<div class="form-group">
 																		<label class="form-control-label" for="l0">New
-																			Location</label> <input type="text"
-																			id="input_add_location" class="form-control"
+																			Location</label> <input type="text" onkeypress="return firmname(event);",
+																			id="input_add_location" class="form-control firmname"
 																			Placeholder="">
 																	</div>
 																	<div class="col-md-12 padding-0" align="right">
 																		<button type="button" class="btn  btn-modal-blue"
 																			onclick="addLocationsOnebyOne();">Add</button>
 																		<button class="btn btn-default"
-																			onclick="addLocation();" type="button">Cancel</button>
+																			onclick="addLocation();" type="button">Close</button>
 																	</div>
 																</div>
 															</div>
@@ -257,7 +329,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 														<fieldset class="fieldset-box">
 
 															<legend>Module and Settings</legend>	
-								
+								<?php if(Yii::$app->user->identity->usertype ==  1){?>
 								<?php if(!empty($firm_id)){ ?>
 								
 									<div class="form-group ">
@@ -266,11 +338,11 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 																<p>
 																	<?php if($model['is_active']){ ?>
 																		<a id="modal-alert" href="#alert_firm_screen"
-																			class="color-blue" data-toggle="modal" ><u id="firm_change_status_label" onclick="deactivateFirm('<?php echo $firm_id;?>');">Deactivate
+																			class="color-blue" data-toggle="modal" ><u  tabindex="1" id="firm_change_status_label" onclick="deactivateFirm('<?php echo $firm_id;?>');">Deactivate
 																				Firm</u></a>
 																	<?php } else{?>
 																		<a id="modal-alert" href="#alert_firm_screen"
-																			class="color-blue" data-toggle="modal" ><u id="firm_change_status_label" onclick="activateFirm('<?php echo $firm_id;?>');">Activate
+																			class="color-blue" data-toggle="modal" ><u  tabindex="1" id="firm_change_status_label" onclick="activateFirm('<?php echo $firm_id;?>');">Activate
 																				Firm</u></a>
 																	<?php }?>
 																</p>
@@ -278,9 +350,10 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 
 															</div>
 														<?php }?>
+														<?php }?>
 														
 														<div class="form-group">
-																<label class="form-control-label" for="l0"><b>Activate
+																<label class="form-control-label" for="l0"><b  tabindex="1">Activate
 																		Modules <span
 																		class="fa fa-info-circle information-icon"
 																		title="Activate Modules" data-container="body"
@@ -288,13 +361,19 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 																		data-content="Select the modules to activate for this firm."></span>
 																</b></label>
 																<p>
-																<?php foreach($modules as $module){?>
+																<?php 
+																$i=0;
+																foreach($modules as $module){?>
 																	<label class="mt-checkbox mt-checkbox-outline margin-bottom-5"> <?php echo $module['option_value'];?>																		
-																		 <input type="checkbox" 
-																		<?php if(in_array($module['option_id'],$active_modules_arr)){?>checked<?php }?> name="activate_module[<?php echo $module['option_id'];?>]" value="1"> <span></span>
+																		 <input type="checkbox"  tabindex="1"
+																		<?php 
+																		
+																		if(!empty($active_modules_arr)) {if(in_array($module['option_id'],$active_modules_arr)){?>checked<?php }}elseif($i==0){?>checked<?php }?> name="activate_module[<?php echo $module['option_id'];?>]" value="1" > <span></span>
 																		
 																	</label>
-																	<?php } ?>
+																	<?php 
+																	$i++;
+																	} ?>
 																</p>
 															</div>
 
@@ -303,7 +382,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 																<div class="form-group ">
 																	<label class="form-control-label" for="l0">Upload Firm
 																		Logo <span class="fa fa-info-circle information-icon" title="Upload Firm Logo" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Recommended dimensions are 400x400 pixels."></span></label>
-																	<?= $form->field($model, 'firm_logo', ['inputOptions' => ['class' => 'form-control']])->fileInput(['accept'=>'image/x-png, image/jpeg'])->label(false); ?>
+																	<?= $form->field($model, 'firm_logo', ['inputOptions' => ['class' => 'form-control','tabindex'=>'1',]])->fileInput(['accept'=>'image/x-png, image/jpeg'])->label(false); ?>
 																</div>
 															</div>
 
@@ -316,9 +395,9 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 											align="right" style="border-top: none;">
 
 											<div class="modal-footer-btn padding-15">
-													<?= Html::submitButton($model->isNewRecord ? 'Save' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-modal-lightblue' : 'btn btn-primary']) ?> <a
+													<?= Html::submitButton($model->isNewRecord ? 'Save' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-modal-lightblue' : 'btn btn-primary','tabindex'=>'1',]) ?> <a
 													class="btn btn-default"
-													href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/search">Cancel</a>
+													href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/search"  tabindex="1">Cancel</a>
 											</div>
 										</div>
 										 <?php ActiveForm::end(); ?>
@@ -329,15 +408,14 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 										<div class="">
 
 											<div class="row padding-10" align="right">
-												
+												<?php if(!$model->isNewRecord){ ?>
+												<?php if(in_array(\app\models\User::FirmUser, $permissions) || in_array(\app\models\User::SuperAdmin, $permissions)  || in_array(\app\models\User::FirmAdministratorAccess, $permissions) ){ ?>
 												<?= Html::a('Add New User', ['addfirmuser', 'firmId' => $encrypt_firm_id,'firmUserId'=>''], ['class' => 'btn  btn-modal-blue view']) ?>
-												
+												<?php } ?>
+												<?php } ?>
 											</div>
 							<?php
 							$gridColumns = [ 
-									[ 
-											'class' => 'kartik\grid\SerialColumn' 
-									],
 									[ 
 											
 											'attribute' => 'first_name',
@@ -518,6 +596,11 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 																'{toggleData}'*/
 															],
 									'pjax' => true,
+									'pjaxSettings' =>[
+									'options'=>[
+											'id'=>'firm-user-grid-pjax',
+										]
+									], 
 									'bordered' => true,
 									'striped' => true,
 									'condensed' => false,
@@ -592,9 +675,28 @@ enableFirm();
 <?php }else{ ?>
 $('#anchor-pb-1').trigger('click');
 <?php }?>
+$(document).on('ready pjax:success', function(){
+	$('.view').click(function(e){
+	       e.preventDefault();
+			
+			$('#create_firm_user').modal('show').find('.modal-content').load($(this).attr('href'));
+			$('.select2').select2();
+	      
+	});
+});	
+$('input.billing-address-check').change(function(){
 
+		if ($('input.billing-address-check').is(':checked')) {
+			
+			var address_1 = '';
+			address_1 = $('#firms-address_1').val();
+			 $('#firms-billing_address').val(address_1);
+		}	
 
+		});
+		
 });
 
 
 </script>
+<?php $this->registerJs('$("select#firms-firm_locations").trigger("change");', View::POS_READY); ?>

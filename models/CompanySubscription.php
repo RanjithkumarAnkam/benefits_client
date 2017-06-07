@@ -59,4 +59,21 @@ class CompanySubscription extends \yii\db\ActiveRecord
             'modified_by' => 'Modified By',
         ];
     }
+	
+	 /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getClient()
+    {
+    	return $this->hasOne(Clients::className(), ['client_id' => 'client_id']);
+    }
+	
+	
+	 /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getModule()
+    {
+    	return $this->hasOne(LookupOptions::className(), ['option_id' => 'module_id']);
+    }
 }

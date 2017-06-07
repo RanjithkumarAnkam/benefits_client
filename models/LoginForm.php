@@ -59,6 +59,8 @@ class LoginForm extends Model {
 			//print_r($user); die();
 			if (! $user ) {
 				$this->addError ( $attribute, 'Incorrect username or password.' );
+			}else if(!empty($user['msg'])){
+				$this->addError ( $attribute, $user['msg']);
 			}else {
 				if($user->is_verified == 0)
 				{
@@ -130,17 +132,21 @@ class LoginForm extends Model {
 	}
 	
 	private function checkforadmin($username,$password){
+		$error=[];
 		$user = User::find()->where(['username'=>$this->username,'usertype'=>1])->One();
 		$adminuser = AdminUsers::findOne(['user_id'=>$user->user_id,'is_active'=>1]);
 		
 		if($adminuser){
 			return $user;
+		}else {
+			$error['msg']='Account Inactive, Please contact administrator.';
 		}
 		
-		return '';
+		return $error;
 	}
 	
 	private function checkforfirm($username,$password){
+		$error=[];
 		$user = User::find()->where(['username'=>$this->username,'usertype'=>2])->One();
 		$firmuser = FirmUsers::findOne(['user_id'=>$user->user_id,'is_active'=>1]);
 		
@@ -148,13 +154,18 @@ class LoginForm extends Model {
 			$firm=Firms::findOne(['firm_id'=>$firmuser->firm_id,'is_active'=>1]);
 			if($firm){
 			return $user;
+			}else{
+				$error['msg']='Firm Inactive, Please contact administrator.';
 			}
+		}else {
+			$error['msg']='Account Inactive, Please contact administrator.';
 		}
 		
-		return '';
+		return $error;
 	}
 	
 	private function checkforclient($username,$password){
+		$error=[];
 		$user = User::find()->where(['username'=>$this->username,'usertype'=>3])->One();
 		
 		$clientuser=ClientUser::findOne(['user_id'=>$user->user_id,'is_active'=>1]);
@@ -166,10 +177,16 @@ class LoginForm extends Model {
 				$firm=Firms::findOne(['firm_id'=>$client->firm_id,'is_active'=>1]);
 			if($firm){
 				return $user;
+			}else {
+				$error['msg']='Firm Inactive, Please contact administrator.';
 			}
-		}
+			}else {
+				$error['msg']='Client Inactive, Please contact administrator.';
+			}
+		}else {
+			$error['msg']='Account Inactive, Please contact administrator.';
 		}
 		
-		return '';
+		return $error;
 	}
 }

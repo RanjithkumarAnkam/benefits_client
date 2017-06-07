@@ -110,15 +110,15 @@ AppAsset::register($this);
 			<div class="modal-body" style="float: left;">
 				
 				<div class="form-group col-md-12">
-				<div class="col-sm-4 add-mem">
-					<label class="add-member-label">Email:</label>
+				<div class="col-sm-4 add-mem margin-top-10">
+					<label class="add-member-label">Email Address:</label>
 				</div>
 				<div class="col-sm-8">
 					<span class="form-control"><?php echo Yii::$app->user->identity->username; ?></span> 
 				</div>
 				</div>
 				<div class="form-group col-md-12">
-				<div class="col-sm-4 add-mem">
+				<div class="col-sm-4 add-mem margin-top-10">
 					<label class="add-member-label">Current Password:<span class="red">*</span></label>
 				</div>
 				<div class="col-sm-8">
@@ -129,7 +129,7 @@ AppAsset::register($this);
 				</div>
 				</div>
 				<div class="form-group col-md-12">
-				<div class="col-sm-4 add-mem">
+				<div class="col-sm-4 add-mem margin-top-10">
 					<label class="add-member-label">New Password:<span class="red">*</span></label>
 				</div>
 				<div class="col-sm-8">
@@ -139,7 +139,7 @@ AppAsset::register($this);
 				</div>
 				</div>
 				<div class="form-group col-md-12">
-				<div class="col-sm-4 add-mem">
+				<div class="col-sm-4 add-mem margin-top-10">
 					<label class="add-member-label">Confirm Password:<span class="red">*</span></label>
 				</div>
 				<div class="col-sm-8">
@@ -670,11 +670,11 @@ AppAsset::register($this);
 								X
 							</button>
 							<h4 class="modal-title color-white" id="myModalLabel">
-								Resend Activation Link
+								Resend Password
 							</h4>
 						</div>
 						<div class="modal-body">
-					<p>Do You Want to Resend Activation Link For this User ?</p>
+					<p>Do You Want to Resend Password Link For this User ?</p>
 							
 			
 								</div>
@@ -884,10 +884,34 @@ AppAsset::register($this);
 <!-- Create Firm User modal start-->
 <div class="modal fade" id="create_firm_user" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true"
-	data-backdrop="static" data-keyboard="false">
+	 data-backdrop="static" data-keyboard="false">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content col-md-12 padding-0">
-			
+			<div class="modal-header modal-header-color">
+							 
+							<button type="button" class="close-modal modal-opacity close-modal-blue firm-close-btn" aria-hidden="true">
+								X
+							</button>
+							<h4 class="modal-title color-white" id="myModalLabel">
+								Firm User
+							</h4>
+						</div>
+						<div class="modal-body col-md-12">
+						
+						<!-- Loading GIF div starts -->
+						<div class="load-gif"  style="position: inherit;">
+							<div class="procressing_plz_wait">
+								<img class=""
+									src="<?php echo Yii::$app->getUrlManager()->getBaseUrl();  ?>/images/default.gif" />
+							</div>
+						</div>
+
+						<!-- Loading GIF div end -->
+
+						</div>
+						<div class="modal-footer">
+							
+						</div>
 			
 		</div>
 	</div>
@@ -1176,7 +1200,31 @@ AppAsset::register($this);
 <div class="modal fade" id="add_client_user" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
+						<div class="modal-header modal-header-color">
+							 
+							<button type="button" class="close-modal modal-opacity close-modal-blue firm-close-btn" aria-hidden="true">
+								X
+							</button>
+							<h4 class="modal-title color-white" id="myModalLabel">
+								Client User
+							</h4>
+						</div>
+						<div class="modal-body col-md-12">
 						
+						<!-- Loading GIF div starts -->
+						<div class="load-gif"  style="position: inherit;">
+							<div class="procressing_plz_wait">
+								<img class=""
+									src="<?php echo Yii::$app->getUrlManager()->getBaseUrl();  ?>/images/default.gif" />
+							</div>
+						</div>
+
+						<!-- Loading GIF div end -->
+
+						</div>
+						<div class="modal-footer">
+							
+						</div>
 						</div>
 						
 					</div>
@@ -1717,7 +1765,31 @@ AppAsset::register($this);
 <div class="modal fade" id="update_admin" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content col-md-12 padding-0">
-						 
+						 <div class="modal-header modal-header-color">
+							 
+							<button type="button" class="close-modal modal-opacity close-modal-blue  admin-user-modal-close" aria-hidden="true">
+								X
+							</button>
+							<h4 class="modal-title color-white" id="myModalLabel">
+								Admin User
+							</h4>
+						</div>
+						<div class="modal-body col-md-12">
+						
+						<!-- Loading GIF div starts -->
+						<div class="load-gif"  style="position: inherit;">
+							<div class="procressing_plz_wait">
+								<img class=""
+									src="<?php echo Yii::$app->getUrlManager()->getBaseUrl();  ?>/images/default.gif" />
+							</div>
+						</div>
+
+						<!-- Loading GIF div end -->
+
+						</div>
+						<div class="modal-footer">
+							
+						</div>
 						
 						</div>
 						
@@ -6963,7 +7035,8 @@ $gridColumns = [
     
     $this->registerJs(
     		"
-    $('.view').click(function(e){
+	$(document).ready(function(){	
+     $(document).on('click', '.view', function (e) {
        e.preventDefault();
 		
 		$('#create_firm_user').find('.modal-content').load($(this).attr('href'));
@@ -6972,15 +7045,15 @@ $gridColumns = [
       
 	});
 	
-	 $('.admin-view').click(function(e){
+	 $(document).on('click', '.admin-view', function (e) {
        e.preventDefault();
 		
-		$('#update_admin').find('.modal-content').load($(this).attr('href'));
+		$('#update_admin').find('.modal-content').load($(this).attr('data-href'));
 		$('#update_admin').modal('show');
 		$('.select2').select2();
       
 	});
-	
+	});
 	");
 
     ?>
@@ -6990,15 +7063,17 @@ $gridColumns = [
     
     
     $this->registerJs(
-    		"
-    $('.view-client').click(function(e){
+    
+	"
+$(document).ready(function(){	
+   $(document).on('click', '.view-client', function (e) {
        e.preventDefault();
 		
 		$('#add_client_user').modal('show').find('.modal-content').load($(this).attr('href'));
 		$('.select2').select2();
       
 });
-	
+});	
 	");
 
     ?>
@@ -7012,7 +7087,7 @@ $gridColumns = [
 			 	}
 				    var formData = new FormData($(\"#add_firm_user\")[0]);
 			 	// submit form
-				$(\"#loading-indicator\").show();
+				$(\"#loading-indicator-firm-user\").show();
 			 	$.ajax({
 			 		url:  form.attr('action'),
 			 		type: 'post',
@@ -7024,9 +7099,7 @@ $gridColumns = [
 							toastr.success('Firm user details updated successfully');
                             $('#create_firm_user').modal('hide');
 							$('#create_firm_user').find('.modal-content').html('');
-							if ( $( \"#w1-pjax\" ).length ) {
-							$.pjax.reload({container:'#w1-pjax'});
-							}
+							location.reload();
 							}else{
                           	  $.each(response, function(key, val) {
                                    $('#'+key).after('<div class=\"help-block\">'+val+'</div>');
@@ -7034,7 +7107,7 @@ $gridColumns = [
                                    $('#'+key).closest(\".form-group\").addClass('has-error');
                                    });
                             }
-						$(\"#loading-indicator\").hide();
+						$(\"#loading-indicator-firm-user\").hide();
 			 		},
 					cache: false,
 			        contentType: false,
@@ -7148,6 +7221,11 @@ $gridColumns = [
 				imgsize = document.querySelector(".img-transistion");
 				itemsscreenimgsize = document.querySelector(".items-class");
 				smallscreenimgsize = document.querySelector(".image-class");
+				
+				if ( $( ".search-screen-header" ).length ) {
+				searchpage = document.querySelector(".search-screen-header");
+				}
+				
 			//	margindropdown = document.querySelector("ul.arrow-icon");
             if (distanceY > shrinkOn) {
                 classie.add(header,"smaller");
@@ -7156,6 +7234,9 @@ $gridColumns = [
 				     classie.add(imgpartii,"profile-part");
 					 classie.add(itemsscreenimgsize,"margin-top-10");
 					 classie.add(smallscreenimgsize,"margin-top-2");
+					 if ( $( ".search-screen-header" ).length ) {
+						classie.add(searchpage,"top-55"); 
+					 }
 				//	  classie.add(margindropdown,"margin-top-6");
             } else {
                 if (classie.has(header,"smaller")) {
@@ -7176,6 +7257,14 @@ $gridColumns = [
 				  if (classie.has(smallscreenimgsize,"margin-top-2")) {
 	                    classie.remove(smallscreenimgsize,"margin-top-2");
 	              }
+				  
+				  if ( $( ".search-screen-header" ).length ) {
+					  
+						if (classie.has(searchpage,"top-55")) {
+	                    classie.remove(searchpage,"top-55");
+	              } 
+					 }
+					 
 				//  if (classie.has(margindropdown,"margin-top-6")) {
 	          //          classie.remove(margindropdown,"margin-top-6");
 	          //    }
