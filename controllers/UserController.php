@@ -1744,7 +1744,7 @@ class UserController extends BaseController {
 					'firm_id' => $model->firm_id 
 			] )->Count ();
 			
-			
+			$model = new Clients ();
 			\Yii::$app->session->setFlash ( 'error', $msg );
 		}
 		

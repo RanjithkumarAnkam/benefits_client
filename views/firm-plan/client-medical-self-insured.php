@@ -63,7 +63,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 				<i class="fa fa-angle-left" aria-hidden="true"></i>
 				</a>
 				<div class="breadcrumb-description">
-					<span class="">Master Data &gt; <a class="color-white" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/dashboard/clients"><u>Manage Plans - Group Medical - Prior (2016)</u></a> &gt; Partially Self Insured</span>
+					<span class="">Clients &gt; <a class="color-white" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/dashboard/clients"><u>Client Name - Group Medical - Prior (2016)</u></a> &gt; Self Insured</span>
 
 				</div>
 
@@ -123,7 +123,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 							<div class="form-group ">
 																			<label class="form-control-label" for="l0">Name of
 																				the Plan <i class="fa fa-info-circle margin-left-5" title="Name of the Plan" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Name the plan in a way you would normally talk about the plan, such as Group PPO Plan" data-original-title="Bill Client Usage to"></i></label>
-																			<input type="text" class="form-control placeholder-italics" value=""
+																			<input type="text" class="form-control placeholder-italics" onkeypress="return planscreenname(event);" value=""
 																				>
 																		</div>
 							</div>
@@ -131,7 +131,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 							<div class="form-group ">
 																			<label class="form-control-label" for="l0">Network <i class="fa fa-info-circle margin-left-5"  data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Enter the name of the network where employees are directed for care, such as Cigna, Blue Cross or Ameritas" data-original-title="Network"></i>
 																			</label>
-																			<input type="text" class="form-control placeholder-italics" value=""
+																			<input type="text" class="form-control placeholder-italics " onkeypress="return planscreenname(event);"value=""
 																				value="UHC Plus">
 																		</div>
 							</div>
@@ -153,7 +153,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 								<div class="form-group ">
 																			<label class="form-control-label" for="l0">Administrative Carrier/Vendor<i class="fa fa-info-circle margin-left-5"  data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Enter your TPAs name or the name of the carrier who is administrating the plans claims, such as United Healthcare or Cypress Benefit Administrators." data-original-title="Administrative Carrier/Vendor"></i>
 																			</label>
-																			<input type="text" class="form-control placeholder-italics" value=""
+																			<input type="text" class="form-control placeholder-italics" value="" onkeypress="return planscreenname(event);"
 																				>
 																		</div>
 							</div>
@@ -162,7 +162,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 																			<label class="form-control-label" for="l0">Pharmacy
 																				Benefit Manager  <i class="fa fa-info-circle margin-left-5"  data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Enter the name of the pharmacy benefit manager such as Express Scripts or Southern Scripts." data-original-title="Pharmacy Benefit Manager"></i>
 																			</label>
-																			<input type="text" class="form-control placeholder-italics" value=""
+																			<input type="text" class="form-control placeholder-italics " onkeypress="return planscreenname(event);" value=""
 																				value="Caremark" >
 																		</div>
 							</div>
@@ -170,8 +170,12 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 	<div class="form-group ">
 																			<label class="form-control-label" for="l0">Annual Consulting Fee<i class="fa fa-info-circle margin-left-5"  data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Enter in the total amount of commissions and other consulting fees your firm will receive on this plan for the plan year." data-original-title="Annual Consulting Fee"></i>
 																			</label>
-																			<input type="text" class="form-control placeholder-italics"
-																				value="" >
+																				<div class="input-group">
+																				<span class="input-group-addon">
+																					<i class="fa fa-usd  color-black"></i>
+																				</span>
+																				<input class="form-control price" type="text" >
+																			</div>
 																		</div>
 																		
 							</div>
@@ -215,7 +219,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
   <div class="form-group ">
 																	<label class="form-control-label" for="l0">Plan Change Summary Details<i class="fa fa-info-circle margin-left-5"  data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Enter in the details of changes made to this plan from the prior plan year.  This section is intended to provide a quick log of changes for your records." data-original-title="Plan Change Summary Details"></i>
 																	</label>
-																		<textarea class="form-control placeholder-italics"  rows="2"></textarea>
+																		<textarea class="form-control placeholder-italics " onkeypress="return planscreenname(event);" rows="2"></textarea>
 																</div>	
 																</div>
 </div>							
@@ -246,7 +250,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 																			<label class="form-control-label" for="l0">Reinsurance
 																				Carrier<i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Enter in carrier name." data-original-title="Reinsurance Carrier"></i>
 																			</label>
-																			<input type="text" class="form-control placeholder-italics"
+																			<input type="text" class="form-control placeholder-italics " onkeypress="return planscreenname(event);"
 																				>
 																		</div>
 							</div>
@@ -272,7 +276,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 																			<label class="form-control-label" for="l0">Specific
 																				Lifetime Maximum
 																			</label>
-																			<input type="text" class="form-control placeholder-italics"
+																			<input type="text" class="form-control placeholder-italics " onkeypress="return planscreenname(event);"
 																				>
 																		</div>
 							</div>
@@ -331,7 +335,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 																			<label class="form-control-label" for="l0">Laser
 																				Details
 																			</label>
-																				<textarea class="form-control placeholder-italics" rows="3"></textarea>
+																				<textarea class="form-control placeholder-italics " onkeypress="return planscreenname(event);"rows="3"></textarea>
 																			
 																				<!--<div class="form-group col-md-12 " align="right">
 																		<label><a onclick="addLaser();" class="color-blue"><u>Add
@@ -441,10 +445,10 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 								    <option>Employee + 3</option>
 									</select>
 									</td>
-								  <td><input type="text" id="reinsurance-3-1" class="form-control reinsurance-rates-td text-align-center" value="$290.00"></td>
-								  <td><input type="text" id="reinsurance-4-1" class="form-control reinsurance-rates-td text-align-center" value="$9.00"></td>
-								  <td><input type="text" id="reinsurance-5-1" class="form-control reinsurance-rates-td text-align-center" value="$925.00"></td>
-								  <td><input type="text" id="reinsurance-6-1" class="form-control reinsurance-rates-td text-align-center" value="$1156.00"></td>
+								  <td><div class="input-group"><span class="input-group-addon"><i class="fa fa-usd  color-black"></i></span><input type="text" id="reinsurance-3-1" class="form-control reinsurance-rates-td text-align-center price" value="290.00"></div></td>
+								  <td><div class="input-group"><span class="input-group-addon"><i class="fa fa-usd  color-black"></i></span><input type="text" id="reinsurance-4-1" class="form-control reinsurance-rates-td text-align-center price" value="9.00"></div></td>
+								  <td><div class="input-group"><span class="input-group-addon"><i class="fa fa-usd  color-black"></i></span><input type="text" id="reinsurance-5-1" class="form-control reinsurance-rates-td text-align-center price" value="925.00"></div></td>
+								  <td><div class="input-group"><span class="input-group-addon"><i class="fa fa-usd  color-black"></i></span><input type="text" id="reinsurance-6-1" class="form-control reinsurance-rates-td text-align-center price" value="1156.00"></div></td>
 								   <td class="select_tiers" ><select class="form-control cursor-pointer  reinsurance-rates-td change-function" id="premium_tiers"  >
 																		<option selected value="1">1 tier</option>
 																		<option  value="2">2 tiers</option>
@@ -489,7 +493,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 							<div class="container margin-top-10 margin-bottom-10">
 							<fieldset class="fieldset-box">
 
-											<legend>Claim Types <i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="top" data-content="Select the claim types you would like to track for this plan by entering in monthly claims amounts." data-original-title="Claim Types"></i></legend>	
+											<legend>Claim Types <i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="bottom" data-content="Select the claim types you would like to track for this plan by entering in monthly claims amounts." data-original-title="Claim Types"></i></legend>	
 							<div class="col-md-12">
 
 																<div class="">
@@ -650,7 +654,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                    </tr>-->
                                   <tr>
                                    
-                                       <td><input type="text" id="adjustment-1-1" class="form-control reinsurance-rates-td" value="Drug Debates"></td>
+                                       <td><input type="text" id="adjustment-1-1" class="form-control reinsurance-rates-td " onkeypress="return planscreenname(event);" value="Drug Debates"></td>
 								  <td> <select class="form-control reinsurance-rates-td" id="adjustment-2-1">
 									 <option>Medical Claims</option>
 								 <option>Dental Claims</option>
@@ -698,7 +702,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                   </tr>-->
                                  
                                   <tr>
-                                    <td><input type="text" id="cost-1-1" class="form-control reinsurance-rates-td text-align-center" value="Adminstrative Fees"></td>
+                                    <td><input type="text" id="cost-1-1" class="form-control reinsurance-rates-td text-align-center " onkeypress="return planscreenname(event);" value="Adminstrative Fees"></td>
 									<td class="add_costtrack_button"><div class="add-icon cursor-pointer"><span class="button-add" onclick="addCosttrack();"><u>Add</u></span></div></td>
                                   </tr>
                             </tbody>
@@ -902,10 +906,10 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                             <tbody>
                                 <tr>
                                     <td id="medicaltwo-left-header-1">Period 1</td>
-									  <td><input type="text" id="medicaltwo-2-1" class="form-control reinsurance-rates-td text-align-center" value="1" disabled></td>
-									   <td><input type="text" id="medicaltwo-3-1" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
-									    <td><input type="text" id="medicaltwo-4-1" class="form-control reinsurance-rates-td text-align-center" value="100%"></td>
-										 <td><input type="text" id="medicaltwo-5-1" class="form-control reinsurance-rates-td text-align-center" value="9.4%"></td>
+									  <td><input type="text" id="medicaltwo-2-1" class="form-control reinsurance-rates-td text-align-center numbers" value="1" disabled></td>
+									   <td><input type="text" id="medicaltwo-3-1" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
+									    <td><input type="text" id="medicaltwo-4-1" class="form-control reinsurance-rates-td text-align-center numbers" value="100%"></td>
+										 <td><input type="text" id="medicaltwo-5-1" class="form-control reinsurance-rates-td text-align-center numbers" value="9.4%"></td>
 									     
                                   </tr>
                                  
@@ -962,9 +966,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                 <tr>
                                     <td id="pharmacytwo-left-header-1">Period 1</td>
 									  <td><input type="text" id="pharmacytwo-2-1" class="form-control reinsurance-rates-td text-align-center" value="1" disabled></td>
-									   <td><input type="text" id="pharmacytwo-3-1" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
-									    <td><input type="text" id="pharmacytwo-4-1" class="form-control reinsurance-rates-td text-align-center" value="100%"></td>
-										 <td><input type="text" id="pharmacytwo-5-1" class="form-control reinsurance-rates-td text-align-center" value="9.4%"></td>
+									   <td><input type="text" id="pharmacytwo-3-1" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
+									    <td><input type="text" id="pharmacytwo-4-1" class="form-control reinsurance-rates-td text-align-center numbers" value="100%"></td>
+										 <td><input type="text" id="pharmacytwo-5-1" class="form-control reinsurance-rates-td text-align-center numbers" value="9.4%"></td>
 									     
                                   </tr>
                                  
@@ -1005,9 +1009,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                 <tr>
                                     <td id="hratwo-left-header-1">Period 1</td>
 									  <td><input type="text" id="hratwo-2-1" class="form-control reinsurance-rates-td text-align-center" value="1" disabled></td>
-									   <td><input type="text" id="hratwo-3-1" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
-									    <td><input type="text" id="hratwo-4-1" class="form-control reinsurance-rates-td text-align-center" value="100%"></td>
-										 <td><input type="text" id="hratwo-5-1" class="form-control reinsurance-rates-td text-align-center" value="11.4%"></td>
+									   <td><input type="text" id="hratwo-3-1" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
+									    <td><input type="text" id="hratwo-4-1" class="form-control reinsurance-rates-td text-align-center numbers" value="100%"></td>
+										 <td><input type="text" id="hratwo-5-1" class="form-control reinsurance-rates-td text-align-center numbers" value="11.4%"></td>
 									     
                                   </tr>
                                  
@@ -1046,9 +1050,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                 <tr>
                                     <td id="dentaltwo-left-header-1">Period 1</td>
 									  <td><input type="text" id="dentaltwo-2-1" class="form-control reinsurance-rates-td text-align-center" value="1" disabled></td>
-									   <td><input type="text" id="dentaltwo-3-1" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
-									    <td><input type="text" id="dentaltwo-4-1" class="form-control reinsurance-rates-td text-align-center" value="100%"></td>
-										 <td><input type="text" id="dentaltwo-5-1" class="form-control reinsurance-rates-td text-align-center" value="7%"></td>
+									   <td><input type="text" id="dentaltwo-3-1" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
+									    <td><input type="text" id="dentaltwo-4-1" class="form-control reinsurance-rates-td text-align-center numbers" value="100%"></td>
+										 <td><input type="text" id="dentaltwo-5-1" class="form-control reinsurance-rates-td text-align-center numbers" value="7%"></td>
 									     
                                   </tr>
                                  
@@ -1089,9 +1093,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                 <tr>
                                     <td id="visiontwo-left-header-1">Period 1</td>
 									  <td><input type="text" id="visiontwo-2-1" class="form-control reinsurance-rates-td text-align-center" value="1" disabled></td>
-									   <td><input type="text" id="visiontwo-3-1" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
-									    <td><input type="text" id="visiontwo-4-1" class="form-control reinsurance-rates-td text-align-center" value="100%"></td>
-										 <td><input type="text" id="visiontwo-5-1" class="form-control reinsurance-rates-td text-align-center" value="4%"></td>
+									   <td><input type="text" id="visiontwo-3-1" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
+									    <td><input type="text" id="visiontwo-4-1" class="form-control reinsurance-rates-td text-align-center numbers" value="100%"></td>
+										 <td><input type="text" id="visiontwo-5-1" class="form-control reinsurance-rates-td text-align-center numbers" value="4%"></td>
 									     
                                   </tr>
                                  
@@ -1129,9 +1133,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                 <tr>
                                     <td id="hsatwo-left-header-1">Period 1</td>
 									  <td><input type="text" id="hsatwo-2-1" class="form-control reinsurance-rates-td text-align-center" value="1" disabled></td>
-									   <td><input type="text" id="hsatwo-3-1" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
-									    <td><input type="text" id="hsatwo-4-1" class="form-control reinsurance-rates-td text-align-center" value="100%"></td>
-										 <td><input type="text" id="hsatwo-5-1" class="form-control reinsurance-rates-td text-align-center" value="4%"></td>
+									   <td><input type="text" id="hsatwo-3-1" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
+									    <td><input type="text" id="hsatwo-4-1" class="form-control reinsurance-rates-td text-align-center numbers" value="100%"></td>
+										 <td><input type="text" id="hsatwo-5-1" class="form-control reinsurance-rates-td text-align-center numbers" value="4%"></td>
 									     
                                   </tr>
                                  
@@ -1195,9 +1199,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                 <tr>
                                     <td id="medicaltwocopy-left-header-1">Period 1</td>
 									  <td><input type="text" id="medicaltwocopy-2-1" class="form-control reinsurance-rates-td text-align-center" value="1" disabled></td>
-									   <td><input type="text" id="medicaltwocopy-3-1" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
-									    <td><input type="text" id="medicaltwocopy-4-1" class="form-control reinsurance-rates-td text-align-center" value="100%"></td>
-										 <td><input type="text" id="medicaltwocopy-5-1" class="form-control reinsurance-rates-td text-align-center" value="9.4%"></td>
+									   <td><input type="text" id="medicaltwocopy-3-1" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
+									    <td><input type="text" id="medicaltwocopy-4-1" class="form-control reinsurance-rates-td text-align-center numbers" value="100%"></td>
+										 <td><input type="text" id="medicaltwocopy-5-1" class="form-control reinsurance-rates-td text-align-center numbers" value="9.4%"></td>
 									     
                                   </tr>
                                  
@@ -1251,9 +1255,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                 <tr>
                                     <td id="pharmacytwocopy-left-header-1">Period 1</td>
 									  <td><input type="text" id="pharmacytwocopy-2-1" class="form-control reinsurance-rates-td text-align-center" value="1" disabled></td>
-									   <td><input type="text" id="pharmacytwocopy-3-1" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
-									    <td><input type="text" id="pharmacytwocopy-4-1" class="form-control reinsurance-rates-td text-align-center" value="100%"></td>
-										 <td><input type="text" id="pharmacytwocopy-5-1" class="form-control reinsurance-rates-td text-align-center" value="9.4%"></td>
+									   <td><input type="text" id="pharmacytwocopy-3-1" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
+									    <td><input type="text" id="pharmacytwocopy-4-1" class="form-control reinsurance-rates-td text-align-center numbers" value="100%"></td>
+										 <td><input type="text" id="pharmacytwocopy-5-1" class="form-control reinsurance-rates-td text-align-center numbers" value="9.4%"></td>
 									     
                                   </tr>
                                   
@@ -1292,9 +1296,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                 <tr>
                                     <td id="hratwocopy-left-header-1">Period 1</td>
 									  <td><input type="text" id="hratwocopy-2-1" class="form-control reinsurance-rates-td text-align-center" value="1" disabled></td>
-									   <td><input type="text" id="hratwocopy-3-1" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
-									    <td><input type="text" id="hratwocopy-4-1" class="form-control reinsurance-rates-td text-align-center" value="100%"></td>
-										 <td><input type="text" id="hratwocopy-5-1" class="form-control reinsurance-rates-td text-align-center" value="11.4%"></td>
+									   <td><input type="text" id="hratwocopy-3-1" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
+									    <td><input type="text" id="hratwocopy-4-1" class="form-control reinsurance-rates-td text-align-center numbers" value="100%"></td>
+										 <td><input type="text" id="hratwocopy-5-1" class="form-control reinsurance-rates-td text-align-center numbers" value="11.4%"></td>
 									     
                                   </tr>
                                   
@@ -1328,9 +1332,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                 <tr>
                                     <td id="dentaltwocopy-left-header-1">Period 1</td>
 									  <td><input type="text" id="dentaltwocopy-2-1" class="form-control reinsurance-rates-td text-align-center" value="1" disabled></td>
-									   <td><input type="text" id="dentaltwocopy-3-1" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
-									    <td><input type="text" id="dentaltwocopy-4-1" class="form-control reinsurance-rates-td text-align-center" value="100%"></td>
-										 <td><input type="text" id="dentaltwocopy-5-1" class="form-control reinsurance-rates-td text-align-center" value="7%"></td>
+									   <td><input type="text" id="dentaltwocopy-3-1" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
+									    <td><input type="text" id="dentaltwocopy-4-1" class="form-control reinsurance-rates-td text-align-center numbers" value="100%"></td>
+										 <td><input type="text" id="dentaltwocopy-5-1" class="form-control reinsurance-rates-td text-align-center numbers" value="7%"></td>
 									     
                                   </tr>
                                   
@@ -1367,9 +1371,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                 <tr>
                                     <td id="visiontwocopy-left-header-1">Period 1</td>
 									  <td><input type="text" id="visiontwocopy-2-1" class="form-control reinsurance-rates-td text-align-center" value="1" disabled></td>
-									   <td><input type="text" id="visiontwocopy-3-1" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
-									    <td><input type="text" id="visiontwocopy-4-1" class="form-control reinsurance-rates-td text-align-center" value="100%"></td>
-										 <td><input type="text" id="visiontwocopy-5-1" class="form-control reinsurance-rates-td text-align-center" value="4%"></td>
+									   <td><input type="text" id="visiontwocopy-3-1" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
+									    <td><input type="text" id="visiontwocopy-4-1" class="form-control reinsurance-rates-td text-align-center numbers" value="100%"></td>
+										 <td><input type="text" id="visiontwocopy-5-1" class="form-control reinsurance-rates-td text-align-center numbers" value="4%"></td>
 									     
                                   </tr>
                                   
@@ -1403,9 +1407,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                 <tr>
                                     <td id="hsatwocopy-left-header-1">Period 1</td>
 									  <td><input type="text" id="hsatwocopy-2-1" class="form-control reinsurance-rates-td text-align-center" value="1" disabled></td>
-									   <td><input type="text" id="hsatwocopy-3-1" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
-									    <td><input type="text" id="hsatwocopy-4-1" class="form-control reinsurance-rates-td text-align-center" value="100%"></td>
-										 <td><input type="text" id="hsatwocopy-5-1" class="form-control reinsurance-rates-td text-align-center" value="4%"></td>
+									   <td><input type="text" id="hsatwocopy-3-1" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
+									    <td><input type="text" id="hsatwocopy-4-1" class="form-control reinsurance-rates-td text-align-center numbers" value="100%"></td>
+										 <td><input type="text" id="hsatwocopy-5-1" class="form-control reinsurance-rates-td text-align-center numbers" value="4%"></td>
 									     
                                   </tr>
                                  
@@ -1471,7 +1475,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                 
 									  <td id="costitems-left-header-1">Stop Loss Premiums</td>
 									   <td><div class="input-group"><span class="input-group-addon"><i class="fa fa-usd  color-black"></i></span><input type="text" id="costitems-2-1" class="form-control reinsurance-rates-td price price" value="4"></div></td>
-									    <td><input type="text" id="costitems-3-1" class="form-control reinsurance-rates-td" value="Any Notes"></td>
+									    <td><input type="text" id="costitems-3-1" class="form-control reinsurance-rates-td  text-align-center" onkeypress="return planscreenname(event);" value="Any Notes"></td>
 									 <td class="add_costitems_button" align="center"><div class="add-icon cursor-pointer"><span class="" onclick="addCostitems();"><u>Add</u></span></div></td>
                                   </tr>
                                  
@@ -2172,13 +2176,24 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                 
 									  <td id="largeclaims-left-header-1" class="text-align-center">1</td>
 									   <td><input type="text" id="largeclaims-2-1" class="form-control reinsurance-rates-td text-align-center" value="7899665"></td>
-									    <td><input type="text" id="largeclaims-3-1" class="form-control reinsurance-rates-td text-align-center" value="Active"></td>
-										<td><input type="text" id="largeclaims-4-1" class="form-control reinsurance-rates-td text-align-center" value="Employee"></td>
-										<td><input type="text" id="largeclaims-5-1" class="form-control reinsurance-rates-td text-align-center" value="24"></td>
-										<td><input type="text" id="largeclaims-6-1" class="form-control reinsurance-rates-td text-align-center" value="Male"></td>
-										<td><input type="text" id="largeclaims-7-1" class="form-control reinsurance-rates-td text-align-center" value="17,8,222.00"></td>
-										<td><input type="text" id="largeclaims-8-1" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										<td><input type="text" id="largeclaims-9-1" class="form-control reinsurance-rates-td text-align-center" value="10000 Next Year"></td>
+									    <td> 
+										<select class="form-control reinsurance-rates-td text-align-center" id="largeclaims-3-1"  >
+																		<option selected value="1">Active</option>
+																		<option  value="2">Inactive</option>
+																	</select>
+																	</td>
+										<td><input type="text" id="largeclaims-4-1" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);"value="Employee"></td>
+										<td><input type="text" id="largeclaims-5-1" class="form-control reinsurance-rates-td text-align-center numbers" value="24"></td>
+										<td> 
+										<select class="form-control reinsurance-rates-td text-align-center" id="largeclaims-6-1"  >
+																		<option selected value="1">Male</option>
+																		<option  value="2">Female</option>
+																		<option  value="3">Others</option>
+																	</select>
+																	</td>
+										<td><input type="text" id="largeclaims-7-1" class="form-control reinsurance-rates-td text-align-center price" value="17,8,222.00"></td>
+										<td><input type="text" id="largeclaims-8-1" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);" value="Cancer"></td>
+										<td><input type="text" id="largeclaims-9-1" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);" value="10000 Next Year"></td>
 									
                                   </tr>
                                  
@@ -2186,13 +2201,24 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                   
 									  <td id="largeclaims-left-header-2" class="text-align-center">2</td>
 									   <td><input type="text" id="largeclaims-2-2" class="form-control reinsurance-rates-td text-align-center" value="7899665"></td>
-									    <td><input type="text" id="largeclaims-3-2" class="form-control reinsurance-rates-td text-align-center" value="Active"></td>
-										<td><input type="text" id="largeclaims-4-2" class="form-control reinsurance-rates-td text-align-center" value="Employee"></td>
-										<td><input type="text" id="largeclaims-5-2" class="form-control reinsurance-rates-td text-align-center" value="24"></td>
-										<td><input type="text" id="largeclaims-6-2" class="form-control reinsurance-rates-td text-align-center" value="Male"></td>
-										<td><input type="text" id="largeclaims-7-2" class="form-control reinsurance-rates-td text-align-center" value="17,8,222.00"></td>
-										<td><input type="text" id="largeclaims-8-2" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										<td><input type="text" id="largeclaims-9-2" class="form-control reinsurance-rates-td text-align-center" value="10000 Next Year"></td>
+									    <td>
+										<select class="form-control reinsurance-rates-td text-align-center" id="largeclaims-3-2"  >
+																		<option selected value="1">Active</option>
+																		<option  value="2">Inactive</option>
+																	</select>
+																	</td>
+										<td><input type="text" id="largeclaims-4-2" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);" value="Employee"></td>
+										<td><input type="text" id="largeclaims-5-2" class="form-control reinsurance-rates-td text-align-center numbers" value="24"></td>
+										<td>
+										<select id="largeclaims-6-2" class="form-control reinsurance-rates-td text-align-center">
+																		<option selected value="1">Male</option>
+																		<option  value="2">Female</option>
+																		<option  value="3">Others</option>
+																	</select>
+																	</td>
+										<td><input type="text" id="largeclaims-7-2" class="form-control reinsurance-rates-td text-align-center price" value="17,8,222.00"></td>
+										<td><input type="text" id="largeclaims-8-2" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);" value="Cancer"></td>
+										<td><input type="text" id="largeclaims-9-2" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);" value="10000 Next Year"></td>
 									     
                                   </tr>
 								   
@@ -2244,25 +2270,25 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                             <tbody>
                                 <tr>
 									  <td id="network-left-header-1" class="text-align-center">Network Utilization %</td>
-									   <td><input type="text" id="network-2-1" class="form-control reinsurance-rates-td text-align-center" value="95%"></td>
+									   <td><input type="text" id="network-2-1" class="form-control reinsurance-rates-td text-align-center numbers" value="95%"></td>
                                   </tr>
                                  
                                    <tr>
 									  <td id="network-left-header-2" class="text-align-center">Total Sumitted Charges</td>
-									   <td><input type="text" id="network-2-2" class="form-control reinsurance-rates-td text-align-center" value="1000"></td>
+									   <td><input type="text" id="network-2-2" class="form-control reinsurance-rates-td text-align-center numbers" value="1000"></td>
                                   </tr>
 								  
 								  <tr>
 									  <td id="network-left-header-3" class="text-align-center">Total Allowed Charges</td>
-									   <td><input type="text" id="network-2-3" class="form-control reinsurance-rates-td text-align-center" value="25000"></td>
+									   <td><input type="text" id="network-2-3" class="form-control reinsurance-rates-td text-align-center numbers" value="25000"></td>
                                   </tr>
 								  <tr>
 									  <td id="network-left-header-4" class="text-align-center">Total Savings</td>
-									   <td><input type="text" id="network-2-4" class="form-control reinsurance-rates-td text-align-center" value="150000"></td>
+									   <td><input type="text" id="network-2-4" class="form-control reinsurance-rates-td text-align-center numbers" value="150000"></td>
                                   </tr>
 								  <tr>
 									  <td id="network-left-header-5" class="text-align-center">Discount %</td>
-									   <td><input type="text" id="network-2-5" class="form-control reinsurance-rates-td text-align-center" value="34.7%"></td>
+									   <td><input type="text" id="network-2-5" class="form-control reinsurance-rates-td text-align-center numbers" value="34.7%"></td>
                                   </tr>
 								   
                             </tbody>
@@ -2353,29 +2379,29 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                             <tbody>
                                 <tr>
 									  <td id="pharmacy-left-header-1" class="text-align-center">Total Prescriptions</td>
-									   <td><input type="text" id="pharmacy-2-1" class="form-control reinsurance-rates-td text-align-center" value="125"></td>
+									   <td><input type="text" id="pharmacy-2-1" class="form-control reinsurance-rates-td text-align-center numbers" value="125"></td>
                                   </tr>
                                  
                                    <tr>
 									  <td id="pharmacy-left-header-2" class="text-align-center">Generic Filled</td>
-									   <td><input type="text" id="pharmacy-2-2" class="form-control reinsurance-rates-td text-align-center" value="100"></td>
+									   <td><input type="text" id="pharmacy-2-2" class="form-control reinsurance-rates-td text-align-center numbers" value="100"></td>
                                   </tr>
 								  
 								  <tr>
 									  <td id="pharmacy-left-header-3" class="text-align-center">Mail Order</td>
-									   <td><input type="text" id="pharmacy-2-3" class="form-control reinsurance-rates-td text-align-center" value="50"></td>
+									   <td><input type="text" id="pharmacy-2-3" class="form-control reinsurance-rates-td text-align-center numbers" value="50"></td>
                                   </tr>
 								  <tr>
 									  <td id="pharmacy-left-header-4" class="text-align-center">Formulary Brand Compliance Rate</td>
-									   <td><input type="text" id="pharmacy-2-4" class="form-control reinsurance-rates-td text-align-center" value="12.5%"></td>
+									   <td><input type="text" id="pharmacy-2-4" class="form-control reinsurance-rates-td text-align-center numbers" value="12.5%"></td>
                                   </tr>
 								  <tr>
 									  <td id="pharmacy-left-header-5" class="text-align-center">Average Brand Discount</td>
-									   <td><input type="text" id="pharmacy-2-5" class="form-control reinsurance-rates-td text-align-center" value="34.7%"></td>
+									   <td><input type="text" id="pharmacy-2-5" class="form-control reinsurance-rates-td text-align-center numbers" value="34.7%"></td>
                                   </tr>
 								    <tr>
 									  <td id="pharmacy-left-header-6" class="text-align-center">Average Generic Discount</td>
-									   <td><input type="text" id="pharmacy-2-6" class="form-control reinsurance-rates-td text-align-center" value="34.7%"></td>
+									   <td><input type="text" id="pharmacy-2-6" class="form-control reinsurance-rates-td text-align-center numbers" value="34.7%"></td>
                                   </tr>
 								   
                             </tbody>
@@ -2442,9 +2468,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                 </div>
                             </div>
                            </td>
-									    <td><input type="text" id="pharmacymedical-3-1" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-1" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-1" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-1" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);" value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-1" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-1" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>
 								    <tr>
 									  <td id="pharmacymedical-left-header-2" class="text-align-center">2</td>
@@ -2461,9 +2487,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                     </div>
                                 </div>
                             </div></td>
-									    <td><input type="text" id="pharmacymedical-3-2" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-2" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-2" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-2" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);" value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-2" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-2" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>
 								    <tr>
 									  <td id="pharmacymedical-left-header-3" class="text-align-center">3</td>
@@ -2480,9 +2506,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                     </div>
                                 </div>
                             </div></td>
-									    <td><input type="text" id="pharmacymedical-3-3" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-3" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-3" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-3" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);"  value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-3" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-3" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>
 								    <tr>
 									  <td id="pharmacymedical-left-header-4" class="text-align-center">4</td>
@@ -2499,9 +2525,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                     </div>
                                 </div>
                             </div></td>
-									    <td><input type="text" id="pharmacymedical-3-4" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-4" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-4" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-4" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);"  value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-4" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-4" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>
 								    <tr>
 									  <td id="pharmacymedical-left-header-5" class="text-align-center">5</td>
@@ -2518,9 +2544,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                     </div>
                                 </div>
                             </div></td>
-									    <td><input type="text" id="pharmacymedical-3-5" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-5" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-5" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-5" class="form-control reinsurance-rates-td text-align-center"  onkeypress="return planscreenname(event);" value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-5" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-5" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>
 								    <tr>
 									  <td id="pharmacymedical-left-header-6" class="text-align-center">6</td>
@@ -2537,9 +2563,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                     </div>
                                 </div>
                             </div></td>
-									    <td><input type="text" id="pharmacymedical-3-6" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-6" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-6" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-6" class="form-control reinsurance-rates-td text-align-center"  onkeypress="return planscreenname(event);" value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-6" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-6" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>
 								    <tr>
 									  <td id="pharmacymedical-left-header-7" class="text-align-center">7</td>
@@ -2556,9 +2582,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                     </div>
                                 </div>
                             </div></td>
-									    <td><input type="text" id="pharmacymedical-3-7" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-7" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-7" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-7" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);"  value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-7" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-7" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>
 								    <tr>
 									  <td id="pharmacymedical-left-header-8" class="text-align-center">8</td>
@@ -2575,9 +2601,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                     </div>
                                 </div>
                             </div></td>
-									    <td><input type="text" id="pharmacymedical-3-8" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-8" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-8" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-8" class="form-control reinsurance-rates-td text-align-center"  onkeypress="return planscreenname(event);" value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-8" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-8" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>
 								    <tr>
 									  <td id="pharmacymedical-left-header-9" class="text-align-center">9</td>
@@ -2594,9 +2620,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                     </div>
                                 </div>
                             </div></td>
-									    <td><input type="text" id="pharmacymedical-3-9" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-9" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-9" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-9" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);"  value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-9" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-9" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>  <tr>
 									  <td id="pharmacymedical-left-header-10" class="text-align-center">10</td>
 									   <td><div class="typeahead__container">
@@ -2612,9 +2638,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                     </div>
                                 </div>
                             </div></td>
-									    <td><input type="text" id="pharmacymedical-3-10" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-10" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-10" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-10" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);"  value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-10" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-10" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>  <tr>
 									  <td id="pharmacymedical-left-header-11" class="text-align-center">11</td>
 									   <td><div class="typeahead__container">
@@ -2630,9 +2656,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                     </div>
                                 </div>
                             </div></td>
-									    <td><input type="text" id="pharmacymedical-3-11" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-11" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-11" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-11" class="form-control reinsurance-rates-td text-align-center"  onkeypress="return planscreenname(event);" value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-11" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-11" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>  <tr>
 									  <td id="pharmacymedical-left-header-12" class="text-align-center">12</td>
 									   <td><div class="typeahead__container">
@@ -2648,9 +2674,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                     </div>
                                 </div>
                             </div></td>
-									    <td><input type="text" id="pharmacymedical-3-12" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-12" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-12" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-12" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);"  value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-12" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-12" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>  <tr>
 									  <td id="pharmacymedical-left-header-13" class="text-align-center">13</td>
 									   <td><div class="typeahead__container">
@@ -2666,9 +2692,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                     </div>
                                 </div>
                             </div></td>
-									    <td><input type="text" id="pharmacymedical-3-13" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-13" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-13" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-13" class="form-control reinsurance-rates-td text-align-center"  onkeypress="return planscreenname(event);" value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-13" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-13" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>  <tr>
 									  <td id="pharmacymedical-left-header-14" class="text-align-center">14</td>
 									   <td><div class="typeahead__container">
@@ -2684,9 +2710,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                     </div>
                                 </div>
                             </div></td>
-									    <td><input type="text" id="pharmacymedical-3-14" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-14" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-14" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-14" class="form-control reinsurance-rates-td text-align-center"  onkeypress="return planscreenname(event);" value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-14" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-14" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>
 								    <tr>
 									  <td id="pharmacymedical-left-header-15" class="text-align-center">15</td>
@@ -2703,9 +2729,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                     </div>
                                 </div>
                             </div></td>
-									    <td><input type="text" id="pharmacymedical-3-15" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-15" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-15" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-15" class="form-control reinsurance-rates-td text-align-center"  onkeypress="return planscreenname(event);" value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-15" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-15" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>
 								    <tr>
 									  <td id="pharmacymedical-left-header-16" class="text-align-center">16</td>
@@ -2722,9 +2748,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                     </div>
                                 </div>
                             </div></td>
-									    <td><input type="text" id="pharmacymedical-3-16" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-16" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-16" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-16" class="form-control reinsurance-rates-td text-align-center"  onkeypress="return planscreenname(event);" value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-16" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-16" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>
 								    <tr>
 									  <td id="pharmacymedical-left-header-17" class="text-align-center">17</td>
@@ -2741,9 +2767,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                     </div>
                                 </div>
                             </div></td>
-									    <td><input type="text" id="pharmacymedical-3-17" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-17" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-17" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-17" class="form-control reinsurance-rates-td text-align-center"  onkeypress="return planscreenname(event);" value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-17" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-17" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>
 								    <tr>
 									  <td id="pharmacymedical-left-header-18" class="text-align-center">18</td>
@@ -2760,9 +2786,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                     </div>
                                 </div>
                             </div></td>
-									    <td><input type="text" id="pharmacymedical-3-18" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-18" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-18" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-18" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);"  value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-18" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-18" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>
 								    <tr>
 									  <td id="pharmacymedical-left-header-19" class="text-align-center">19</td>
@@ -2779,9 +2805,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                     </div>
                                 </div>
                             </div></td>
-									    <td><input type="text" id="pharmacymedical-3-19" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-19" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-19" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-19" class="form-control reinsurance-rates-td text-align-center"  onkeypress="return planscreenname(event);" value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-19" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-19" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>
 								    <tr>
 									  <td id="pharmacymedical-left-header-20" class="text-align-center">20</td>
@@ -2798,9 +2824,9 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                     </div>
                                 </div>
                             </div></td>
-									    <td><input type="text" id="pharmacymedical-3-20" class="form-control reinsurance-rates-td text-align-center" value="Cancer"></td>
-										 <td><input type="text" id="pharmacymedical-4-20" class="form-control reinsurance-rates-td text-align-center" value="4,75,522"></td>
-										  <td><input type="text" id="pharmacymedical-5-20" class="form-control reinsurance-rates-td text-align-center" value="12"></td>
+									    <td><input type="text" id="pharmacymedical-3-20" class="form-control reinsurance-rates-td text-align-center"  onkeypress="return planscreenname(event);" value="Cancer"></td>
+										 <td><input type="text" id="pharmacymedical-4-20" class="form-control reinsurance-rates-td text-align-center price" value="4,75,522"></td>
+										  <td><input type="text" id="pharmacymedical-5-20" class="form-control reinsurance-rates-td text-align-center numbers" value="12"></td>
                                   </tr>
 								  <tr>
 									  <td class="text-align-center"></td>
@@ -3077,12 +3103,7 @@ $gridColumns = [
 		<!-- page Content end-->
 	</section>
 	<!-- section end here-->	
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.2/jszip.min.js"></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
-	<script 
-	src="https://cdn3.devexpress.com/jslib/16.2.4/js/dx.all.js"></script>
+ 
 
 	<script type="text/javascript"
 		src="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/js/design/firm/medicalplandetails.js"></script> 
@@ -3375,7 +3396,7 @@ $gridColumns = [
 															Locations *</label>
 													</div>
 													<div class="col-md-8 form-group ">
-														<input type="text" class="form-control"
+														<input type="text" class="form-control"  onkeypress="return planscreenname(event);" 
 															>
 													</div>
 												</div>
@@ -3408,7 +3429,7 @@ $gridColumns = [
 														<label class="form-control-label" for="l0">Age *</label>
 													</div>
 													<div class="col-md-8 form-group ">
-														<input type="text" class="form-control" 
+														<input type="text" class="form-control numbers" 
 															>
 													</div>
 												</div>
@@ -3440,7 +3461,7 @@ $gridColumns = [
 														<label class="form-control-label" for="l0">Plan Claims *</label>
 													</div>
 													<div class="col-md-8 form-group ">
-														<input type="text" class="form-control" 
+														<input type="text" class="form-control"   onkeypress="return planscreenname(event);" 
 															>
 													</div>
 												</div>
@@ -3452,7 +3473,7 @@ $gridColumns = [
 														<label class="form-control-label" for="l0">Condition *</label>
 													</div>
 													<div class="col-md-8 form-group ">
-														<input type="text" class="form-control" 
+														<input type="text" class="form-control"  onkeypress="return planscreenname(event);" 
 															>
 													</div>
 
@@ -3469,7 +3490,7 @@ $gridColumns = [
 														<label class="form-control-label" for="l0">Prognosis *</label>
 													</div>
 													<div class="col-md-8 form-group ">
-														<input type="text" class="form-control" 
+														<input type="text" class="form-control"  onkeypress="return planscreenname(event);" 
 															>
 													</div>
 												</div>
@@ -3542,7 +3563,7 @@ $gridColumns = [
 														<label class="form-control-label" for="l0">Description Of Item *</label>
 													</div>
 													<div class="col-md-8 form-group ">
-														<input type="text" class="form-control"
+														<input type="text" class="form-control"  onkeypress="return planscreenname(event);"
 															placeholder="Total Description">
 													</div>
 												</div>
@@ -3558,7 +3579,7 @@ $gridColumns = [
 														<label class="form-control-label" for="l0">Percentage or Amount *</label>
 													</div>
 													<div class="col-md-8 form-group ">
-														<input type="text" class="form-control"
+														<input type="text" class="form-control numbers"
 															placeholder="Percentage or Amount">
 													</div>
 												</div>
@@ -3723,7 +3744,7 @@ $gridColumns = [
                                     <label class="form-control-label" for="l0">Period Start Month*</label>
                                 </div>
                                 <div class="col-md-8 form-group ">
-                             <input type="text" class="form-control" >
+                             <input type="text" class="form-control  numbers" >
                                 </div>
                             </div>
 						 </div>
@@ -3733,7 +3754,7 @@ $gridColumns = [
                                     <label class="form-control-label" for="l0">Period End Month*</label>
                                 </div>
                                 <div class="col-md-8 form-group ">
-                              <input type="text" class="form-control" >
+                              <input type="text" class="form-control  numbers" >
                                 </div>
                             </div>
 						 </div>
@@ -3747,7 +3768,7 @@ $gridColumns = [
                                     <label class="form-control-label" for="l0">Credibility:</label>
                                 </div>
                                 <div class="col-md-8 form-group ">
-                             <input type="text" class="form-control" >
+                             <input type="text" class="form-control numbers" >
                                 </div>
                             </div>
 						 </div>
@@ -3757,7 +3778,7 @@ $gridColumns = [
                                     <label class="form-control-label" id="label_trend" for="l0">Medical Trend</label>
                                 </div>
                                 <div class="col-md-8 form-group ">
-                            <input type="text" class="form-control" >
+                            <input type="text" class="form-control numbers" >
                                 </div>
                             </div>
 						 </div>

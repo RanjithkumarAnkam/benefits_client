@@ -49,7 +49,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 				<i class="fa fa-angle-left" aria-hidden="true"></i>
 				</a>
 				<div class="breadcrumb-description">
-					<span class="">Master Data &gt; <a class="color-white" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/firm-plan/client-plan-years?id=1"><u>Manage Plans - Group Medical - Prior (2016)</u></a> &gt; Partially Self Insured</span>
+					<span class="">Clients &gt; <a class="color-white" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/dashboard/clients"><u>Client Name - Group Medical - Prior (2016)</u></a> &gt; Fully Insured</span>
 
 				</div>
 
@@ -66,7 +66,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 			
 				<ul class="nav nav-pills col-md-12 main-pills" id="main_tab">
 						<li class="col-md-2"></li>
-					  <li href="#account_setup_block" data-toggle="tab" class="active col-md-2" align="center"><img src="/images/design/account_setup_sel.png"  class="avatar"
+					  <li href="#account_setup_block" data-toggle="tab" class="col-md-2" align="center"><img src="/images/design/account_setup_sel.png"  class="avatar"
 							alt="Alternative text to the image" id="main-anchor-1" onclick="addHasttag(1);">
 							<p class="font-white margin-0">Account Setup</p></li>
 					  <li href="#cost_projections_block" data-toggle="tab" class="col-md-2" align="center"><img src="/images/design/cost_projectionsl.png" class="avatar"
@@ -83,7 +83,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 			
 			</div>
 			<div class="tab-content clearfix">
-				<div class="tab-pane active" id="account_setup_block">
+				<div class="tab-pane" id="account_setup_block">
 					<div class="col-md-12  padding-10 ul-block">
 						<ul class="nav nav-pills nav-wizard inner-block-ul">
 							<li href="#planbasics" data-toggle="tab" class="active inner-block-li"  id="anchor-pb-1"><a><div class="inner-block-digits pull-left">1</div><span class="inner-block-text">Plan Basics</span></a></li>
@@ -497,10 +497,10 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 						<ul class="nav nav-pills nav-wizard">
 							<!--<li href="#year_project_assumption" data-toggle="tab" class="active inner-block-li" id="anchor-pb-6"><a><div class="inner-block-digits pull-left">1</div><span class="inner-block-text" title="Remainder of Year Claim Projection Assumptions">Remainder of Year Claim...</span></a></li>--->
 							<li href="#claims_project_assumption" data-toggle="tab" class="active inner-block-li" id="anchor-pb-7"><a><div class="inner-block-digits pull-left">1</div><span class="inner-block-text">Renewal Projection
-							 <i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="In this section, you can enter in the details to be used for financial projections of future claims.  The system uses mid-point to mid-point underwriting to determine future claims.  The necessary components to perform these calculations is to determine how many prior months of claims you would like to use in your calculations, the credibility to apply to those claims and the annualized trend to use.  The system will then perform month by month calculations to estimate future claims based upon prior history." data-original-title="Renewal Projection"></i>
+							 <i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="bottom" data-content="In this section, you can enter in the details to be used for financial projections of future claims.  The system uses mid-point to mid-point underwriting to determine future claims.  The necessary components to perform these calculations is to determine how many prior months of claims you would like to use in your calculations, the credibility to apply to those claims and the annualized trend to use.  The system will then perform month by month calculations to estimate future claims based upon prior history." data-original-title="Renewal Projection"></i>
 							 </span></a></li>
 							<li href="#cost_project_assumption" data-toggle="tab" class="inner-block-li" id="anchor-pb-8"><a><div class="inner-block-digits pull-left">2</div><span class="inner-block-text" title="Renewal Cost Item Renewal Assumptions">Renewal Cost Items
-							<i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="At renewal cost items are likely to change.  In order to illustrate this in the renewal projection reporting, please enter in the estimated percentage change over the current plan year, as well as any notes associated with your projection." data-original-title="Renewal Cost Items"></i>
+							<i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="bottom" data-content="At renewal cost items are likely to change.  In order to illustrate this in the renewal projection reporting, please enter in the estimated percentage change over the current plan year, as well as any notes associated with your projection." data-original-title="Renewal Cost Items"></i>
 							</span></a></li>
 							<li href="#contribution_project_assumption" data-toggle="tab" class="inner-block-li" id="anchor-pb-9"><a><div class="inner-block-digits pull-left">3</div><span class="inner-block-text" title="Renewal Employee Contribution & Average Enrollment Assumption">Renewal Contributions</span></a></li>
 						</ul>
@@ -2250,7 +2250,90 @@ $gridColumns = [
 					</div>
 					
 				</div>
-				
+												
+<div class="modal fade" id="add_plan" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header modal-header-color">
+							 
+							<button type="button" class="close-modal modal-opacity  close-modal-blue" data-dismiss="modal" aria-hidden="true">
+								X
+							</button>
+							<h4 class="modal-title color-white" id="plan_label">
+								Add Plan 
+							</h4>
+						</div>
+						<div class="modal-body row">
+							
+                         <form>
+						 <div class="col-md-12">
+						 <div class="col-md-6">
+						   <div class="row">
+                                <div class="col-md-4 form-group ">
+                                    <label class="form-control-label" for="l0">Period Start Month*</label>
+                                </div>
+                                <div class="col-md-8 form-group ">
+                             <input type="text" class="form-control" >
+                                </div>
+                            </div>
+						 </div>
+						  <div class="col-md-6">
+						   <div class="row">
+                                <div class="col-md-4 form-group ">
+                                    <label class="form-control-label" for="l0">Period End Month*</label>
+                                </div>
+                                <div class="col-md-8 form-group ">
+                              <input type="text" class="form-control" >
+                                </div>
+                            </div>
+						 </div>
+						 </div>
+						 
+						  <div class="col-md-12">
+						
+						  <div class="col-md-6">
+						   <div class="row">
+                                <div class="col-md-4 form-group ">
+                                    <label class="form-control-label" for="l0">Credibility:</label>
+                                </div>
+                                <div class="col-md-8 form-group ">
+                             <input type="text" class="form-control" >
+                                </div>
+                            </div>
+						 </div>
+						  <div class="col-md-6">
+						   <div class="row">
+                                <div class="col-md-4 form-group ">
+                                    <label class="form-control-label" id="label_trend" for="l0">Medical Trend</label>
+                                </div>
+                                <div class="col-md-8 form-group ">
+                            <input type="text" class="form-control" >
+                                </div>
+                            </div>
+						 </div>
+						 </div>
+						  
+					
+						  </div>
+                        </form>
+
+								<div class="modal-footer">
+							 
+							<a href=""  class="btn btn-modal-blue">
+								Save
+							</a>
+							<button type="button" class="btn btn-default" data-dismiss="modal">
+								Close
+							</button> 
+						</div>			
+								</div>
+								
+							
+						</div>
+						
+					</div>
+					
+				</div>
 				<!-- for enter reinsurance details -->
 	<div class="modal fade" id="alert_message" tabindex="-1"
 	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -30,8 +30,7 @@ use yii\web\View;
 				</a>
 				<div class="breadcrumb-description">
 					<!--<span class="">New &#62; <?php //if(!empty($firm_id)){?>Update Firm<?php //}else{?>Create Firm<?php //}?></span> -->
-					<span class="">New &#62; <span style="padding:0;vertical-align:baseline;" id="add_update_firm_label"></span></span>
-
+					<span class="">New &#62; <span id="add_update_firm_label">Update Firm</span></span>
 				</div>
 
 			</div>
@@ -85,7 +84,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 									<a
 										id="anchor-pb-4" class="nav-link color-white pointer-disable"
 										<?php if(!empty($firm_id)){ ?> data-target="#profile5" data-toggle="tab"
-										onclick="changeCreateFirmUserText();" role="tab" aria-expanded="false" <?php } ?>>Firm
+										 onclick="changeCreateFirmUserText();" role="tab" aria-expanded="false" <?php } ?>>Firm
 											Users <span class="fa fa-info-circle information-icon"
 											title="Firm Users" data-container="body"
 											data-toggle="popover-hover" data-placement="right"
@@ -140,7 +139,24 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 															</div>
 															
 															
+															<div class="col-md-12 ">
+														
 															
+															<div class="col-md-6">
+															<div class="form-group ">
+															<label class="form-control-label" for="l0">Billing
+																		Address * </label>
+																<?= $form->field($model, 'billing_address', ['inputOptions' => ['class' => 'form-control','tabindex'=>'1']])->textInput(['maxlength' => true])->label(false); ?>
+															</div>
+															</div>
+															
+															<div class="col-md-6 margin-top-40">
+															<label class="mt-checkbox mt-checkbox-outline margin-bottom-10">
+																Same as Business Address 1 
+																<input type="checkbox" value="1" name="billing_address_check" class="billing-address-check" tabindex="1"> <span></span>
+															</label>
+															</div>
+														</div>
 														
 															<div class="col-md-12 p-0">
 															<div class="col-md-6  ">
@@ -299,91 +315,6 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 																</div>
 															</div>
 															</div>
-															
-															
-															<div class="col-md-12 ">
-														
-															
-															
-															
-															<div class="col-md-6 ">
-															<label class="mt-checkbox mt-checkbox-outline margin-bottom-10">
-																Same as Business Address  
-																<input type="checkbox" value="1" name="billing_address_check" class="billing-address-check" tabindex="1"> <span></span>
-															</label>
-															</div>
-														</div>
-														
-														<div class="col-md-12 p-0">
-															<div class="col-md-6 ">
-																<div class="form-group ">
-																	<label class="form-control-label" for="l0">Billing
-																		Address 1*</label>
-																	<?= $form->field($model, 'billing_address_1', ['inputOptions' => ['class' => 'form-control firmname','tabindex'=>'1','onkeypress'=>'return firmname(event);',]])->textInput(['maxlength' => true])->label(false); ?>
-																</div>
-
-															</div>
-															<div class="col-md-6 ">
-
-																<div class="form-group ">
-																	<label class="form-control-label" for="l0">Billing
-																		Address 2</label>
-																	<?= $form->field($model, 'billing_address_2', ['inputOptions' => ['class' => 'form-control firmname','tabindex'=>'1','onkeypress'=>'return firmname(event);',]])->textInput(['maxlength' => true])->label(false); ?>
-																</div>
-
-															</div>
-															</div>
-															
-															
-															
-														
-															<div class="col-md-12 p-0">
-															<div class="col-md-6  ">
-
-																<div class="form-group ">
-																	<label class="form-control-label" for="l0">Billing City *</label>
-																	<?= $form->field($model, 'billing_city', ['inputOptions' => ['class' => 'form-control alpha','tabindex'=>'1']])->textInput(['maxlength' => true])->label(false); ?>
-																</div>
-
-															</div>
-															<div class="col-md-6  ">
-
-																<div class="form-group ">
-																	<label class="form-control-label" for="l0">Billing State *</label>
-																	<?php
-																	
-																	$states = States::find ()->all ();
-																	$stateList = ArrayHelper::map ( $states, 'state_id', 'state_name' );
-																	
-																	echo $form->field ( $model, 'billing_state', [ 
-																			'inputOptions' => [ 
-																					'class' => 'form-control' ,'tabindex'=>'1',
-																			] 
-																	] )->dropDownList ( $stateList, [ 
-																			'prompt' => 'Select' 
-																	] )->label ( false );
-																	?>
-																</div>
-
-
-															</div>
-															</div>
-															
-															<div class="col-md-12 p-0">
-															<div class="col-md-6  ">
-
-																<div class="form-group ">
-																	<label class="form-control-label" for="l0">Billing Zip Code*</label>
-																	<?= $form->field($model, 'billing_zip', ['inputOptions' => ['class' => 'form-control numbers','tabindex'=>'1']])->textInput(['maxlength' => 5])->label(false); ?>
-																</div>
-
-
-															</div>
-															
-															</div>
-
-
-
 
 
 														</fieldset>
@@ -759,27 +690,18 @@ $('input.billing-address-check').change(function(){
 			
 			var address_1 = '';
 			address_1 = $('#firms-address_1').val();
-			address_2 = $('#firms-address_2').val();
-			city = $('#firms-city').val();
-			state = $('#firms-state').val();
-			zip = $('#firms-zip').val();
-			 $('#firms-billing_address_1').val(address_1);
-			 $('#firms-billing_address_2').val(address_2);
-			 $('#firms-billing_city').val(city);
-			 $('#firms-billing_state').val(state);
-			 $('#firms-billing_zip').val(zip);
+			 $('#firms-billing_address').val(address_1);
 		}	
 
 		});
 		
 });
 
-
 function changeCreateFirmText(){
 	<?php if(!empty($firm_id)){ ?>
 		$('#add_update_firm_label').html('Update Firm');
 	<?php } else{ ?>
-		$('#add_update_firm_label').html('Create Firm');
+		$('#add_update_firm_label').html('Add Firm');
 	<?php } ?>
 }
 function changeCreateFirmUserText(){	

@@ -21,8 +21,8 @@ use app\components\EncryptDecryptComponent;
 				<i class="fa fa-angle-left" aria-hidden="true"></i>
 				</a>
 				<div class="breadcrumb-description">
-					<span class="">New &#62; <?php if(!empty($client_id)){?>Update Client<?php }else{?>Create Client<?php }?></span>
-
+					<!--<span class="">New &#62; <?php //if(!empty($client_id)){?>Update Client<?php //}else{?>Create Client<?php //}?></span>-->
+					<span class="">New &#62; <span style="padding:0;vertical-align:baseline;" id="add_update_client_label"></span></span>
 				</div>
 
 			</div>
@@ -61,14 +61,14 @@ use app\components\EncryptDecryptComponent;
                     <div>
                         <ul class="nav nav-tabs mb-4 blue-main-nav" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link  color-white" id="anchor-pb-1" data-target="#home5" data-toggle="tab" href="javascript: void(0);" role="tab" aria-expanded="true">Client Details
+                                <a class="nav-link  color-white" id="anchor-pb-1" data-target="#home5" data-toggle="tab" onclick="changeCreateClientText();" role="tab" aria-expanded="true">Client Details
 								<i class="fa fa-info-circle" title="Client Details" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="<?php if(empty($client_id)){?> Enter in the<?php }else{?> Update<?php }?> basic details of the client company." ></i>
 								</a>
                             </li>
 							
 							
                             <li class="nav-item cursor-nodrop"  <?php if(empty($client_id)){?> data-toggle="tooltip" data-placement="bottom" title="First enter Client details." <?php }?>>
-                                <a  class="nav-link color-white pointer-disable" id="anchor-pb-5" <?php if(!empty($client_id)){?>data-target="#profile5" data-toggle="tab" href="javascript: void(0);" role="tab" aria-expanded="false"  <?php }?>>Client Users 
+                                <a  class="nav-link color-white pointer-disable" id="anchor-pb-5" <?php if(!empty($client_id)){?>data-target="#profile5" data-toggle="tab" onclick="changeCreateClientUserText();" role="tab" aria-expanded="false"  <?php }?>>Client Users 
 								<i class="fa fa-info-circle" title="Client Users" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="<?php if(empty($client_id)){?> Enter in the<?php }else{?> Update<?php }?>  details of the client user." ></i>
 								</a>
 								
@@ -950,6 +950,17 @@ $(document).on('ready pjax:success', function(){
 	});
 
 	
+
+function changeCreateClientText(){
+	<?php if(!empty($client_id)){ ?>
+		$('#add_update_client_label').html('Update Client');
+	<?php } else{ ?>
+		$('#add_update_client_label').html('Create Client');
+	<?php } ?>
+}
+function changeCreateClientUserText(){	
+		$('#add_update_client_label').html('Manage Client Users');
+}
 	
 	</script>
 	</div>

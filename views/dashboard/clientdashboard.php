@@ -162,8 +162,8 @@ body.body-blue .plan-link.active{
                                     <a class="nav-link plan-link color-white no-wrap pull-left" href="javascript: void(0);"  onclick="downtabChange(3);" data-toggle="tab" data-target="#messages2" role="tab">Jan 15 - Dec 15
 									 </a>
 									 <span id="year_three" class="hide">  
-									<a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-medical-self-insured#home2" class="glyphicon glyphicon-pencil custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Plan Year"></a>
-									  <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-medical-self-insured#messages2" class="glyphicon glyphicon-usd custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Monthly Financials"></a>
+									<a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-medical-self-funded#home2" class="glyphicon glyphicon-pencil custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Plan Year"></a>
+									  <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-medical-self-funded#messages2" class="glyphicon glyphicon-usd custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Monthly Financials"></a>
 									 </span>
 									    <div class="dropdown">
 										<a
@@ -229,8 +229,8 @@ body.body-blue .plan-link.active{
                                     <a class="nav-link plan-link active color-white no-wrap pull-left" href="javascript: void(0);" onclick="downtabChangetwo(1);" data-toggle="tab"  data-target="#home2" role="tab">Jan 17 - Dec 17
 									</a>
 									<span id="year_one_2">
-									 <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-medical-self-insured#home2" class="glyphicon glyphicon-pencil custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Plan Year"></a>
-									  <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-medical-self-insured#messages2" class="glyphicon glyphicon-usd custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Monthly Financials"></a>
+									 <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-dental-self-insured#home2" class="glyphicon glyphicon-pencil custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Plan Year"></a>
+									  <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-dental-self-insured#messages2" class="glyphicon glyphicon-usd custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Monthly Financials"></a>
 									 </span>
 									 
                                 </li>
@@ -238,16 +238,16 @@ body.body-blue .plan-link.active{
                                     <a class="nav-link plan-link color-white no-wrap pull-left" href="javascript: void(0);" data-toggle="tab" onclick="downtabChangetwo(2);" data-target="#profile2" role="tab">Jan 16 - Dec 16
                              </a>
                              <span id="year_two_2" class="hide"> 
-                              <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-medical-self-insured#home2" class="glyphicon glyphicon-pencil custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Plan Year"></a>
-									  <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-medical-self-insured#messages2" class="glyphicon glyphicon-usd custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Monthly Financials"></a>
+                              <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-dental-self-insured#home2" class="glyphicon glyphicon-pencil custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Plan Year"></a>
+									  <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-dental-self-insured#messages2" class="glyphicon glyphicon-usd custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Monthly Financials"></a>
 									 </span> 
 							 </li>
                                 <li class="nav-item hover width-30 ">
                                     <a class="nav-link plan-link color-white no-wrap pull-left" href="javascript: void(0);"  onclick="downtabChangetwo(3);" data-toggle="tab" data-target="#messages2" role="tab">Jan 15 - Dec 15
 									 </a>
 									 <span id="year_three_2" class="hide">  
-									<a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-medical-self-insured#home2" class="glyphicon glyphicon-pencil custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Plan Year"></a>
-									  <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-medical-self-insured#messages2" class="glyphicon glyphicon-usd custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Monthly Financials"></a>
+									<a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-dental-self-insured#home2" class="glyphicon glyphicon-pencil custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Plan Year"></a>
+									  <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-dental-self-insured#messages2" class="glyphicon glyphicon-usd custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Monthly Financials"></a>
 									 </span>
 									    <div class="dropdown">
 										<a
@@ -288,8 +288,8 @@ body.body-blue .plan-link.active{
                                     <a class="nav-link plan-link active color-white no-wrap pull-left" href="javascript: void(0);" onclick="downtabChangethree(1);" data-toggle="tab"  data-target="#home2" role="tab">Jan 17 - Dec 17
 									</a>
 									<span id="year_one_3">
-									 <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-medical-self-insured#home2" class="glyphicon glyphicon-pencil custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Plan Year"></a>
-									  <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-medical-self-insured#messages2" class="glyphicon glyphicon-usd custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Monthly Financials"></a>
+									 <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-vision-self-insured#home2" class="glyphicon glyphicon-pencil custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Plan Year"></a>
+									  <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-vision-self-insured#messages2" class="glyphicon glyphicon-usd custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Monthly Financials"></a>
 									 </span>
 									 
                                 </li>
@@ -297,16 +297,16 @@ body.body-blue .plan-link.active{
                                     <a class="nav-link plan-link color-white no-wrap pull-left" href="javascript: void(0);" data-toggle="tab" onclick="downtabChangethree(2);" data-target="#profile2" role="tab">Jan 16 - Dec 16
                              </a>
                              <span id="year_two_3" class="hide"> 
-                              <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-medical-self-insured#home2" class="glyphicon glyphicon-pencil custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Plan Year"></a>
-									  <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-medical-self-insured#messages2" class="glyphicon glyphicon-usd custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Monthly Financials"></a>
+                              <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-vision-self-insured#home2" class="glyphicon glyphicon-pencil custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Plan Year"></a>
+									  <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-vision-self-insured#messages2" class="glyphicon glyphicon-usd custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Monthly Financials"></a>
 									 </span> 
 							 </li>
                                 <li class="nav-item hover width-30 ">
                                     <a class="nav-link plan-link color-white no-wrap pull-left" href="javascript: void(0);"  onclick="downtabChangethree(3);" data-toggle="tab" data-target="#messages2" role="tab">Jan 15 - Dec 15
 									 </a>
 									 <span id="year_three_3" class="hide">  
-									<a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-medical-self-insured#home2" class="glyphicon glyphicon-pencil custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Plan Year"></a>
-									  <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-medical-self-insured#messages2" class="glyphicon glyphicon-usd custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Monthly Financials"></a>
+									<a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-vision-self-insured#home2" class="glyphicon glyphicon-pencil custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Plan Year"></a>
+									  <a href="<?php echo Yii::$app->getUrlManager()->getBaseUrl();?>/firm-plan/client-vision-self-insured#messages2" class="glyphicon glyphicon-usd custom cursor-pointer pull-left color-white"  data-toggle="tooltip" data-placement="bottom" title="Edit Monthly Financials"></a>
 									 </span>
 									    <div class="dropdown">
 										<a
