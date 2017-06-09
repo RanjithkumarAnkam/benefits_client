@@ -10,9 +10,13 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'components' => [	
-		
-		'awssdk' => [
+    'components' => [
+			'session' => array(
+			  'class' => 'yii\web\DbSession',
+			  'timeout' => 1800,
+		   ),
+	
+	'awssdk' => [
             'class' => 'fedemotta\awssdk\AwsSdk',
             'credentials' => [ //you can use a different method to grant access
                 'key' => 'AKIAJMJO2L5ZO476VDZQ',
@@ -21,8 +25,27 @@ $config = [
             'region' => 'us-west-2', //i.e.: 'us-east-1'
             'version' => 'latest', //i.e.: 'latest'
         ],
-	
-	
+		'sendGrid' => [
+	    'class' => 'bryglen\sendgrid\Mailer',
+	    'username'=>'samknara',
+	    'password' => 'SkyInsTech2017#@!',
+	    
+	    ],
+		/*'recaptcha' => [
+        'class' => 'richweber\recaptcha\ReCaptcha',
+       // 'siteKey' => 'https://www.google.com/recaptcha/admin',
+	    'siteKey' => '6LfW8SEUAAAAAF1OS44oiI2kjlu5qPxNeKCs1g9z',
+        'secretKey' => '6LfW8SEUAAAAACaKajMB5Tam810bYUlo8PCHiYoN',
+        'errorMessage' => 'Are you robot?',
+		],*/
+		'reCaptcha' => [
+        'name' => 'reCaptcha',
+        'class' => 'himiklab\yii2\recaptcha\ReCaptcha',
+        //'siteKey' => 'your siteKey',
+        //'secret' => 'your secret key',
+		'siteKey' => '6LfW8SEUAAAAAF1OS44oiI2kjlu5qPxNeKCs1g9z',
+        'secret' => '6LfW8SEUAAAAACaKajMB5Tam810bYUlo8PCHiYoN',
+		],
 		 'assetManager' => [
 		    'linkAssets' => false,
 		    'appendTimestamp' => true, // timestamp for cache busting assets
@@ -52,18 +75,22 @@ $config = [
         'SessionCheck' => [
         'class' => 'app\components\SessionCheckComponent',
         ],
-        'EncryptDecrypt' => [
+		 'EncryptDecrypt' => [
         'class' => 'app\components\EncryptDecryptComponent',
         ],
         'user' => [
-			//'class' => 'listfixer\remember\RememberMe',
+			 'class' => 'listfixer\remember\RememberMe',
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
-        ],
-		
+			'loginUrl' => ['site/login'],
+		 ],
+		 
         'errorHandler' => [
             'errorAction' => 'site/error',
 			'maxSourceLines' => 20,
+        ],
+		'customMail' => [
+        'class' => 'app\components\MailComponent',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
@@ -100,8 +127,15 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+			'<alias:index|about|contact|login|logout|forgot-password|verification|verify-mail>' => 'site/<alias>',
             ],
         ],
+        
+		
+	
+	
+	
+	
     ],
     'modules' => [
 	    'admin' => [
@@ -112,6 +146,9 @@ $config = [
 	    ],
 	    'client' => [
 	    	'class' => 'app\modules\client\Module',
+	    ],
+		 'designmodule' => [
+	    	'class' => 'app\modules\designmodule\Module',
 	    ],
 		'gridview'=> [
 			'class'=>'\kartik\grid\Module'
