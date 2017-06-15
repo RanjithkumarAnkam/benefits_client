@@ -7,6 +7,7 @@ use app\components\EncryptDecryptComponent;
 use kartik\alert\Alert;
 use yii\widgets\LinkPager;
 use yii\widgets\ListView;
+use yii\widgets\Pjax;
 
 /* $states = array (
 		'AL' => 'Alabama',
@@ -82,6 +83,7 @@ asort($industry);   */
 ?>
 
 <section class="page-content padding-0">
+ <?php Pjax::begin(['id'=>'search-pjax-div']); ?>
 <div class="">
 	<div class="search-screen-header">
 	<div class="col-lg-12 search-header-inner">
@@ -356,9 +358,10 @@ echo  Alert::widget([
 	</div>
 	
 	<?php }else{ ?> 
-	<div id="w0" class="list-view widget width-100 padding-50 font-20 color-blue"><div class="empty" align="center">No results found.</div></div>
+	<div  class="list-view widget width-100 padding-50 font-20 color-blue"><div class="empty" align="center">No results found.</div></div>
 	<?php } }  ?>
 	</div>
+	<?php Pjax::end(); ?>
 </section>
 				
 				
@@ -438,7 +441,7 @@ echo  Alert::widget([
     
     $this->registerJs(
     		"
-    $('.view-firm-detail').click(function(e){
+   $(document).on('click', '.view-firm-detail', function (e) {
        e.preventDefault();
 		
 		$('#update_firm_details').modal('show').find('.modal-body').load($(this).attr('data-href'));
@@ -447,7 +450,7 @@ echo  Alert::widget([
 });
 
 
-$('.view-update').click(function(e){
+$(document).on('click', '.view-update', function (e) {
        e.preventDefault();
 		
 		$('#create_firm_user').find('.modal-content').load($(this).attr('data-href'));
@@ -456,8 +459,8 @@ $('.view-update').click(function(e){
       
 });
 
+$(document).on('click', '.view-update-client', function (e) { 
 
-$('.view-update-client').click(function(e){
        e.preventDefault();
 		
 		$('#add_client_user').find('.modal-content').load($(this).attr('data-href'));
@@ -467,13 +470,14 @@ $('.view-update-client').click(function(e){
 });
 
  
- $('.view-client-detail').click(function(e){
+$(document).on('click', '.view-client-detail', function (e) { 
        e.preventDefault();
 		
 		$('#update_client_details').modal('show').find('.modal-body').load($(this).attr('data-href'));
 		$('.select2').select2();
       
 });
+
 
 
 	$(document).on('click', '.firm-close-btn', function () { 

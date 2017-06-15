@@ -45,7 +45,7 @@ use demogorgorn\ajax\AjaxSubmitButton;
 	<div class="col-md-12 padding-0">
 		<div class="col-md-6">
 		 <label class="form-control-label">Title</label>
-							<?= $form->field($model, 'title', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true])->label(false); ?>
+							<?= $form->field($model, 'title', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true,'onkeypress'=>'return username(event);'])->label(false); ?>
 
 						</div>
 		<div class="col-md-6">

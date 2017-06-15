@@ -381,7 +381,7 @@ user will have full access to view/edit all clients in the system at all firm lo
 					
 					<?php } ?>
 					<div class="col-md-12">
-					<p><b>Note:-</b>&nbsp&nbsp Please contact your administrator for more access if any.</p>
+					<p><b>Note:-</b>&nbsp&nbsp Your account Access privileges are as above, If you need more Privilege, please Contact your administrator.</p>
 					</div>
 					
 					

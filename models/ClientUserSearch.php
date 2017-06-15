@@ -48,9 +48,7 @@ class ClientUserSearch extends ClientUser
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
 			'sort'=> ['defaultOrder' => ['client_user_id'=>SORT_DESC]],
-			'pagination' => [
-    			'pagesize' => 10,
-    			],
+			
         ]);
 
         $this->load($params);

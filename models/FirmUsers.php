@@ -47,6 +47,8 @@ class FirmUsers extends \yii\db\ActiveRecord
             [['first_name', 'last_name', 'title'], 'string', 'max' => 50],
             ['first_name', 'match', 'pattern' => '/^[a-zA-Z,.\-\ ]+$/', 'message' => 'First name can only contain alphabets, comma, dot and hash.'],
             ['last_name', 'match', 'pattern' => '/^[a-zA-Z,.\-\ ]+$/', 'message' => 'First name can only contain alphabets, comma, dot and hash.'],
+			['title', 'match', 'pattern' => '/^[a-zA-Z,.\-\ ]+$/', 'message' => 'First name can only contain alphabets, comma, dot and hash.'],
+			 ['title', 'match', 'pattern' => '/^[a-zA-Z,.\-\ ]+$/', 'message' => 'Title can only contain alphabets, comma, dot and hash.'],
             ['extension', 'match', 'pattern' => '/^[0-9]+$/', 'message' => 'Extension can only contain numbers.'],
             [['profile_pic'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, PNG, JPEG, JPG, TIF, GIF, BMP', 'maxSize' => 1024*1024 , 'maxWidth' => 400, 'maxHeight' => 400],
             [['extension'], 'string','min'=>3, 'max' => 6],

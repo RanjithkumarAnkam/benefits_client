@@ -276,8 +276,13 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 																			<label class="form-control-label" for="l0">Specific
 																				Lifetime Maximum
 																			</label>
-																			<input type="text" class="form-control placeholder-italics " onkeypress="return planscreenname(event);"
+																			<div class="input-group">
+																				<span class="input-group-addon">
+																					<i class="fa fa-usd  color-black"></i>
+																				</span>
+																			<input type="text" class="form-control placeholder-italics price"
 																				>
+																				</div>
 																		</div>
 							</div>
 							</div>
@@ -318,7 +323,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 							<div class="col-md-4">
 							<div class="form-group ">
 																			<label class="form-control-label" for="l0">
-																				Specific Lasers?<i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Select â€˜Yesâ€™ if the reinsurance contract will have specific lasers on certain members, and then enter in the details to memorialize what lasers are on the contract for historic purposes.  Example:  $325,000 laser, member #225496." data-original-title="Specific Lasers"></i>
+																				Specific Lasers?<i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Select ‘Yes’ if the reinsurance contract will have specific lasers on certain members, and then enter in the details to memorialize what lasers are on the contract for historic purposes.  Example:  $325,000 laser, member #225496." data-original-title="Specific Lasers"></i>
 																			</label>
 																				<select
 																				class="form-control edited"
@@ -366,7 +371,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 							<div class="col-md-4">
 							<div class="form-group ">
 																			<label class="form-control-label" for="l0">Aggregating Specific Contract
-																			<i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Select â€˜Yesâ€™ if the reinsurance contract will have an aggregating specific provision, and then if so enter the amount of the aggregating specific.  Example:  $300,000." data-original-title="Aggregating Specific Contract"></i>
+																			<i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Select ‘Yes’ if the reinsurance contract will have an aggregating specific provision, and then if so enter the amount of the aggregating specific.  Example:  $300,000." data-original-title="Aggregating Specific Contract"></i>
 																			</label>
 																				<select
 																				class="form-control"
@@ -420,8 +425,8 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                             <thead>
                             <tr>
                                 
-                                <th class="no-wrap header-1">Tier #</th>
-                                <th class="no-wrap" id="reinsurance-column-2">Tier Name</th>
+                             <!--   <th class="no-wrap header-1">Tier #</th>-->
+                                <th class="no-wrap width-20pc" id="reinsurance-column-2">Tier Name</th>
                                 <th class="no-wrap" id="reinsurance-column-3">Specific Premiums</th>
                                 <th class="no-wrap" id="reinsurance-column-4">Aggregate Premiums</th>
                                 <th class="no-wrap" id="reinsurance-column-5">Expected Claim Factors</th>
@@ -432,7 +437,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
  
                             <tbody>
                             <tr id="enter-reinsurance-details-row-1">
-                                <td id="reinsurance-left-header-1">1</td>
+                            <!--    <td id="reinsurance-left-header-1">1</td>-->
 								 <td class="column-1">
 								 <select class="form-control reinsurance-rates-td" id="reinsurance-2-1">
 								 <option>Employee</option>
@@ -702,7 +707,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                   </tr>-->
                                  
                                   <tr>
-                                    <td><input type="text" id="cost-1-1" class="form-control reinsurance-rates-td text-align-center " onkeypress="return planscreenname(event);" value="Adminstrative Fees"></td>
+                                    <td><input type="text" id="cost-1-1" class="form-control reinsurance-rates-td" onkeypress="return planscreenname(event);" value="Adminstrative Fees"></td>
 									<td class="add_costtrack_button"><div class="add-icon cursor-pointer"><span class="button-add" onclick="addCosttrack();"><u>Add</u></span></div></td>
                                   </tr>
                             </tbody>
@@ -808,7 +813,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 														 <i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Select the number of various employee contribution structures you would like to track on this plan.  Once selected, below you will see your selected number of tables where you can then enter in the number of contribution tiers for each structure, name the tiers and enter in monthly premium rates.  Finally, enter the average monthly enrollment for each structure." data-original-title="Plan Contribution Strategies"></i>
 														 </label>
 													</div>
-													<div class="col-md-5">
+													<div class="col-md-2">
 														<select class="form-control" id="select_employee_contribution" onchange="employeeContribution();">
 														<option value="">Select</option>
 															<option value="1">1</option>
@@ -856,13 +861,13 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 					<div class="col-md-12  padding-10 ul-block">
 						<ul class="nav nav-pills nav-wizard">
 							<li href="#year_project_assumption" data-toggle="tab" class="active inner-block-li" id="anchor-pb-6"><a><div class="inner-block-digits pull-left">1</div><span class="inner-block-text" title="Remainder of Year Claim Projection Assumptions">Remainder Projection
-							<i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="top" data-content="In this section, you can enter in the details to be used for financial projections of future claims.  The system uses mid-point to mid-point underwriting to determine future claims.  The necessary components to perform these calculations is to determine how many prior months of claims you would like to use in your calculations, the credibility to apply to those claims and the annualized trend to use.  The system will then perform month by month calculations to estimate future claims based upon prior history." data-original-title="Remainder Projection"></i>
+							<i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="bottom" data-content="In this section, you can enter in the details to be used for financial projections of future claims.  The system uses mid-point to mid-point underwriting to determine future claims.  The necessary components to perform these calculations is to determine how many prior months of claims you would like to use in your calculations, the credibility to apply to those claims and the annualized trend to use.  The system will then perform month by month calculations to estimate future claims based upon prior history." data-original-title="Remainder Projection"></i>
 							</span></a></li>
 							<li href="#claims_project_assumption" data-toggle="tab" class="inner-block-li" id="anchor-pb-7"><a><div class="inner-block-digits pull-left">2</div><span class="inner-block-text">Renewal Projection
-							 <i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="top" data-content="In this section, you can enter in the details to be used for financial projections of future claims.  The system uses mid-point to mid-point underwriting to determine future claims.  The necessary components to perform these calculations is to determine how many prior months of claims you would like to use in your calculations, the credibility to apply to those claims and the annualized trend to use.  The system will then perform month by month calculations to estimate future claims based upon prior history." data-original-title="Renewal Projection"></i>
+							 <i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="bottom" data-content="In this section, you can enter in the details to be used for financial projections of future claims.  The system uses mid-point to mid-point underwriting to determine future claims.  The necessary components to perform these calculations is to determine how many prior months of claims you would like to use in your calculations, the credibility to apply to those claims and the annualized trend to use.  The system will then perform month by month calculations to estimate future claims based upon prior history." data-original-title="Renewal Projection"></i>
 							 </span></a></li>
 							<li href="#cost_project_assumption" data-toggle="tab" class="inner-block-li" id="anchor-pb-8"><a><div class="inner-block-digits pull-left">3</div><span class="inner-block-text" title="Renewal Cost Item Renewal Assumptions">Renewal Cost Items
-							<i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="top" data-content="At renewal cost items are likely to change.  In order to illustrate this in the renewal projection reporting, please enter in the estimated percentage change over the current plan year, as well as any notes associated with your projection." data-original-title="Renewal Cost Items"></i>
+							<i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="bottom" data-content="At renewal cost items are likely to change.  In order to illustrate this in the renewal projection reporting, please enter in the estimated percentage change over the current plan year, as well as any notes associated with your projection." data-original-title="Renewal Cost Items"></i>
 							</span></a></li>
 							<li href="#contribution_project_assumption" data-toggle="tab" class="inner-block-li" id="anchor-pb-9"><a><div class="inner-block-digits pull-left">4</div><span class="inner-block-text" title="Renewal Employee Contribution & Average Enrollment Assumption">Renewal Contributions</span></a></li>
 						</ul>
@@ -1464,7 +1469,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                 <tr> 
                                    
 									<th class="text-align-center" id="costitems-column-1">Item Name</th>
-									<th class="text-align-center" id="costitems-column-2">Estimated Renewal</th>
+									<th class="text-align-center" id="costitems-column-2">Estimated Renewal %</th>
 									<th class="text-align-center" id="costitems-column-3">Notes</th>
 									<th class="text-align-center" id="costitems-column-4">Add New Item</th>
                                      
@@ -1474,8 +1479,8 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                                 <tr>
                                 
 									  <td id="costitems-left-header-1">Stop Loss Premiums</td>
-									   <td><div class="input-group"><span class="input-group-addon"><i class="fa fa-usd  color-black"></i></span><input type="text" id="costitems-2-1" class="form-control reinsurance-rates-td price price" value="4"></div></td>
-									    <td><input type="text" id="costitems-3-1" class="form-control reinsurance-rates-td  text-align-center" onkeypress="return planscreenname(event);" value="Any Notes"></td>
+									   <td><div class="input-group"><span class="input-group-addon"><i class="fa fa-usd  color-black"></i></span><input type="text" id="costitems-2-1" class="form-control reinsurance-rates-td price" value="4"></div></td>
+									    <td><textarea type="text" id="costitems-3-1" class="form-control reinsurance-rates-td " onkeypress="return planscreenname(event);" value="Any Notes"></textarea></td>
 									 <td class="add_costitems_button" align="center"><div class="add-icon cursor-pointer"><span class="" onclick="addCostitems();"><u>Add</u></span></div></td>
                                   </tr>
                                  
@@ -1530,7 +1535,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 															 <i class="fa fa-info-circle margin-left-5" data-container="body" data-toggle="popover-hover" data-placement="right" data-content="Select the number of various employee contribution structures you would like to track on this plan.  Once selected, below you will see your selected number of tables where you can then enter in the number of contribution tiers for each structure, name the tiers and enter in monthly premium rates.  Finally, enter the average monthly enrollment for each structure." data-original-title="Plan Contribution Strategies"></i>
 														 </label>
 													</div>
-													<div class="col-md-5">
+													<div class="col-md-2">
 														<select class="form-control" id="select_renewal_employee_contribution" onchange="employeerenewalContribution();">
 														<option value="">Select</option>
 															<option value="1">1</option>
@@ -2165,9 +2170,10 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 									<th class="text-align-center" id="largeclaims-column-4">Member Type</th>
 									<th class="text-align-center" id="largeclaims-column-5">Age</th>
 									<th class="text-align-center" id="largeclaims-column-6">Gender</th>
-									<th class="text-align-center" id="largeclaims-column-7">Plan Claims</th>
-									<th class="text-align-center" id="largeclaims-column-8">Condition</th>
-									<th class="text-align-center" id="largeclaims-column-9">Prognosis</th>
+									
+									<th class="text-align-center" id="largeclaims-column-7">Condition</th>
+									<th class="text-align-center" id="largeclaims-column-8">Prognosis</th>
+									<th class="text-align-center" id="largeclaims-column-9">Plan Claims</th>
                                      
                                 </tr>
                             </thead>
@@ -2191,10 +2197,10 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 																		<option  value="3">Others</option>
 																	</select>
 																	</td>
-										<td><input type="text" id="largeclaims-7-1" class="form-control reinsurance-rates-td text-align-center price" value="17,8,222.00"></td>
-										<td><input type="text" id="largeclaims-8-1" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);" value="Cancer"></td>
-										<td><input type="text" id="largeclaims-9-1" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);" value="10000 Next Year"></td>
-									
+										
+										<td><input type="text" id="largeclaims-7-1" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);" value="Cancer"></td>
+										<td><input type="text" id="largeclaims-8-1" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);" value="10000 Next Year"></td>
+									    <td><input type="text" id="largeclaims-9-1" class="form-control reinsurance-rates-td text-align-center price" value="17,8,222.00"></td>
                                   </tr>
                                  
                                      <tr>
@@ -2216,10 +2222,10 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 																		<option  value="3">Others</option>
 																	</select>
 																	</td>
-										<td><input type="text" id="largeclaims-7-2" class="form-control reinsurance-rates-td text-align-center price" value="17,8,222.00"></td>
-										<td><input type="text" id="largeclaims-8-2" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);" value="Cancer"></td>
-										<td><input type="text" id="largeclaims-9-2" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);" value="10000 Next Year"></td>
-									     
+										
+										<td><input type="text" id="largeclaims-7-2" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);" value="Cancer"></td>
+										<td><input type="text" id="largeclaims-8-2" class="form-control reinsurance-rates-td text-align-center" onkeypress="return planscreenname(event);" value="10000 Next Year"></td>
+									     <td><input type="text" id="largeclaims-9-2" class="form-control reinsurance-rates-td text-align-center price" value="17,8,222.00"></td>
                                   </tr>
 								   
                             </tbody>
@@ -2250,45 +2256,61 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 						<div class="border-top-bottom-ddd col-md-12 padding-0">
 							<div class="container margin-top-10 margin-bottom-10">
 							<div class="col-md-12">
-							<div class="col-md-1">
+							<div class="col-md-2">
 							</div>
-							<div class="col-md-10">
+							<div class="col-md-8">
 							<fieldset class="fieldset-box">
 
 											<legend>Network performance</legend>
 							<div class="col-md-12">
+							
+							<div class="row">
+							<div class="col-md-12 col-xs-12 padding-top-10 padding-bottom-10">
+							<div class="col-md-3 col-xs-3 padding-left-8"><label class="margin-top-10"> Plan Year Data As of :</label></div>
+								<div class="col-md-4 col-xs-7">
+								<select class="form-control" id="claim_value">
+								<option value="">January 2017</option>
+								<option value="">February 2017</option>
+								<option value="">March 2017</option></select>
+								</div>
+								<div class="col-md-6 col-xs-2 margin-top-10" align="right">
+								
+								</div>
+								</div>
+								</div>
+								
 								<table class="table table-hover table-backcolor" id="editable_network_performance" style="table-layout:fixed;">
                             <thead>
                                 <tr> 
                                    
-									<th class="text-align-center" id="network-column-1">Utilization</th>
-									<th class="text-align-center" id="network-column-2">Amount</th>
+									<th class="" id="network-column-1">Utilization</th>
+									<th class="" id="network-column-2">Amount</th>
 								 
                                      
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-									  <td id="network-left-header-1" class="text-align-center">Network Utilization %</td>
-									   <td><input type="text" id="network-2-1" class="form-control reinsurance-rates-td text-align-center numbers" value="95%"></td>
+									  <td id="network-left-header-1" class="">Network Utilization %</td>
+									   <td><input type="text" id="network-2-1" class="form-control reinsurance-rates-td numbers" value="95%"></td>
                                   </tr>
                                  
                                    <tr>
-									  <td id="network-left-header-2" class="text-align-center">Total Sumitted Charges</td>
-									   <td><input type="text" id="network-2-2" class="form-control reinsurance-rates-td text-align-center numbers" value="1000"></td>
+									  <td id="network-left-header-2" class="">Total Sumitted Charges</td>
+									   <td><input type="text" id="network-2-2" class="form-control reinsurance-rates-td numbers" value="1000"></td>
                                   </tr>
 								  
 								  <tr>
-									  <td id="network-left-header-3" class="text-align-center">Total Allowed Charges</td>
-									   <td><input type="text" id="network-2-3" class="form-control reinsurance-rates-td text-align-center numbers" value="25000"></td>
+									  <td id="network-left-header-3" class="">Total Allowed Charges</td>
+									   <td><input type="text" id="network-2-3" class="form-control reinsurance-rates-td numbers" value="25000"></td>
                                   </tr>
 								  <tr>
-									  <td id="network-left-header-4" class="text-align-center">Total Savings</td>
-									   <td><input type="text" id="network-2-4" class="form-control reinsurance-rates-td text-align-center numbers" value="150000"></td>
+									  <td id="network-left-header-4" class="">Total Savings</td>
+									   <td><input type="text" id="network-2-4" class="form-control reinsurance-rates-td numbers" value="150000"></td>
                                   </tr>
 								  <tr>
-									  <td id="network-left-header-5" class="text-align-center">Discount %</td>
-									   <td><input type="text" id="network-2-5" class="form-control reinsurance-rates-td text-align-center numbers" value="34.7%"></td>
+									  <td id="network-left-header-5" class="">Discount %</td>
+									   <td><input type="text" id="network-2-5" class="form-control reinsurance-rates-td numbers" value="34.7%"></td>
                                   </tr>
 								   
                             </tbody>
@@ -2301,25 +2323,12 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 						<!--	<div class="demo-container " style="margin-top: 10px;">
 																<div dx-data-grid="dataGridOptionsnetworkperfomance"></div>
 															</div>-->
-															<div class="row">
-							<div class="col-md-12 col-xs-12 padding-top-10 padding-bottom-10">
-							<div class="col-md-3 col-xs-3 padding-left-8"><label class="margin-top-10"> Plan Year Data As of :</label></div>
-								<div class="col-md-6 col-xs-7">
-								<select class="form-control" id="claim_value">
-								<option value="">January 2017</option>
-								<option value="">February 2017</option>
-								<option value="">March 2017</option></select>
-								</div>
-								<div class="col-md-6 col-xs-2 margin-top-10" align="right">
-								
-								</div>
-								</div>
-								</div>
+															
 								</div>
 								</fieldset>
 							
 							</div>
-							<div class="col-md-1">
+							<div class="col-md-2">
 							</div>
 							
 							</div>
@@ -2346,16 +2355,16 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 							<div class="container margin-top-10 margin-bottom-10">
 							<div class="col-md-12">
 							<div class="col-md-12">
-							<div class="col-md-1">
+							<div class="col-md-2">
 							</div>
-							<div class="col-md-10">
+							<div class="col-md-8">
 							
 							<fieldset class="fieldset-box"> 
 											<legend>Pharmacy performance</legend>
 											<div class="row">
 							<div class="col-md-12 col-xs-12 padding-top-10 padding-bottom-10">
-							<div class="col-md-6 col-xs-3 padding-left-8"><label class="margin-top-10"> Plan Year Data As of :</label></div>
-								<div class="col-md-6 col-xs-7">
+							<div class="col-md-3 col-xs-3 padding-left-8"><label class="margin-top-10"> Plan Year Data As of :</label></div>
+								<div class="col-md-4 col-xs-7">
 								<select class="form-control" id="claim_value">
 								<option value="">January 2017</option>
 								<option value="">February 2017</option>
@@ -2378,30 +2387,30 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
                             </thead>
                             <tbody>
                                 <tr>
-									  <td id="pharmacy-left-header-1" class="text-align-center">Total Prescriptions</td>
-									   <td><input type="text" id="pharmacy-2-1" class="form-control reinsurance-rates-td text-align-center numbers" value="125"></td>
+									  <td id="pharmacy-left-header-1" class="">Total Prescriptions</td>
+									   <td><input type="text" id="pharmacy-2-1" class="form-control reinsurance-rates-td numbers" value="125"></td>
                                   </tr>
                                  
                                    <tr>
-									  <td id="pharmacy-left-header-2" class="text-align-center">Generic Filled</td>
-									   <td><input type="text" id="pharmacy-2-2" class="form-control reinsurance-rates-td text-align-center numbers" value="100"></td>
+									  <td id="pharmacy-left-header-2" class="">Generic Filled</td>
+									   <td><input type="text" id="pharmacy-2-2" class="form-control reinsurance-rates-td numbers" value="100"></td>
                                   </tr>
 								  
 								  <tr>
-									  <td id="pharmacy-left-header-3" class="text-align-center">Mail Order</td>
-									   <td><input type="text" id="pharmacy-2-3" class="form-control reinsurance-rates-td text-align-center numbers" value="50"></td>
+									  <td id="pharmacy-left-header-3" class="">Mail Order</td>
+									   <td><input type="text" id="pharmacy-2-3" class="form-control reinsurance-rates-td numbers" value="50"></td>
                                   </tr>
 								  <tr>
-									  <td id="pharmacy-left-header-4" class="text-align-center">Formulary Brand Compliance Rate</td>
-									   <td><input type="text" id="pharmacy-2-4" class="form-control reinsurance-rates-td text-align-center numbers" value="12.5%"></td>
+									  <td id="pharmacy-left-header-4" class="">Formulary Brand Compliance Rate</td>
+									   <td><input type="text" id="pharmacy-2-4" class="form-control reinsurance-rates-td numbers" value="12.5%"></td>
                                   </tr>
 								  <tr>
-									  <td id="pharmacy-left-header-5" class="text-align-center">Average Brand Discount</td>
-									   <td><input type="text" id="pharmacy-2-5" class="form-control reinsurance-rates-td text-align-center numbers" value="34.7%"></td>
+									  <td id="pharmacy-left-header-5" class="">Average Brand Discount</td>
+									   <td><input type="text" id="pharmacy-2-5" class="form-control reinsurance-rates-td numbers" value="34.7%"></td>
                                   </tr>
 								    <tr>
-									  <td id="pharmacy-left-header-6" class="text-align-center">Average Generic Discount</td>
-									   <td><input type="text" id="pharmacy-2-6" class="form-control reinsurance-rates-td text-align-center numbers" value="34.7%"></td>
+									  <td id="pharmacy-left-header-6" class="">Average Generic Discount</td>
+									   <td><input type="text" id="pharmacy-2-6" class="form-control reinsurance-rates-td numbers" value="34.7%"></td>
                                   </tr>
 								   
                             </tbody>
@@ -2412,13 +2421,13 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 											</fieldset>
 						
 							</div>
-						<div class="col-md-1">
+						<div class="col-md-2">
 							</div>
 						</div>
 							<div class="col-md-12">
-							<div class="col-md-1">
+							<div class="col-md-2">
 							</div>
-							<div class="col-md-10">
+							<div class="col-md-8">
 							<fieldset class="fieldset-box margin-top-10"> 
 											<legend>Pharmacy performance</legend>
 											<div class="row">
@@ -2845,7 +2854,7 @@ border-right: 2px solid #f7971e;border-left: 2px solid #f7971e;
 											</fieldset>
 							
 							</div>
-							<div class="col-md-1">
+							<div class="col-md-2">
 							</div>
 							</div>
 							 
@@ -3495,7 +3504,7 @@ $gridColumns = [
 													</div>
 												</div>
 						   </div>
-						  <div class="col-md-6">
+						  <!--<div class="col-md-6">
 						   <div class="row">
 													<div class="col-md-4 form-group">
 														<label class="form-control-label" for="l0">Select Plan Year *</label>
@@ -3504,7 +3513,7 @@ $gridColumns = [
 														 <input type="text" class="form-control datetimepicker-my" />
 													</div>
 												</div>
-						   </div>
+						   </div>-->
 						   </div>
 						   
 						  <!--   <div class="col-md-12">
@@ -3564,7 +3573,7 @@ $gridColumns = [
 													</div>
 													<div class="col-md-8 form-group ">
 														<input type="text" class="form-control"  onkeypress="return planscreenname(event);"
-															placeholder="Total Description">
+															>
 													</div>
 												</div>
 						    
@@ -3580,7 +3589,7 @@ $gridColumns = [
 													</div>
 													<div class="col-md-8 form-group ">
 														<input type="text" class="form-control numbers"
-															placeholder="Percentage or Amount">
+														>
 													</div>
 												</div>
 						    
@@ -3588,21 +3597,21 @@ $gridColumns = [
 						  
 						   
 						   </div>			   
-					 <div class="col-md-12">
+					 <!--<div class="col-md-12">
 						  
 						    <div class="row">
 													<div class="col-md-4 form-group ">
 														<label class="form-control-label" for="l0">Select Plan Year *</label>
 													</div>
 													<div class="col-md-8 form-group ">
-														 <input type="text"  class="form-control datetimepicker-my" placeholder="Select Plan Year" />
+														 <input type="text"  class="form-control datetimepicker-my"  />
 													</div>
 												</div>
 						    
 					
 						  
 						   
-						   </div>				
+						   </div>	-->			
 
 											</form>
 
@@ -3648,7 +3657,7 @@ $gridColumns = [
 													</div>
 													<div class="col-md-8 form-group ">
 														<input type="text" class="form-control"
-															placeholder="Drug name">
+															>
 													</div>
 												</div>
 						</div>  
@@ -3659,7 +3668,7 @@ $gridColumns = [
 													</div>
 													<div class="col-md-8 form-group ">
 														<input type="text" class="form-control"
-															placeholder="Condition">
+														>
 													</div>
 												</div>
 						</div>
@@ -3672,7 +3681,7 @@ $gridColumns = [
 													</div>
 													<div class="col-md-8 form-group ">
 														<input type="text" class="form-control"
-															placeholder="Plan Spend">
+															>
 													</div>
 												</div>
 						</div>  
@@ -3683,23 +3692,23 @@ $gridColumns = [
 													</div>
 													<div class="col-md-8 form-group ">
 														<input type="text" class="form-control"
-															placeholder="Unique Number">
+															>
 													</div>
 												</div>
 						</div>
 						   </div>			   
-					 <div class="col-md-12">
+				<!--	 <div class="col-md-12">
 						  <div class="col-md-6 ">
 						    <div class="row">
 													<div class="col-md-4 form-group ">
 														<label class="form-control-label" for="l0">Select Plan Year *</label>
 													</div>
 													<div class="col-md-8 form-group ">
-														 <input type="text"  class="form-control datetimepicker-my" placeholder="Select Plan Year" />
+														 <input type="text"  class="form-control datetimepicker-my"  />
 													</div>
 												</div>
 												</div>
-												  </div>				
+												  </div>	-->			
 
 											</form>
 
@@ -3723,7 +3732,7 @@ $gridColumns = [
 				
 										
 <div class="modal fade" id="add_plan" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-lg">
+				<div class="modal-dialog modal-md">
 					<div class="modal-content">
 						<div class="modal-header modal-header-color">
 							 
@@ -3820,7 +3829,7 @@ $gridColumns = [
 			<div class="modal-body">
 			<div class="form-group">
 				<div class="col-sm-12 add-mem"  style="line-height: 33px;">
-					<label class="add-member-label">If you remove that row it will remove it from the input monthly financials table and will remove the data previously entered.</label>
+					<label class="add-member-label">On making this change. The data which is previously entered in input monthly financials table, Will be removed.</label>
 				</div>
 				
 	</div>
@@ -3850,7 +3859,7 @@ $gridColumns = [
 			<div class="modal-body">
 			<div class="form-group">
 				<div class="col-sm-12 add-mem"  style="line-height: 33px;">
-					<label class="add-member-label">If you remove that row it will remove it from the input monthly financials table and will remove the data previously entered.</label>
+					<label class="add-member-label">On making this change. The data which is previously entered in input monthly financials table, Will be removed.</label>
 				</div>
 				
 	</div>
@@ -3881,7 +3890,7 @@ $gridColumns = [
 			<div class="modal-body">
 			<div class="form-group">
 				<div class="col-sm-12 add-mem"  style="line-height: 33px;">
-					<label class="add-member-label">If you remove that row it will remove it from the input monthly financials table and will remove the data previously entered.</label>
+					<label class="add-member-label">On making this change. The data which is previously entered in input monthly financials table, Will be removed.</label>
 				</div>
 				
 	</div>
@@ -3912,7 +3921,7 @@ $gridColumns = [
 			<div class="modal-body">
 			<div class="form-group">
 				<div class="col-sm-12 add-mem"  style="line-height: 33px;">
-					<label class="add-member-label">If you remove that row it will remove it from the input monthly financials table and will remove the data previously entered.</label>
+					<label class="add-member-label">On making this change. The data which is previously entered in input monthly financials table, Will be removed.</label>
 				</div>
 				
 	</div>

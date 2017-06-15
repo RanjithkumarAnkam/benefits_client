@@ -35,6 +35,8 @@ use app\models\ClientUser;
 use app\models\ClientUserSearch;
 use app\models\SystemPricing;
 use app\models\CompanySubscription;
+use app\models\UserEmailChange;
+
 
 class UserController extends BaseController {
 	public function behaviors() {
@@ -230,7 +232,7 @@ class UserController extends BaseController {
 								}
 							}
 						} else {
-							throw new \Exception ( 'Atleast one permission is required for user creation.' );
+							throw new \Exception ( 'Please assign at least one Access Privilege for user creation.' );
 						}
 						
 						// check if all permissions is saved
@@ -238,16 +240,15 @@ class UserController extends BaseController {
 							
 							$transaction->commit ();
 							$to = $model_users->username;
-							$from = 'sky@analytics.com';
+							$from = \Yii::$app->params ['from_mail'];
 							$name = $model_admin_users->first_name . ' ' . $model_admin_users->last_name;
 							// creating link
 							$link = \Yii::$app->urlManager->createAbsoluteUrl ( '/verify-mail' ) . '?authkey=' . $model_users->authkey . '&email=' . $model_users->username;
-							$company_email = 'sky@analytics.com';
-							$company_phone = '89998989898';
-							$company_logo = \Yii::$app->urlManager->createAbsoluteUrl ( '/images/logo/benefits.png' );
 							
 							// send re-verifcation mail
-							$mail_result = \Yii::$app->customMail->verifymail ( $to, $from, $name, $link, $company_email, $company_phone, $company_logo );
+							$mail_result = \Yii::$app->customMail->verifymail ( $to, $from, $name, $link);
+							
+							
 							\Yii::$app->session->setFlash ( 'success', 'Admin added succesfully, a verification mail has been sent please verify it.' );
 							
 							return $this->redirect ( [ 
@@ -343,6 +344,10 @@ class UserController extends BaseController {
 		$picmodel = new UploadForm ();
 		$adminrights = new AdminUserRights ();
 		$email_changed = false;
+		$oldemail = '';
+		$newemail = '';
+		$user_id = '' ;
+		
 		$rightslist = RightsMaster::find ()->where ( [ 
 				'user_type' => 1 
 		] )->all ();
@@ -366,6 +371,11 @@ class UserController extends BaseController {
 			try {
 				$model->attributes = $_POST ['AdminUsers'];
 				$model_users->attributes = $_POST ['User'];
+				$oldemail = $email_id;
+				$newemail = $_POST ['User']['username'];
+				$logged_id=Yii::$app->user->identity->user_id;
+				$user_id = $model->user_id ;
+				
 				/**
 				 * ******Check if old email_id is different to new one***********
 				 */
@@ -430,22 +440,22 @@ class UserController extends BaseController {
 							}
 						}
 						else {
-							throw new \Exception ( 'Atleast one permission is required.' );
+							throw new \Exception ( 'Please assign at least one Access Privilege.' );
 						}
 						// check for email change
 						if ($email_changed) {
 							
+							$emailchange = $this->emailchanged($newemail,$oldemail,$user_id,$logged_id);
 							$to = $model_users->username;
-							$from = 'sky@analytics.com';
+							$from = \Yii::$app->params ['from_mail'];
 							$name = $model->first_name . ' ' . $model->last_name;
 							// creating link
 							$link = \Yii::$app->urlManager->createAbsoluteUrl ( '/verify-mail' ) . '?authkey=' . $model_users->authkey . '&email=' . $model_users->username;
-							$company_email = 'sky@analytics.com';
-							$company_phone = '89998989898';
-							$company_logo = \Yii::$app->urlManager->createAbsoluteUrl ( '/images/logo/benefits.png' );
 							
 							// send re-verifcation mail
-							$mail_result = \Yii::$app->customMail->verifymail ( $to, $from, $name, $link, $company_email, $company_phone, $company_logo );
+							$mail_result = \Yii::$app->customMail->verifymail ( $to, $from, $name, $link);
+							
+							
 							$success = 'Profile updated successfully, a verification mail has been sent please verify it.';
 						}
 						
@@ -533,6 +543,14 @@ class UserController extends BaseController {
 						
 						if ($users->save ()) {
 							$transaction->commit ();
+							
+							$to = $users->username;
+							$from = \Yii::$app->params ['from_mail'];
+							$name = $adminusers->first_name . ' ' . $adminusers->last_name;
+							
+							// send re-verifcation mail
+							$mail_result = \Yii::$app->customMail->deactivateusermail ( $to, $from, $name);
+							
 							return TRUE;
 						} else {
 							
@@ -949,21 +967,21 @@ class UserController extends BaseController {
 						// check if all permissions is saved
 						if ($total_permissions_count == $rights_count) {
 							// Sending mail
+						
+							
 							$to = $model_users->username;
-							$from = 'sky@analytics.com';
+							$from = \Yii::$app->params ['from_mail'];
 							$name = $model->first_name . ' ' . $model->last_name;
 							// creating link
 							$link = \Yii::$app->urlManager->createAbsoluteUrl ( '/verify-mail' ) . '?authkey=' . $model_users->authkey . '&email=' . $model_users->username;
-							$company_email = 'sky@analytics.com';
-							$company_phone = '89998989898';
-							$company_logo = \Yii::$app->urlManager->createAbsoluteUrl ( '/images/logo/benefits.png' );
 							
 							// send re-verifcation mail
-							$mail_result = \Yii::$app->customMail->verifymail ( $to, $from, $name, $link, $company_email, $company_phone, $company_logo );
+							$mail_result = \Yii::$app->customMail->verifymail ( $to, $from, $name, $link);
+							
 							
 							// form inputs are valid, do something here
 							$transaction->commit ();
-							$success = 'success';
+							$success = 'add-success';
 							Yii::$app->response->format = trim ( Response::FORMAT_JSON );
 							return $success;
 						} else {
@@ -1041,6 +1059,15 @@ class UserController extends BaseController {
 						$users->is_active = 0;
 						
 						if ($users->save ()) {
+							
+							$to = $users->username;
+							$from = \Yii::$app->params ['from_mail'];
+							$name = $firmusers->first_name . ' ' . $firmusers->last_name;
+							
+							// send re-verifcation mail
+							$mail_result = \Yii::$app->customMail->deactivateusermail ( $to, $from, $name);
+							
+							
 							$transaction->commit ();
 							return TRUE;
 						} else {
@@ -1116,6 +1143,13 @@ class UserController extends BaseController {
 							
 							$transaction->commit ();
 							
+							$to = $users->username;
+							$from = \Yii::$app->params ['from_mail'];
+							$name = $clientusers->first_name . ' ' . $clientusers->last_name;
+							
+							// send re-verifcation mail
+							$mail_result = \Yii::$app->customMail->deactivateusermail ( $to, $from, $name);
+							
 							return TRUE;
 						} else {
 							
@@ -1157,11 +1191,14 @@ class UserController extends BaseController {
 					$firms->modified_date = date ( 'Y-m-d H:i:s' );
 					$firms->firm_locations = true;
 					$firms->zip = (string)$firms->zip;
+					$firms->billing_zip = (string)$firms->billing_zip;
+					$firms->billing_city = $firms->billing_city;
 					
 					if ($firms->save ()) {
 						$transaction->commit ();
 						return TRUE;
 					} else {
+					//	print_R($firms->errors);die();
 						return FALSE;
 					}
 				} 
@@ -1175,12 +1212,14 @@ class UserController extends BaseController {
 					$firms->modified_date = date ( 'Y-m-d H:i:s' );
 					$firms->firm_locations = true;
 					$firms->zip = (string)$firms->zip;
+					$firms->billing_zip = (string)$firms->billing_zip;
+					$firms->billing_city = $firms->billing_city;
 					// print_r($firms);die();
 					if ($firms->save ()) {
 						$transaction->commit ();
 						return TRUE;
 					} else {
-						
+					//	print_R($firms->errors);die();
 						return FALSE;
 					}
 				}
@@ -1223,6 +1262,9 @@ class UserController extends BaseController {
 		$firm_rights = new FirmUserRights ();
 		$firmlocationsModel = new FirmUserLocations ();
 		$result = array ();
+		$oldemail = '';
+		$newemail =''; 
+		$user_id = '' ;
 		
 		$email_changed = false;
 		
@@ -1248,6 +1290,11 @@ class UserController extends BaseController {
 			try {
 				$model->attributes = $_POST ['FirmUsers'];
 				$model_users->attributes = $_POST ['User'];
+				$oldemail = $email_id;
+				$newemail = $_POST ['User']['username'];
+				$logged_id=Yii::$app->user->identity->user_id;
+				$user_id = $model->user_id ;
+				
 				/**
 				 * ******Check if old email_id is different to new one***********
 				 */
@@ -1365,21 +1412,24 @@ class UserController extends BaseController {
 							
 							if ($email_changed) {
 								
+								$emailchange = $this->emailchanged($newemail,$oldemail,$user_id,$logged_id);
+								
+								
 								$to = $model_users->username;
-								$from = 'sky@analytics.com';
+								$from = \Yii::$app->params ['from_mail'];
 								$name = $model->first_name . ' ' . $model->last_name;
 								// creating link
 								$link = \Yii::$app->urlManager->createAbsoluteUrl ( '/verify-mail' ) . '?authkey=' . $model_users->authkey . '&email=' . $model_users->username;
-								$company_email = 'sky@analytics.com';
-								$company_phone = '89998989898';
-								$company_logo = \Yii::$app->urlManager->createAbsoluteUrl ( '/images/logo/benefits.png' );
 								
 								// send re-verifcation mail
-								$mail_result = \Yii::$app->customMail->verifymail ( $to, $from, $name, $link, $company_email, $company_phone, $company_logo );
+								$mail_result = \Yii::$app->customMail->verifymail ( $to, $from, $name, $link);
+							
+							
+							
 								$success = 'Profile updated successfully, a verification mail has been sent please verify it.';
 							}
 							
-							$success = 'success';
+							$success = 'update-success';
 							Yii::$app->response->format = trim ( Response::FORMAT_JSON );
 							return $success;
 						}
@@ -1504,6 +1554,7 @@ class UserController extends BaseController {
 			// encrypting all the decrypted data
 			$model->add_firm_id = EncryptDecryptComponent::encrytedUser ( $model->firm_id );
 			$model->add_state = EncryptDecryptComponent::encrytedUser ( $model->state );
+			$model->billing_add_state = EncryptDecryptComponent::encrytedUser ( $model->billing_state );
 			$model->add_primary_consultant = EncryptDecryptComponent::encrytedUser ( $model->primary_consultant );
 			$model->add_primary_account_manager = EncryptDecryptComponent::encrytedUser ( $model->primary_account_manager );
 			$model->add_primary_service_rep = EncryptDecryptComponent::encrytedUser ( $model->primary_service_rep );
@@ -1558,9 +1609,19 @@ class UserController extends BaseController {
 			// if posting data (in add firm or update firm)
 			if ($model->load ( Yii::$app->request->post () )) {
 				
+				
+				$post = Yii::$app->request->post ();
+				if(!empty($post['Clients']['client_name'])){
+					$client_name = $post['Clients']['client_name'];
+				}else{
+					$client_name = 'Client';
+				}
+				
+				
 				// decrypting all the encrypted posted data
 				$decrypted_firm_id = EncryptDecryptComponent::decryptUser ( $model->add_firm_id );
 				$decrypted_state = EncryptDecryptComponent::decryptUser ( $model->add_state );
+				$decrypted_billing_state = EncryptDecryptComponent::decryptUser ( $model->billing_add_state );
 				$decrypted_primary_consultant = EncryptDecryptComponent::decryptUser ( $model->add_primary_consultant );
 				$decrypted_primary_account_manager = EncryptDecryptComponent::decryptUser ( $model->add_primary_account_manager );
 				$decrypted_primary_service_rep = EncryptDecryptComponent::decryptUser ( $model->add_primary_service_rep );
@@ -1597,6 +1658,7 @@ class UserController extends BaseController {
 				// assigning posted values to model
 				$model->firm_id = $decrypted_firm_id;
 				$model->state = $decrypted_state;
+				$model->billing_state = $decrypted_billing_state;
 				$model->primary_consultant = $decrypted_primary_consultant;
 				$model->primary_account_manager = $decrypted_primary_account_manager;
 				$model->primary_service_rep = $decrypted_primary_service_rep;
@@ -1664,7 +1726,7 @@ class UserController extends BaseController {
 								\Yii::$app->session->setFlash ( 'success', 'Client details updated succesfully' );
 							} else {
 								// add client
-								\Yii::$app->session->setFlash ( 'success', 'Client added succesfully' );
+								\Yii::$app->session->setFlash ( 'success', 'Client ('.$client_name.') added succesfully' );
 							}
 							
 							// encrypting the ids in url
@@ -1714,6 +1776,7 @@ class UserController extends BaseController {
 			// encrypting all the decrypted data
 			$model->add_firm_id = EncryptDecryptComponent::encrytedUser ( $model->firm_id );
 			$model->add_state = EncryptDecryptComponent::encrytedUser ( $model->state );
+			$model->billing_add_state = EncryptDecryptComponent::encrytedUser ( $model->billing_state );
 			$model->add_primary_consultant = EncryptDecryptComponent::encrytedUser ( $model->primary_consultant );
 			$model->add_primary_account_manager = EncryptDecryptComponent::encrytedUser ( $model->primary_account_manager );
 			$model->add_primary_service_rep = EncryptDecryptComponent::encrytedUser ( $model->primary_service_rep );
@@ -1963,16 +2026,49 @@ class UserController extends BaseController {
 						$password_reset_token = $user_details->password_reset_token;
 						
 						$to = $user_details->username;
-						$from = 'sky@analytics.com';
+						$from = \Yii::$app->params ['from_mail'];
+						
+						
+						// check usertype
+						switch ($user_details->usertype) {
+							/**
+							 * ****if admin*******
+							 */
+							case '1' :
+								$userdetailModel = AdminUsers::find ()->where ( [
+								'user_id' => $user_details->user_id
+								] )->One ();
+								break;
+								/**
+								 * ****if firm*******
+								 */
+							case '2' :
+								$userdetailModel = FirmUsers::find ()->where ( [
+								'user_id' => $user_details->user_id
+								] )->One ();
+								break;
+								/**
+								 * ****if client*******
+								 */
+							case '3' :
+								$userdetailModel = ClientUser::find ()->where ( [
+								'user_id' => $user_details->user_id
+								] )->One ();
+								break;
+						}
+							
+						if (! empty ( $userdetailModel )) {
+							$name = $userdetailModel->first_name . ' ' . $userdetailModel->last_name;
+						} else {
+							$name = $to;
+						}
+						
 						$name = $to;
 						// creating link
 						$link = \Yii::$app->urlManager->createAbsoluteUrl ( '/forgot-password' ) . '?token=' . $password_reset_token . '&email=' . $user_details->username;
-						$company_email = 'sky@analytics.com';
-						$company_phone = '89998989898';
-						$company_logo = \Yii::$app->urlManager->createAbsoluteUrl ( '/images/logo/benefits.png' );
 						
 						// send forgot password mail
-						$mail_result = \Yii::$app->customMail->forgotpasswordmail ( $to, $from, $name, $link, $company_email, $company_phone, $company_logo );
+						$mail_result = \Yii::$app->customMail->Resendpasswordmail ( $to, $from, $name, $link );
 						
 						if (! empty ( $mail_result )) {
 							$arrresult ['success'] = 'Password reset link sent to ' . $user_details->username;
@@ -2127,19 +2223,19 @@ class UserController extends BaseController {
 					
 					if ($model->save ()) {
 						
-						// Sending mail
+					
+						
 						$to = $model_users->username;
-						$from = 'sky@analytics.com';
+						$from = \Yii::$app->params ['from_mail'];
 						$name = $model->first_name . ' ' . $model->last_name;
 						// creating link
 						$link = \Yii::$app->urlManager->createAbsoluteUrl ( '/verify-mail' ) . '?authkey=' . $model_users->authkey . '&email=' . $model_users->username;
-						$company_email = 'sky@analytics.com';
-						$company_phone = '89998989898';
-						$company_logo = \Yii::$app->urlManager->createAbsoluteUrl ( '/images/logo/benefits.png' );
 						
 						// send re-verifcation mail
-						$mail_result = \Yii::$app->customMail->verifymail ( $to, $from, $name, $link, $company_email, $company_phone, $company_logo );
-						
+						$mail_result = \Yii::$app->customMail->verifymail ( $to, $from, $name, $link);
+					
+							
+							
 						// form inputs are valid, do something here
 						$transaction->commit ();
 						$success = 'add-success';
@@ -2171,6 +2267,10 @@ class UserController extends BaseController {
 		$picmodel = new UploadForm ();
 		$result = array ();
 		$email_changed = false;
+		$oldemail = '';
+		$newemail = '';
+	 	$user_id = '';
+		
 		if (isset ( $_POST ['ClientUser'] )) {
 			
 			// decrypting the client id
@@ -2196,6 +2296,11 @@ class UserController extends BaseController {
 				
 				$model->attributes = $_POST ['ClientUser'];
 				$model_users->attributes = $_POST ['User'];
+				$oldemail = $email_id;
+				$newemail = $_POST ['User']['username'];
+				$logged_id=Yii::$app->user->identity->user_id;
+				$user_id = $model->user_id ;
+				
 				/**
 				 * ******Check if old email_id is different to new one***********
 				 */
@@ -2260,17 +2365,17 @@ class UserController extends BaseController {
 						
 						if ($email_changed) {
 							
+							$emailchange = $this->emailchanged($newemail,$oldemail,$user_id,$logged_id);
 							$to = $model_users->username;
-							$from = 'sky@analytics.com';
+							$from = \Yii::$app->params ['from_mail'];
 							$name = $model->first_name . ' ' . $model->last_name;
 							// creating link
 							$link = \Yii::$app->urlManager->createAbsoluteUrl ( '/verify-mail' ) . '?authkey=' . $model_users->authkey . '&email=' . $model_users->username;
-							$company_email = 'sky@analytics.com';
-							$company_phone = '89998989898';
-							$company_logo = \Yii::$app->urlManager->createAbsoluteUrl ( '/images/logo/benefits.png' );
 							
 							// send re-verifcation mail
-							$mail_result = \Yii::$app->customMail->verifymail ( $to, $from, $name, $link, $company_email, $company_phone, $company_logo );
+							$mail_result = \Yii::$app->customMail->verifymail ( $to, $from, $name, $link);
+					
+							
 							
 							$success = 'Profile updated successfully, a verification mail has been sent please verify it.';
 						}
@@ -2728,6 +2833,7 @@ class UserController extends BaseController {
 		// encrypting all the decrypted data
 		$model->add_firm_id = EncryptDecryptComponent::encrytedUser ( $model->firm_id );
 		$model->add_state = EncryptDecryptComponent::encrytedUser ( $model->state );
+		$model->billing_add_state = EncryptDecryptComponent::encrytedUser ( $model->billing_state );
 		$model->add_primary_consultant = EncryptDecryptComponent::encrytedUser ( $model->primary_consultant );
 		$model->add_primary_account_manager = EncryptDecryptComponent::encrytedUser ( $model->primary_account_manager );
 		$model->add_primary_service_rep = EncryptDecryptComponent::encrytedUser ( $model->primary_service_rep );
@@ -3105,6 +3211,29 @@ class UserController extends BaseController {
 	}
 	
 	
-	
+	protected function emailchanged($newemail,$oldemail,$user_id,$logged_id){
+		/* begining the db transaction */
+		$transaction = \Yii::$app->db->beginTransaction ();
+		try{
+			$model_email_change = new UserEmailChange();
+			$model_email_change->previous_email = $oldemail;
+			$model_email_change->new_email = $newemail;
+			$model_email_change->user_id = $user_id;
+			$model_email_change->updated_by = $logged_id;
+			
+			if($model_email_change->save()){
+				$transaction->commit ();
+				return true;
+			}else{
+				return false;
+			}
+		} catch ( \Exception $e ) {
+					$msg = $e->getMessage ();
+					$transaction->rollBack ();
+					
+					Yii::$app->response->format = trim ( Response::FORMAT_JSON );
+					return false;
+				}
+	}
 	
 }

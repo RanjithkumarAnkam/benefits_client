@@ -48,9 +48,7 @@ class FirmUsersSearch extends FirmUsers
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
 			'sort'=> ['defaultOrder' => ['firm_user_id'=>SORT_DESC]],
-			'pagination' => [
-    			'pagesize' => 10,
-    			],
+			
         ]);
 
         $this->load($params);

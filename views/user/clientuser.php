@@ -43,6 +43,7 @@ use app\components\EncryptDecryptComponent;
 										'delay' => 0 
 								] );
 							}
+							Yii::$app->session->setFlash('success', null);
 							?>
 							
 							<?php
@@ -55,6 +56,7 @@ use app\components\EncryptDecryptComponent;
 										'delay' => 0 
 								] );
 							}
+							Yii::$app->session->setFlash('error', null);
 							?>
 						</div>
 			<div class="col-md-12 border-ddd widget padding-15">
@@ -131,23 +133,7 @@ use app\components\EncryptDecryptComponent;
 															</div>
 														</div>
 														
-														<div class="col-md-12 padding-0">
 														
-															
-															<div class="col-md-6">
-															<label class="form-control-label" for="l0">Billing
-																		Address * </label>
-																<?= $form->field($model, 'billing_address', ['inputOptions' => ['class' => 'form-control','onkeypress'=>'return firmname(event);',]])->textInput(['maxlength' => true])->label(false); ?>
-															
-															</div>
-															
-															<div class="col-md-6 margin-top-40">
-															<label class="mt-checkbox mt-checkbox-outline margin-bottom-10">
-																Same as Business Address 1 
-																<input type="checkbox" value="1" name="business_address_check" class=" business-address-check"> <span></span>
-															</label>
-															</div>
-														</div>
 														
 														<div class="col-md-12 padding-0">
 															<div class="col-md-6">
@@ -229,8 +215,69 @@ use app\components\EncryptDecryptComponent;
 
 															</div>
 														</div>
+														<div class="col-md-12 padding-0">
+															
+															<div class="col-md-6 ">
+															<label class="mt-checkbox mt-checkbox-outline margin-bottom-10">
+																Same as Business Address 
+																<input type="checkbox" value="1" name="business_address_check" class=" business-address-check"> <span></span>
+															</label>
+															</div>
+														</div>
+														
+														<div class="col-md-12 padding-0">
+															<div class="col-md-6">
 
+																<div class="form-group ">
+																	<label class="form-control-label" for="l0">Billing
+																		Address 1*</label>
+																<?= $form->field($model, 'billing_address_1', ['inputOptions' => ['class' => 'form-control','onkeypress'=>'return firmname(event);',]])->textInput(['maxlength' => true])->label(false); ?>
+															</div>
 
+															</div>
+															<div class="col-md-6">
+																<div class="form-group ">
+																	<label class="form-control-label" for="l0">Billing
+																		Address 2 </label>
+																<?= $form->field($model, 'billing_address_2', ['inputOptions' => ['class' => 'form-control','onkeypress'=>'return firmname(event);',]])->textInput(['maxlength' => true])->label(false); ?>
+															</div>
+															</div>
+														</div>
+														
+														
+														
+														<div class="col-md-12 padding-0">
+															<div class="col-md-6">
+																<div class="form-group ">
+																	<label class="form-control-label" for="l0">Billing City *</label>
+																<?= $form->field($model, 'billing_city', ['inputOptions' => ['class' => 'form-control','onkeypress'=>'return alpha(event);',]])->textInput(['maxlength' => true])->label(false); ?>
+															</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group ">
+																	<label class="form-control-label" for="l0">Billing State *</label>
+																<?php
+																echo $form->field ( $model, 'billing_add_state', [ 
+																		'inputOptions' => [ 
+																				'class' => 'form-control' 
+																		] 
+																] )->dropDownList ( $stateList, [ 
+																		'prompt' => 'Select' 
+																] )->label ( false );
+																?>
+															</div>
+															</div>
+														</div>
+														<div class="col-md-12 padding-0">
+															<div class="col-md-6">
+
+																<div class="form-group ">
+																	<label class="form-control-label" for="l0">Billing Zip Code*</label>
+																<?= $form->field($model, 'billing_zip', ['inputOptions' => ['class' => 'form-control numbers']])->textInput(['maxlength' => 5])->label(false); ?>
+															</div>
+															</div>
+															
+														</div>
 													</fieldset>
 												</div>
 
@@ -429,7 +476,7 @@ use app\components\EncryptDecryptComponent;
 															<div id="client_form_modules">
 															<?php if(!$model->isNewRecord){?>
 																<?php foreach($modules as $module){?>																	
-																	<label class="form-control-label"><?php echo $module['option_value'];?></label>
+																	<label class="form-control-label"><?php echo $module['option_value'];?> * </label>
 																	<div class="">
 																		 <label class="mt-checkbox mt-checkbox-outline"> Activate
 																			<input class="client_module_selection input_available_client_packages"   type="checkbox" <?php if($active_modules == $module['option_id']){ ?> checked <?php }?> name="activate_module" value="<?php echo $module['option_id'];?>"> <span></span>
@@ -798,14 +845,24 @@ $(document).on('ready pjax:success', function(){
 				
 		$('input.business-address-check').change(function(){
 
-		if ($('input.business-address-check').is(':checked')) {
-			
-			var address_1 = '';
-			address_1 = $('#clients-address_1').val();
-			 $('#clients-billing_address').val(address_1);
-		}	
+			if ($('input.business-address-check').is(':checked')) {
 
-		});
+				
+				var address_1 = '';
+				address_1 = $('#clients-address_1').val();
+				address_2 = $('#clients-address_2').val();
+				city = $('#clients-city').val();
+				state = $('#clients-add_state').val();
+				zip = $('#clients-zip').val();
+				 $('#clients-billing_address_1').val(address_1);
+
+				 $('#clients-billing_address_2').val(address_2);
+				 $('#clients-billing_city').val(city);
+				 $('#clients-billing_add_state').val(state);
+				 $('#clients-billing_zip').val(zip);
+			}	
+
+			});
 		
 		
 		<?php if(Yii::$app->user->identity->usertype == 2){ ?>
@@ -891,7 +948,7 @@ $(document).on('ready pjax:success', function(){
 						{
 							checked = 'checked';
 						}
-						div += '<label class="form-control-label">'+data.firm_modules[i]['option_value']+'</label><div class=""><label class="mt-checkbox mt-checkbox-outline"> Activate<input class="input_available_client_packages" type="checkbox" value="'+data.firm_modules[i]['module_id']+'" name="activate_module" '+checked+'> <span></span></label></div>';
+						div += '<label class="form-control-label">'+data.firm_modules[i]['option_value']+' * </label><div class=""><label class="mt-checkbox mt-checkbox-outline"> Activate<input class="input_available_client_packages" type="checkbox" value="'+data.firm_modules[i]['module_id']+'" name="activate_module" '+checked+'> <span></span></label></div>';
 					}
 					$('#packages_block').removeClass("hidden");
 					$('#client_num_and_amount_block').removeClass("hidden");

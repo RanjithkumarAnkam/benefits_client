@@ -48,7 +48,7 @@ class Firms extends \yii\db\ActiveRecord
             [['created_date', 'modified_date'], 'safe'],
             [['firm_name'], 'string', 'max' => 50],
 			[['firm_name'], 'unique'],
-			['firm_name', 'match', 'pattern' => "/^[a-zA-Z0-9&,#.\-\ ]+$/", 'message' => 'Firm name can only contain  alpha, number, space, dot , comma, hash, ampersand, hyphen .'],
+			['firm_name', 'match', 'pattern' => "/^[a-zA-Z0-9&,.\-\ ]+$/", 'message' => 'Firm name can only contain  alpha, number, space, dot , comma, ampersand, hyphen .'],
             ['address_1', 'match', 'pattern' => "/^[a-zA-Z0-9&,#. ]+$/", 'message' => 'Address 1 can only contain alpha, number, space, dot , comma, hash, ampersand .'],
 			['address_2', 'match', 'pattern' => "/^[a-zA-Z0-9&,#. ]+$/", 'message' => 'Address 2 can only contain alpha, number, space, dot , comma, hash, ampersand .'],
         		['billing_address_1', 'match', 'pattern' => "/^[a-zA-Z0-9&,#. ]+$/", 'message' => 'Billing Address 1 can only contain alpha, number, space, dot , comma, hash, ampersand .'],

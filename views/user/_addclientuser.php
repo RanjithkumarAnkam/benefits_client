@@ -41,7 +41,7 @@ use yii\helpers\Html;
 	<div class="col-md-12 padding-0">
 		<div class="col-md-6">
 			<label class="form-control-label" for="l0">Title</label>
-			<?= $form->field($model, 'title', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true])->label(false); ?>
+			<?= $form->field($model, 'title', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true,'onkeypress'=>'return username(event);'])->label(false); ?>
 		</div>
 		<div class="col-md-6">
 			<label class="form-control-label" for="l0">Email Address *</label>
@@ -158,19 +158,27 @@ $("[data-toggle=tooltip]").tooltip();
 });
 
 
+	 $(document).on('click', '.primary-class-yes', function () { 
+		 $('input.primary-contact-checkbox').attr('checked',true);
+		 $('#primary_billing_button_yes').removeClass('primary-class-yes');
+		 $('#primary_billing_button_no').removeClass('primary-class-no');
+	 });
+	 $(document).on('click', '.primary-class-no', function () { 
+		 $('input.primary-contact-checkbox').attr('checked',false);
+		 $('#primary_billing_button_yes').removeClass('primary-class-yes');
+		 $('#primary_billing_button_no').removeClass('primary-class-no');
+	 });
 
-<?php if(!empty($get_user_primary)){ ?>
-
-$('input.primary-contact-checkbox').change(function(){
-
-if ($('input.primary-contact-checkbox').is(':checked')) {
-
-toastr.error('You have already made other user as primary contact, this will override previous one.');	
-	
-}	
-
-});
-<?php } ?>
+	 $(document).on('click', '.billing-class-yes', function () { 
+		 $('input.billing-contact-checkbox').attr('checked',true);
+		 $('#primary_billing_button_yes').removeClass('billing-class-yes');
+		 $('#primary_billing_button_no').removeClass('billing-class-no');
+	 });
+	 $(document).on('click', '.billing-class-no', function () { 
+		 $('input.billing-contact-checkbox').attr('checked',false);
+		 $('#primary_billing_button_yes').removeClass('billing-class-yes');
+		 $('#primary_billing_button_no').removeClass('billing-class-no');
+	 });
 
 
 <?php if(!empty($get_user_billing)){ ?>
@@ -179,13 +187,37 @@ $('input.billing-contact-checkbox').change(function(){
 
 if ($('input.billing-contact-checkbox').is(':checked')) {
 
-toastr.error('You have already made other user as billing contact, this will override previous one.');	
+	$('#label_primary_billing').html('<?php echo $get_user_primary->first_name;?> is already Billing Contact, Do you Want to Override it.');
+	
+	$('#primary_billing_button_yes').addClass('billing-class-yes');
+	$('#primary_billing_button_no').addClass('billing-class-no');
+	$('#primary_billing').modal('show');
+//toastr.error('You have already made other user as billing contact, this will override previous one.');	
 	
 }	
 
 });
 <?php } ?>
 
+<?php if(!empty($get_user_primary)){ ?>
+
+$('input.primary-contact-checkbox').change(function(){
+	
+	
+if ($('input.primary-contact-checkbox').is(':checked')) {
+
+	$('#label_primary_billing').html('<?php echo $get_user_primary->first_name;?> is already Primary Contact, Do you Want to Override it.');
+	
+	$('#primary_billing_button_yes').addClass('primary-class-yes');
+	$('#primary_billing_button_no').addClass('primary-class-no');
+	$('#primary_billing').modal('show');
+	
+//toastr.error('You have already made other user as primary contact, this will override previous one.');	
+	
+}	
+
+});
+<?php } ?>
 
 
 

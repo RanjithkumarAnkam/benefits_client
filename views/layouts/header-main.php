@@ -390,7 +390,9 @@
                             Lookup Options
                         </a>
               
-               
+					 <a class="dropdown-item dropdown-a color-white" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/email-templates">
+                            Email Templates
+                        </a>
                     <a class="dropdown-item dropdown-a color-white hide" href="#">
                             Element Master
                         </a>

@@ -230,7 +230,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 																</div> -->
 
 
-																<div class="form-group field-firms-locations">
+																<!--<div class="form-group field-firms-locations">
 																	
 																	
 																	<label class="form-control-label" for="l0">Firm
@@ -242,7 +242,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 																	</label>
 																	
 																	<?php 
-																	$selected = array();
+																	/*$selected = array();
 																	if(!empty($firm_locations)){
 																		
 																	
@@ -258,7 +258,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 																				  '9' => array('selected' => 'selected'),
 																				  '10' => array('selected' => 'selected'),
 																				);*/
-																	$firm_locations = ArrayHelper::map ( $firm_locations, 'location_id', 'location_name' );
+																/*	$firm_locations = ArrayHelper::map ( $firm_locations, 'location_id', 'location_name' );
 																	
 																	}
 																	
@@ -272,11 +272,108 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 																		]
 																		] )->dropDownList ( $firm_locations ,array( 'options'=>$selected))->label ( false );
 																		
-																	?>
+																	*/?>
 
+																</div>-->
+
+																<div class="form-group field-firms-locations">
+																	
+																	
+																	<label class="form-control-label" for="l0">Firm
+																		Locations * <span
+																		class="fa fa-info-circle information-icon"
+																		title="Firm Locations" data-container="body"
+																		data-toggle="popover-hover" data-placement="right"
+																		data-content="Enter in the various firm locations.  These locations will later be used when entering your firm users to associate which of your users are from which locations."></span>
+																	</label>
+																	<?php if($model->isNewRecord){?>
+																	 <span class="hide" id="span_location_id">
+																	<?php 
+																	$selected = array();
+																	if(!empty($firm_locations) ){
+																		
+																	
+																	
+																	foreach($firm_locations as $locations){
+																		
+																		//array_push($selected,'9');
+																		$selected[$locations->location_id] = array('selected' => 'selected');
+																			
+																	}
+																	/*
+																	$selected   = array(
+																				  '9' => array('selected' => 'selected'),
+																				  '10' => array('selected' => 'selected'),
+																				);*/
+																	$firm_locations = ArrayHelper::map ( $firm_locations, 'location_id', 'location_name' );
+																}	
+																	
+																	
+																	
+																	echo $form->field ( $model, 'firm_locations[]', [
+																		'inputOptions' => [
+																		'class' => 'form-control select2','tabindex'=>'1', 
+                                                                       
+																		'multiple' => true,
+																		'selected' => 'selected',
+																		'name'=>'firm_locations[]',
+																		]
+																		] )->dropDownList ( $firm_locations ,array( 'options'=>$selected))->label ( false );
+																		
+																								
+																								?>
+ </span>
+															
+																	<div id="input_location-id">
+																		<div class="form-group field-firms-firm_locations required">
+																			<input type="text" class="form-control" id="firms-firm_location" onblur="showAddtionallocation();" name="firm_locations[]" value="">
+																			<div class="help-block"></div>
+																			</div>
+																			</div>
+																			
+																	
 																</div>
+																	
+																	<?php }else{?>
+																		<?php 
+																	$selected = array();
+																	if(!empty($firm_locations) && !empty($firm_id)){
+																		
+																	
+																	
+																	foreach($firm_locations as $locations){
+																		
+																		//array_push($selected,'9');
+																		$selected[$locations->location_id] = array('selected' => 'selected');
+																			
+																	}
+																	/*
+																	$selected   = array(
+																				  '9' => array('selected' => 'selected'),
+																				  '10' => array('selected' => 'selected'),
+																				);*/
+																	$firm_locations = ArrayHelper::map ( $firm_locations, 'location_id', 'location_name' );
+																
+																	}
+																	
+																	
+																	echo $form->field ( $model, 'firm_locations[]', [
+																		'inputOptions' => [
+																		'class' => 'form-control select2','tabindex'=>'1', 
+                                                                       
+																		'multiple' => true,
+																		'selected' => 'selected',
+																		'name'=>'firm_locations[]',
+																		]
+																		] )->dropDownList ( $firm_locations ,array( 'options'=>$selected))->label ( false );
+																		
+																							
+																								?>
+																	<?php }?>
 
-																<div class="row">
+																	
+																	
+																	<div class="row <?php if(empty($firm_locations)){?>hide<?php }?>" id="label_additional_locations">
 																	<div class="form-group col-md-12 " align="right">
 																		<label><a onclick="addLocation();" class="color-blue"><u  tabindex="1">Add
 																					Additional Locations</u></a></label>
@@ -291,7 +388,7 @@ if ($flash = Yii::$app->session->getFlash ( 'error' )) {
 																			Placeholder="">
 																	</div>
 																	<div class="col-md-12 padding-0" align="right">
-																		<button type="button" class="btn  btn-modal-blue"
+																		<button type="button" class="btn  btn-modal-blue" id="add_location_button"
 																			onclick="addLocationsOnebyOne();">Add</button>
 																		<button class="btn btn-default"
 																			onclick="addLocation();" type="button">Close</button>
@@ -772,6 +869,12 @@ $('input.billing-address-check').change(function(){
 
 		});
 		
+		$("#input_add_location").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#add_location_button").click();
+    }
+});
+
 });
 
 

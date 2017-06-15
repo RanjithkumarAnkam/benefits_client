@@ -23,7 +23,7 @@ AppAsset::register($this);
     <link href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/web/themes/clean-ui/common/img/favicon.114x114.png" rel="apple-touch-icon" type="image/png" sizes="114x114">
     <link href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/web/themes/clean-ui/common/img/favicon.72x72.png" rel="apple-touch-icon" type="image/png" sizes="72x72">
     <link href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/web/themes/clean-ui/common/img/favicon.57x57.png" rel="apple-touch-icon" type="image/png">
-    <link href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/web/themes/clean-ui/common/img/favicon.png" rel="icon" type="image/png">
+    <link href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/web/images/favicon.png" rel="icon" type="image/png">
    
 
     <!-- HTML5 shim and Respond.js for < IE9 support of HTML5 elements and media queries -->

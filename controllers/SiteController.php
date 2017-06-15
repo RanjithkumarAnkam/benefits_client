@@ -93,8 +93,8 @@ class SiteController extends Controller {
 		// check if user identity is already set or not
 		if (! Yii::$app->user->isGuest) {
 			// getting login url based on loogedin usertype
-			$result = SessionCheckComponent::RedirectionandSessioncreation();
-			$login_url = $result['login_url'];
+			$result = SessionCheckComponent::RedirectionandSessioncreation ();
+			$login_url = $result ['login_url'];
 			return $this->redirect ( array ( // redirecting to dashboard page
 					$login_url 
 			) );
@@ -104,12 +104,12 @@ class SiteController extends Controller {
 		$modelforgotpassword = new ForgotPasswordForm ();
 		$modeluser = new User ();
 		
-		if ($model->load ( Yii::$app->request->post () ) && $model->login ()) {			
+		if ($model->load ( Yii::$app->request->post () ) && $model->login ()) {
 			$user_id = Yii::$app->user->identity->user_id;
 			
 			// getting login url based on loggedin usertype
-			$result = SessionCheckComponent::RedirectionandSessioncreation();
-			$login_url = $result['login_url'];
+			$result = SessionCheckComponent::RedirectionandSessioncreation ();
+			$login_url = $result ['login_url'];
 			
 			return $this->redirect ( array ( // redirecting to admin page
 					$login_url 
@@ -133,19 +133,51 @@ class SiteController extends Controller {
 						$password_reset_token = $user_details->password_reset_token;
 						
 						$to = $modelforgotpassword->username;
-						$from = 'sky@analytics.com';
-						$name = $to;
+						$from = \Yii::$app->params ['from_mail'];
+						
+						
+						// check usertype
+						switch ($user_details->usertype) {
+							/**
+							 * ****if admin*******
+							 */
+							case '1' :
+								$userdetailModel = AdminUsers::find ()->where ( [
+								'user_id' => $user_details->user_id
+								] )->One ();
+								break;
+								/**
+								 * ****if firm*******
+								 */
+							case '2' :
+								$userdetailModel = FirmUsers::find ()->where ( [
+								'user_id' => $user_details->user_id
+								] )->One ();
+								break;
+								/**
+								 * ****if client*******
+								 */
+							case '3' :
+								$userdetailModel = ClientUser::find ()->where ( [
+								'user_id' => $user_details->user_id
+								] )->One ();
+								break;
+						}
+							
+						if (! empty ( $userdetailModel )) {
+							$name = $userdetailModel->first_name . ' ' . $userdetailModel->last_name;
+						} else {
+							$name = $to;
+						}
+						
 						// creating link
 						$link = \Yii::$app->urlManager->createAbsoluteUrl ( '/forgot-password' ) . '?token=' . $password_reset_token . '&email=' . $modelforgotpassword->username;
-						$company_email = 'sky@analytics.com';
-						$company_phone = '89998989898';
-						$company_logo = \Yii::$app->urlManager->createAbsoluteUrl ( '/images/logo/benefits.png' );
 						
 						// send forgot password mail
-						$mail_result = \Yii::$app->customMail->forgotpasswordmail ( $to, $from, $name, $link, $company_email, $company_phone, $company_logo );
+						$mail_result = \Yii::$app->customMail->forgotpasswordmail ( $to, $from, $name, $link );
 						
 						if (! empty ( $mail_result )) {
-							\Yii::$app->session->setFlash ( 'success', 'Password reset link sent to your mail id' );
+							\Yii::$app->session->setFlash ( 'success', 'Password reset link has been sent to your email address. Please follow the instructions in the email' );
 						} else {
 							\Yii::$app->session->setFlash ( 'error', 'Some error occurred while sending mail' );
 						}
@@ -187,9 +219,51 @@ class SiteController extends Controller {
 						
 						if ($user_details->save ()) {
 							
-							//deleting old cookie in db
-							UserIdentityCookie::deleteAll('user_id = :user_id', [':user_id' => $user_details->user_id]);
-						
+							// deleting old cookie in db
+							UserIdentityCookie::deleteAll ( 'user_id = :user_id', [ 
+									':user_id' => $user_details->user_id 
+							] );
+							
+							// password change mail
+							$to = $user_details->username;
+							$from = \Yii::$app->params ['from_mail'];
+							
+							// check usertype
+							switch ($user_details->usertype) {
+								/**
+								 * ****if admin*******
+								 */
+								case '1' :
+									$userdetailModel = AdminUsers::find ()->where ( [ 
+											'user_id' => $user_details->user_id 
+									] )->One ();
+									break;
+								/**
+								 * ****if firm*******
+								 */
+								case '2' :
+									$userdetailModel = FirmUsers::find ()->where ( [ 
+											'user_id' => $user_details->user_id 
+									] )->One ();
+									break;
+								/**
+								 * ****if client*******
+								 */
+								case '3' :
+									$userdetailModel = ClientUser::find ()->where ( [ 
+											'user_id' => $user_details->user_id 
+									] )->One ();
+									break;
+							}
+							
+							if (! empty ( $userdetailModel )) {
+								$name = $userdetailModel->first_name . ' ' . $userdetailModel->last_name;
+							} else {
+								$name = $to;
+							}
+							
+							$mail_result = \Yii::$app->customMail->passwordchangemail ( $to, $from, $name );
+							
 							\Yii::$app->session->setFlash ( 'success', 'Password updated successfully' );
 							return $this->redirect ( array ( // redirecting to login page
 									'/site/login' 
@@ -235,14 +309,14 @@ class SiteController extends Controller {
 				/**
 				 * ***Check if password is already set or not********
 				 */
-				 $transaction = \Yii::$app->db->beginTransaction (); // begin the transaction
+				$transaction = \Yii::$app->db->beginTransaction (); // begin the transaction
 				try {
-								
-				if ($user_details->password == '') {
 					
-					\Yii::$app->session->setFlash ( 'success', 'Email verification pending, please set password to complete verification.' );
-					
-					if ($model_password_form->load ( Yii::$app->request->post () ) && $model_password_form->validate ()) {
+					if ($user_details->password == '') {
+						
+						\Yii::$app->session->setFlash ( 'success', 'Email verification pending, please set password to complete verification.' );
+						
+						if ($model_password_form->load ( Yii::$app->request->post () ) && $model_password_form->validate ()) {
 							
 							$user_details->setPassword ( $model_password_form->confirmpassword );
 							$user_details->is_active = 1;
@@ -289,34 +363,30 @@ class SiteController extends Controller {
 									) );
 								}
 							}
-						
-					}
-					
-					return $this->render ( 'forgot-password', [ 
-							'model' => $model,
-							'model_password_form' => $model_password_form 
-					] );
-				} else {
-					
-					if ($user_details->save ()) {
-						$transaction->commit ();
-						\Yii::$app->session->setFlash ( 'success', 'Email verified successfully.' );
-						return $this->redirect ( array ( // redirecting to login page
-								'/site/login' 
-						) );
-					}
-				}
-				
-				} catch ( \Exception $e ) {
-							$transaction->rollback (); // if exception occurs transaction rollbacks
-							$msg = $e->getMessage ();
-							\Yii::$app->session->setFlash ( 'error', $msg );
 						}
-				
+						
+						return $this->render ( 'forgot-password', [ 
+								'model' => $model,
+								'model_password_form' => $model_password_form 
+						] );
+					} else {
+						
+						if ($user_details->save ()) {
+							$transaction->commit ();
+							\Yii::$app->session->setFlash ( 'success', 'Email verified successfully.' );
+							return $this->redirect ( array ( // redirecting to login page
+									'/site/login' 
+							) );
+						}
+					}
+				} catch ( \Exception $e ) {
+					$transaction->rollback (); // if exception occurs transaction rollbacks
+					$msg = $e->getMessage ();
+					\Yii::$app->session->setFlash ( 'error', $msg );
+				}
 			} else {
 				
-				
-				\Yii::$app->session->setFlash ( 'error', 'Verification link has expired.' );
+				\Yii::$app->session->setFlash ( 'error', ' Your Account Verification link has expired. Please contact Help Desk.' );
 				return $this->redirect ( array ( // redirecting to login page
 						'/site/login' 
 				) );
@@ -347,10 +417,53 @@ class SiteController extends Controller {
 					$user_details->setPassword ( $newpass );
 					
 					if ($user_details->save ()) { // saving the model
-					
-					
-						//deleting old cookie in db
-						UserIdentityCookie::deleteAll('user_id = :user_id', [':user_id' => $logged_user_id]);
+					                              
+						// deleting old cookie in db
+						UserIdentityCookie::deleteAll ( 'user_id = :user_id', [ 
+								':user_id' => $logged_user_id 
+						] );
+						
+						
+						// password change mail
+						$to = $user_details->username;
+						$from = \Yii::$app->params ['from_mail'];
+							
+						// check usertype
+						switch ($user_details->usertype) {
+							/**
+							 * ****if admin*******
+							 */
+							case '1' :
+								$userdetailModel = AdminUsers::find ()->where ( [
+								'user_id' => $logged_user_id
+								] )->One ();
+								break;
+								/**
+								 * ****if firm*******
+								 */
+							case '2' :
+								$userdetailModel = FirmUsers::find ()->where ( [
+								'user_id' => $logged_user_id
+								] )->One ();
+								break;
+								/**
+								 * ****if client*******
+								 */
+							case '3' :
+								$userdetailModel = ClientUser::find ()->where ( [
+								'user_id' => $logged_user_id
+								] )->One ();
+								break;
+						}
+							
+						if (! empty ( $userdetailModel )) {
+							$name = $userdetailModel->first_name . ' ' . $userdetailModel->last_name;
+						} else {
+							$name = $to;
+						}
+							
+						$mail_result = \Yii::$app->customMail->passwordchangemail ( $to, $from, $name );
+							
 						
 						$transaction->commit (); // commiting the transaction
 						$output ['success'] = 'success';

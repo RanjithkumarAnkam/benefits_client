@@ -28,7 +28,7 @@ AppAsset::register($this);
     <link href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/web/themes/clean-ui/common/img/favicon.114x114.png" rel="apple-touch-icon" type="image/png" sizes="114x114">
     <link href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/web/themes/clean-ui/common/img/favicon.72x72.png" rel="apple-touch-icon" type="image/png" sizes="72x72">
     <link href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/web/themes/clean-ui/common/img/favicon.57x57.png" rel="apple-touch-icon" type="image/png">
-    <link href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/web/themes/clean-ui/common/img/favicon.png" rel="icon" type="image/png">
+    <link href="<?php echo Yii::$app->getUrlManager()->getBaseUrl(); ?>/web/images/favicon.png" rel="icon" type="image/png">
    
 
     <!-- HTML5 shim and Respond.js for < IE9 support of HTML5 elements and media queries -->
@@ -7028,6 +7028,38 @@ $gridColumns = [
 					
 				</div>		
 		<!---end spec report modal-->
+		
+		<!-- for primary billing contact -->
+		
+		<div class="modal fade" id="primary_billing" tabindex="-1"     style="z-index: 99999;"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog pswd-pop" style="width: 450px;">
+		<div class="modal-content">
+			<div class="modal-header">
+			<!-- 	<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">x</button>-->
+				<h4 class="modal-title" id="myModalLabel">Alert Message</h4>
+			</div>
+		
+			<div class="modal-body">
+			<div class="form-group">
+				<div class="col-sm-12 add-mem"  style="line-height: 33px;">
+					<label class="add-member-label" id="label_primary_billing"></label>
+				</div>
+				
+	</div>
+			</div>
+			<div class="modal-footer"
+				style="border-top: none; margin-right: 15px;">
+				<button type="button" id="primary_billing_button_no" class="btn btn-default btn-sm"
+					data-dismiss="modal" >No</button>
+					   <a id="primary_billing_button_yes" class="btn btn-primary btn-sm" data-dismiss="modal" >Yes</a>
+				
+			</div>
+	
+		</div>
+	</div>
+</div>
 		
 <?php 
     

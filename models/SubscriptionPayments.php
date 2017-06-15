@@ -38,7 +38,7 @@ class SubscriptionPayments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['subscription_id', 'invoice_no', 'invoice_date', 'payment_due_date', 'payment_date', 'created_date', 'created_by'], 'required'],
+            [['subscription_id', 'invoice_no', 'invoice_date', 'payment_due_date', 'created_date', 'created_by'], 'required'],
             [['subscription_id', 'created_by', 'modified_by'], 'integer'],
             [['invoice_date', 'payment_due_date', 'payment_date', 'created_date', 'modified_date'], 'safe'],
             [['amount'], 'string'],

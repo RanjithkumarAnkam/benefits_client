@@ -98,9 +98,7 @@ class SystemPricingSearch extends SystemPricing
     	
     	$provider = new ArrayDataProvider([
     			'allModels' => $data,
-    			'pagination' => [
-    			'pageSize' => 10,
-    			],
+    			
     			'sort' => [
     			'attributes' => ['client_number', 'basic','full_service','bulk'],
     			],

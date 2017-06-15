@@ -124,9 +124,7 @@ use app\components\EncryptDecryptComponent;
 									'created_date' 
 							] 
 					],
-					'pagination' => [ 
-							'pageSize' => 10 
-					] 
+					
 			] );
 			
 		

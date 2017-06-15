@@ -69,7 +69,7 @@ echo $form->field ( $model, 'payment_due_date' )->widget ( DatePicker::classname
 		
 		</div>
 		<div class="col-md-6">
-			<label class="form-control-label">Payment Date *</label>
+			<label class="form-control-label">Payment Date </label>
 			<?php //  $form->field($model, 'payment_date', ['inputOptions' => ['class' => 'form-control']])->textInput(['maxlength' => true])->label(false); ?>
 		<?php
 		
@@ -89,7 +89,7 @@ echo $form->field ( $model, 'payment_date' )->widget ( DatePicker::classname (),
 
 	<div class="col-md-12 padding-0">
 		<div class="col-md-6">
-			<label class="form-control-label">Payment Amount *</label>
+			<label class="form-control-label">Payment Amount </label>
 			<?php
 	if(!empty($model->amount)){
 		$model->amount = Yii::$app->formatter->asCurrency($model->amount,'');

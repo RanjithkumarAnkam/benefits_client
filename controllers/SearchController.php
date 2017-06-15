@@ -231,7 +231,7 @@ class SearchController extends BaseController {
 		
 		$count_sql .=") x ) t GROUP BY name";
 		
-		//echo $count_sql; die();
+		//echo $final_sql; die();
 		
 		$total_count_sql="SELECT count(u.user_id) FROM tbl_sir_users u ".$sql_admin.$sql_firm.$sql_client." ";
 		if($user_type==2 || $user_type==3){
